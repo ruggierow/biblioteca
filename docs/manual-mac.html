@@ -73,13 +73,13 @@
     <div class="capa-plataforma">para Mac</div>
     <div class="capa-divisor"></div>
     <div class="capa-manual">Manual do Usu&aacute;rio</div>
-    <div class="capa-versao">Vers&atilde;o 1.8.3</div>
+    <div class="capa-versao">Vers&atilde;o 1.9.0</div>
   </div>
   <div class="capa-rodape">Setembro de 2026 &nbsp;&middot;&nbsp; ruggierow</div>
 </div>
 
 <h1>Biblioteca Web para Mac</h1>
-<p class="subtitulo">Manual do Usu&aacute;rio &mdash; Vers&atilde;o 1.8.3</p>
+<p class="subtitulo">Manual do Usu&aacute;rio &mdash; Vers&atilde;o 1.9.0</p>
 
 <nav id="sumario">
   <h2>Sum&aacute;rio</h2>
@@ -175,7 +175,7 @@
   <p>O Biblioteca &eacute; distribu&iacute;do como um arquivo <code>.dmg</code> (imagem de disco), o formato padr&atilde;o de instala&ccedil;&atilde;o de aplicativos no macOS. A instala&ccedil;&atilde;o leva menos de um minuto.</p>
 
   <ol>
-    <li><strong>Localize o arquivo baixado.</strong> O Safari salva downloads automaticamente na pasta <code>Downloads</code>. O arquivo se chama algo como <code>Biblioteca-1.8.3.dmg</code>.</li>
+    <li><strong>Localize o arquivo baixado.</strong> O Safari salva downloads automaticamente na pasta <code>Downloads</code>. O arquivo se chama algo como <code>Biblioteca-1.9.0.dmg</code>.</li>
     <li><strong>Abra o arquivo DMG.</strong> Dois cliques sobre ele. O macOS vai verificar o arquivo brevemente e, em seguida, vai montar um disco virtual que aparece na &Aacute;rea de Trabalho e no Finder.</li>
     <li><strong>Arraste o &iacute;cone do Biblioteca para a pasta Aplicativos.</strong> Uma janela mostrar&aacute; o &iacute;cone do app e um atalho para a pasta Aplicativos. Basta arrastar o &iacute;cone de um lado para o outro.</li>
     <li><strong>Aguarde a c&oacute;pia terminar.</strong> Uma barra de progresso aparece durante a c&oacute;pia. Quando sumir, o app est&aacute; instalado.</li>
@@ -197,7 +197,7 @@
       <circle cx="62" cy="48" r="7" fill="#ff5f56"/>
       <circle cx="82" cy="48" r="7" fill="#ffbd2e"/>
       <circle cx="102" cy="48" r="7" fill="#27c93f"/>
-      <text x="260" y="53" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" fill="#444">Biblioteca 1.8.3</text>
+      <text x="260" y="53" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" fill="#444">Biblioteca 1.9.0</text>
       <!-- Icone do app (livro estilizado) -->
       <rect x="100" y="100" width="80" height="80" rx="18" fill="#1a56a8"/>
       <rect x="116" y="114" width="48" height="52" rx="4" fill="#fff" opacity="0.9"/>
@@ -543,7 +543,15 @@
     <figcaption>Figura 6 &mdash; Viewfinder da c&acirc;mera com o livro enquadrado. A moldura verde guia o posicionamento da capa.</figcaption>
   </figure>
 
-  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+    <h3>Fotos sem livro</h3>
+
+  <p>Se você apagar um livro que tinha capa, ou mudar bastante o título e o autor, a foto pode ficar órfã — guardada, mas sem nenhum livro que a mostre. O botão <strong>Fotos órfãs</strong> aparece quando isso acontece e lista essas capas, permitindo <strong>associar</strong> cada uma a um livro ou <strong>excluir</strong> de vez.</p>
+
+  <div class="nota">
+    <strong>Corrigido na versão 1.9.0.</strong> Nas versões anteriores, apagar uma foto órfã a fazia sumir da tela, mas ela voltava ao reabrir o aplicativo — a exclusão não chegava ao arquivo. Agora é definitiva.
+  </div>
+
+<p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
 </section>
 
 <hr class="secao"/>
@@ -669,7 +677,24 @@
     <strong>Aviso:</strong> o modelo &eacute; &ldquo;&uacute;ltima grava&ccedil;&atilde;o vence&rdquo;. Se voc&ecirc; editar o mesmo livro no Mac e no iPhone ao mesmo tempo sem sincronizar, a vers&atilde;o que for gravada por &uacute;ltimo substituir&aacute; a outra. Nunca h&aacute; mescla&ccedil;&atilde;o autom&aacute;tica.
   </div>
 
-  <h3>Sincroniza&ccedil;&atilde;o de fotos</h3>
+    <h3>Backup automático</h3>
+
+  <p>A partir da versão 1.9.0 o Biblioteca guarda cópias de segurança sozinho, sem você pedir:</p>
+
+  <ul>
+    <li><strong>Quando:</strong> antes da primeira gravação de cada sessão. A cópia preserva o estado <em>anterior</em> às suas alterações — é o que permite voltar atrás depois de um engano.</li>
+    <li><strong>Só quando algo mudou:</strong> abrir e fechar sem mexer não gera cópia nenhuma.</li>
+    <li><strong>Onde:</strong> na subpasta <code>Backups/</code>, ao lado dos seus arquivos no iCloud Drive.</li>
+    <li><strong>Quantas:</strong> as <strong>30</strong> últimas do catálogo e as <strong>7</strong> últimas das fotos. As mais antigas saem sozinhas.</li>
+  </ul>
+
+  <p>Os nomes trazem data e hora — <code>biblioteca_2026-09-11_09h42.txt</code>. Para voltar a uma versão anterior, feche o aplicativo, copie a cópia desejada por cima do <code>biblioteca.txt</code> e abra de novo.</p>
+
+  <div class="nota">
+    <strong>As cópias de todos os aparelhos ficam juntas.</strong> Como <code>Backups/</code> está no iCloud, você verá ali também os backups feitos no iPhone e no PC. É proposital: qualquer um deles serve para recuperar.
+  </div>
+
+<h3>Sincroniza&ccedil;&atilde;o de fotos</h3>
   <p>As fotos de capa s&atilde;o embutidas no <code>biblioteca.dat</code> como imagens JPEG codificadas em Base64. Isso significa:</p>
   <ul>
     <li><strong>Ao tirar uma foto no iPhone:</strong> ela &eacute; salva localmente e publicada no <code>biblioteca.dat</code> do iCloud automaticamente.</li>
@@ -686,7 +711,7 @@
   <p>Para <strong>restaurar</strong>, basta substituir os arquivos na pasta do iCloud pela c&oacute;pia salva.</p>
 
   <h3>Fotos &oacute;rf&atilde;s</h3>
-  <p>Uma foto fica &ldquo;&oacute;rf&atilde;&rdquo; quando o livro ao qual ela pertencia foi exclu&iacute;do ou teve seu t&iacute;tulo/autor alterado. Na vers&atilde;o 1.8.3, um bot&atilde;o <strong>Fotos &Oacute;rf&atilde;s</strong> (laranja) passa a aparecer na &aacute;rea de sincroniza&ccedil;&atilde;o quando h&aacute; fotos sem livro associado, indicando a contagem.</p>
+  <p>Uma foto fica &ldquo;&oacute;rf&atilde;&rdquo; quando o livro ao qual ela pertencia foi exclu&iacute;do ou teve seu t&iacute;tulo/autor alterado. Na vers&atilde;o 1.9.0, um bot&atilde;o <strong>Fotos &Oacute;rf&atilde;s</strong> (laranja) passa a aparecer na &aacute;rea de sincroniza&ccedil;&atilde;o quando h&aacute; fotos sem livro associado, indicando a contagem.</p>
   <p>Ao clicar, abre um painel com miniaturas e o c&oacute;digo identificador de cada foto. Para cada foto voc&ecirc; pode:</p>
   <ul>
     <li><strong>Associar</strong> &mdash; escolha um livro no menu suspenso e clique em Associar. A foto passa a ser a capa daquele livro.</li>
@@ -724,7 +749,7 @@
 <hr class="secao"/>
 
 <p style="text-align:center; color:#aaa; font-size:0.85em; margin-top:3em;">
-  Biblioteca Web para Mac &mdash; Vers&atilde;o 1.8.3 &mdash; Setembro de 2026
+  Biblioteca Web para Mac &mdash; Vers&atilde;o 1.9.0 &mdash; Setembro de 2026
 </p>
 
 </body>

@@ -72,13 +72,13 @@
       <div class="capa-plataforma">para iPhone</div>
       <div class="capa-divisor"></div>
       <div class="capa-manual">Manual do Usuário</div>
-      <div class="capa-versao">Versão 1.8.2 &nbsp;&middot;&nbsp; TestFlight</div>
+      <div class="capa-versao">Versão 1.9.0 &nbsp;&middot;&nbsp; TestFlight</div>
     </div>
     <div class="capa-rodape">Setembro de 2026 &nbsp;&middot;&nbsp; ruggierow</div>
   </div>
 
   <h1>Biblioteca para iPhone</h1>
-  <p class="subtitulo">Manual do Usuário &mdash; Vers&#227;o 1.8.2 &mdash; Distribu&#237;do via TestFlight</p>
+  <p class="subtitulo">Manual do Usuário &mdash; Vers&#227;o 1.9.0 &mdash; Distribu&#237;do via TestFlight</p>
 
   <nav id="sumario">
     <h2>Sum&#225;rio</h2>
@@ -173,7 +173,7 @@
       <figcaption>Tela principal do Biblioteca &#8212; lista de livros com foto de capa, t&#237;tulo e autor</figcaption>
     </figure>
 
-    <p>Esta vers&#227;o (<strong>1.8.2</strong>) est&#225; dispon&#237;vel exclusivamente via TestFlight para testadores convidados. Quando o app for lan&#231;ado na App Store, as atualiza&#231;&#245;es poder&#227;o ser instaladas diretamente, sem o TestFlight.</p>
+    <p>Esta vers&#227;o (<strong>1.9.0</strong>) est&#225; dispon&#237;vel exclusivamente via TestFlight para testadores convidados. Quando o app for lan&#231;ado na App Store, as atualiza&#231;&#245;es poder&#227;o ser instaladas diretamente, sem o TestFlight.</p>
 
     <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&#225;rio</a></p>
   </section>
@@ -244,7 +244,7 @@
         <rect x="316" y="208" width="48" height="48" rx="10" fill="#1a3a6e"/>
         <text x="340" y="238" font-family="-apple-system, Arial, sans-serif" font-size="24" text-anchor="middle" fill="#fff">&#128218;</text>
         <text x="340" y="268" font-family="-apple-system, Arial, sans-serif" font-size="11" fill="#1a1a1a" font-weight="600" text-anchor="middle">Biblioteca</text>
-        <text x="340" y="282" font-family="-apple-system, Arial, sans-serif" font-size="8" fill="#888" text-anchor="middle">Vers&#227;o 1.8.2 &middot; 12 MB</text>
+        <text x="340" y="282" font-family="-apple-system, Arial, sans-serif" font-size="8" fill="#888" text-anchor="middle">Vers&#227;o 1.9.0 &middot; 12 MB</text>
         <rect x="290" y="294" width="100" height="26" rx="13" fill="#007aff"/>
         <text x="340" y="311" font-family="-apple-system, Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle" font-weight="600">Ver no TestFlight</text>
         <text x="340" y="440" font-family="-apple-system, Arial, sans-serif" font-size="9" fill="#888" text-anchor="middle">&#9313; E-mail de convite</text>
@@ -263,7 +263,7 @@
         <rect x="538" y="142" width="74" height="74" rx="16" fill="#1a3a6e"/>
         <text x="575" y="191" font-family="-apple-system, Arial, sans-serif" font-size="36" text-anchor="middle" fill="#fff">&#128218;</text>
         <text x="575" y="232" font-family="-apple-system, Arial, sans-serif" font-size="13" fill="#1a1a1a" font-weight="700" text-anchor="middle">Biblioteca</text>
-        <text x="575" y="247" font-family="-apple-system, Arial, sans-serif" font-size="9" fill="#888" text-anchor="middle">Vers&#227;o 1.8.2 &middot; Build 47</text>
+        <text x="575" y="247" font-family="-apple-system, Arial, sans-serif" font-size="9" fill="#888" text-anchor="middle">Vers&#227;o 1.9.0 &middot; Build 47</text>
         <text x="575" y="262" font-family="-apple-system, Arial, sans-serif" font-size="8.5" fill="#555" text-anchor="middle">Cataloga livros com c&#226;mera</text>
         <text x="575" y="275" font-family="-apple-system, Arial, sans-serif" font-size="8.5" fill="#555" text-anchor="middle">e sincroniza via iCloud</text>
         <rect x="523" y="290" width="104" height="36" rx="18" fill="#007aff"/>
@@ -733,7 +733,24 @@
     </table>
     <p>Os dois arquivos ficam na mesma pasta. O app l&#234; e grava nela automaticamente depois que voc&#234; a selecionar uma vez.</p>
 
-    <h3>Configura&#231;&#227;o inicial</h3>
+      <h3>Backup automático</h3>
+
+  <p>A partir da versão 1.9.0 o Biblioteca guarda cópias de segurança sozinho, sem você pedir:</p>
+
+  <ul>
+    <li><strong>Quando:</strong> antes da primeira gravação de cada sessão. A cópia preserva o estado <em>anterior</em> às suas alterações — é o que permite voltar atrás depois de um engano.</li>
+    <li><strong>Só quando algo mudou:</strong> abrir e fechar sem mexer não gera cópia nenhuma.</li>
+    <li><strong>Onde:</strong> na subpasta <code>Backups/</code>, ao lado dos seus arquivos no iCloud Drive.</li>
+    <li><strong>Quantas:</strong> as <strong>30</strong> últimas do catálogo e as <strong>7</strong> últimas das fotos. As mais antigas saem sozinhas.</li>
+  </ul>
+
+  <p>Os nomes trazem data e hora — <code>biblioteca_2026-09-11_09h42.txt</code>. Para voltar a uma versão anterior, feche o aplicativo, copie a cópia desejada por cima do <code>biblioteca.txt</code> e abra de novo.</p>
+
+  <div class="nota">
+    <strong>As cópias de todos os aparelhos ficam juntas.</strong> Como <code>Backups/</code> está no iCloud, você verá ali também os backups feitos no iPhone e no PC. É proposital: qualquer um deles serve para recuperar.
+  </div>
+
+<h3>Configura&#231;&#227;o inicial</h3>
     <p>Na primeira vez que usar o app, voc&#234; precisa indicar onde est&#227;o (ou onde devem ficar) seus arquivos:</p>
     <ol>
       <li>Toque no &#237;cone de nuvem (canto superior direito da tela principal) para abrir a <strong>Tela de Sincroniza&#231;&#227;o</strong></li>
@@ -806,7 +823,7 @@
   <hr class="secao">
 
   <p style="text-align:center; color:#999; font-size:0.85em; margin-top:2em;">
-    Biblioteca para iPhone &mdash; Vers&#227;o 1.8.2 &mdash; Distribu&#237;do via TestFlight<br>
+    Biblioteca para iPhone &mdash; Vers&#227;o 1.9.0 &mdash; Distribu&#237;do via TestFlight<br>
     Manual gerado em setembro de 2026
   </p>
 

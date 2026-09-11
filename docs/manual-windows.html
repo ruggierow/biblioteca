@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Biblioteca — Manual do Usuário (Windows) — v1.8.3</title>
+<title>Biblioteca — Manual do Usuário (Windows) — v1.9.0</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size: 16px; line-height: 1.8; color: #1a1a1a; background: #fff; max-width: 820px; margin: 0 auto; padding: 48px 32px; }
@@ -74,13 +74,13 @@ hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
     <div class="capa-plataforma">para Windows</div>
     <div class="capa-divisor"></div>
     <div class="capa-manual">Manual do Usuário</div>
-    <div class="capa-versao">Versão 1.8.3</div>
+    <div class="capa-versao">Versão 1.9.0</div>
   </div>
   <div class="capa-rodape">Setembro de 2026 &nbsp;&middot;&nbsp; ruggierow</div>
 </div>
 
 <h1>Biblioteca</h1>
-<p class="subtitulo">Manual do Usuário &mdash; Windows &mdash; Versão 1.8.3</p>
+<p class="subtitulo">Manual do Usuário &mdash; Windows &mdash; Versão 1.9.0</p>
 
 <nav id="sumario">
   <h2>Sumário</h2>
@@ -103,15 +103,20 @@ hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
 
   <p>O <strong>Biblioteca</strong> é um aplicativo para catalogar sua coleção de livros pessoais. Ele funciona completamente <strong>offline</strong> — não depende de internet, não envia dados para nenhum servidor e não exige conta ou cadastro. Tudo fica salvo no seu próprio computador.</p>
 
-  <p>No Windows, o Biblioteca abre direto no seu navegador padrão (Edge, Chrome ou Firefox). A barra de endereço mostrará um caminho começando com <code>file:///</code> — isso é normal e esperado. O app é um arquivo HTML único que roda localmente, sem necessidade de servidor web instalado.</p>
+  <p>No Windows, o Biblioteca é um <strong>aplicativo próprio</strong>, com janela e ícone na Área de Trabalho, como qualquer outro programa. Você não precisa abrir navegador nem escolher arquivo: ele encontra sozinho a sua biblioteca no iCloud Drive e já abre com o catálogo carregado.</p>
+
+  <div class="nota">
+    <strong>Mudou na versão 1.9.0.</strong> Até a versão anterior o Biblioteca abria dentro do navegador, e você precisava vincular o <code>biblioteca.txt</code> à mão toda vez que a permissão do navegador expirava. Isso acabou. Se você vinha da versão antiga, o instalador remove os atalhos dela automaticamente.
+  </div>
 
   <h3>Principais recursos</h3>
   <ul>
     <li>Cadastro de livros com título, autor, assunto, editora, ano, ISBN, páginas e observações</li>
-    <li>Foto de capa registrada via webcam ou arquivo de imagem do computador</li>
+    <li>Foto de capa a partir de um arquivo de imagem do computador — e as capas fotografadas no iPhone chegam pela sincronização</li>
     <li>Pesquisa instantânea por título e autor enquanto você digita</li>
     <li>Filtros por assunto e editora</li>
     <li>Exportação do catálogo em formato TSV (abre no Excel, LibreOffice Calc e similares)</li>
+    <li>Backup automático da sua base a cada sessão em que você altera alguma coisa</li>
     <li>Compatível com Windows 10 e Windows 11</li>
   </ul>
 
@@ -124,18 +129,18 @@ hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
       <rect x="10" y="316" width="18" height="18" rx="2" fill="#0078d4"/>
       <text x="19" y="329" font-family="Arial" font-size="11" fill="white" text-anchor="middle">&#x229E;</text>
       <text x="530" y="329" font-family="'Segoe UI',Arial" font-size="10" fill="#ccc" text-anchor="middle">14:37</text>
-      <!-- Janela do navegador -->
+      <!-- Janela do aplicativo -->
       <rect x="30" y="10" width="500" height="292" rx="8" fill="#ffffff" stroke="#d0d0d0" stroke-width="1"/>
-      <!-- Barra de título do navegador -->
+      <!-- Barra de título da janela do aplicativo -->
       <rect x="30" y="10" width="500" height="38" rx="8" fill="#f3f3f3" stroke="#d0d0d0" stroke-width="1"/>
       <rect x="30" y="38" width="500" height="10" fill="#f3f3f3"/>
-      <!-- Botões fechar/min/max -->
-      <circle cx="50" cy="29" r="7" fill="#ff5f57"/>
-      <circle cx="70" cy="29" r="7" fill="#febc2e"/>
-      <circle cx="90" cy="29" r="7" fill="#28c840"/>
-      <!-- Barra de endereço -->
-      <rect x="106" y="19" width="350" height="20" rx="10" fill="#ffffff" stroke="#b0b8c8" stroke-width="1"/>
-      <text x="115" y="33" font-family="monospace" font-size="9" fill="#444">file:///C:/Program Files/Biblioteca/biblioteca.html</text>
+      <!-- Icone e titulo do app -->
+      <rect x="44" y="22" width="14" height="14" rx="3" fill="#2b5fb3"/>
+      <text x="68" y="34" font-family="'Segoe UI',Arial" font-size="11" fill="#333">Biblioteca v1.9.0</text>
+      <!-- Controles da janela, do jeito do Windows: minimizar, maximizar, fechar -->
+      <text x="452" y="34" font-family="'Segoe UI',Arial" font-size="12" fill="#555">&#x2500;</text>
+      <text x="478" y="34" font-family="'Segoe UI',Arial" font-size="10" fill="#555">&#x25A1;</text>
+      <text x="506" y="34" font-family="'Segoe UI',Arial" font-size="12" fill="#555">&#x2715;</text>
       <!-- Conteúdo do app -->
       <rect x="30" y="48" width="500" height="254" rx="0" fill="#fff"/>
       <!-- Cabeçalho azul do app -->
@@ -166,7 +171,7 @@ hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
       <text x="100" y="246" font-family="'Segoe UI',Arial" font-size="12" font-weight="bold" fill="#1a1a1a">O Processo</text>
       <text x="100" y="262" font-family="'Segoe UI',Arial" font-size="11" fill="#666">Franz Kafka</text>
     </svg>
-    <figcaption>O Biblioteca abrindo no navegador padr&#xe3;o do Windows, com lista de livros catalogados e barra de endere&#xe7;o mostrando <code>file:///</code>.</figcaption>
+    <figcaption>A janela do Biblioteca no Windows, com o cat&#xe1;logo j&#xe1; carregado. N&#xe3;o h&#xe1; barra de endere&#xe7;o: o programa &#xe9; um aplicativo pr&#xf3;prio, n&#xe3;o uma p&#xe1;gina no navegador.</figcaption>
   </figure>
 
   <p class="voltar"><a href="#sumario">&#x2191; Voltar ao Sum&#xe1;rio</a></p>
@@ -178,7 +183,7 @@ hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
 <section id="instalacao">
   <h2>2. Instala&#xe7;&#xe3;o</h2>
 
-  <p>Fa&#xe7;a o download do arquivo <strong>Biblioteca-1.8.3-setup.exe</strong> e clique duas vezes nele para iniciar a instala&#xe7;&#xe3;o.</p>
+  <p>Fa&#xe7;a o download do arquivo <strong>Biblioteca-1.9.0-setup.exe</strong> e clique duas vezes nele para iniciar a instala&#xe7;&#xe3;o.</p>
 
   <h3>Aviso do Windows SmartScreen</h3>
 
@@ -233,7 +238,7 @@ hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
       <rect x="10" y="18" width="118" height="128" rx="6" fill="white" stroke="#c8d8f8" stroke-width="1.5"/>
       <rect x="10" y="18" width="118" height="36" rx="6" fill="#1a3a6e"/>
       <rect x="10" y="44" width="118" height="10" fill="#1a3a6e"/>
-      <text x="69" y="40" font-family="'Segoe UI',Arial" font-size="9" fill="white" text-anchor="middle">Instalar Biblioteca 1.8.3</text>
+      <text x="69" y="40" font-family="'Segoe UI',Arial" font-size="9" fill="white" text-anchor="middle">Instalar Biblioteca 1.9.0</text>
       <text x="69" y="76" font-family="'Segoe UI',Arial" font-size="9" fill="#444" text-anchor="middle">Bem-vindo ao</text>
       <text x="69" y="88" font-family="'Segoe UI',Arial" font-size="9" fill="#444" text-anchor="middle">assistente de</text>
       <text x="69" y="100" font-family="'Segoe UI',Arial" font-size="9" font-weight="bold" fill="#1a3a6e" text-anchor="middle">instala&#xe7;&#xe3;o</text>
@@ -301,37 +306,37 @@ hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
 <section id="primeiro-uso">
   <h2>3. Abrindo o Biblioteca</h2>
 
-  <p>Clique duas vezes no atalho <strong>Biblioteca</strong> na &#xc1;rea de Trabalho. O app abre automaticamente no seu navegador padr&#xe3;o &mdash; Edge, Chrome ou Firefox, dependendo do que estiver configurado no seu Windows.</p>
+  <p>Clique duas vezes no atalho <strong>Biblioteca</strong> na &#xc1;rea de Trabalho. O programa abre na pr&#xf3;pria janela dele &mdash; n&#xe3;o abre navegador, n&#xe3;o pede para escolher arquivo.</p>
 
-  <p>A barra de endere&#xe7;o do navegador mostrar&#xe1; algo parecido com o exemplo abaixo:</p>
+  <p>Logo ao abrir, ele mostra na faixa superior <strong>qual arquivo est&#xe1; usando</strong>. Vale conferir na primeira vez:</p>
 
   <figure>
-    <svg width="520" height="100" viewBox="0 0 520 100" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;">
-      <rect width="520" height="100" rx="10" fill="#f8f9fc"/>
-      <!-- Moldura do navegador -->
-      <rect x="20" y="16" width="480" height="68" rx="8" fill="white" stroke="#d0d0d0" stroke-width="1"/>
-      <!-- Barra de título -->
-      <rect x="20" y="16" width="480" height="32" rx="8" fill="#f3f3f3" stroke="#d0d0d0" stroke-width="1"/>
-      <rect x="20" y="36" width="480" height="12" fill="#f3f3f3"/>
-      <!-- Botões -->
-      <circle cx="38" cy="32" r="6" fill="#ff5f57"/>
-      <circle cx="56" cy="32" r="6" fill="#febc2e"/>
-      <circle cx="74" cy="32" r="6" fill="#28c840"/>
-      <!-- Barra de endereço -->
-      <rect x="90" y="20" width="396" height="22" rx="11" fill="white" stroke="#90b0e8" stroke-width="1.5"/>
-      <text x="102" y="35" font-family="Arial" font-size="11" fill="#555">&#x1F512;</text>
-      <text x="120" y="35" font-family="monospace" font-size="10.5" fill="#1a1a1a">file:///C:/Program Files/Biblioteca/biblioteca.html</text>
-      <!-- Texto de apoio -->
-      <text x="260" y="74" font-family="'Segoe UI',Arial" font-size="11" fill="#555" text-anchor="middle">O Biblioteca est&#xe1; aberto e pronto para uso nesta aba.</text>
+    <svg width="520" height="104" viewBox="0 0 520 104" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;">
+      <rect width="520" height="104" rx="10" fill="#f8f9fc"/>
+      <!-- Janela do aplicativo -->
+      <rect x="20" y="16" width="480" height="72" rx="8" fill="white" stroke="#d0d0d0" stroke-width="1"/>
+      <!-- Barra de titulo -->
+      <rect x="20" y="16" width="480" height="30" rx="8" fill="#f3f3f3" stroke="#d0d0d0" stroke-width="1"/>
+      <rect x="20" y="34" width="480" height="12" fill="#f3f3f3"/>
+      <rect x="32" y="25" width="12" height="12" rx="3" fill="#2b5fb3"/>
+      <text x="54" y="36" font-family="'Segoe UI',Arial" font-size="11" fill="#333">Biblioteca v1.9.0</text>
+      <text x="432" y="36" font-family="'Segoe UI',Arial" font-size="11" fill="#555">&#x2500;</text>
+      <text x="456" y="36" font-family="'Segoe UI',Arial" font-size="9" fill="#555">&#x25A1;</text>
+      <text x="482" y="36" font-family="'Segoe UI',Arial" font-size="11" fill="#555">&#x2715;</text>
+      <!-- Faixa verde de sincronizacao -->
+      <rect x="20" y="46" width="480" height="42" fill="#e3f2eb"/>
+      <text x="34" y="63" font-family="'Segoe UI',Arial" font-size="10.5" fill="#1b7d57">&#x2713;</text>
+      <text x="50" y="63" font-family="monospace" font-size="9.5" fill="#1b7d57">Arquivo: C:\Users\voce\iCloudDrive\Biblioteca\biblioteca.txt</text>
+      <text x="50" y="78" font-family="'Segoe UI',Arial" font-size="10" fill="#1b7d57">altera&#xe7;&#xf5;es salvas automaticamente</text>
     </svg>
-    <figcaption>A barra de endere&#xe7;o mostrando <code>file:///C:/Program Files/Biblioteca/biblioteca.html</code> &mdash; normal para um app que roda localmente.</figcaption>
+    <figcaption>A faixa verde mostra o caminho do arquivo em uso. Se ela apontar para a sua pasta do iCloud, est&#xe1; tudo certo.</figcaption>
   </figure>
 
   <div class="nota">
-    <strong>Por que aparece "file:///"?</strong> O Biblioteca &#xe9; um arquivo HTML que roda diretamente no seu computador, sem precisar de internet ou servidor. O <code>file:///</code> significa que o navegador est&#xe1; abrindo um arquivo local &mdash; como se fosse um documento do Word, s&#xf3; que interativo.
+    <strong>Onde ele procura o arquivo.</strong> Na ordem: <code>C:\Users\&lt;voc&#xea;&gt;\iCloudDrive\Biblioteca\</code>, depois a pasta Documentos. Se voc&#xea; usa o iCloud para Windows &mdash; que &#xe9; o caso quando a mesma biblioteca est&#xe1; no Mac ou no iPhone &mdash; ele acha sozinho e n&#xe3;o h&#xe1; nada a configurar.
   </div>
 
-  <p>Na primeira vez que abrir, o cat&#xe1;logo estar&#xe1; vazio. Voc&#xea; pode come&#xe7;ar a cadastrar seus livros imediatamente clicando em <strong>+ Novo livro</strong>.</p>
+  <p>Se o cat&#xe1;logo estiver vazio na primeira vez, comece a cadastrar clicando em <strong>+ Novo livro</strong>. O arquivo &#xe9; criado na primeira gravac&#xe3;o.</p>
 
   <div class="dica">
     <strong>Atalho r&#xe1;pido:</strong> Pressione <strong>Win&#x229e; + S</strong>, digite "Biblioteca" e pressione Enter para abrir o app sem precisar do atalho na &#xc1;rea de Trabalho.
@@ -513,69 +518,32 @@ hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
 <section id="capas">
   <h2>6. Fotografando capas</h2>
 
-  <p>Cada livro pode ter uma foto da capa associada. H&#xe1; dois modos de adicionar a foto:</p>
+  <p>Cada livro pode ter uma foto da capa. No computador, a capa entra a partir de um <strong>arquivo de imagem</strong> &mdash; uma foto que voc&#xea; tirou com o celular, uma capa baixada, um digitaliza&#xe7;&#xe3;o.</p>
 
-  <ul>
-    <li><strong>Via arquivo:</strong> escolha uma imagem JPEG ou PNG j&#xe1; existente no seu computador &mdash; uma foto tirada com o celular, uma capa baixada da internet, etc.</li>
-    <li><strong>Via c&#xe2;mera:</strong> use a webcam do computador para fotografar a capa diretamente, com o livro na m&#xe3;o.</li>
-  </ul>
+  <div class="nota">
+    <strong>E a webcam?</strong> No computador o Biblioteca n&#xe3;o usa a c&#xe2;mera. Quem fotografa capa &#xe9; o aplicativo do iPhone, que tem enquadramento guiado e detec&#xe7;&#xe3;o autom&#xe1;tica da capa. As fotos tiradas l&#xe1; aparecem aqui sozinhas pela sincroniza&#xe7;&#xe3;o.
+  </div>
 
   <h3>Como adicionar a foto</h3>
   <ol>
-    <li>Clique no livro para abrir o painel de detalhes.</li>
-    <li>Clique na &#xe1;rea da capa ou no bot&#xe3;o <strong>Adicionar foto</strong>.</li>
-    <li>Escolha o modo: <strong>C&#xe2;mera</strong> ou <strong>Arquivo</strong>.</li>
+    <li>Clique no livro para abrir o painel de detalhes, ou abra o cadastro de um livro novo.</li>
+    <li>Na &#xe1;rea <strong>Foto da capa</strong>, clique em <strong>Selecionar foto&#x2026;</strong>.</li>
+    <li>O explorador de arquivos do Windows abre. Escolha a imagem e clique em <em>Abrir</em>. S&#xe3;o aceitos <code>.jpg</code>, <code>.jpeg</code> e <code>.png</code>.</li>
+    <li>A miniatura aparece na hora. Para trocar, clique de novo; para tirar, use <strong>Remover foto</strong>.</li>
   </ol>
 
-  <h3>Via arquivo</h3>
-  <p>O explorador de arquivos do Windows abre. Navegue at&#xe9; a imagem desejada, selecione-a e clique em <em>Abrir</em>. O Biblioteca aceita arquivos <code>.jpg</code>, <code>.jpeg</code> e <code>.png</code>.</p>
+  <h3>Fotos sem livro</h3>
 
-  <h3>Via c&#xe2;mera (webcam)</h3>
-  <ol>
-    <li>Selecione o modo <strong>C&#xe2;mera</strong>.</li>
-    <li>O navegador exibe um di&#xe1;logo pedindo permiss&#xe3;o para acessar a webcam.</li>
-    <li>Clique em <strong>Permitir</strong>.</li>
-    <li>A imagem ao vivo da c&#xe2;mera aparece na tela. Segure o livro na frente da webcam, centralize a capa e clique em <strong>Capturar</strong>.</li>
-    <li>Confirme a imagem ou clique em <strong>Tirar novamente</strong> se quiser repetir.</li>
-  </ol>
-
-  <figure>
-    <svg width="440" height="256" viewBox="0 0 440 256" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;">
-      <rect width="440" height="256" rx="10" fill="#f8f9fc"/>
-      <!-- Sombra do diálogo -->
-      <rect x="76" y="28" width="290" height="210" rx="12" fill="#00000018"/>
-      <!-- Diálogo de permissão do navegador -->
-      <rect x="72" y="24" width="296" height="208" rx="10" fill="white" stroke="#c8d8f8" stroke-width="2"/>
-      <!-- Header do diálogo -->
-      <rect x="72" y="24" width="296" height="56" rx="10" fill="#f3f3f3" stroke="#c8d8f8" stroke-width="1.5"/>
-      <rect x="72" y="60" width="296" height="20" fill="#f3f3f3"/>
-      <!-- Ícone câmera -->
-      <circle cx="106" cy="52" r="18" fill="#e8f0fe"/>
-      <text x="106" y="59" font-family="Arial" font-size="18" fill="#1a56a8" text-anchor="middle">&#x1F4F7;</text>
-      <!-- Título do diálogo -->
-      <text x="130" y="44" font-family="'Segoe UI',Arial" font-size="12" font-weight="bold" fill="#1a1a1a">biblioteca.html quer usar</text>
-      <text x="130" y="60" font-family="'Segoe UI',Arial" font-size="12" font-weight="bold" fill="#1a1a1a">sua c&#xe2;mera</text>
-      <!-- Endereço -->
-      <text x="220" y="100" font-family="monospace" font-size="8.5" fill="#888" text-anchor="middle">file:///C:/Program Files/Biblioteca/</text>
-      <!-- Explicação -->
-      <text x="220" y="124" font-family="'Segoe UI',Arial" font-size="10.5" fill="#444" text-anchor="middle">O Biblioteca quer acessar sua c&#xe2;mera</text>
-      <text x="220" y="140" font-family="'Segoe UI',Arial" font-size="10.5" fill="#444" text-anchor="middle">para fotografar a capa do livro.</text>
-      <text x="220" y="156" font-family="'Segoe UI',Arial" font-size="10" fill="#888" text-anchor="middle">As imagens ficam salvas apenas no seu computador.</text>
-      <!-- Botões -->
-      <rect x="86" y="172" width="118" height="36" rx="6" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>
-      <text x="145" y="195" font-family="'Segoe UI',Arial" font-size="12" fill="#444" text-anchor="middle">Bloquear</text>
-      <rect x="218" y="172" width="130" height="36" rx="6" fill="#0067c0"/>
-      <text x="283" y="195" font-family="'Segoe UI',Arial" font-size="12" fill="white" text-anchor="middle" font-weight="bold">Permitir</text>
-    </svg>
-    <figcaption>Di&#xe1;logo de permiss&#xe3;o de c&#xe2;mera exibido pelo navegador. Clique em "Permitir" para que o Biblioteca acesse a webcam.</figcaption>
-  </figure>
+  <p>Se voc&#xea; renomear muito um t&#xed;tulo ou apagar um livro que tinha capa, a foto pode ficar &#xf3;rf&#xe3; &mdash; guardada, mas sem livro que a mostre. O bot&#xe3;o <strong>Fotos &#xf3;rf&#xe3;s</strong> lista essas capas e permite <strong>associar</strong> cada uma a um livro ou <strong>excluir</strong> de vez.</p>
 
   <div class="nota">
-    <strong>Permiss&#xe3;o negada por engano?</strong> Se voc&#xea; clicou em "Bloquear", clique no &#xed;cone de cadeado na barra de endere&#xe7;o do navegador e redefina a permiss&#xe3;o da c&#xe2;mera para "Permitir". Recarregue a p&#xe1;gina em seguida.
+    <strong>Corrigido na vers&#xe3;o 1.9.0.</strong> Nas vers&#xf5;es anteriores, apagar uma foto &#xf3;rf&#xe3; a fazia sumir da tela mas ela voltava ao reabrir o programa, porque a exclus&#xe3;o n&#xe3;o chegava ao arquivo. Agora a exclus&#xe3;o &#xe9; definitiva.
   </div>
 
+
+
   <div class="dica">
-    <strong>Dica de qualidade:</strong> Para uma boa foto de capa via c&#xe2;mera, use um ambiente bem iluminado, segure o livro firme e paralelo &#xe0; c&#xe2;mera, e aguarde o foco estabilizar antes de clicar em Capturar.
+    <strong>Dica de qualidade:</strong> capas escaneadas ou fotografadas de frente, com boa luz e sem sombra, ficam bem melhores na lista. Imagens muito grandes s&#xe3;o reduzidas automaticamente.
   </div>
 
   <p class="voltar"><a href="#sumario">&#x2191; Voltar ao Sum&#xe1;rio</a></p>
@@ -639,85 +607,60 @@ hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
 
 <!-- ============================================================ -->
 <section id="sincronizacao">
-  <h2>8. Sincronização e backup</h2>
+  <h2>8. Sincroniza&#xe7;&#xe3;o e backup</h2>
 
   <h3>Onde ficam seus dados</h3>
-  <p>O Biblioteca para Windows guarda seus livros em dois arquivos que você escolhe onde colocar:</p>
+
+  <p>O Biblioteca guarda tudo em arquivos comuns, numa pasta s&#xf3;:</p>
+
   <table style="width:100%;border-collapse:collapse;margin:16px 0">
-    <thead><tr style="background:#f2f6ff"><th style="text-align:left;padding:8px 12px;border:1px solid #dde">Arquivo</th><th style="text-align:left;padding:8px 12px;border:1px solid #dde">Conteúdo</th></tr></thead>
+    <thead><tr style="background:#f2f6ff"><th style="text-align:left;padding:8px 12px;border:1px solid #dde">Arquivo</th><th style="text-align:left;padding:8px 12px;border:1px solid #dde">Conte&#xfa;do</th></tr></thead>
     <tbody>
-      <tr><td style="padding:8px 12px;border:1px solid #dde"><code>biblioteca.txt</code></td><td style="padding:8px 12px;border:1px solid #dde">Catálogo de livros (texto separado por tab)</td></tr>
-      <tr><td style="padding:8px 12px;border:1px solid #dde"><code>biblioteca.dat</code></td><td style="padding:8px 12px;border:1px solid #dde">Fotos de capa (imagens embutidas em JSON)</td></tr>
+      <tr><td style="padding:8px 12px;border:1px solid #dde"><code>biblioteca.txt</code></td><td style="padding:8px 12px;border:1px solid #dde">O cat&#xe1;logo de livros (texto separado por tabula&#xe7;&#xe3;o)</td></tr>
+      <tr><td style="padding:8px 12px;border:1px solid #dde"><code>biblioteca.dat</code></td><td style="padding:8px 12px;border:1px solid #dde">As fotos de capa</td></tr>
+      <tr><td style="padding:8px 12px;border:1px solid #dde"><code>Backups\</code></td><td style="padding:8px 12px;border:1px solid #dde">C&#xf3;pias autom&#xe1;ticas (veja adiante)</td></tr>
     </tbody>
   </table>
-  <p>Esses arquivos podem ficar em qualquer pasta — local, OneDrive ou Google Drive. A escolha determina se haverá sincronização com outros dispositivos.</p>
 
-  <h3>Configuração inicial</h3>
-  <p><strong>Se está começando do zero:</strong> clique em <strong>Vincular biblioteca.txt</strong> na tela principal, escolha uma pasta de sua preferência e crie um arquivo <code>biblioteca.txt</code> vazio (pode ser criado pelo próprio app na primeira gravação).</p>
-  <p><strong>Se já tem um catálogo:</strong> copie seu <code>biblioteca.txt</code> (e <code>biblioteca.dat</code>, se tiver) para a pasta desejada, depois clique em <strong>Vincular biblioteca.txt</strong> e localize o arquivo.</p>
+  <p>O programa procura essa pasta em <code>C:\Users\&lt;voc&#xea;&gt;\iCloudDrive\Biblioteca\</code> e, se n&#xe3;o achar, na pasta Documentos. <strong>N&#xe3;o h&#xe1; nada a configurar</strong> &mdash; a faixa verde no topo mostra qual arquivo est&#xe1; em uso.</p>
 
-  <h3>Usando com OneDrive (recomendado)</h3>
-  <p>O OneDrive já vem instalado no Windows 10 e 11. Para sincronizar entre PC e celular:</p>
-  <ol>
-    <li>Abra o Explorador de Arquivos → OneDrive → crie a pasta <strong>Biblioteca</strong></li>
-    <li>Copie <code>biblioteca.txt</code> para dentro dessa pasta</li>
-    <li>No Biblioteca, clique em <strong>Vincular biblioteca.txt</strong> → navegue até <code>OneDrive\Biblioteca</code> → selecione o arquivo</li>
-    <li>O banner de status ficará <span style="color:#2a7a2a">verde</span> — sincronização ativa</li>
-  </ol>
-  <div class="dica">O OneDrive sincroniza automaticamente em segundo plano. Qualquer livro que você cadastrar no PC aparecerá no celular em segundos (via app OneDrive + Biblioteca).</div>
+  <div class="nota">
+    <strong>Mudou na vers&#xe3;o 1.9.0.</strong> Antes era preciso clicar em "Vincular biblioteca.txt" e escolher o arquivo &mdash; e refazer isso toda vez que o navegador perdia a permiss&#xe3;o, o que acontecia a cada reinicializa&#xe7;&#xe3;o. Nada disso existe mais.
+  </div>
 
-  <h3>Usando com Google Drive</h3>
-  <ol>
-    <li>Instale o <strong>Google Drive para Desktop</strong> (disponível em drive.google.com)</li>
-    <li>Após instalar, o Drive aparece como uma unidade no Explorador (ex: <code>G:\Meu Drive\</code>)</li>
-    <li>Crie a pasta <code>G:\Meu Drive\Biblioteca\</code></li>
-    <li>No Biblioteca, clique em <strong>Vincular biblioteca.txt</strong> → navegue até essa pasta</li>
-  </ol>
+  <h3>Sincronizando com o Mac e o iPhone</h3>
 
-  <h3>O indicador de sincronização</h3>
-  <p>O Biblioteca mostra um banner no topo da tela indicando o estado:</p>
+  <p>Se a pasta estiver no <strong>iCloud Drive</strong>, os tr&#xea;s conversam sozinhos: o que voc&#xea; cadastra aqui aparece no Mac e no iPhone, e vice-versa. Para isso basta ter o <strong>iCloud para Windows</strong> instalado e a pasta <code>Biblioteca</code> dentro do iCloud Drive.</p>
+
+  <div class="dica">
+    <strong>Evite editar em dois lugares ao mesmo tempo.</strong> A regra &#xe9; simples: a &#xfa;ltima grava&#xe7;&#xe3;o vence. Se voc&#xea; alterou algo no iPhone, use <strong>&#x21bb; Recarregar</strong> aqui antes de mexer.
+  </div>
+
+  <h3>Backup autom&#xe1;tico</h3>
+
+  <p>A partir da vers&#xe3;o 1.9.0, o Biblioteca guarda uma c&#xf3;pia de seguran&#xe7;a sozinho. As regras:</p>
+
   <ul>
-    <li><strong style="color:#2a7a2a">Verde — Arquivo vinculado:</strong> cada alteração é salva diretamente no arquivo. Sincronização ativa.</li>
-    <li><strong style="color:#a07000">Amarelo — Permissão expirada:</strong> o Chrome perdeu o acesso ao arquivo (ocorre ao reiniciar). Clique em <strong>Reativar</strong> para restaurar.</li>
-    <li><strong style="color:#666">Cinza — Sem vínculo:</strong> os dados ficam só no navegador. Nenhuma sincronização com nuvem.</li>
+    <li><strong>Quando:</strong> antes da primeira grava&#xe7;&#xe3;o de cada sess&#xe3;o. A c&#xf3;pia preserva o estado <em>anterior</em> &#xe0;s suas altera&#xe7;&#xf5;es &mdash; &#xe9; isso que permite desfazer um engano.</li>
+    <li><strong>S&#xf3; quando algo mudou:</strong> abrir e fechar sem mexer n&#xe3;o gera c&#xf3;pia nenhuma.</li>
+    <li><strong>Onde:</strong> na subpasta <code>Backups\</code>, ao lado dos seus arquivos.</li>
+    <li><strong>Quantas:</strong> as <strong>30</strong> &#xfa;ltimas do cat&#xe1;logo e as <strong>7</strong> &#xfa;ltimas das fotos. As mais antigas saem sozinhas.</li>
   </ul>
 
-  <h3>Botões de sincronização disponíveis</h3>
+  <p>Os nomes trazem a data e a hora, como <code>biblioteca_2026-09-11_09h42.txt</code>. Para voltar atr&#xe1;s, feche o programa, copie a c&#xf3;pia desejada por cima do <code>biblioteca.txt</code> e abra de novo.</p>
+
+  <div class="nota">
+    <strong>As c&#xf3;pias do Mac e do iPhone v&#xe3;o para a mesma pasta.</strong> Como <code>Backups\</code> fica no iCloud, voc&#xea; ver&#xe1; ali tamb&#xe9;m os backups feitos nos outros aparelhos. &#xc9; proposital: qualquer um deles serve para recuperar.
+  </div>
+
+  <h3>Bot&#xf5;es da tela principal</h3>
   <ul>
-    <li><strong>Vincular biblioteca.txt</strong> — escolhe o arquivo a usar. Faça isso uma vez; o Chrome lembra para as próximas sessões.</li>
-    <li><strong>Recarregar</strong> — relê o arquivo do disco. Use quando editar em outro dispositivo e quiser trazer as mudanças.</li>
-    <li><strong>Importar (avulso)</strong> — carrega qualquer .txt, mesclando ou substituindo o catálogo atual.</li>
-    <li><strong>Exportar (avulso)</strong> — salva uma cópia do catálogo como <code>biblioteca.txt</code> em qualquer pasta.</li>
-    <li><strong>Vincular fotos (.dat)</strong> — carrega fotos de capa de um arquivo <code>biblioteca.dat</code> existente. O aviso exibido informa quantas fotos foram importadas ou, se o arquivo estiver vazio, quantas fotos locais ser&atilde;o gravadas nele.</li>
-    <li><strong>Exportar Fotos</strong> — salva todas as fotos de capa em um arquivo <code>biblioteca.dat</code>.</li>
-    <li><strong>Fotos &Oacute;rf&atilde;s</strong> (bot&atilde;o laranja) — exibe quantas fotos armazenadas n&atilde;o est&atilde;o associadas a nenhum livro. Aparece apenas quando h&aacute; fotos &oacute;rf&atilde;s.</li>
+    <li><strong>&#x21bb; Recarregar</strong> &mdash; rel&#xea; o arquivo do disco. Use depois de alterar a base em outro aparelho.</li>
+    <li><strong>Backup</strong> &mdash; faz uma c&#xf3;pia agora, sob demanda, ao lado do arquivo.</li>
+    <li><strong>Importar (avulso)</strong> &mdash; carrega um <code>.txt</code> qualquer, mesclando ou substituindo o cat&#xe1;logo.</li>
+    <li><strong>Exportar (avulso)</strong> &mdash; salva uma c&#xf3;pia do cat&#xe1;logo onde voc&#xea; escolher.</li>
+    <li><strong>Fotos &#xf3;rf&#xe3;s</strong> &mdash; aparece quando h&#xe1; capas sem livro; permite associar ou excluir cada uma.</li>
   </ul>
-
-  <h3>Fotos &oacute;rf&atilde;s</h3>
-  <p>Uma foto fica &ldquo;&oacute;rf&atilde;&rdquo; quando o livro ao qual ela pertencia foi exclu&iacute;do ou teve seu t&iacute;tulo/autor alterado. Ao clicar no bot&atilde;o <strong>Fotos &Oacute;rf&atilde;s</strong>, abre um painel com miniaturas e o c&oacute;digo identificador de cada foto. Para cada foto voc&ecirc; pode:</p>
-  <ul>
-    <li><strong>Associar</strong> &mdash; escolha um livro no menu suspenso e clique em Associar. A foto passa a ser a capa daquele livro.</li>
-    <li><strong>Excluir</strong> &mdash; remove a foto definitivamente.</li>
-  </ul>
-  <p>O bot&atilde;o <strong>Excluir todas</strong>, no rodap&eacute; do painel, remove de uma s&oacute; vez todas as fotos &oacute;rf&atilde;s listadas.</p>
-
-  <h3>Reativar Permiss&atilde;o</h3>
-  <p>O Chrome pede permiss&atilde;o de acesso ao arquivo a cada vez que o navegador &eacute; reiniciado. O banner amarelo com o bot&atilde;o <strong>Reativar</strong> aparece nessa situa&ccedil;&atilde;o. Na vers&atilde;o 1.8.3, ao clicar:</p>
-  <ol>
-    <li>O Chrome exibe um di&aacute;logo de confirma&ccedil;&atilde;o &mdash; clique em <strong>Permitir</strong>.</li>
-    <li>Se a permiss&atilde;o n&atilde;o for concedida pelo di&aacute;logo, o Biblioteca abre automaticamente o seletor de arquivo para voc&ecirc; selecionar o <code>biblioteca.txt</code>. Ap&oacute;s selecionar, o acesso &eacute; restaurado.</li>
-  </ol>
-  <p>Essa melhoria elimina a necessidade de clicar v&aacute;rias vezes no bot&atilde;o Reativar.</p>
-
-  <h3>Sincroniza&ccedil;&atilde;o de fotos</h3>
-  <p>As fotos não viajam automaticamente pelo OneDrive ou Drive junto com o <code>biblioteca.txt</code>. Para incluir as fotos na sincronização:</p>
-  <ol>
-    <li>Clique em <strong>Exportar Fotos</strong> → salve o <code>biblioteca.dat</code> na mesma pasta do <code>biblioteca.txt</code> (ex: <code>OneDrive\Biblioteca\</code>)</li>
-    <li>Em outro dispositivo, clique em <strong>Vincular fotos (.dat)</strong> → selecione o mesmo arquivo</li>
-  </ol>
-  <p>Repita a exportação sempre que adicionar novas capas.</p>
-
-  <div class="nota"><strong>Atenção:</strong> se você editar o catálogo no PC e no celular ao mesmo tempo, a versão gravada por último substituirá a outra. Não há mesclagem automática. Sempre clique em <strong>Recarregar</strong> antes de começar a editar.</div>
 
   <p class="voltar"><a href="#sumario">↑ Voltar ao Sumário</a></p>
 </section>
@@ -731,16 +674,15 @@ hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
   <h3>Apareceu o aviso do SmartScreen e n&#xe3;o sei o que fazer</h3>
   <p>Esse aviso &#xe9; exibido pelo Windows quando um programa n&#xe3;o tem um certificado digital pago. O Biblioteca &#xe9; seguro &mdash; ele apenas n&#xe3;o possui esse certificado, por ser um app gratuito e independente. Para continuar: na tela azul do SmartScreen, clique em <strong>Mais informa&#xe7;&#xf5;es</strong> (link de texto que aparece abaixo da mensagem) e depois clique no bot&#xe3;o <strong>Executar assim mesmo</strong>. Veja as instru&#xe7;&#xf5;es com captura de tela na se&#xe7;&#xe3;o <a href="#instalacao">Instala&#xe7;&#xe3;o</a>.</p>
 
-  <h3>O Biblioteca abre mas n&#xe3;o exibe nada</h3>
-  <p>Isso pode acontecer se o navegador bloqueou o acesso a arquivos locais por configura&#xe7;&#xe3;o de seguran&#xe7;a. Tente o seguinte:</p>
+  <h3>O Biblioteca abre mas a janela fica em branco</h3>
+  <p>A janela do Biblioteca &#xe9; desenhada pelo <strong>WebView2</strong>, um componente da Microsoft que vem de f&#xe1;brica no Windows 11. Se ele faltar, a janela abre vazia.</p>
   <ul>
-    <li>Feche o navegador e abra o Biblioteca novamente pelo atalho da &#xc1;rea de Trabalho (n&#xe3;o pelo hist&#xf3;rico do navegador).</li>
-    <li>Se usar o Firefox, veja em <strong>Configura&#xe7;&#xf5;es &rarr; Privacidade e Seguran&#xe7;a</strong> se n&#xe3;o h&#xe1; bloqueio ativo para <code>file://</code>.</li>
-    <li>Se o problema persistir, tente abrir o Biblioteca em outro navegador instalado no computador (por exemplo, Edge ou Chrome).</li>
+    <li>O pr&#xf3;prio instalador avisa quando n&#xe3;o encontra o WebView2. Se voc&#xea; viu esse aviso, instale o <strong>Microsoft Edge WebView2 Runtime</strong> e execute o instalador de novo.</li>
+    <li>Se a janela abre mas o cat&#xe1;logo aparece vazio, confira a faixa no topo: ela mostra qual arquivo est&#xe1; em uso. Um cat&#xe1;logo realmente vazio &#xe9; s&#xf3; um arquivo novo &mdash; comece cadastrando.</li>
   </ul>
 
-  <h3>Como fazer backup dos meus livros?</h3>
-  <p>O Biblioteca salva todos os dados em um arquivo chamado <code>biblioteca.txt</code> (formato TSV, texto com tabula&#xe7;&#xe3;o) dentro da pasta de instala&#xe7;&#xe3;o, em <code>C:\Program Files\Biblioteca\</code>. Para fazer backup, basta copiar esse arquivo para um pendrive, para a nuvem (OneDrive, Google Drive) ou para qualquer outro local seguro. Para restaurar, copie o arquivo de volta para a mesma pasta, substituindo o existente.</p>
+  <h3>Como fa&#xe7;o backup dos meus livros?</h3>
+  <p>Desde a vers&#xe3;o 1.9.0, <strong>ele j&#xe1; faz sozinho</strong>: antes da primeira grava&#xe7;&#xe3;o de cada sess&#xe3;o em que voc&#xea; altera algo, guarda uma c&#xf3;pia em <code>Backups\</code>, mantendo as 30 &#xfa;ltimas do cat&#xe1;logo e as 7 &#xfa;ltimas das fotos. Para uma c&#xf3;pia extra, na hora que quiser, use o bot&#xe3;o <strong>Backup</strong>. E como os arquivos ficam no iCloud Drive, j&#xe1; existe uma c&#xf3;pia na nuvem.</p>
 
   <div class="dica">
     <strong>Dica:</strong> O arquivo <code>biblioteca.txt</code> &#xe9; texto puro e abre normalmente no Excel ou no LibreOffice Calc. Isso tamb&#xe9;m facilita importa&#xe7;&#xe3;o e exporta&#xe7;&#xe3;o de dados em outros sistemas.
@@ -758,7 +700,7 @@ hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
 <hr class="secao">
 
 <p style="text-align:center; color:#999; font-size:0.85em; margin-top:2em;">
-  Biblioteca v1.8.3 &mdash; Manual do Usu&#xe1;rio para Windows<br>
+  Biblioteca v1.9.0 &mdash; Manual do Usu&#xe1;rio para Windows<br>
   Setembro de 2026
 </p>
 
