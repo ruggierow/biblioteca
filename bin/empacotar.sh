@@ -7,9 +7,24 @@
 # Win  → distribui o instalador do app nativo (Tauri), gerado antes por
 #        ./bin/compilar-windows.sh. O HTML vai embutido no executavel.
 #
-# Prerequisito (uma vez so):
-#   xcrun notarytool store-credentials "biblioteca-notarize" \
-#       --apple-id SEU@EMAIL.COM --team-id Q87ANATBD3 --password APP-SPECIFIC-PASSWORD
+# Prerequisito (uma vez so): gravar o perfil de notarizacao no chaveiro.
+# Usar a CHAVE DE API, nao senha especifica de app — a senha caduca, pode ser
+# revogada e derruba a notarizacao junto; a chave nao.
+#
+#   xcrun notarytool store-credentials biblioteca-chave-api \
+#       --key ~/.appstoreconnect/private_keys/AuthKey_<KEYID>.p8 \
+#       --key-id <KEYID> \
+#       --issuer "$(cat ~/.appstoreconnect/issuer_id)"
+#
+# Nada secreto passa pela linha de comando: a chave vai por CAMINHO, e key-id e
+# issuer sao identificadores.
+#
+# ARMADILHA: se um perfil com esse nome ja existir, regravar por cima pode NAO
+# ter efeito — o notarytool guarda os itens num compartimento que o comando
+# `security` nao enxerga, e um item velho continua fazendo sombra. O sintoma e
+# store-credentials dizer "Credentials validated" e toda operacao seguinte dar
+# 401 falando em "app-specific password". A saida e usar um nome NOVO de perfil.
+# Aconteceu em 11/09/2026 com o antigo "biblioteca-notarize".
 set -e
 RAIZ="$(cd "$(dirname "$0")/.." && pwd)"
 V="$(tr -d '[:space:]' < "$RAIZ/VERSION")"
@@ -20,7 +35,7 @@ DOCS="$RAIZ/docs"
 
 CERT="Developer ID Application: WILSON VICENTE RUGGIERO (Q87ANATBD3)"
 ENTITLEMENTS="$RAIZ/motor-web/macos/Sources/BibliotecaMacWeb/BibliotecaMacWeb.entitlements"
-NOTARIZE_PROFILE="biblioteca-notarize"
+NOTARIZE_PROFILE="biblioteca-chave-api"
 
 if [ ! -f "$MOTOR" ]; then echo "motor-web/biblioteca.html nao encontrado."; exit 1; fi
 
