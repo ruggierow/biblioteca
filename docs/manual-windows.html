@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca — Manual do Usuário (Windows) — v1.8.3</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size: 16px; line-height: 1.8; color: #1a1a1a; background: #fff; max-width: 820px; margin: 0 auto; padding: 48px 32px; }
+h1 { font-size: 2em; text-align: center; margin-bottom: 4px; }
+.subtitulo { text-align: center; color: #666; margin-bottom: 40px; font-size: 1em; }
+h2 { font-size: 1.4em; color: #1a3a6e; margin-top: 2.8em; margin-bottom: 0.6em; padding-bottom: 0.3em; border-bottom: 2px solid #d0dcf0; }
+h3 { font-size: 1.1em; color: #2a4080; margin-top: 1.6em; margin-bottom: 0.4em; }
+p { margin-bottom: 1em; }
+ul, ol { margin-bottom: 1em; padding-left: 1.6em; }
+li { margin-bottom: 0.4em; }
+code { background: #f0f0f0; border-radius: 3px; padding: 1px 5px; font-family: monospace; font-size: 0.9em; }
+nav#sumario { background: #f2f6ff; border: 1px solid #c8d8f8; border-radius: 8px; padding: 24px 32px; margin: 32px 0 48px; }
+nav#sumario h2 { margin-top: 0; border-bottom: none; }
+nav#sumario ol { margin: 8px 0 0 0; }
+nav#sumario a { color: #1a56a8; text-decoration: none; }
+nav#sumario a:hover { text-decoration: underline; }
+section { margin-bottom: 3em; }
+.voltar { margin-top: 2em; padding-top: 0.8em; border-top: 1px solid #e8e8e8; text-align: right; font-size: 0.9em; }
+.voltar a { color: #1a56a8; text-decoration: none; }
+.nota { background: #fffbe6; border-left: 4px solid #f0c040; padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 16px 0; }
+.dica { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 16px 0; }
+figure { margin: 24px 0; text-align: center; }
+figcaption { font-size: 0.88em; color: #555; margin-top: 8px; font-style: italic; }
+hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
+/* ── Capa ── */
+.capa { background: linear-gradient(145deg, #1e1b4b 0%, #3730a3 55%, #6366f1 100%); border-radius: 16px; margin: -48px -32px 80px; min-height: 620px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #fff; page-break-after: always; break-after: page; position: relative; overflow: hidden; }
+.capa-orbe1 { position: absolute; top: -90px; right: -90px; width: 340px; height: 340px; border-radius: 50%; background: rgba(255,255,255,0.07); pointer-events: none; }
+.capa-orbe2 { position: absolute; bottom: -110px; left: -70px; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,255,255,0.05); pointer-events: none; }
+.capa-orbe3 { position: absolute; top: 38%; left: 58%; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.04); pointer-events: none; }
+.capa-conteudo { position: relative; z-index: 1; padding: 80px 60px; display: flex; flex-direction: column; align-items: center; }
+.capa-icone { margin-bottom: 36px; }
+.capa-titulo { font-size: 3.6em; font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 10px; }
+.capa-plataforma { font-size: 0.95em; font-weight: 400; letter-spacing: 6px; text-transform: uppercase; opacity: 0.7; margin-bottom: 44px; }
+.capa-divisor { width: 60px; height: 2px; background: rgba(255,255,255,0.4); margin-bottom: 44px; }
+.capa-manual { font-size: 1.3em; font-weight: 600; opacity: 0.95; margin-bottom: 8px; }
+.capa-versao { font-size: 0.9em; opacity: 0.55; letter-spacing: 1px; }
+.capa-rodape { position: absolute; bottom: 28px; font-size: 0.82em; opacity: 0.45; letter-spacing: 0.5px; z-index: 1; }
+</style>
+</head>
+<body>
+
+<div class="capa">
+  <div class="capa-orbe1"></div>
+  <div class="capa-orbe2"></div>
+  <div class="capa-orbe3"></div>
+  <div class="capa-conteudo">
+    <div class="capa-icone">
+      <svg width="160" height="122" viewBox="0 0 160 122" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M80 20 L12 33 L12 98 L80 87 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M80 20 L148 33 L148 98 L80 87 Z" fill="rgba(255,255,255,0.19)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linejoin="round"/>
+        <line x1="80" y1="20" x2="80" y2="87" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/>
+        <ellipse cx="80" cy="104" rx="55" ry="6" fill="rgba(0,0,0,0.18)"/>
+        <line x1="27" y1="50" x2="68" y2="44" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+        <line x1="27" y1="60" x2="68" y2="54" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+        <line x1="27" y1="70" x2="68" y2="64" stroke="rgba(255,255,255,0.32)" stroke-width="1.2"/>
+        <line x1="27" y1="80" x2="55" y2="75" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+        <line x1="92" y1="44" x2="133" y2="50" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+        <line x1="92" y1="54" x2="133" y2="60" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+        <line x1="92" y1="64" x2="133" y2="70" stroke="rgba(255,255,255,0.32)" stroke-width="1.2"/>
+        <line x1="92" y1="75" x2="120" y2="80" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+        <rect x="114" y="24" width="10" height="10" rx="1.5" fill="rgba(255,255,255,0.75)"/>
+        <rect x="127" y="24" width="10" height="10" rx="1.5" fill="rgba(255,255,255,0.75)"/>
+        <rect x="114" y="37" width="10" height="10" rx="1.5" fill="rgba(255,255,255,0.75)"/>
+        <rect x="127" y="37" width="10" height="10" rx="1.5" fill="rgba(255,255,255,0.75)"/>
+      </svg>
+    </div>
+    <div class="capa-titulo">BIBLIOTECA</div>
+    <div class="capa-plataforma">para Windows</div>
+    <div class="capa-divisor"></div>
+    <div class="capa-manual">Manual do Usuário</div>
+    <div class="capa-versao">Versão 1.8.3</div>
+  </div>
+  <div class="capa-rodape">Setembro de 2026 &nbsp;&middot;&nbsp; ruggierow</div>
+</div>
+
+<h1>Biblioteca</h1>
+<p class="subtitulo">Manual do Usuário &mdash; Windows &mdash; Versão 1.8.3</p>
+
+<nav id="sumario">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#apresentacao">Apresentação</a></li>
+    <li><a href="#instalacao">Instalação</a></li>
+    <li><a href="#primeiro-uso">Abrindo o Biblioteca</a></li>
+    <li><a href="#catalogo">Consultando o catálogo</a></li>
+    <li><a href="#livros">Adicionando e editando livros</a></li>
+    <li><a href="#capas">Fotografando capas</a></li>
+    <li><a href="#pesquisa">Pesquisa e filtros</a></li>
+    <li><a href="#sincronizacao">Sincronização e backup</a></li>
+    <li><a href="#faq">Perguntas frequentes</a></li>
+  </ol>
+</nav>
+
+<!-- ============================================================ -->
+<section id="apresentacao">
+  <h2>1. Apresentação</h2>
+
+  <p>O <strong>Biblioteca</strong> é um aplicativo para catalogar sua coleção de livros pessoais. Ele funciona completamente <strong>offline</strong> — não depende de internet, não envia dados para nenhum servidor e não exige conta ou cadastro. Tudo fica salvo no seu próprio computador.</p>
+
+  <p>No Windows, o Biblioteca abre direto no seu navegador padrão (Edge, Chrome ou Firefox). A barra de endereço mostrará um caminho começando com <code>file:///</code> — isso é normal e esperado. O app é um arquivo HTML único que roda localmente, sem necessidade de servidor web instalado.</p>
+
+  <h3>Principais recursos</h3>
+  <ul>
+    <li>Cadastro de livros com título, autor, assunto, editora, ano, ISBN, páginas e observações</li>
+    <li>Foto de capa registrada via webcam ou arquivo de imagem do computador</li>
+    <li>Pesquisa instantânea por título e autor enquanto você digita</li>
+    <li>Filtros por assunto e editora</li>
+    <li>Exportação do catálogo em formato TSV (abre no Excel, LibreOffice Calc e similares)</li>
+    <li>Compatível com Windows 10 e Windows 11</li>
+  </ul>
+
+  <figure>
+    <svg width="560" height="340" viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;">
+      <!-- Fundo geral -->
+      <rect width="560" height="340" rx="10" fill="#f8f9fc"/>
+      <!-- Barra de tarefas do Windows -->
+      <rect x="0" y="310" width="560" height="30" rx="0" fill="#2d2d3f"/>
+      <rect x="10" y="316" width="18" height="18" rx="2" fill="#0078d4"/>
+      <text x="19" y="329" font-family="Arial" font-size="11" fill="white" text-anchor="middle">&#x229E;</text>
+      <text x="530" y="329" font-family="'Segoe UI',Arial" font-size="10" fill="#ccc" text-anchor="middle">14:37</text>
+      <!-- Janela do navegador -->
+      <rect x="30" y="10" width="500" height="292" rx="8" fill="#ffffff" stroke="#d0d0d0" stroke-width="1"/>
+      <!-- Barra de título do navegador -->
+      <rect x="30" y="10" width="500" height="38" rx="8" fill="#f3f3f3" stroke="#d0d0d0" stroke-width="1"/>
+      <rect x="30" y="38" width="500" height="10" fill="#f3f3f3"/>
+      <!-- Botões fechar/min/max -->
+      <circle cx="50" cy="29" r="7" fill="#ff5f57"/>
+      <circle cx="70" cy="29" r="7" fill="#febc2e"/>
+      <circle cx="90" cy="29" r="7" fill="#28c840"/>
+      <!-- Barra de endereço -->
+      <rect x="106" y="19" width="350" height="20" rx="10" fill="#ffffff" stroke="#b0b8c8" stroke-width="1"/>
+      <text x="115" y="33" font-family="monospace" font-size="9" fill="#444">file:///C:/Program Files/Biblioteca/biblioteca.html</text>
+      <!-- Conteúdo do app -->
+      <rect x="30" y="48" width="500" height="254" rx="0" fill="#fff"/>
+      <!-- Cabeçalho azul do app -->
+      <rect x="30" y="48" width="500" height="44" fill="#1a3a6e"/>
+      <text x="56" y="76" font-family="'Segoe UI',Arial" font-size="16" font-weight="bold" fill="white">Biblioteca</text>
+      <!-- Campo de pesquisa no header -->
+      <rect x="200" y="58" width="200" height="22" rx="11" fill="#ffffff33" stroke="#ffffff55" stroke-width="1"/>
+      <text x="212" y="73" font-family="'Segoe UI',Arial" font-size="10" fill="#ffffffaa">Pesquisar...</text>
+      <!-- Botão novo livro -->
+      <rect x="420" y="58" width="90" height="22" rx="4" fill="#4caf50"/>
+      <text x="465" y="73" font-family="'Segoe UI',Arial" font-size="10" fill="white" text-anchor="middle">+ Novo livro</text>
+      <!-- Livro 1 -->
+      <rect x="40" y="104" width="480" height="52" rx="6" fill="#f8f9fc" stroke="#e8eaf0" stroke-width="1"/>
+      <rect x="52" y="112" width="36" height="36" rx="3" fill="#4a6fa5"/>
+      <text x="70" y="136" font-family="Arial" font-size="20" text-anchor="middle">&#x1F4D7;</text>
+      <text x="100" y="126" font-family="'Segoe UI',Arial" font-size="12" font-weight="bold" fill="#1a1a1a">Dom Quixote</text>
+      <text x="100" y="142" font-family="'Segoe UI',Arial" font-size="11" fill="#666">Miguel de Cervantes</text>
+      <!-- Livro 2 -->
+      <rect x="40" y="164" width="480" height="52" rx="6" fill="#f8f9fc" stroke="#e8eaf0" stroke-width="1"/>
+      <rect x="52" y="172" width="36" height="36" rx="3" fill="#7b9e87"/>
+      <text x="70" y="196" font-family="Arial" font-size="20" text-anchor="middle">&#x1F4D8;</text>
+      <text x="100" y="186" font-family="'Segoe UI',Arial" font-size="12" font-weight="bold" fill="#1a1a1a">Cem Anos de Solid&#xe3;o</text>
+      <text x="100" y="202" font-family="'Segoe UI',Arial" font-size="11" fill="#666">Gabriel Garc&#xed;a M&#xe1;rquez</text>
+      <!-- Livro 3 -->
+      <rect x="40" y="224" width="480" height="52" rx="6" fill="#f8f9fc" stroke="#e8eaf0" stroke-width="1"/>
+      <rect x="52" y="232" width="36" height="36" rx="3" fill="#8e7498"/>
+      <text x="70" y="256" font-family="Arial" font-size="20" text-anchor="middle">&#x1F4D9;</text>
+      <text x="100" y="246" font-family="'Segoe UI',Arial" font-size="12" font-weight="bold" fill="#1a1a1a">O Processo</text>
+      <text x="100" y="262" font-family="'Segoe UI',Arial" font-size="11" fill="#666">Franz Kafka</text>
+    </svg>
+    <figcaption>O Biblioteca abrindo no navegador padr&#xe3;o do Windows, com lista de livros catalogados e barra de endere&#xe7;o mostrando <code>file:///</code>.</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#x2191; Voltar ao Sum&#xe1;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ============================================================ -->
+<section id="instalacao">
+  <h2>2. Instala&#xe7;&#xe3;o</h2>
+
+  <p>Fa&#xe7;a o download do arquivo <strong>Biblioteca-1.8.3-setup.exe</strong> e clique duas vezes nele para iniciar a instala&#xe7;&#xe3;o.</p>
+
+  <h3>Aviso do Windows SmartScreen</h3>
+
+  <p>Ao clicar no instalador pela primeira vez, o Windows pode exibir uma tela azul com a mensagem <em>"Windows protegeu seu computador"</em>. Esse aviso aparece porque o Biblioteca n&#xe3;o possui um certificado digital pago &mdash; ele &#xe9; um app independente e gratuito. O arquivo n&#xe3;o cont&#xe9;m v&#xed;rus ou malware.</p>
+
+  <p>Para continuar a instala&#xe7;&#xe3;o:</p>
+  <ol>
+    <li>Clique em <strong>Mais informa&#xe7;&#xf5;es</strong> (link de texto na tela de aviso)</li>
+    <li>Em seguida, clique no bot&#xe3;o <strong>Executar assim mesmo</strong> que aparecer</li>
+  </ol>
+
+  <figure>
+    <svg width="480" height="300" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;">
+      <!-- Fundo azul do SmartScreen -->
+      <rect width="480" height="300" rx="10" fill="#0067c0"/>
+      <!-- Ícone de escudo -->
+      <rect x="190" y="30" width="100" height="100" rx="50" fill="#ffffff22"/>
+      <text x="240" y="96" font-family="Arial" font-size="52" fill="white" text-anchor="middle">&#x1F6E1;</text>
+      <!-- Título principal -->
+      <text x="240" y="158" font-family="'Segoe UI',Arial" font-size="17" font-weight="bold" fill="white" text-anchor="middle">Windows protegeu seu computador</text>
+      <!-- Subtítulo -->
+      <text x="240" y="182" font-family="'Segoe UI',Arial" font-size="12" fill="#cce0ff" text-anchor="middle">O Windows Defender SmartScreen impediu a inicializa&#xe7;&#xe3;o</text>
+      <text x="240" y="198" font-family="'Segoe UI',Arial" font-size="12" fill="#cce0ff" text-anchor="middle">de um aplicativo n&#xe3;o reconhecido.</text>
+      <!-- Link "Mais informações" em destaque -->
+      <text x="240" y="230" font-family="'Segoe UI',Arial" font-size="13" fill="#ffdf80" text-anchor="middle" text-decoration="underline">&#x25b6; Mais informa&#xe7;&#xf5;es</text>
+      <!-- Botão Não executar -->
+      <rect x="110" y="254" width="130" height="32" rx="4" fill="#005ba1" stroke="#cce0ff" stroke-width="1"/>
+      <text x="175" y="274" font-family="'Segoe UI',Arial" font-size="12" fill="white" text-anchor="middle">N&#xe3;o executar</text>
+      <!-- Botão Executar assim mesmo -->
+      <rect x="258" y="254" width="160" height="32" rx="4" fill="white"/>
+      <text x="338" y="274" font-family="'Segoe UI',Arial" font-size="12" fill="#0067c0" font-weight="bold" text-anchor="middle">Executar assim mesmo</text>
+    </svg>
+    <figcaption>Tela azul do SmartScreen: clique em "Mais informa&#xe7;&#xf5;es" (texto dourado) e depois em "Executar assim mesmo" para prosseguir.</figcaption>
+  </figure>
+
+  <h3>Assistente de instala&#xe7;&#xe3;o</h3>
+
+  <p>Depois de liberar o aviso do SmartScreen, o assistente de instala&#xe7;&#xe3;o abre. S&#xe3;o apenas quatro telas simples:</p>
+
+  <ol>
+    <li><strong>Boas-vindas</strong> &mdash; apresenta o Biblioteca e a vers&#xe3;o que ser&#xe1; instalada. Clique em <em>Avan&#xe7;ar</em>.</li>
+    <li><strong>Escolher pasta</strong> &mdash; a pasta padr&#xe3;o &#xe9; <code>C:\Program Files\Biblioteca</code>. Voc&#xea; pode manter ou alterar. Clique em <em>Instalar</em>.</li>
+    <li><strong>Instalando</strong> &mdash; barra de progresso enquanto os arquivos s&#xe3;o copiados.</li>
+    <li><strong>Conclu&#xed;do</strong> &mdash; clique em <em>Terminar</em>. O atalho <strong>Biblioteca</strong> j&#xe1; aparece na &#xc1;rea de Trabalho.</li>
+  </ol>
+
+  <figure>
+    <svg width="560" height="168" viewBox="0 0 560 168" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;">
+      <rect width="560" height="168" rx="10" fill="#f8f9fc"/>
+
+      <!-- Tela 1: Boas-vindas -->
+      <rect x="10" y="18" width="118" height="128" rx="6" fill="white" stroke="#c8d8f8" stroke-width="1.5"/>
+      <rect x="10" y="18" width="118" height="36" rx="6" fill="#1a3a6e"/>
+      <rect x="10" y="44" width="118" height="10" fill="#1a3a6e"/>
+      <text x="69" y="40" font-family="'Segoe UI',Arial" font-size="9" fill="white" text-anchor="middle">Instalar Biblioteca 1.8.3</text>
+      <text x="69" y="76" font-family="'Segoe UI',Arial" font-size="9" fill="#444" text-anchor="middle">Bem-vindo ao</text>
+      <text x="69" y="88" font-family="'Segoe UI',Arial" font-size="9" fill="#444" text-anchor="middle">assistente de</text>
+      <text x="69" y="100" font-family="'Segoe UI',Arial" font-size="9" font-weight="bold" fill="#1a3a6e" text-anchor="middle">instala&#xe7;&#xe3;o</text>
+      <rect x="76" y="128" width="44" height="12" rx="3" fill="#0067c0"/>
+      <text x="98" y="138" font-family="'Segoe UI',Arial" font-size="8" fill="white" text-anchor="middle">Avan&#xe7;ar</text>
+      <text x="69" y="158" font-family="'Segoe UI',Arial" font-size="8" fill="#888" text-anchor="middle">&#x2460; Boas-vindas</text>
+
+      <!-- Seta 1 -->
+      <text x="142" y="88" font-family="Arial" font-size="20" fill="#0067c0" text-anchor="middle">&#x2192;</text>
+
+      <!-- Tela 2: Pasta -->
+      <rect x="156" y="18" width="118" height="128" rx="6" fill="white" stroke="#c8d8f8" stroke-width="1.5"/>
+      <rect x="156" y="18" width="118" height="36" rx="6" fill="#1a3a6e"/>
+      <rect x="156" y="44" width="118" height="10" fill="#1a3a6e"/>
+      <text x="215" y="40" font-family="'Segoe UI',Arial" font-size="9" fill="white" text-anchor="middle">Escolher pasta</text>
+      <text x="215" y="72" font-family="'Segoe UI',Arial" font-size="8.5" fill="#444" text-anchor="middle">Instalar em:</text>
+      <rect x="166" y="76" width="98" height="14" rx="2" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>
+      <text x="169" y="86" font-family="monospace" font-size="7" fill="#444">C:\Program Files\...</text>
+      <rect x="222" y="128" width="44" height="12" rx="3" fill="#0067c0"/>
+      <text x="244" y="138" font-family="'Segoe UI',Arial" font-size="8" fill="white" text-anchor="middle">Instalar</text>
+      <text x="215" y="158" font-family="'Segoe UI',Arial" font-size="8" fill="#888" text-anchor="middle">&#x2461; Escolher pasta</text>
+
+      <!-- Seta 2 -->
+      <text x="288" y="88" font-family="Arial" font-size="20" fill="#0067c0" text-anchor="middle">&#x2192;</text>
+
+      <!-- Tela 3: Progresso -->
+      <rect x="302" y="18" width="118" height="128" rx="6" fill="white" stroke="#c8d8f8" stroke-width="1.5"/>
+      <rect x="302" y="18" width="118" height="36" rx="6" fill="#1a3a6e"/>
+      <rect x="302" y="44" width="118" height="10" fill="#1a3a6e"/>
+      <text x="361" y="40" font-family="'Segoe UI',Arial" font-size="9" fill="white" text-anchor="middle">Instalando...</text>
+      <text x="361" y="76" font-family="'Segoe UI',Arial" font-size="8.5" fill="#444" text-anchor="middle">Copiando arquivos...</text>
+      <rect x="314" y="84" width="96" height="10" rx="5" fill="#e0e0e0"/>
+      <rect x="314" y="84" width="68" height="10" rx="5" fill="#0067c0"/>
+      <text x="361" y="158" font-family="'Segoe UI',Arial" font-size="8" fill="#888" text-anchor="middle">&#x2462; Instalando</text>
+
+      <!-- Seta 3 -->
+      <text x="434" y="88" font-family="Arial" font-size="20" fill="#0067c0" text-anchor="middle">&#x2192;</text>
+
+      <!-- Tela 4: Concluído -->
+      <rect x="448" y="18" width="100" height="128" rx="6" fill="white" stroke="#4caf50" stroke-width="2"/>
+      <rect x="448" y="18" width="100" height="36" rx="6" fill="#1a3a6e"/>
+      <rect x="448" y="44" width="100" height="10" fill="#1a3a6e"/>
+      <text x="498" y="40" font-family="'Segoe UI',Arial" font-size="9" fill="white" text-anchor="middle">Conclu&#xed;do!</text>
+      <circle cx="498" cy="88" r="18" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
+      <text x="498" y="95" font-family="Arial" font-size="18" fill="#4caf50" text-anchor="middle">&#x2713;</text>
+      <text x="498" y="116" font-family="'Segoe UI',Arial" font-size="8" fill="#444" text-anchor="middle">Atalho criado</text>
+      <text x="498" y="126" font-family="'Segoe UI',Arial" font-size="8" fill="#444" text-anchor="middle">na &#xc1;rea de Trabalho</text>
+      <rect x="466" y="134" width="64" height="12" rx="3" fill="#4caf50"/>
+      <text x="498" y="144" font-family="'Segoe UI',Arial" font-size="8" fill="white" text-anchor="middle">Terminar</text>
+      <text x="498" y="158" font-family="'Segoe UI',Arial" font-size="8" fill="#888" text-anchor="middle">&#x2463; Conclu&#xed;do</text>
+    </svg>
+    <figcaption>As quatro telas do assistente de instala&#xe7;&#xe3;o. Ao clicar em "Terminar", o atalho Biblioteca aparece na &#xc1;rea de Trabalho.</figcaption>
+  </figure>
+
+  <div class="dica">
+    <strong>Dica:</strong> N&#xe3;o &#xe9; necess&#xe1;rio reiniciar o computador ap&#xf3;s a instala&#xe7;&#xe3;o. O Biblioteca abre imediatamente pelo atalho da &#xc1;rea de Trabalho.
+  </div>
+
+  <p class="voltar"><a href="#sumario">&#x2191; Voltar ao Sum&#xe1;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ============================================================ -->
+<section id="primeiro-uso">
+  <h2>3. Abrindo o Biblioteca</h2>
+
+  <p>Clique duas vezes no atalho <strong>Biblioteca</strong> na &#xc1;rea de Trabalho. O app abre automaticamente no seu navegador padr&#xe3;o &mdash; Edge, Chrome ou Firefox, dependendo do que estiver configurado no seu Windows.</p>
+
+  <p>A barra de endere&#xe7;o do navegador mostrar&#xe1; algo parecido com o exemplo abaixo:</p>
+
+  <figure>
+    <svg width="520" height="100" viewBox="0 0 520 100" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;">
+      <rect width="520" height="100" rx="10" fill="#f8f9fc"/>
+      <!-- Moldura do navegador -->
+      <rect x="20" y="16" width="480" height="68" rx="8" fill="white" stroke="#d0d0d0" stroke-width="1"/>
+      <!-- Barra de título -->
+      <rect x="20" y="16" width="480" height="32" rx="8" fill="#f3f3f3" stroke="#d0d0d0" stroke-width="1"/>
+      <rect x="20" y="36" width="480" height="12" fill="#f3f3f3"/>
+      <!-- Botões -->
+      <circle cx="38" cy="32" r="6" fill="#ff5f57"/>
+      <circle cx="56" cy="32" r="6" fill="#febc2e"/>
+      <circle cx="74" cy="32" r="6" fill="#28c840"/>
+      <!-- Barra de endereço -->
+      <rect x="90" y="20" width="396" height="22" rx="11" fill="white" stroke="#90b0e8" stroke-width="1.5"/>
+      <text x="102" y="35" font-family="Arial" font-size="11" fill="#555">&#x1F512;</text>
+      <text x="120" y="35" font-family="monospace" font-size="10.5" fill="#1a1a1a">file:///C:/Program Files/Biblioteca/biblioteca.html</text>
+      <!-- Texto de apoio -->
+      <text x="260" y="74" font-family="'Segoe UI',Arial" font-size="11" fill="#555" text-anchor="middle">O Biblioteca est&#xe1; aberto e pronto para uso nesta aba.</text>
+    </svg>
+    <figcaption>A barra de endere&#xe7;o mostrando <code>file:///C:/Program Files/Biblioteca/biblioteca.html</code> &mdash; normal para um app que roda localmente.</figcaption>
+  </figure>
+
+  <div class="nota">
+    <strong>Por que aparece "file:///"?</strong> O Biblioteca &#xe9; um arquivo HTML que roda diretamente no seu computador, sem precisar de internet ou servidor. O <code>file:///</code> significa que o navegador est&#xe1; abrindo um arquivo local &mdash; como se fosse um documento do Word, s&#xf3; que interativo.
+  </div>
+
+  <p>Na primeira vez que abrir, o cat&#xe1;logo estar&#xe1; vazio. Voc&#xea; pode come&#xe7;ar a cadastrar seus livros imediatamente clicando em <strong>+ Novo livro</strong>.</p>
+
+  <div class="dica">
+    <strong>Atalho r&#xe1;pido:</strong> Pressione <strong>Win&#x229e; + S</strong>, digite "Biblioteca" e pressione Enter para abrir o app sem precisar do atalho na &#xc1;rea de Trabalho.
+  </div>
+
+  <p class="voltar"><a href="#sumario">&#x2191; Voltar ao Sum&#xe1;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ============================================================ -->
+<section id="catalogo">
+  <h2>4. Consultando o cat&#xe1;logo</h2>
+
+  <p>A tela principal exibe todos os livros cadastrados em uma lista com miniatura da capa (quando dispon&#xed;vel), t&#xed;tulo e nome do autor. Clique em qualquer livro para ver o painel de detalhes completo no lado direito da tela.</p>
+
+  <h3>Campos de cada livro</h3>
+  <ul>
+    <li><strong>T&#xed;tulo</strong> &mdash; nome do livro (obrigat&#xf3;rio)</li>
+    <li><strong>Autor</strong> &mdash; nome do autor ou autores</li>
+    <li><strong>Assunto</strong> &mdash; categoria ou &#xe1;rea do conhecimento</li>
+    <li><strong>Editora</strong> &mdash; nome da editora</li>
+    <li><strong>Ano</strong> &mdash; ano de publica&#xe7;&#xe3;o ou de aquisi&#xe7;&#xe3;o</li>
+    <li><strong>ISBN</strong> &mdash; c&#xf3;digo identificador do livro (encontrado na contracapa)</li>
+    <li><strong>P&#xe1;ginas</strong> &mdash; n&#xfa;mero de p&#xe1;ginas</li>
+    <li><strong>Observa&#xe7;&#xf5;es</strong> &mdash; notas pessoais, localiza&#xe7;&#xe3;o na estante, etc.</li>
+  </ul>
+
+  <figure>
+    <svg width="560" height="300" viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;">
+      <rect width="560" height="300" rx="10" fill="#f8f9fc"/>
+      <!-- Cabeçalho do app -->
+      <rect x="10" y="10" width="540" height="42" rx="6" fill="#1a3a6e"/>
+      <text x="30" y="36" font-family="'Segoe UI',Arial" font-size="15" font-weight="bold" fill="white">Biblioteca</text>
+      <rect x="190" y="18" width="190" height="22" rx="11" fill="#ffffff22" stroke="#ffffff44" stroke-width="1"/>
+      <text x="200" y="33" font-family="'Segoe UI',Arial" font-size="10" fill="#ffffff88">Pesquisar...</text>
+      <rect x="400" y="18" width="90" height="22" rx="4" fill="#4caf50"/>
+      <text x="445" y="33" font-family="'Segoe UI',Arial" font-size="10" fill="white" text-anchor="middle">+ Novo livro</text>
+      <!-- Painel esquerdo: lista -->
+      <rect x="10" y="52" width="240" height="238" rx="0" fill="white" stroke="#e8eaf0" stroke-width="1"/>
+      <!-- Livro 1 selecionado -->
+      <rect x="10" y="52" width="240" height="56" fill="#e8f0fe"/>
+      <rect x="20" y="60" width="38" height="40" rx="3" fill="#4a6fa5"/>
+      <text x="39" y="84" font-family="Arial" font-size="20" fill="white" text-anchor="middle">&#x1F4D7;</text>
+      <text x="68" y="74" font-family="'Segoe UI',Arial" font-size="11" font-weight="bold" fill="#1a3a6e">Dom Quixote</text>
+      <text x="68" y="88" font-family="'Segoe UI',Arial" font-size="10" fill="#555">Miguel de Cervantes</text>
+      <text x="68" y="100" font-family="'Segoe UI',Arial" font-size="9" fill="#888">Literatura &middot; 1605</text>
+      <!-- Livro 2 -->
+      <rect x="20" y="116" width="38" height="40" rx="3" fill="#7b9e87"/>
+      <text x="39" y="140" font-family="Arial" font-size="20" fill="white" text-anchor="middle">&#x1F4D8;</text>
+      <text x="68" y="130" font-family="'Segoe UI',Arial" font-size="11" font-weight="bold" fill="#1a1a1a">Cem Anos de Solid&#xe3;o</text>
+      <text x="68" y="144" font-family="'Segoe UI',Arial" font-size="10" fill="#555">Gabriel Garc&#xed;a M&#xe1;rquez</text>
+      <text x="68" y="156" font-family="'Segoe UI',Arial" font-size="9" fill="#888">Romance &middot; 1967</text>
+      <!-- Livro 3 -->
+      <rect x="20" y="172" width="38" height="40" rx="3" fill="#8e7498"/>
+      <text x="39" y="196" font-family="Arial" font-size="20" fill="white" text-anchor="middle">&#x1F4D9;</text>
+      <text x="68" y="186" font-family="'Segoe UI',Arial" font-size="11" font-weight="bold" fill="#1a1a1a">O Processo</text>
+      <text x="68" y="200" font-family="'Segoe UI',Arial" font-size="10" fill="#555">Franz Kafka</text>
+      <text x="68" y="212" font-family="'Segoe UI',Arial" font-size="9" fill="#888">Romance &middot; 1925</text>
+      <!-- Livro 4 -->
+      <rect x="20" y="228" width="38" height="40" rx="3" fill="#c0956a"/>
+      <text x="39" y="252" font-family="Arial" font-size="20" fill="white" text-anchor="middle">&#x1F4D5;</text>
+      <text x="68" y="242" font-family="'Segoe UI',Arial" font-size="11" font-weight="bold" fill="#1a1a1a">Grande Sert&#xe3;o: Veredas</text>
+      <text x="68" y="256" font-family="'Segoe UI',Arial" font-size="10" fill="#555">Jo&#xe3;o Guimar&#xe3;es Rosa</text>
+      <text x="68" y="268" font-family="'Segoe UI',Arial" font-size="9" fill="#888">Romance &middot; 1956</text>
+      <!-- Divisória -->
+      <line x1="250" y1="52" x2="250" y2="290" stroke="#d8dce8" stroke-width="1"/>
+      <!-- Painel direito: detalhes -->
+      <rect x="250" y="52" width="300" height="238" rx="0" fill="white"/>
+      <text x="270" y="80" font-family="'Segoe UI',Arial" font-size="14" font-weight="bold" fill="#1a3a6e">Dom Quixote</text>
+      <!-- Capa -->
+      <rect x="412" y="60" width="118" height="160" rx="4" fill="#4a6fa5" stroke="#3a5f95" stroke-width="1"/>
+      <text x="471" y="148" font-family="Arial" font-size="46" fill="white" text-anchor="middle">&#x1F4D7;</text>
+      <!-- Campos de detalhe -->
+      <text x="270" y="104" font-family="'Segoe UI',Arial" font-size="9.5" fill="#888">Autor</text>
+      <text x="270" y="118" font-family="'Segoe UI',Arial" font-size="11" fill="#1a1a1a">Miguel de Cervantes</text>
+      <text x="270" y="138" font-family="'Segoe UI',Arial" font-size="9.5" fill="#888">Assunto</text>
+      <text x="270" y="152" font-family="'Segoe UI',Arial" font-size="11" fill="#1a1a1a">Literatura &middot; Romance Cl&#xe1;ssico</text>
+      <text x="270" y="172" font-family="'Segoe UI',Arial" font-size="9.5" fill="#888">Editora</text>
+      <text x="270" y="186" font-family="'Segoe UI',Arial" font-size="11" fill="#1a1a1a">Penguin Companhia</text>
+      <text x="270" y="206" font-family="'Segoe UI',Arial" font-size="9.5" fill="#888">Ano &middot; P&#xe1;ginas</text>
+      <text x="270" y="220" font-family="'Segoe UI',Arial" font-size="11" fill="#1a1a1a">1605 &middot; 912 p&#xe1;ginas</text>
+      <!-- Botões de ação -->
+      <rect x="262" y="262" width="62" height="18" rx="3" fill="#1a3a6e"/>
+      <text x="293" y="275" font-family="'Segoe UI',Arial" font-size="10" fill="white" text-anchor="middle">Editar</text>
+      <rect x="332" y="262" width="62" height="18" rx="3" fill="#f44336"/>
+      <text x="363" y="275" font-family="'Segoe UI',Arial" font-size="10" fill="white" text-anchor="middle">Excluir</text>
+    </svg>
+    <figcaption>Lista de livros &#xe0; esquerda e painel de detalhes &#xe0; direita, com foto de capa, campos completos e bot&#xf5;es de a&#xe7;&#xe3;o.</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#x2191; Voltar ao Sum&#xe1;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ============================================================ -->
+<section id="livros">
+  <h2>5. Adicionando e editando livros</h2>
+
+  <h3>Adicionar um novo livro</h3>
+  <ol>
+    <li>Clique no bot&#xe3;o <strong>+ Novo livro</strong> no canto superior direito da tela.</li>
+    <li>Um formul&#xe1;rio abre com todos os campos dispon&#xed;veis.</li>
+    <li>Preencha ao menos o <strong>T&#xed;tulo</strong> (&#xfa;nico campo obrigat&#xf3;rio).</li>
+    <li>Clique em <strong>Salvar</strong>. O livro aparece imediatamente na lista.</li>
+  </ol>
+
+  <h3>Editar um livro existente</h3>
+  <ol>
+    <li>Clique no livro que deseja editar na lista.</li>
+    <li>No painel de detalhes, clique em <strong>Editar</strong>.</li>
+    <li>O formul&#xe1;rio abre preenchido com os dados atuais.</li>
+    <li>Fa&#xe7;a as altera&#xe7;&#xf5;es e clique em <strong>Salvar</strong>.</li>
+  </ol>
+
+  <h3>Excluir um livro</h3>
+  <ol>
+    <li>Selecione o livro na lista.</li>
+    <li>Clique em <strong>Excluir</strong> no painel de detalhes.</li>
+    <li>Uma caixa de confirma&#xe7;&#xe3;o aparecer&#xe1; perguntando se voc&#xea; tem certeza.</li>
+    <li>Clique em <strong>Confirmar</strong> para excluir ou em <strong>Cancelar</strong> para desistir.</li>
+  </ol>
+
+  <div class="nota">
+    <strong>Aten&#xe7;&#xe3;o:</strong> A exclus&#xe3;o &#xe9; permanente. O Biblioteca n&#xe3;o tem lixeira &mdash; se excluir um livro por engano, ser&#xe1; necess&#xe1;rio cadastr&#xe1;-lo novamente.
+  </div>
+
+  <figure>
+    <svg width="480" height="318" viewBox="0 0 480 318" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;">
+      <rect width="480" height="318" rx="10" fill="#f8f9fc"/>
+      <!-- Formulário de cadastro -->
+      <rect x="30" y="16" width="420" height="286" rx="8" fill="white" stroke="#d0dcf0" stroke-width="1.5"/>
+      <!-- Barra do formulário -->
+      <rect x="30" y="16" width="420" height="38" rx="8" fill="#1a3a6e"/>
+      <rect x="30" y="44" width="420" height="10" fill="#1a3a6e"/>
+      <text x="240" y="39" font-family="'Segoe UI',Arial" font-size="13" font-weight="bold" fill="white" text-anchor="middle">Novo livro</text>
+      <!-- Campo Título -->
+      <text x="52" y="76" font-family="'Segoe UI',Arial" font-size="11" fill="#444">T&#xed;tulo <tspan fill="#c0392b">*</tspan></text>
+      <rect x="52" y="80" width="376" height="26" rx="4" fill="#f8f9ff" stroke="#90b0e0" stroke-width="1.5"/>
+      <text x="62" y="97" font-family="'Segoe UI',Arial" font-size="11" fill="#1a1a1a">A Divina Com&#xe9;dia</text>
+      <!-- Campo Autor -->
+      <text x="52" y="124" font-family="'Segoe UI',Arial" font-size="11" fill="#444">Autor</text>
+      <rect x="52" y="128" width="376" height="26" rx="4" fill="#f8f9ff" stroke="#b0c0e0" stroke-width="1.5"/>
+      <text x="62" y="145" font-family="'Segoe UI',Arial" font-size="11" fill="#1a1a1a">Dante Alighieri</text>
+      <!-- Assunto e Editora -->
+      <text x="52" y="172" font-family="'Segoe UI',Arial" font-size="11" fill="#444">Assunto</text>
+      <rect x="52" y="176" width="175" height="26" rx="4" fill="#f8f9ff" stroke="#b0c0e0" stroke-width="1.5"/>
+      <text x="62" y="193" font-family="'Segoe UI',Arial" font-size="11" fill="#1a1a1a">Poesia &middot; Cl&#xe1;ssico</text>
+      <text x="253" y="172" font-family="'Segoe UI',Arial" font-size="11" fill="#444">Editora</text>
+      <rect x="253" y="176" width="175" height="26" rx="4" fill="#f8f9ff" stroke="#b0c0e0" stroke-width="1.5"/>
+      <text x="263" y="193" font-family="'Segoe UI',Arial" font-size="11" fill="#1a1a1a">Editora 34</text>
+      <!-- Ano e ISBN -->
+      <text x="52" y="220" font-family="'Segoe UI',Arial" font-size="11" fill="#444">Ano</text>
+      <rect x="52" y="224" width="80" height="26" rx="4" fill="#f8f9ff" stroke="#b0c0e0" stroke-width="1.5"/>
+      <text x="62" y="241" font-family="'Segoe UI',Arial" font-size="11" fill="#1a1a1a">1320</text>
+      <text x="148" y="220" font-family="'Segoe UI',Arial" font-size="11" fill="#444">ISBN</text>
+      <rect x="148" y="224" width="280" height="26" rx="4" fill="#f8f9ff" stroke="#b0c0e0" stroke-width="1.5"/>
+      <text x="158" y="241" font-family="'Segoe UI',Arial" font-size="11" fill="#1a1a1a">978-85-7326-362-3</text>
+      <!-- Observações -->
+      <text x="52" y="268" font-family="'Segoe UI',Arial" font-size="11" fill="#444">Observa&#xe7;&#xf5;es</text>
+      <rect x="52" y="272" width="376" height="22" rx="4" fill="#f8f9ff" stroke="#b0c0e0" stroke-width="1"/>
+      <text x="62" y="286" font-family="'Segoe UI',Arial" font-size="10" fill="#aaa">Notas pessoais, localiza&#xe7;&#xe3;o na estante...</text>
+      <!-- Botões -->
+      <rect x="52" y="278" width="96" height="18" rx="4" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>
+      <text x="100" y="290" font-family="'Segoe UI',Arial" font-size="10" fill="#444" text-anchor="middle">Cancelar</text>
+      <rect x="332" y="278" width="96" height="18" rx="4" fill="#1a3a6e"/>
+      <text x="380" y="290" font-family="'Segoe UI',Arial" font-size="10" fill="white" text-anchor="middle">Salvar</text>
+    </svg>
+    <figcaption>Formul&#xe1;rio de cadastro de livro. O campo T&#xed;tulo (marcado com *) &#xe9; obrigat&#xf3;rio; os demais s&#xe3;o opcionais.</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#x2191; Voltar ao Sum&#xe1;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ============================================================ -->
+<section id="capas">
+  <h2>6. Fotografando capas</h2>
+
+  <p>Cada livro pode ter uma foto da capa associada. H&#xe1; dois modos de adicionar a foto:</p>
+
+  <ul>
+    <li><strong>Via arquivo:</strong> escolha uma imagem JPEG ou PNG j&#xe1; existente no seu computador &mdash; uma foto tirada com o celular, uma capa baixada da internet, etc.</li>
+    <li><strong>Via c&#xe2;mera:</strong> use a webcam do computador para fotografar a capa diretamente, com o livro na m&#xe3;o.</li>
+  </ul>
+
+  <h3>Como adicionar a foto</h3>
+  <ol>
+    <li>Clique no livro para abrir o painel de detalhes.</li>
+    <li>Clique na &#xe1;rea da capa ou no bot&#xe3;o <strong>Adicionar foto</strong>.</li>
+    <li>Escolha o modo: <strong>C&#xe2;mera</strong> ou <strong>Arquivo</strong>.</li>
+  </ol>
+
+  <h3>Via arquivo</h3>
+  <p>O explorador de arquivos do Windows abre. Navegue at&#xe9; a imagem desejada, selecione-a e clique em <em>Abrir</em>. O Biblioteca aceita arquivos <code>.jpg</code>, <code>.jpeg</code> e <code>.png</code>.</p>
+
+  <h3>Via c&#xe2;mera (webcam)</h3>
+  <ol>
+    <li>Selecione o modo <strong>C&#xe2;mera</strong>.</li>
+    <li>O navegador exibe um di&#xe1;logo pedindo permiss&#xe3;o para acessar a webcam.</li>
+    <li>Clique em <strong>Permitir</strong>.</li>
+    <li>A imagem ao vivo da c&#xe2;mera aparece na tela. Segure o livro na frente da webcam, centralize a capa e clique em <strong>Capturar</strong>.</li>
+    <li>Confirme a imagem ou clique em <strong>Tirar novamente</strong> se quiser repetir.</li>
+  </ol>
+
+  <figure>
+    <svg width="440" height="256" viewBox="0 0 440 256" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;">
+      <rect width="440" height="256" rx="10" fill="#f8f9fc"/>
+      <!-- Sombra do diálogo -->
+      <rect x="76" y="28" width="290" height="210" rx="12" fill="#00000018"/>
+      <!-- Diálogo de permissão do navegador -->
+      <rect x="72" y="24" width="296" height="208" rx="10" fill="white" stroke="#c8d8f8" stroke-width="2"/>
+      <!-- Header do diálogo -->
+      <rect x="72" y="24" width="296" height="56" rx="10" fill="#f3f3f3" stroke="#c8d8f8" stroke-width="1.5"/>
+      <rect x="72" y="60" width="296" height="20" fill="#f3f3f3"/>
+      <!-- Ícone câmera -->
+      <circle cx="106" cy="52" r="18" fill="#e8f0fe"/>
+      <text x="106" y="59" font-family="Arial" font-size="18" fill="#1a56a8" text-anchor="middle">&#x1F4F7;</text>
+      <!-- Título do diálogo -->
+      <text x="130" y="44" font-family="'Segoe UI',Arial" font-size="12" font-weight="bold" fill="#1a1a1a">biblioteca.html quer usar</text>
+      <text x="130" y="60" font-family="'Segoe UI',Arial" font-size="12" font-weight="bold" fill="#1a1a1a">sua c&#xe2;mera</text>
+      <!-- Endereço -->
+      <text x="220" y="100" font-family="monospace" font-size="8.5" fill="#888" text-anchor="middle">file:///C:/Program Files/Biblioteca/</text>
+      <!-- Explicação -->
+      <text x="220" y="124" font-family="'Segoe UI',Arial" font-size="10.5" fill="#444" text-anchor="middle">O Biblioteca quer acessar sua c&#xe2;mera</text>
+      <text x="220" y="140" font-family="'Segoe UI',Arial" font-size="10.5" fill="#444" text-anchor="middle">para fotografar a capa do livro.</text>
+      <text x="220" y="156" font-family="'Segoe UI',Arial" font-size="10" fill="#888" text-anchor="middle">As imagens ficam salvas apenas no seu computador.</text>
+      <!-- Botões -->
+      <rect x="86" y="172" width="118" height="36" rx="6" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>
+      <text x="145" y="195" font-family="'Segoe UI',Arial" font-size="12" fill="#444" text-anchor="middle">Bloquear</text>
+      <rect x="218" y="172" width="130" height="36" rx="6" fill="#0067c0"/>
+      <text x="283" y="195" font-family="'Segoe UI',Arial" font-size="12" fill="white" text-anchor="middle" font-weight="bold">Permitir</text>
+    </svg>
+    <figcaption>Di&#xe1;logo de permiss&#xe3;o de c&#xe2;mera exibido pelo navegador. Clique em "Permitir" para que o Biblioteca acesse a webcam.</figcaption>
+  </figure>
+
+  <div class="nota">
+    <strong>Permiss&#xe3;o negada por engano?</strong> Se voc&#xea; clicou em "Bloquear", clique no &#xed;cone de cadeado na barra de endere&#xe7;o do navegador e redefina a permiss&#xe3;o da c&#xe2;mera para "Permitir". Recarregue a p&#xe1;gina em seguida.
+  </div>
+
+  <div class="dica">
+    <strong>Dica de qualidade:</strong> Para uma boa foto de capa via c&#xe2;mera, use um ambiente bem iluminado, segure o livro firme e paralelo &#xe0; c&#xe2;mera, e aguarde o foco estabilizar antes de clicar em Capturar.
+  </div>
+
+  <p class="voltar"><a href="#sumario">&#x2191; Voltar ao Sum&#xe1;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ============================================================ -->
+<section id="pesquisa">
+  <h2>7. Pesquisa e filtros</h2>
+
+  <p>O Biblioteca oferece pesquisa em tempo real: conforme voc&#xea; digita, a lista de livros &#xe9; filtrada instantaneamente, sem precisar pressionar Enter.</p>
+
+  <h3>Barra de pesquisa</h3>
+  <p>A barra de pesquisa fica no topo da tela, integrada ao cabe&#xe7;alho azul. Ela pesquisa simultaneamente por <strong>t&#xed;tulo</strong> e <strong>autor</strong>. Basta come&#xe7;ar a digitar &mdash; por exemplo, "kafka" &mdash; e a lista mostrar&#xe1; apenas os livros correspondentes.</p>
+
+  <p>Para limpar a pesquisa e voltar a ver todos os livros, apague o texto da barra ou clique no <strong>X</strong> que aparece dentro dela.</p>
+
+  <h3>Filtros por categoria</h3>
+  <p>O menu <strong>Filtrar por</strong> permite restringir a lista por assunto ou por editora. &#xc9; &#xfa;til quando voc&#xea; quer ver apenas, por exemplo, todos os livros de "Filosofia" ou todos da "Companhia das Letras".</p>
+
+  <p>Voc&#xea; pode combinar um filtro de categoria com a pesquisa por texto ao mesmo tempo &mdash; a lista exibir&#xe1; apenas os livros que satisfazem as duas condi&#xe7;&#xf5;es.</p>
+
+  <figure>
+    <svg width="520" height="208" viewBox="0 0 520 208" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;">
+      <rect width="520" height="208" rx="10" fill="#f8f9fc"/>
+      <!-- Cabeçalho do app -->
+      <rect x="10" y="10" width="500" height="44" rx="6" fill="#1a3a6e"/>
+      <text x="30" y="36" font-family="'Segoe UI',Arial" font-size="14" font-weight="bold" fill="white">Biblioteca</text>
+      <!-- Barra de pesquisa com texto digitado -->
+      <rect x="136" y="18" width="228" height="26" rx="13" fill="white" stroke="#90b0e8" stroke-width="2"/>
+      <text x="152" y="35" font-family="'Segoe UI',Arial" font-size="12" fill="#1a1a1a">kafka</text>
+      <!-- X para limpar -->
+      <circle cx="350" cy="31" r="9" fill="#c8d0e0"/>
+      <text x="350" y="36" font-family="Arial" font-size="13" fill="white" text-anchor="middle">&#xd7;</text>
+      <!-- Filtrar por -->
+      <rect x="376" y="18" width="122" height="26" rx="4" fill="#ffffff22" stroke="#ffffff55" stroke-width="1"/>
+      <text x="386" y="35" font-family="'Segoe UI',Arial" font-size="11" fill="white">Filtrar por &#x25be;</text>
+      <!-- Label de resultado -->
+      <text x="30" y="76" font-family="'Segoe UI',Arial" font-size="10" fill="#888">2 resultados para "kafka"</text>
+      <!-- Livro 1 -->
+      <rect x="10" y="84" width="500" height="50" rx="6" fill="white" stroke="#e0e8f8" stroke-width="1"/>
+      <rect x="22" y="93" width="32" height="32" rx="3" fill="#8e7498"/>
+      <text x="38" y="113" font-family="Arial" font-size="17" fill="white" text-anchor="middle">&#x1F4D9;</text>
+      <text x="66" y="105" font-family="'Segoe UI',Arial" font-size="12" font-weight="bold" fill="#1a1a1a">O Processo</text>
+      <text x="66" y="120" font-family="'Segoe UI',Arial" font-size="10.5" fill="#555">Franz <tspan font-weight="bold" fill="#1a56a8">Kafka</tspan> &middot; Romance &middot; 1925</text>
+      <!-- Livro 2 -->
+      <rect x="10" y="142" width="500" height="50" rx="6" fill="white" stroke="#e0e8f8" stroke-width="1"/>
+      <rect x="22" y="151" width="32" height="32" rx="3" fill="#6b8e6b"/>
+      <text x="38" y="171" font-family="Arial" font-size="17" fill="white" text-anchor="middle">&#x1F4D7;</text>
+      <text x="66" y="163" font-family="'Segoe UI',Arial" font-size="12" font-weight="bold" fill="#1a1a1a">A Metamorfose</text>
+      <text x="66" y="178" font-family="'Segoe UI',Arial" font-size="10.5" fill="#555">Franz <tspan font-weight="bold" fill="#1a56a8">Kafka</tspan> &middot; Conto &middot; 1915</text>
+    </svg>
+    <figcaption>Pesquisa por "kafka" filtrando a lista em tempo real. O nome do autor aparece destacado nos resultados encontrados.</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#x2191; Voltar ao Sum&#xe1;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ============================================================ -->
+<section id="sincronizacao">
+  <h2>8. Sincronização e backup</h2>
+
+  <h3>Onde ficam seus dados</h3>
+  <p>O Biblioteca para Windows guarda seus livros em dois arquivos que você escolhe onde colocar:</p>
+  <table style="width:100%;border-collapse:collapse;margin:16px 0">
+    <thead><tr style="background:#f2f6ff"><th style="text-align:left;padding:8px 12px;border:1px solid #dde">Arquivo</th><th style="text-align:left;padding:8px 12px;border:1px solid #dde">Conteúdo</th></tr></thead>
+    <tbody>
+      <tr><td style="padding:8px 12px;border:1px solid #dde"><code>biblioteca.txt</code></td><td style="padding:8px 12px;border:1px solid #dde">Catálogo de livros (texto separado por tab)</td></tr>
+      <tr><td style="padding:8px 12px;border:1px solid #dde"><code>biblioteca.dat</code></td><td style="padding:8px 12px;border:1px solid #dde">Fotos de capa (imagens embutidas em JSON)</td></tr>
+    </tbody>
+  </table>
+  <p>Esses arquivos podem ficar em qualquer pasta — local, OneDrive ou Google Drive. A escolha determina se haverá sincronização com outros dispositivos.</p>
+
+  <h3>Configuração inicial</h3>
+  <p><strong>Se está começando do zero:</strong> clique em <strong>Vincular biblioteca.txt</strong> na tela principal, escolha uma pasta de sua preferência e crie um arquivo <code>biblioteca.txt</code> vazio (pode ser criado pelo próprio app na primeira gravação).</p>
+  <p><strong>Se já tem um catálogo:</strong> copie seu <code>biblioteca.txt</code> (e <code>biblioteca.dat</code>, se tiver) para a pasta desejada, depois clique em <strong>Vincular biblioteca.txt</strong> e localize o arquivo.</p>
+
+  <h3>Usando com OneDrive (recomendado)</h3>
+  <p>O OneDrive já vem instalado no Windows 10 e 11. Para sincronizar entre PC e celular:</p>
+  <ol>
+    <li>Abra o Explorador de Arquivos → OneDrive → crie a pasta <strong>Biblioteca</strong></li>
+    <li>Copie <code>biblioteca.txt</code> para dentro dessa pasta</li>
+    <li>No Biblioteca, clique em <strong>Vincular biblioteca.txt</strong> → navegue até <code>OneDrive\Biblioteca</code> → selecione o arquivo</li>
+    <li>O banner de status ficará <span style="color:#2a7a2a">verde</span> — sincronização ativa</li>
+  </ol>
+  <div class="dica">O OneDrive sincroniza automaticamente em segundo plano. Qualquer livro que você cadastrar no PC aparecerá no celular em segundos (via app OneDrive + Biblioteca).</div>
+
+  <h3>Usando com Google Drive</h3>
+  <ol>
+    <li>Instale o <strong>Google Drive para Desktop</strong> (disponível em drive.google.com)</li>
+    <li>Após instalar, o Drive aparece como uma unidade no Explorador (ex: <code>G:\Meu Drive\</code>)</li>
+    <li>Crie a pasta <code>G:\Meu Drive\Biblioteca\</code></li>
+    <li>No Biblioteca, clique em <strong>Vincular biblioteca.txt</strong> → navegue até essa pasta</li>
+  </ol>
+
+  <h3>O indicador de sincronização</h3>
+  <p>O Biblioteca mostra um banner no topo da tela indicando o estado:</p>
+  <ul>
+    <li><strong style="color:#2a7a2a">Verde — Arquivo vinculado:</strong> cada alteração é salva diretamente no arquivo. Sincronização ativa.</li>
+    <li><strong style="color:#a07000">Amarelo — Permissão expirada:</strong> o Chrome perdeu o acesso ao arquivo (ocorre ao reiniciar). Clique em <strong>Reativar</strong> para restaurar.</li>
+    <li><strong style="color:#666">Cinza — Sem vínculo:</strong> os dados ficam só no navegador. Nenhuma sincronização com nuvem.</li>
+  </ul>
+
+  <h3>Botões de sincronização disponíveis</h3>
+  <ul>
+    <li><strong>Vincular biblioteca.txt</strong> — escolhe o arquivo a usar. Faça isso uma vez; o Chrome lembra para as próximas sessões.</li>
+    <li><strong>Recarregar</strong> — relê o arquivo do disco. Use quando editar em outro dispositivo e quiser trazer as mudanças.</li>
+    <li><strong>Importar (avulso)</strong> — carrega qualquer .txt, mesclando ou substituindo o catálogo atual.</li>
+    <li><strong>Exportar (avulso)</strong> — salva uma cópia do catálogo como <code>biblioteca.txt</code> em qualquer pasta.</li>
+    <li><strong>Vincular fotos (.dat)</strong> — carrega fotos de capa de um arquivo <code>biblioteca.dat</code> existente. O aviso exibido informa quantas fotos foram importadas ou, se o arquivo estiver vazio, quantas fotos locais ser&atilde;o gravadas nele.</li>
+    <li><strong>Exportar Fotos</strong> — salva todas as fotos de capa em um arquivo <code>biblioteca.dat</code>.</li>
+    <li><strong>Fotos &Oacute;rf&atilde;s</strong> (bot&atilde;o laranja) — exibe quantas fotos armazenadas n&atilde;o est&atilde;o associadas a nenhum livro. Aparece apenas quando h&aacute; fotos &oacute;rf&atilde;s.</li>
+  </ul>
+
+  <h3>Fotos &oacute;rf&atilde;s</h3>
+  <p>Uma foto fica &ldquo;&oacute;rf&atilde;&rdquo; quando o livro ao qual ela pertencia foi exclu&iacute;do ou teve seu t&iacute;tulo/autor alterado. Ao clicar no bot&atilde;o <strong>Fotos &Oacute;rf&atilde;s</strong>, abre um painel com miniaturas e o c&oacute;digo identificador de cada foto. Para cada foto voc&ecirc; pode:</p>
+  <ul>
+    <li><strong>Associar</strong> &mdash; escolha um livro no menu suspenso e clique em Associar. A foto passa a ser a capa daquele livro.</li>
+    <li><strong>Excluir</strong> &mdash; remove a foto definitivamente.</li>
+  </ul>
+  <p>O bot&atilde;o <strong>Excluir todas</strong>, no rodap&eacute; do painel, remove de uma s&oacute; vez todas as fotos &oacute;rf&atilde;s listadas.</p>
+
+  <h3>Reativar Permiss&atilde;o</h3>
+  <p>O Chrome pede permiss&atilde;o de acesso ao arquivo a cada vez que o navegador &eacute; reiniciado. O banner amarelo com o bot&atilde;o <strong>Reativar</strong> aparece nessa situa&ccedil;&atilde;o. Na vers&atilde;o 1.8.3, ao clicar:</p>
+  <ol>
+    <li>O Chrome exibe um di&aacute;logo de confirma&ccedil;&atilde;o &mdash; clique em <strong>Permitir</strong>.</li>
+    <li>Se a permiss&atilde;o n&atilde;o for concedida pelo di&aacute;logo, o Biblioteca abre automaticamente o seletor de arquivo para voc&ecirc; selecionar o <code>biblioteca.txt</code>. Ap&oacute;s selecionar, o acesso &eacute; restaurado.</li>
+  </ol>
+  <p>Essa melhoria elimina a necessidade de clicar v&aacute;rias vezes no bot&atilde;o Reativar.</p>
+
+  <h3>Sincroniza&ccedil;&atilde;o de fotos</h3>
+  <p>As fotos não viajam automaticamente pelo OneDrive ou Drive junto com o <code>biblioteca.txt</code>. Para incluir as fotos na sincronização:</p>
+  <ol>
+    <li>Clique em <strong>Exportar Fotos</strong> → salve o <code>biblioteca.dat</code> na mesma pasta do <code>biblioteca.txt</code> (ex: <code>OneDrive\Biblioteca\</code>)</li>
+    <li>Em outro dispositivo, clique em <strong>Vincular fotos (.dat)</strong> → selecione o mesmo arquivo</li>
+  </ol>
+  <p>Repita a exportação sempre que adicionar novas capas.</p>
+
+  <div class="nota"><strong>Atenção:</strong> se você editar o catálogo no PC e no celular ao mesmo tempo, a versão gravada por último substituirá a outra. Não há mesclagem automática. Sempre clique em <strong>Recarregar</strong> antes de começar a editar.</div>
+
+  <p class="voltar"><a href="#sumario">↑ Voltar ao Sumário</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ============================================================ -->
+<section id="faq">
+  <h2>9. Perguntas frequentes</h2>
+
+  <h3>Apareceu o aviso do SmartScreen e n&#xe3;o sei o que fazer</h3>
+  <p>Esse aviso &#xe9; exibido pelo Windows quando um programa n&#xe3;o tem um certificado digital pago. O Biblioteca &#xe9; seguro &mdash; ele apenas n&#xe3;o possui esse certificado, por ser um app gratuito e independente. Para continuar: na tela azul do SmartScreen, clique em <strong>Mais informa&#xe7;&#xf5;es</strong> (link de texto que aparece abaixo da mensagem) e depois clique no bot&#xe3;o <strong>Executar assim mesmo</strong>. Veja as instru&#xe7;&#xf5;es com captura de tela na se&#xe7;&#xe3;o <a href="#instalacao">Instala&#xe7;&#xe3;o</a>.</p>
+
+  <h3>O Biblioteca abre mas n&#xe3;o exibe nada</h3>
+  <p>Isso pode acontecer se o navegador bloqueou o acesso a arquivos locais por configura&#xe7;&#xe3;o de seguran&#xe7;a. Tente o seguinte:</p>
+  <ul>
+    <li>Feche o navegador e abra o Biblioteca novamente pelo atalho da &#xc1;rea de Trabalho (n&#xe3;o pelo hist&#xf3;rico do navegador).</li>
+    <li>Se usar o Firefox, veja em <strong>Configura&#xe7;&#xf5;es &rarr; Privacidade e Seguran&#xe7;a</strong> se n&#xe3;o h&#xe1; bloqueio ativo para <code>file://</code>.</li>
+    <li>Se o problema persistir, tente abrir o Biblioteca em outro navegador instalado no computador (por exemplo, Edge ou Chrome).</li>
+  </ul>
+
+  <h3>Como fazer backup dos meus livros?</h3>
+  <p>O Biblioteca salva todos os dados em um arquivo chamado <code>biblioteca.txt</code> (formato TSV, texto com tabula&#xe7;&#xe3;o) dentro da pasta de instala&#xe7;&#xe3;o, em <code>C:\Program Files\Biblioteca\</code>. Para fazer backup, basta copiar esse arquivo para um pendrive, para a nuvem (OneDrive, Google Drive) ou para qualquer outro local seguro. Para restaurar, copie o arquivo de volta para a mesma pasta, substituindo o existente.</p>
+
+  <div class="dica">
+    <strong>Dica:</strong> O arquivo <code>biblioteca.txt</code> &#xe9; texto puro e abre normalmente no Excel ou no LibreOffice Calc. Isso tamb&#xe9;m facilita importa&#xe7;&#xe3;o e exporta&#xe7;&#xe3;o de dados em outros sistemas.
+  </div>
+
+  <h3>Posso mover a pasta de instala&#xe7;&#xe3;o?</h3>
+  <p>N&#xe3;o &#xe9; recomendado mover a pasta manualmente, pois o atalho da &#xc1;rea de Trabalho aponta para o caminho original e deixaria de funcionar. Se precisar mudar o local de instala&#xe7;&#xe3;o, desinstale o Biblioteca, fa&#xe7;a backup do arquivo <code>biblioteca.txt</code>, reinstale escolhendo a nova pasta e depois copie o arquivo de backup de volta.</p>
+
+  <h3>Como desinstalar o Biblioteca?</h3>
+  <p>Abra as <strong>Configura&#xe7;&#xf5;es do Windows</strong> (tecla <strong>Win&#x229e; + I</strong>), v&#xe1; em <strong>Aplicativos &rarr; Aplicativos instalados</strong>, localize "Biblioteca" na lista, clique nos tr&#xea;s pontos ao lado do nome e selecione <strong>Desinstalar</strong>. O assistente de desinstala&#xe7;&#xe3;o remove os arquivos do programa, mas o arquivo <code>biblioteca.txt</code> com seus dados permanece intacto na pasta de instala&#xe7;&#xe3;o, para que voc&#xea; n&#xe3;o perca seu cat&#xe1;logo.</p>
+
+  <p class="voltar"><a href="#sumario">&#x2191; Voltar ao Sum&#xe1;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<p style="text-align:center; color:#999; font-size:0.85em; margin-top:2em;">
+  Biblioteca v1.8.3 &mdash; Manual do Usu&#xe1;rio para Windows<br>
+  Setembro de 2026
+</p>
+
+</body>
+</html>

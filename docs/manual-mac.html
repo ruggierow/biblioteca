@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual do Usuário — Biblioteca Web para Mac</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size: 16px; line-height: 1.8; color: #1a1a1a; background: #fff; max-width: 820px; margin: 0 auto; padding: 48px 32px; }
+    h1 { font-size: 2em; text-align: center; margin-bottom: 4px; }
+    .subtitulo { text-align: center; color: #666; margin-bottom: 40px; font-size: 1em; }
+    h2 { font-size: 1.4em; color: #1a3a6e; margin-top: 2.8em; margin-bottom: 0.6em; padding-bottom: 0.3em; border-bottom: 2px solid #d0dcf0; }
+    h3 { font-size: 1.1em; color: #2a4080; margin-top: 1.6em; margin-bottom: 0.4em; }
+    p { margin-bottom: 1em; }
+    ul, ol { margin-bottom: 1em; padding-left: 1.6em; }
+    li { margin-bottom: 0.4em; }
+    code { background: #f0f0f0; border-radius: 3px; padding: 1px 5px; font-family: monospace; font-size: 0.9em; }
+    nav#sumario { background: #f2f6ff; border: 1px solid #c8d8f8; border-radius: 8px; padding: 24px 32px; margin: 32px 0 48px; }
+    nav#sumario h2 { margin-top: 0; border-bottom: none; }
+    nav#sumario ol { margin: 8px 0 0 0; }
+    nav#sumario a { color: #1a56a8; text-decoration: none; }
+    nav#sumario a:hover { text-decoration: underline; }
+    section { margin-bottom: 3em; }
+    .voltar { margin-top: 2em; padding-top: 0.8em; border-top: 1px solid #e8e8e8; text-align: right; font-size: 0.9em; }
+    .voltar a { color: #1a56a8; text-decoration: none; }
+    .nota { background: #fffbe6; border-left: 4px solid #f0c040; padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 16px 0; }
+    .dica { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 16px 0; }
+    figure { margin: 24px 0; text-align: center; }
+    figcaption { font-size: 0.88em; color: #555; margin-top: 8px; font-style: italic; }
+    hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
+    /* ── Capa ── */
+    .capa { background: linear-gradient(145deg, #0c1a3e 0%, #1e3a8a 55%, #2563eb 100%); border-radius: 16px; margin: -48px -32px 80px; min-height: 620px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #fff; page-break-after: always; break-after: page; position: relative; overflow: hidden; }
+    .capa-orbe1 { position: absolute; top: -90px; right: -90px; width: 340px; height: 340px; border-radius: 50%; background: rgba(255,255,255,0.07); pointer-events: none; }
+    .capa-orbe2 { position: absolute; bottom: -110px; left: -70px; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,255,255,0.05); pointer-events: none; }
+    .capa-orbe3 { position: absolute; top: 38%; left: 58%; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.04); pointer-events: none; }
+    .capa-conteudo { position: relative; z-index: 1; padding: 80px 60px; display: flex; flex-direction: column; align-items: center; }
+    .capa-icone { margin-bottom: 36px; }
+    .capa-titulo { font-size: 3.6em; font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 10px; }
+    .capa-plataforma { font-size: 0.95em; font-weight: 400; letter-spacing: 6px; text-transform: uppercase; opacity: 0.7; margin-bottom: 44px; }
+    .capa-divisor { width: 60px; height: 2px; background: rgba(255,255,255,0.4); margin-bottom: 44px; }
+    .capa-manual { font-size: 1.3em; font-weight: 600; opacity: 0.95; margin-bottom: 8px; }
+    .capa-versao { font-size: 0.9em; opacity: 0.55; letter-spacing: 1px; }
+    .capa-rodape { position: absolute; bottom: 28px; font-size: 0.82em; opacity: 0.45; letter-spacing: 0.5px; z-index: 1; }
+  </style>
+</head>
+<body>
+
+<div class="capa">
+  <div class="capa-orbe1"></div>
+  <div class="capa-orbe2"></div>
+  <div class="capa-orbe3"></div>
+  <div class="capa-conteudo">
+    <div class="capa-icone">
+      <svg width="160" height="122" viewBox="0 0 160 122" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M80 20 L12 33 L12 98 L80 87 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M80 20 L148 33 L148 98 L80 87 Z" fill="rgba(255,255,255,0.19)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linejoin="round"/>
+        <line x1="80" y1="20" x2="80" y2="87" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/>
+        <ellipse cx="80" cy="104" rx="55" ry="6" fill="rgba(0,0,0,0.18)"/>
+        <line x1="27" y1="50" x2="68" y2="44" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+        <line x1="27" y1="60" x2="68" y2="54" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+        <line x1="27" y1="70" x2="68" y2="64" stroke="rgba(255,255,255,0.32)" stroke-width="1.2"/>
+        <line x1="27" y1="80" x2="55" y2="75" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+        <line x1="92" y1="44" x2="133" y2="50" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+        <line x1="92" y1="54" x2="133" y2="60" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+        <line x1="92" y1="64" x2="133" y2="70" stroke="rgba(255,255,255,0.32)" stroke-width="1.2"/>
+        <line x1="92" y1="75" x2="120" y2="80" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+        <circle cx="24" cy="32" r="5" fill="#ff5f57"/>
+        <circle cx="38" cy="32" r="5" fill="#febc2e"/>
+        <circle cx="52" cy="32" r="5" fill="#28c840"/>
+      </svg>
+    </div>
+    <div class="capa-titulo">BIBLIOTECA</div>
+    <div class="capa-plataforma">para Mac</div>
+    <div class="capa-divisor"></div>
+    <div class="capa-manual">Manual do Usu&aacute;rio</div>
+    <div class="capa-versao">Vers&atilde;o 1.8.3</div>
+  </div>
+  <div class="capa-rodape">Setembro de 2026 &nbsp;&middot;&nbsp; ruggierow</div>
+</div>
+
+<h1>Biblioteca Web para Mac</h1>
+<p class="subtitulo">Manual do Usu&aacute;rio &mdash; Vers&atilde;o 1.8.3</p>
+
+<nav id="sumario">
+  <h2>Sum&aacute;rio</h2>
+  <ol>
+    <li><a href="#apresentacao">Apresenta&ccedil;&atilde;o</a></li>
+    <li><a href="#instalacao">Instala&ccedil;&atilde;o</a></li>
+    <li><a href="#primeiro-uso">Primeiro uso</a></li>
+    <li><a href="#catalogo">Consultando o cat&aacute;logo</a></li>
+    <li><a href="#livros">Adicionando e editando livros</a></li>
+    <li><a href="#capas">Fotografando capas</a></li>
+    <li><a href="#pesquisa">Pesquisa e filtros</a></li>
+    <li><a href="#backup">Backup e exporta&ccedil;&atilde;o</a></li>
+    <li><a href="#faq">Perguntas frequentes</a></li>
+  </ol>
+</nav>
+
+<!-- ============================================================ -->
+<section id="apresentacao">
+  <h2>1. Apresenta&ccedil;&atilde;o</h2>
+
+  <p>O <strong>Biblioteca</strong> &eacute; um aplicativo para catalogar a sua cole&ccedil;&atilde;o de livros pessoais diretamente no Mac. Ele funciona completamente <strong>sem conex&atilde;o com a internet</strong>: todos os dados ficam gravados no seu pr&oacute;prio computador, sem depender de nenhum servi&ccedil;o externo ou conta em nuvem.</p>
+
+  <p>O app &eacute; constru&iacute;do sobre uma p&aacute;gina web embutida (o &ldquo;motor web&rdquo;), o que garante que o seu cat&aacute;logo seja leg&iacute;vel em qualquer plataforma &mdash; mesmo que voc&ecirc; abra o arquivo diretamente em um navegador. A vers&atilde;o para Mac adiciona integra&ccedil;&atilde;o nativa com o macOS: atalhos de teclado, acesso &agrave; c&acirc;mera, sincroniza&ccedil;&atilde;o via iCloud Drive e comportamento de menu bar.</p>
+
+  <h3>Recursos principais</h3>
+  <ul>
+    <li><strong>Cadastro completo de livros:</strong> t&iacute;tulo, autor, assunto, editora, ano, ISBN, n&uacute;mero de p&aacute;ginas e observa&ccedil;&otilde;es livres.</li>
+    <li><strong>Foto de capa:</strong> tire a foto com a c&acirc;mera do Mac ou importe uma imagem do Finder. As capas s&atilde;o associadas ao livro por uma impress&atilde;o digital &uacute;nica (hash FNV-1a), n&atilde;o por nome de arquivo.</li>
+    <li><strong>Pesquisa em tempo real:</strong> filtre por t&iacute;tulo, autor, assunto ou editora enquanto digita.</li>
+    <li><strong>Exporta&ccedil;&atilde;o em TSV:</strong> o cat&aacute;logo pode ser exportado como arquivo de texto separado por tabula&ccedil;&otilde;es, compat&iacute;vel com Excel, Numbers e qualquer editor de planilha.</li>
+    <li><strong>Sincroniza&ccedil;&atilde;o autom&aacute;tica:</strong> o arquivo de dados fica no iCloud Drive e sincroniza com o iPhone e outros Macs automaticamente.</li>
+    <li><strong>Sem instala&ccedil;&atilde;o complicada:</strong> arraste para Aplicativos e pronto.</li>
+  </ul>
+
+  <figure>
+    <svg width="560" height="340" viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;border-radius:10px;">
+      <!-- Fundo da janela -->
+      <rect width="560" height="340" fill="#f8f9fc" rx="10"/>
+      <!-- Barra de titulo da janela macOS -->
+      <rect x="40" y="30" width="480" height="280" rx="10" fill="#ffffff" stroke="#c8c8c8" stroke-width="1.5"/>
+      <rect x="40" y="30" width="480" height="36" rx="10" fill="#e8e8e8"/>
+      <rect x="40" y="52" width="480" height="14" fill="#e8e8e8"/>
+      <!-- Traffic lights -->
+      <circle cx="62" cy="48" r="7" fill="#ff5f56"/>
+      <circle cx="82" cy="48" r="7" fill="#ffbd2e"/>
+      <circle cx="102" cy="48" r="7" fill="#27c93f"/>
+      <!-- Titulo da janela -->
+      <text x="280" y="53" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" fill="#444">Biblioteca</text>
+      <!-- Barra de pesquisa -->
+      <rect x="60" y="80" width="280" height="28" rx="6" fill="#f0f0f0" stroke="#d0d0d0" stroke-width="1"/>
+      <text x="75" y="99" font-family="-apple-system, sans-serif" font-size="12" fill="#888">Pesquisar por t&iacute;tulo ou autor...</text>
+      <!-- Botao Novo livro -->
+      <rect x="356" y="80" width="108" height="28" rx="6" fill="#1a56a8"/>
+      <text x="410" y="99" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#fff">+ Novo livro</text>
+      <!-- Divisor -->
+      <line x1="60" y1="118" x2="500" y2="118" stroke="#e0e0e0" stroke-width="1"/>
+      <!-- Livro 1 -->
+      <rect x="60" y="124" width="440" height="46" rx="4" fill="#f7f9ff"/>
+      <rect x="68" y="130" width="30" height="34" rx="3" fill="#c8d8f8"/>
+      <text x="83" y="151" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#5570a0">CAPA</text>
+      <text x="108" y="143" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">Dom Casmurro</text>
+      <text x="108" y="160" font-family="-apple-system, sans-serif" font-size="11" fill="#666">Machado de Assis</text>
+      <!-- Livro 2 -->
+      <rect x="60" y="174" width="440" height="46" rx="4" fill="#ffffff"/>
+      <rect x="68" y="180" width="30" height="34" rx="3" fill="#c8f8d0"/>
+      <text x="83" y="201" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#408050">CAPA</text>
+      <text x="108" y="193" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">O Corti&ccedil;o</text>
+      <text x="108" y="210" font-family="-apple-system, sans-serif" font-size="11" fill="#666">Alo&iacute;sio Azevedo</text>
+      <!-- Livro 3 -->
+      <rect x="60" y="224" width="440" height="46" rx="4" fill="#f7f9ff"/>
+      <rect x="68" y="230" width="30" height="34" rx="3" fill="#f8d8c8"/>
+      <text x="83" y="251" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="8" fill="#a05030">CAPA</text>
+      <text x="108" y="243" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">Grande Sert&atilde;o: Veredas</text>
+      <text x="108" y="260" font-family="-apple-system, sans-serif" font-size="11" fill="#666">Jo&atilde;o Guimar&atilde;es Rosa</text>
+      <!-- Livro 4 -->
+      <rect x="60" y="274" width="440" height="26" rx="4" fill="#ffffff"/>
+      <rect x="68" y="278" width="30" height="18" rx="3" fill="#e8d8f8"/>
+      <text x="83" y="291" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="7" fill="#7040a0">CAPA</text>
+      <text x="108" y="291" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#1a1a1a">Macuna&iacute;ma &mdash; M&aacute;rio de Andrade</text>
+    </svg>
+    <figcaption>Figura 1 &mdash; Tela principal do Biblioteca: lista de livros com miniaturas de capa, barra de pesquisa e bot&atilde;o de cadastro.</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao"/>
+
+<!-- ============================================================ -->
+<section id="instalacao">
+  <h2>2. Instala&ccedil;&atilde;o</h2>
+
+  <p>O Biblioteca &eacute; distribu&iacute;do como um arquivo <code>.dmg</code> (imagem de disco), o formato padr&atilde;o de instala&ccedil;&atilde;o de aplicativos no macOS. A instala&ccedil;&atilde;o leva menos de um minuto.</p>
+
+  <ol>
+    <li><strong>Localize o arquivo baixado.</strong> O Safari salva downloads automaticamente na pasta <code>Downloads</code>. O arquivo se chama algo como <code>Biblioteca-1.8.3.dmg</code>.</li>
+    <li><strong>Abra o arquivo DMG.</strong> Dois cliques sobre ele. O macOS vai verificar o arquivo brevemente e, em seguida, vai montar um disco virtual que aparece na &Aacute;rea de Trabalho e no Finder.</li>
+    <li><strong>Arraste o &iacute;cone do Biblioteca para a pasta Aplicativos.</strong> Uma janela mostrar&aacute; o &iacute;cone do app e um atalho para a pasta Aplicativos. Basta arrastar o &iacute;cone de um lado para o outro.</li>
+    <li><strong>Aguarde a c&oacute;pia terminar.</strong> Uma barra de progresso aparece durante a c&oacute;pia. Quando sumir, o app est&aacute; instalado.</li>
+    <li><strong>Ejete o disco.</strong> Clique com o bot&atilde;o direito no &iacute;cone do disco virtual (no Finder ou na &Aacute;rea de Trabalho) e escolha <strong>Ejetar</strong>, ou arraste o &iacute;cone do disco para a Lixeira. O arquivo <code>.dmg</code> pode ser descartado.</li>
+  </ol>
+
+  <div class="nota">
+    <strong>Aviso de seguran&ccedil;a na primeira abertura:</strong> como o Biblioteca n&atilde;o &eacute; distribu&iacute;do pela Mac App Store, o macOS pode exibir um aviso dizendo que o app &ldquo;n&atilde;o pode ser aberto porque n&atilde;o &eacute; de um desenvolvedor identificado&rdquo;. Veja como resolver isso na se&ccedil;&atilde;o <a href="#primeiro-uso">Primeiro uso</a>.
+  </div>
+
+  <figure>
+    <svg width="520" height="280" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;border-radius:10px;">
+      <!-- Fundo -->
+      <rect width="520" height="280" fill="#f8f9fc" rx="10"/>
+      <!-- Janela do DMG -->
+      <rect x="40" y="30" width="440" height="220" rx="10" fill="#fff" stroke="#c8c8c8" stroke-width="1.5"/>
+      <rect x="40" y="30" width="440" height="36" rx="10" fill="#e8e8e8"/>
+      <rect x="40" y="52" width="440" height="14" fill="#e8e8e8"/>
+      <circle cx="62" cy="48" r="7" fill="#ff5f56"/>
+      <circle cx="82" cy="48" r="7" fill="#ffbd2e"/>
+      <circle cx="102" cy="48" r="7" fill="#27c93f"/>
+      <text x="260" y="53" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" fill="#444">Biblioteca 1.8.3</text>
+      <!-- Icone do app (livro estilizado) -->
+      <rect x="100" y="100" width="80" height="80" rx="18" fill="#1a56a8"/>
+      <rect x="116" y="114" width="48" height="52" rx="4" fill="#fff" opacity="0.9"/>
+      <line x1="128" y1="126" x2="152" y2="126" stroke="#1a56a8" stroke-width="2.5"/>
+      <line x1="128" y1="134" x2="152" y2="134" stroke="#1a56a8" stroke-width="2.5"/>
+      <line x1="128" y1="142" x2="152" y2="142" stroke="#1a56a8" stroke-width="2"/>
+      <line x1="128" y1="150" x2="144" y2="150" stroke="#1a56a8" stroke-width="2"/>
+      <text x="140" y="198" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#444">Biblioteca</text>
+      <!-- Seta -->
+      <text x="226" y="148" font-size="36" fill="#1a56a8" font-family="Arial">&#8594;</text>
+      <!-- Pasta Aplicativos -->
+      <rect x="300" y="100" width="80" height="70" rx="6" fill="#5b9bd5"/>
+      <rect x="300" y="90" width="36" height="18" rx="4" fill="#4a7fb5"/>
+      <rect x="302" y="108" width="76" height="60" rx="4" fill="#7ab3e0"/>
+      <text x="340" y="143" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#fff" font-weight="bold">Aplicativos</text>
+      <text x="340" y="198" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#444">Aplicativos</text>
+    </svg>
+    <figcaption>Figura 2 &mdash; Janela do DMG: arraste o &iacute;cone do Biblioteca para a pasta Aplicativos para instalar.</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao"/>
+
+<!-- ============================================================ -->
+<section id="primeiro-uso">
+  <h2>3. Primeiro uso</h2>
+
+  <p>Ap&oacute;s a instala&ccedil;&atilde;o, o Biblioteca pode ser aberto pelo <strong>Launchpad</strong> (o &iacute;cone de foguete no Dock) ou diretamente pela pasta <strong>Aplicativos</strong> no Finder.</p>
+
+  <h3>Aviso de seguran&ccedil;a do macOS</h3>
+  <p>Na primeira abertura, o macOS exibe um di&aacute;logo pedindo confirma&ccedil;&atilde;o antes de abrir um app que n&atilde;o veio da Mac App Store. Se aparecer a mensagem <em>&ldquo;Biblioteca n&atilde;o pode ser aberto porque &eacute; de um desenvolvedor n&atilde;o identificado&rdquo;</em>, siga estes passos:</p>
+  <ol>
+    <li>Abra <strong>Ajustes do Sistema</strong> (ou Prefer&ecirc;ncias do Sistema em vers&otilde;es anteriores).</li>
+    <li>V&aacute; em <strong>Privacidade e Seguran&ccedil;a</strong>.</li>
+    <li>Role a p&aacute;gina at&eacute; encontrar a mensagem sobre o Biblioteca bloqueado e clique em <strong>Abrir mesmo assim</strong>.</li>
+    <li>O macOS pedir&aacute; sua senha de administrador. Confirme.</li>
+    <li>A partir deste momento, o Biblioteca abre normalmente sem mais avisos.</li>
+  </ol>
+
+  <div class="dica">
+    <strong>Alternativa r&aacute;pida:</strong> segure a tecla <strong>Control</strong> e clique no &iacute;cone do app na pasta Aplicativos; escolha <strong>Abrir</strong> no menu de contexto. O macOS mostrar&aacute; um di&aacute;logo com a op&ccedil;&atilde;o &ldquo;Abrir&rdquo; diretamente, sem precisar ir at&eacute; as Prefer&ecirc;ncias.
+  </div>
+
+  <h3>O app na barra de menus</h3>
+  <p>Ap&oacute;s abrir, o Biblioteca aparece como um <strong>&iacute;cone na barra de menus</strong> (canto superior direito da tela, pr&oacute;ximo ao rel&oacute;gio). Ele n&atilde;o abre uma janela grande automaticamente &mdash; esse &eacute; o comportamento normal para manter o app discreto e sempre acess&iacute;vel.</p>
+  <p>Clique no &iacute;cone do Biblioteca na barra de menus para abrir o menu suspenso. Escolha <strong>Abrir Biblioteca</strong> para abrir a janela principal. O menu tamb&eacute;m oferece acesso r&aacute;pido a op&ccedil;&otilde;es de exporta&ccedil;&atilde;o e prefer&ecirc;ncias.</p>
+
+  <figure>
+    <svg width="540" height="220" viewBox="0 0 540 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;border-radius:10px;">
+      <!-- Fundo -->
+      <rect width="540" height="220" fill="#f8f9fc" rx="10"/>
+      <!-- Barra de menus do Mac -->
+      <rect x="20" y="30" width="500" height="28" rx="4" fill="#e8e8e8" stroke="#c8c8c8" stroke-width="1"/>
+      <!-- Menus da esquerda (Apple + app) -->
+      <text x="38" y="49" font-family="-apple-system, sans-serif" font-size="14" fill="#1a1a1a">&#63743;</text>
+      <text x="62" y="49" font-family="-apple-system, sans-serif" font-size="12" fill="#1a1a1a">Finder</text>
+      <text x="112" y="49" font-family="-apple-system, sans-serif" font-size="12" fill="#444">Arquivo</text>
+      <text x="164" y="49" font-family="-apple-system, sans-serif" font-size="12" fill="#444">Editar</text>
+      <text x="208" y="49" font-family="-apple-system, sans-serif" font-size="12" fill="#444">Visualizar</text>
+      <!-- Lado direito da barra de menus -->
+      <text x="348" y="49" font-family="-apple-system, sans-serif" font-size="11" fill="#444">Wi-Fi</text>
+      <text x="390" y="49" font-family="-apple-system, sans-serif" font-size="11" fill="#444">Bat.</text>
+      <!-- Icone do Biblioteca destacado -->
+      <rect x="425" y="33" width="28" height="22" rx="5" fill="#1a56a8"/>
+      <rect x="430" y="37" width="18" height="14" rx="2" fill="#fff" opacity="0.9"/>
+      <line x1="433" y1="41" x2="445" y2="41" stroke="#1a56a8" stroke-width="1.5"/>
+      <line x1="433" y1="44" x2="445" y2="44" stroke="#1a56a8" stroke-width="1.5"/>
+      <line x1="433" y1="47" x2="441" y2="47" stroke="#1a56a8" stroke-width="1.5"/>
+      <!-- Seta indicando o icone -->
+      <line x1="439" y1="62" x2="439" y2="75" stroke="#1a56a8" stroke-width="2" marker-end="url(#seta)"/>
+      <defs>
+        <marker id="seta" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="#1a56a8"/>
+        </marker>
+      </defs>
+      <!-- Texto de relogio -->
+      <text x="462" y="49" font-family="-apple-system, sans-serif" font-size="11" fill="#444">14:32</text>
+      <!-- Menu suspenso -->
+      <rect x="380" y="62" width="148" height="118" rx="6" fill="#fff" stroke="#c8c8c8" stroke-width="1" filter="url(#sombra)"/>
+      <defs>
+        <filter id="sombra" x="-10%" y="-10%" width="120%" height="130%">
+          <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.15"/>
+        </filter>
+      </defs>
+      <!-- Itens do menu -->
+      <rect x="380" y="62" width="148" height="28" rx="6" fill="#1a56a8"/>
+      <rect x="380" y="76" width="148" height="14" fill="#1a56a8"/>
+      <text x="454" y="81" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#fff" font-weight="bold">Abrir Biblioteca</text>
+      <line x1="390" y1="98" x2="518" y2="98" stroke="#e8e8e8" stroke-width="1"/>
+      <text x="394" y="113" font-family="-apple-system, sans-serif" font-size="12" fill="#333">Exportar TSV...</text>
+      <line x1="390" y1="122" x2="518" y2="122" stroke="#e8e8e8" stroke-width="1"/>
+      <text x="394" y="137" font-family="-apple-system, sans-serif" font-size="12" fill="#333">Prefer&ecirc;ncias...</text>
+      <line x1="390" y1="146" x2="518" y2="146" stroke="#e8e8e8" stroke-width="1"/>
+      <text x="394" y="161" font-family="-apple-system, sans-serif" font-size="12" fill="#333">Sair</text>
+    </svg>
+    <figcaption>Figura 3 &mdash; O Biblioteca fica na barra de menus do Mac. Clique no &iacute;cone para abrir o menu de op&ccedil;&otilde;es r&aacute;pidas.</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao"/>
+
+<!-- ============================================================ -->
+<section id="catalogo">
+  <h2>4. Consultando o cat&aacute;logo</h2>
+
+  <p>A janela principal do Biblioteca &eacute; dividida em duas &aacute;reas: a <strong>lista de livros</strong> (lado esquerdo) e o <strong>painel de detalhes</strong> (lado direito). Ao clicar em qualquer livro da lista, os detalhes completos aparecem no painel ao lado.</p>
+
+  <h3>Lista de livros</h3>
+  <p>A lista exibe, para cada livro, a miniatura da capa (quando dispon&iacute;vel), o t&iacute;tulo em destaque e o nome do autor abaixo. Os livros s&atilde;o ordenados alfabeticamente pelo t&iacute;tulo por padr&atilde;o.</p>
+
+  <h3>Painel de detalhes</h3>
+  <p>Ao selecionar um livro, o painel de detalhes exibe todos os campos cadastrados:</p>
+  <ul>
+    <li><strong>T&iacute;tulo</strong></li>
+    <li><strong>Autor</strong></li>
+    <li><strong>Assunto</strong> (g&ecirc;nero ou categoria)</li>
+    <li><strong>Editora</strong></li>
+    <li><strong>Ano</strong> de publica&ccedil;&atilde;o</li>
+    <li><strong>ISBN</strong></li>
+    <li><strong>P&aacute;ginas</strong></li>
+    <li><strong>Observa&ccedil;&otilde;es</strong> (campo de texto livre)</li>
+  </ul>
+  <p>No topo do painel de detalhes ficam os bot&otilde;es <strong>Editar</strong> e <strong>Excluir</strong>. A capa do livro aparece em tamanho maior nesse painel, com a op&ccedil;&atilde;o de alterar a foto.</p>
+
+  <figure>
+    <svg width="560" height="320" viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;border-radius:10px;">
+      <!-- Fundo -->
+      <rect width="560" height="320" fill="#f8f9fc" rx="10"/>
+      <!-- Janela -->
+      <rect x="30" y="20" width="500" height="280" rx="10" fill="#fff" stroke="#c8c8c8" stroke-width="1.5"/>
+      <!-- Barra de titulo -->
+      <rect x="30" y="20" width="500" height="36" rx="10" fill="#e8e8e8"/>
+      <rect x="30" y="42" width="500" height="14" fill="#e8e8e8"/>
+      <circle cx="52" cy="38" r="7" fill="#ff5f56"/>
+      <circle cx="72" cy="38" r="7" fill="#ffbd2e"/>
+      <circle cx="92" cy="38" r="7" fill="#27c93f"/>
+      <text x="280" y="43" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" fill="#444">Biblioteca</text>
+      <!-- Divisor vertical entre lista e detalhe -->
+      <line x1="230" y1="56" x2="230" y2="300" stroke="#e0e0e0" stroke-width="1.5"/>
+      <!-- Barra de pesquisa na lista -->
+      <rect x="44" y="62" width="174" height="24" rx="5" fill="#f0f0f0" stroke="#d0d0d0" stroke-width="1"/>
+      <text x="56" y="79" font-family="-apple-system, sans-serif" font-size="10" fill="#aaa">Pesquisar...</text>
+      <!-- Livros na lista -->
+      <rect x="38" y="92" width="186" height="40" rx="3" fill="#e8f0ff"/>
+      <rect x="44" y="97" width="24" height="28" rx="2" fill="#c8d8f8"/>
+      <text x="56" y="115" text-anchor="middle" font-family="monospace" font-size="7" fill="#5570a0">capa</text>
+      <text x="74" y="108" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#1a1a1a">Dom Casmurro</text>
+      <text x="74" y="122" font-family="-apple-system, sans-serif" font-size="10" fill="#666">Machado de Assis</text>
+      <rect x="38" y="136" width="186" height="40" rx="3" fill="#fff"/>
+      <rect x="44" y="141" width="24" height="28" rx="2" fill="#c8f8d0"/>
+      <text x="56" y="159" text-anchor="middle" font-family="monospace" font-size="7" fill="#408050">capa</text>
+      <text x="74" y="152" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#1a1a1a">O Corti&ccedil;o</text>
+      <text x="74" y="166" font-family="-apple-system, sans-serif" font-size="10" fill="#666">Alo&iacute;sio Azevedo</text>
+      <rect x="38" y="180" width="186" height="40" rx="3" fill="#fff"/>
+      <rect x="44" y="185" width="24" height="28" rx="2" fill="#f8d8c8"/>
+      <text x="56" y="203" text-anchor="middle" font-family="monospace" font-size="7" fill="#a05030">capa</text>
+      <text x="74" y="196" font-family="-apple-system, sans-serif" font-size="11" font-weight="bold" fill="#1a1a1a">Grande Sert&atilde;o</text>
+      <text x="74" y="210" font-family="-apple-system, sans-serif" font-size="10" fill="#666">Guimar&atilde;es Rosa</text>
+      <!-- Painel de detalhes -->
+      <rect x="240" y="58" width="280" height="236" rx="4" fill="#fff"/>
+      <!-- Capa grande no detalhe -->
+      <rect x="250" y="66" width="70" height="90" rx="6" fill="#c8d8f8" stroke="#a0b8e8" stroke-width="1"/>
+      <text x="285" y="115" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#5570a0">CAPA</text>
+      <!-- Botoes editar / excluir -->
+      <rect x="332" y="70" width="58" height="22" rx="4" fill="#f0f0f0" stroke="#d0d0d0" stroke-width="1"/>
+      <text x="361" y="85" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#333">Editar</text>
+      <rect x="398" y="70" width="58" height="22" rx="4" fill="#fff0f0" stroke="#f0c0c0" stroke-width="1"/>
+      <text x="427" y="85" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#c0304a">Excluir</text>
+      <!-- Campos de detalhe -->
+      <text x="252" y="174" font-family="-apple-system, sans-serif" font-size="9" fill="#888">T&Iacute;TULO</text>
+      <text x="252" y="188" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a">Dom Casmurro</text>
+      <text x="252" y="204" font-family="-apple-system, sans-serif" font-size="9" fill="#888">AUTOR</text>
+      <text x="252" y="216" font-family="-apple-system, sans-serif" font-size="12" fill="#333">Machado de Assis</text>
+      <text x="252" y="232" font-family="-apple-system, sans-serif" font-size="9" fill="#888">ASSUNTO</text>
+      <text x="252" y="244" font-family="-apple-system, sans-serif" font-size="12" fill="#333">Romance</text>
+      <text x="370" y="174" font-family="-apple-system, sans-serif" font-size="9" fill="#888">EDITORA</text>
+      <text x="370" y="186" font-family="-apple-system, sans-serif" font-size="11" fill="#333">Martin Claret</text>
+      <text x="370" y="204" font-family="-apple-system, sans-serif" font-size="9" fill="#888">ANO / P&Aacute;GINAS</text>
+      <text x="370" y="216" font-family="-apple-system, sans-serif" font-size="11" fill="#333">1899 / 256 p&aacute;g.</text>
+      <text x="370" y="232" font-family="-apple-system, sans-serif" font-size="9" fill="#888">ISBN</text>
+      <text x="370" y="244" font-family="-apple-system, sans-serif" font-size="11" fill="#333">978-85-7232-...</text>
+      <text x="252" y="264" font-family="-apple-system, sans-serif" font-size="9" fill="#888">OBSERVA&Ccedil;&Otilde;ES</text>
+      <text x="252" y="278" font-family="-apple-system, sans-serif" font-size="11" fill="#555">Cl&aacute;ssico da literatura brasileira.</text>
+    </svg>
+    <figcaption>Figura 4 &mdash; Lista de livros (esquerda) e painel de detalhes completo (direita). Livro selecionado aparece destacado em azul.</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao"/>
+
+<!-- ============================================================ -->
+<section id="livros">
+  <h2>5. Adicionando e editando livros</h2>
+
+  <h3>Adicionar um novo livro</h3>
+  <ol>
+    <li>Clique no bot&atilde;o <strong>+ Novo livro</strong> no canto superior direito da janela principal.</li>
+    <li>Um formul&aacute;rio de cadastro se abre. Preencha os campos desejados.</li>
+    <li>O campo <strong>T&iacute;tulo</strong> &eacute; obrigat&oacute;rio. Todos os outros s&atilde;o opcionais.</li>
+    <li>Clique em <strong>Salvar</strong>. O livro aparece imediatamente na lista, em ordem alfab&eacute;tica.</li>
+  </ol>
+
+  <h3>Campos do formul&aacute;rio</h3>
+  <ul>
+    <li><strong>T&iacute;tulo</strong> &mdash; Nome completo do livro (obrigat&oacute;rio).</li>
+    <li><strong>Autor</strong> &mdash; Nome do autor ou autores.</li>
+    <li><strong>Assunto</strong> &mdash; G&ecirc;nero, tema ou categoria (ex: Romance, Fic&ccedil;&atilde;o Cient&iacute;fica, Hist&oacute;ria).</li>
+    <li><strong>Editora</strong> &mdash; Nome da editora.</li>
+    <li><strong>Ano</strong> &mdash; Ano de publica&ccedil;&atilde;o desta edi&ccedil;&atilde;o.</li>
+    <li><strong>ISBN</strong> &mdash; C&oacute;digo de identifica&ccedil;&atilde;o do livro (10 ou 13 d&iacute;gitos).</li>
+    <li><strong>P&aacute;ginas</strong> &mdash; N&uacute;mero de p&aacute;ginas da edi&ccedil;&atilde;o.</li>
+    <li><strong>Observa&ccedil;&otilde;es</strong> &mdash; Campo livre para notas pessoais, avalia&ccedil;&atilde;o, localiza&ccedil;&atilde;o na estante, etc.</li>
+  </ul>
+
+  <h3>Editar um livro existente</h3>
+  <p>Clique no livro na lista para abrir o painel de detalhes e, em seguida, clique no bot&atilde;o <strong>Editar</strong>. O mesmo formul&aacute;rio de cadastro se abre preenchido com os dados atuais. Fa&ccedil;a as altera&ccedil;&otilde;es e clique em <strong>Salvar</strong>.</p>
+
+  <h3>Excluir um livro</h3>
+  <p>No painel de detalhes, clique em <strong>Excluir</strong>. O app pede confirma&ccedil;&atilde;o antes de remover o livro da lista. A exclus&atilde;o remove o registro do cat&aacute;logo; a foto de capa &eacute; mantida at&eacute; que voc&ecirc; a exclua manualmente.</p>
+
+  <div class="nota">
+    <strong>Aten&ccedil;&atilde;o:</strong> a exclus&atilde;o de um livro n&atilde;o pode ser desfeita pelo menu Editar &rarr; Desfazer. Certifique-se antes de confirmar.
+  </div>
+
+  <figure>
+    <svg width="500" height="320" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;border-radius:10px;">
+      <!-- Fundo -->
+      <rect width="500" height="320" fill="#f8f9fc" rx="10"/>
+      <!-- Janela do formulario -->
+      <rect x="50" y="20" width="400" height="280" rx="10" fill="#fff" stroke="#c8c8c8" stroke-width="1.5"/>
+      <!-- Barra de titulo -->
+      <rect x="50" y="20" width="400" height="36" rx="10" fill="#e8e8e8"/>
+      <rect x="50" y="42" width="400" height="14" fill="#e8e8e8"/>
+      <circle cx="72" cy="38" r="7" fill="#ff5f56"/>
+      <circle cx="92" cy="38" r="7" fill="#ffbd2e"/>
+      <circle cx="112" cy="38" r="7" fill="#27c93f"/>
+      <text x="250" y="43" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" fill="#444">Novo livro</text>
+      <!-- Campos do formulario -->
+      <text x="72" y="80" font-family="-apple-system, sans-serif" font-size="11" fill="#555">T&iacute;tulo *</text>
+      <rect x="72" y="84" width="356" height="26" rx="5" fill="#fff" stroke="#a8b8d8" stroke-width="1.5"/>
+      <text x="82" y="101" font-family="-apple-system, sans-serif" font-size="12" fill="#1a1a1a">A Hora da Estrela</text>
+      <text x="72" y="124" font-family="-apple-system, sans-serif" font-size="11" fill="#555">Autor</text>
+      <rect x="72" y="128" width="356" height="26" rx="5" fill="#fff" stroke="#c8c8c8" stroke-width="1"/>
+      <text x="82" y="145" font-family="-apple-system, sans-serif" font-size="12" fill="#1a1a1a">Clarice Lispector</text>
+      <text x="72" y="168" font-family="-apple-system, sans-serif" font-size="11" fill="#555">Assunto</text>
+      <rect x="72" y="172" width="168" height="26" rx="5" fill="#fff" stroke="#c8c8c8" stroke-width="1"/>
+      <text x="82" y="189" font-family="-apple-system, sans-serif" font-size="12" fill="#1a1a1a">Romance</text>
+      <text x="256" y="168" font-family="-apple-system, sans-serif" font-size="11" fill="#555">Editora</text>
+      <rect x="256" y="172" width="172" height="26" rx="5" fill="#fff" stroke="#c8c8c8" stroke-width="1"/>
+      <text x="266" y="189" font-family="-apple-system, sans-serif" font-size="12" fill="#1a1a1a">Rocco</text>
+      <text x="72" y="212" font-family="-apple-system, sans-serif" font-size="11" fill="#555">Ano</text>
+      <rect x="72" y="216" width="74" height="26" rx="5" fill="#fff" stroke="#c8c8c8" stroke-width="1"/>
+      <text x="82" y="233" font-family="-apple-system, sans-serif" font-size="12" fill="#1a1a1a">1977</text>
+      <text x="158" y="212" font-family="-apple-system, sans-serif" font-size="11" fill="#555">ISBN</text>
+      <rect x="158" y="216" width="152" height="26" rx="5" fill="#fff" stroke="#c8c8c8" stroke-width="1"/>
+      <text x="168" y="233" font-family="-apple-system, sans-serif" font-size="12" fill="#1a1a1a">978-85-325-1...</text>
+      <text x="322" y="212" font-family="-apple-system, sans-serif" font-size="11" fill="#555">P&aacute;ginas</text>
+      <rect x="322" y="216" width="106" height="26" rx="5" fill="#fff" stroke="#c8c8c8" stroke-width="1"/>
+      <text x="332" y="233" font-family="-apple-system, sans-serif" font-size="12" fill="#1a1a1a">87</text>
+      <!-- Botoes -->
+      <rect x="72" y="264" width="90" height="28" rx="6" fill="#f0f0f0" stroke="#d0d0d0" stroke-width="1"/>
+      <text x="117" y="283" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#444">Cancelar</text>
+      <rect x="338" y="264" width="90" height="28" rx="6" fill="#1a56a8"/>
+      <text x="383" y="283" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#fff" font-weight="bold">Salvar</text>
+    </svg>
+    <figcaption>Figura 5 &mdash; Formul&aacute;rio de cadastro de um novo livro. O campo T&iacute;tulo &eacute; obrigat&oacute;rio; os demais s&atilde;o opcionais.</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao"/>
+
+<!-- ============================================================ -->
+<section id="capas">
+  <h2>6. Fotografando capas</h2>
+
+  <p>O Biblioteca permite associar uma foto da capa f&iacute;sica ao registro de cada livro. A imagem &eacute; armazenada localmente e sincroniza automaticamente com o iPhone e outros Macs pelo iCloud Drive.</p>
+
+  <h3>Como adicionar uma foto</h3>
+  <ol>
+    <li>Abra o detalhe de um livro clicando nele na lista.</li>
+    <li>Clique na &aacute;rea da capa (onde aparece um &iacute;cone de imagem ou a foto atual) ou no bot&atilde;o <strong>Adicionar foto</strong> abaixo da capa.</li>
+    <li>O app oferece duas op&ccedil;&otilde;es:
+      <ul>
+        <li><strong>C&acirc;mera</strong> &mdash; usa a c&acirc;mera FaceTime ou uma c&acirc;mera externa conectada ao Mac.</li>
+        <li><strong>Arquivo</strong> &mdash; abre o Finder para voc&ecirc; selecionar uma imagem JPEG ou PNG salva no computador.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>Via c&acirc;mera</h3>
+  <p>Posicione o livro com a capa voltada para a c&acirc;mera. Uma janela de visualiza&ccedil;&atilde;o ao vivo &eacute; exibida, com uma moldura guia para centralizar a imagem. Quando estiver satisfeito com o enquadramento, clique em <strong>Capturar</strong>. O Biblioteca corta e ajusta a imagem automaticamente.</p>
+
+  <div class="dica">
+    <strong>Dica para fotos melhores:</strong> fotografe em um ambiente bem iluminado, com fundo de cor s&oacute;lida (mesa branca ou cartolina). Evite reflexos na capa plastificada &mdash; um &acirc;ngulo ligeiramente inclinado elimina o brilho.
+  </div>
+
+  <h3>Via arquivo</h3>
+  <p>Escolha qualquer arquivo JPEG ou PNG no Finder. N&atilde;o h&aacute; restri&ccedil;&atilde;o de tamanho, mas imagens com mais de 5 MB ser&atilde;o redimensionadas automaticamente para economizar espa&ccedil;o no iCloud.</p>
+
+  <h3>Remover ou trocar a foto</h3>
+  <p>No painel de detalhes, clique com o bot&atilde;o direito na capa atual (ou clique no &iacute;cone de op&ccedil;&otilde;es acima dela) e escolha <strong>Remover foto</strong> ou <strong>Trocar foto</strong>.</p>
+
+  <figure>
+    <svg width="480" height="300" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;border-radius:10px;">
+      <!-- Fundo -->
+      <rect width="480" height="300" fill="#1a1a2e" rx="10"/>
+      <!-- Area do viewfinder (fundo escuro da camera) -->
+      <rect x="60" y="30" width="360" height="200" rx="8" fill="#0d0d1a"/>
+      <!-- Imagem ao vivo simulada (livro enquadrado) -->
+      <rect x="80" y="48" width="320" height="168" rx="4" fill="#2a2a3e"/>
+      <!-- Superficie onde o livro repousa -->
+      <rect x="80" y="188" width="320" height="28" rx="4" fill="#1e1e30"/>
+      <!-- O livro -->
+      <rect x="158" y="68" width="164" height="128" rx="6" fill="#8b2040"/>
+      <rect x="164" y="74" width="152" height="116" rx="4" fill="#a02848"/>
+      <text x="240" y="128" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" fill="#fff" font-weight="bold">A Hora</text>
+      <text x="240" y="146" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" fill="#fff" font-weight="bold">da Estrela</text>
+      <text x="240" y="168" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#f0c0c0">Clarice Lispector</text>
+      <!-- Moldura guia (linhas de enquadramento) -->
+      <rect x="140" y="58" width="200" height="148" rx="4" fill="none" stroke="#4af0a0" stroke-width="2" stroke-dasharray="8,4"/>
+      <!-- Cantos destacados da moldura -->
+      <polyline points="140,78 140,58 160,58" fill="none" stroke="#4af0a0" stroke-width="3"/>
+      <polyline points="320,58 340,58 340,78" fill="none" stroke="#4af0a0" stroke-width="3"/>
+      <polyline points="140,186 140,206 160,206" fill="none" stroke="#4af0a0" stroke-width="3"/>
+      <polyline points="320,206 340,206 340,186" fill="none" stroke="#4af0a0" stroke-width="3"/>
+      <!-- Botao de captura -->
+      <circle cx="240" cy="256" r="22" fill="#fff" opacity="0.9"/>
+      <circle cx="240" cy="256" r="17" fill="#fff"/>
+      <circle cx="240" cy="256" r="13" fill="#e0e0e0"/>
+      <!-- Texto abaixo -->
+      <text x="240" y="292" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#aaa">Clique para capturar</text>
+      <!-- Botao cancelar (canto) -->
+      <text x="90" y="256" font-family="-apple-system, sans-serif" font-size="11" fill="#aaa">Cancelar</text>
+    </svg>
+    <figcaption>Figura 6 &mdash; Viewfinder da c&acirc;mera com o livro enquadrado. A moldura verde guia o posicionamento da capa.</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao"/>
+
+<!-- ============================================================ -->
+<section id="pesquisa">
+  <h2>7. Pesquisa e filtros</h2>
+
+  <p>Com uma cole&ccedil;&atilde;o grande, a pesquisa &eacute; a funcionalidade mais usada do Biblioteca. O app filtra os livros em tempo real enquanto voc&ecirc; digita &mdash; n&atilde;o &eacute; preciso pressionar Enter.</p>
+
+  <h3>Pesquisa por texto</h3>
+  <p>Clique na barra de pesquisa no topo da lista (atalho de teclado: <code>Cmd&nbsp;+&nbsp;F</code>) e comece a digitar. O Biblioteca busca simultaneamente em:</p>
+  <ul>
+    <li>T&iacute;tulo do livro</li>
+    <li>Nome do autor</li>
+    <li>Assunto / g&ecirc;nero</li>
+    <li>Editora</li>
+  </ul>
+  <p>A busca ignora acentos e diferen&ccedil;a entre mai&uacute;sculas e min&uacute;sculas. Procurar por &ldquo;jose&rdquo; encontra &ldquo;Jos&eacute; Saramago&rdquo;.</p>
+
+  <h3>Filtrar por categoria</h3>
+  <p>Use o menu <strong>Filtrar por</strong> (ao lado da barra de pesquisa) para restringir a lista a um Assunto ou Editora espec&iacute;fica. Os valores do menu s&atilde;o gerados automaticamente a partir do que est&aacute; cadastrado no seu cat&aacute;logo.</p>
+
+  <h3>Limpar a pesquisa</h3>
+  <p>Para ver todos os livros novamente, apague o texto da barra de pesquisa manualmente ou clique no &iacute;cone de <strong>X</strong> que aparece no lado direito da barra quando h&aacute; texto digitado. O atalho <code>Esc</code> tamb&eacute;m limpa a pesquisa e devolve o foco &agrave; lista.</p>
+
+  <figure>
+    <svg width="520" height="260" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;border-radius:10px;">
+      <!-- Fundo -->
+      <rect width="520" height="260" fill="#f8f9fc" rx="10"/>
+      <!-- Janela -->
+      <rect x="30" y="20" width="460" height="220" rx="10" fill="#fff" stroke="#c8c8c8" stroke-width="1.5"/>
+      <!-- Barra de titulo -->
+      <rect x="30" y="20" width="460" height="36" rx="10" fill="#e8e8e8"/>
+      <rect x="30" y="42" width="460" height="14" fill="#e8e8e8"/>
+      <circle cx="52" cy="38" r="7" fill="#ff5f56"/>
+      <circle cx="72" cy="38" r="7" fill="#ffbd2e"/>
+      <circle cx="92" cy="38" r="7" fill="#27c93f"/>
+      <!-- Barra de pesquisa com texto digitado -->
+      <rect x="50" y="62" width="248" height="26" rx="5" fill="#fff" stroke="#1a56a8" stroke-width="2"/>
+      <!-- Icone de lupa -->
+      <circle cx="64" cy="75" r="6" fill="none" stroke="#888" stroke-width="1.5"/>
+      <line x1="69" y1="80" x2="73" y2="84" stroke="#888" stroke-width="1.5"/>
+      <text x="80" y="80" font-family="-apple-system, sans-serif" font-size="12" fill="#1a1a1a">clarice</text>
+      <!-- X para limpar -->
+      <circle cx="287" cy="75" r="8" fill="#c8c8c8"/>
+      <line x1="283" y1="71" x2="291" y2="79" stroke="#fff" stroke-width="2"/>
+      <line x1="291" y1="71" x2="283" y2="79" stroke="#fff" stroke-width="2"/>
+      <!-- Menu filtrar -->
+      <rect x="308" y="62" width="120" height="26" rx="5" fill="#f0f0f0" stroke="#d0d0d0" stroke-width="1"/>
+      <text x="318" y="79" font-family="-apple-system, sans-serif" font-size="11" fill="#555">Filtrar por: Todos</text>
+      <text x="418" y="79" font-family="-apple-system, sans-serif" font-size="11" fill="#888">&#9660;</text>
+      <!-- Linha divisoria -->
+      <line x1="46" y1="96" x2="474" y2="96" stroke="#e8e8e8" stroke-width="1"/>
+      <!-- Resultado 1: Clarice Lispector -->
+      <rect x="46" y="100" width="422" height="44" rx="3" fill="#f0f5ff"/>
+      <rect x="52" y="106" width="28" height="30" rx="3" fill="#e8c0c8"/>
+      <text x="66" y="124" text-anchor="middle" font-family="monospace" font-size="7" fill="#804050">capa</text>
+      <text x="90" y="118" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#1a1a1a">A Hora da Estrela</text>
+      <text x="90" y="133" font-family="-apple-system, sans-serif" font-size="11" fill="#666">Clarice Lispector</text>
+      <!-- Resultado 2: outra Clarice -->
+      <rect x="46" y="148" width="422" height="44" rx="3" fill="#fff"/>
+      <rect x="52" y="154" width="28" height="30" rx="3" fill="#d8e8c0"/>
+      <text x="66" y="172" text-anchor="middle" font-family="monospace" font-size="7" fill="#507040">capa</text>
+      <text x="90" y="166" font-family="-apple-system, sans-serif" font-size="12" font-weight="bold" fill="#1a1a1a">Perto do Cora&ccedil;&atilde;o Selvagem</text>
+      <text x="90" y="181" font-family="-apple-system, sans-serif" font-size="11" fill="#666">Clarice Lispector</text>
+      <!-- Contador de resultados -->
+      <text x="474" y="248" text-anchor="end" font-family="-apple-system, sans-serif" font-size="11" fill="#888">2 de 34 livros</text>
+    </svg>
+    <figcaption>Figura 7 &mdash; Pesquisa em tempo real: digitar &ldquo;clarice&rdquo; filtra instantaneamente a lista para os livros da autora.</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao"/>
+
+<!-- ============================================================ -->
+<section id="backup">
+  <h2>8. Backup, sincroniza&ccedil;&atilde;o e exporta&ccedil;&atilde;o</h2>
+
+  <h3>Onde ficam seus dados</h3>
+  <p>O Biblioteca para Mac salva seus dados em dois arquivos dentro do iCloud Drive:</p>
+
+  <table style="width:100%; border-collapse:collapse; margin-bottom:1em;">
+    <thead>
+      <tr>
+        <th style="text-align:left; padding:8px 12px; border-bottom:2px solid #d0dcf0; color:#1a3a6e;">Arquivo</th>
+        <th style="text-align:left; padding:8px 12px; border-bottom:2px solid #d0dcf0; color:#1a3a6e;">Conte&uacute;do</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:8px 12px; border-bottom:1px solid #eef0f8;"><code>iCloud Drive/Biblioteca/biblioteca.txt</code></td>
+        <td style="padding:8px 12px; border-bottom:1px solid #eef0f8;">Cat&aacute;logo de livros em formato TSV (texto com separador tab)</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 12px;"><code>iCloud Drive/Biblioteca/biblioteca.dat</code></td>
+        <td style="padding:8px 12px;">Fotos de capa em formato JSON com imagens embutidas</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>O caminho completo no Mac &eacute;:</p>
+  <p><code>~/Library/Mobile Documents/com~apple~CloudDocs/Biblioteca/</code></p>
+  <p>Voc&ecirc; pode acessar essa pasta pelo app <strong>Arquivos</strong> no iPhone ou pelo <strong>iCloud Drive</strong> no Finder (menu lateral).</p>
+
+  <h3>Configura&ccedil;&atilde;o inicial</h3>
+  <p><strong>Se voc&ecirc; j&aacute; tem um cat&aacute;logo</strong> (arquivo biblioteca.txt existente):</p>
+  <ol>
+    <li>Abra o Finder e navegue at&eacute; o <strong>iCloud Drive</strong>.</li>
+    <li>Crie uma pasta chamada exatamente <strong>Biblioteca</strong> (com B mai&uacute;sculo).</li>
+    <li>Copie seu <code>biblioteca.txt</code> para dentro dessa pasta.</li>
+    <li>Se tiver um <code>biblioteca.dat</code> com fotos, copie-o tamb&eacute;m.</li>
+    <li>Abra o app &mdash; ele detecta e carrega os arquivos automaticamente.</li>
+  </ol>
+  <p><strong>Se est&aacute; come&ccedil;ando do zero:</strong> basta abrir o app. Ele cria a pasta e os arquivos automaticamente na primeira grava&ccedil;&atilde;o.</p>
+
+  <h3>Como a sincroniza&ccedil;&atilde;o funciona</h3>
+  <p>O Biblioteca sincroniza automaticamente &mdash; voc&ecirc; n&atilde;o precisa fazer nada manualmente. Cada altera&ccedil;&atilde;o (novo livro, foto de capa, edi&ccedil;&atilde;o) &eacute; salva com 1 segundo de atraso para evitar grava&ccedil;&otilde;es desnecess&aacute;rias. O iCloud propaga as mudan&ccedil;as para iPhone e iPad que usem o mesmo Apple ID.</p>
+
+  <div class="nota">
+    <strong>Aviso:</strong> o modelo &eacute; &ldquo;&uacute;ltima grava&ccedil;&atilde;o vence&rdquo;. Se voc&ecirc; editar o mesmo livro no Mac e no iPhone ao mesmo tempo sem sincronizar, a vers&atilde;o que for gravada por &uacute;ltimo substituir&aacute; a outra. Nunca h&aacute; mescla&ccedil;&atilde;o autom&aacute;tica.
+  </div>
+
+  <h3>Sincroniza&ccedil;&atilde;o de fotos</h3>
+  <p>As fotos de capa s&atilde;o embutidas no <code>biblioteca.dat</code> como imagens JPEG codificadas em Base64. Isso significa:</p>
+  <ul>
+    <li><strong>Ao tirar uma foto no iPhone:</strong> ela &eacute; salva localmente e publicada no <code>biblioteca.dat</code> do iCloud automaticamente.</li>
+    <li><strong>No Mac:</strong> o app l&ecirc; o <code>biblioteca.dat</code> ao carregar e exibe as fotos sem nenhuma a&ccedil;&atilde;o do usu&aacute;rio.</li>
+    <li><strong>Se as fotos n&atilde;o aparecerem:</strong> feche e reabra o app para for&ccedil;ar a releitura do iCloud.</li>
+  </ul>
+
+  <h3>Exportar uma c&oacute;pia de seguran&ccedil;a</h3>
+  <p>Para fazer uma c&oacute;pia manual:</p>
+  <ol>
+    <li>Abra o Finder e navegue at&eacute; <strong>iCloud Drive &rarr; pasta Biblioteca</strong>.</li>
+    <li>Copie <code>biblioteca.txt</code> (e <code>biblioteca.dat</code>) para qualquer pasta local, pen-drive ou e-mail.</li>
+  </ol>
+  <p>Para <strong>restaurar</strong>, basta substituir os arquivos na pasta do iCloud pela c&oacute;pia salva.</p>
+
+  <h3>Fotos &oacute;rf&atilde;s</h3>
+  <p>Uma foto fica &ldquo;&oacute;rf&atilde;&rdquo; quando o livro ao qual ela pertencia foi exclu&iacute;do ou teve seu t&iacute;tulo/autor alterado. Na vers&atilde;o 1.8.3, um bot&atilde;o <strong>Fotos &Oacute;rf&atilde;s</strong> (laranja) passa a aparecer na &aacute;rea de sincroniza&ccedil;&atilde;o quando h&aacute; fotos sem livro associado, indicando a contagem.</p>
+  <p>Ao clicar, abre um painel com miniaturas e o c&oacute;digo identificador de cada foto. Para cada foto voc&ecirc; pode:</p>
+  <ul>
+    <li><strong>Associar</strong> &mdash; escolha um livro no menu suspenso e clique em Associar. A foto passa a ser a capa daquele livro.</li>
+    <li><strong>Excluir</strong> &mdash; remove a foto definitivamente.</li>
+  </ul>
+  <p>O bot&atilde;o <strong>Excluir todas</strong>, no rodap&eacute; do painel, remove de uma s&oacute; vez todas as fotos &oacute;rf&atilde;s.</p>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao"/>
+
+<!-- ============================================================ -->
+<section id="faq">
+  <h2>9. Perguntas frequentes</h2>
+
+  <h3>O app n&atilde;o abre &mdash; aparece aviso de seguran&ccedil;a do macOS</h3>
+  <p>O macOS bloqueia aplicativos que n&atilde;o vieram da Mac App Store ou de desenvolvedores com certificado Apple. Para liberar o Biblioteca: abra <strong>Ajustes do Sistema &rarr; Privacidade e Seguran&ccedil;a</strong>, role at&eacute; encontrar a mensagem sobre o Biblioteca e clique em <strong>Abrir mesmo assim</strong>. Se a op&ccedil;&atilde;o n&atilde;o aparecer, tente este caminho alternativo: segure a tecla <strong>Control</strong>, clique no &iacute;cone do app na pasta Aplicativos e escolha <strong>Abrir</strong> no menu de contexto. Esse procedimento &eacute; necess&aacute;rio apenas na primeira abertura.</p>
+
+  <h3>N&atilde;o consigo ver a c&acirc;mera no app</h3>
+  <p>O macOS exige que o usu&aacute;rio conceda permiss&atilde;o de acesso &agrave; c&acirc;mera a cada app individualmente. Se a c&acirc;mera n&atilde;o abrir, v&aacute; em <strong>Ajustes do Sistema &rarr; Privacidade e Seguran&ccedil;a &rarr; C&acirc;mera</strong> e verifique se o Biblioteca est&aacute; na lista e se a chave ao lado est&aacute; ativada. Se o Biblioteca n&atilde;o aparecer na lista, abra o app, tente usar a c&acirc;mera pela primeira vez e o sistema exibir&aacute; o di&aacute;logo de permiss&atilde;o automaticamente.</p>
+
+  <h3>Perdi meus livros depois de reinstalar</h3>
+  <p>Os dados do Biblioteca ficam no iCloud Drive, n&atilde;o dentro do pacote do aplicativo. Reinstalar o app n&atilde;o apaga o cat&aacute;logo. Se os livros sumiram, verifique: se voc&ecirc; est&aacute; conectado com o mesmo Apple ID que usava antes, e se o iCloud Drive est&aacute; ativo nas prefer&ecirc;ncias de conta (<strong>Ajustes do Sistema &rarr; ID Apple &rarr; iCloud &rarr; iCloud Drive</strong>). Quando o iCloud Drive estiver ativo e a conta correta, os livros voltam automaticamente assim que o Mac sincronizar.</p>
+
+  <h3>O app n&atilde;o aparece no Launchpad</h3>
+  <p>O Launchpad atualiza sua lista automaticamente, mas pode demorar alguns segundos ap&oacute;s a instala&ccedil;&atilde;o. Se o Biblioteca n&atilde;o aparecer, use o Spotlight (<code>Cmd&nbsp;+&nbsp;Espa&ccedil;o</code>) e digite &ldquo;Biblioteca&rdquo; para localizar o app; ou abra o Finder, v&aacute; em <strong>Aplicativos</strong> e clique duas vezes no &iacute;cone do Biblioteca. Se o &iacute;cone n&atilde;o estiver na pasta Aplicativos, repita a instala&ccedil;&atilde;o a partir do arquivo DMG.</p>
+
+  <h3>Posso usar o Biblioteca em outro Mac?</h3>
+  <p>Sim. Instale o app no outro Mac da mesma forma (a partir do arquivo DMG) e acesse com o mesmo Apple ID. O cat&aacute;logo sincroniza automaticamente pelo iCloud Drive. As fotos de capa tamb&eacute;m sincronizam, mas podem levar alguns minutos a mais para aparecer, dependendo do tamanho das imagens e da velocidade da conex&atilde;o.</p>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao"/>
+
+<p style="text-align:center; color:#aaa; font-size:0.85em; margin-top:3em;">
+  Biblioteca Web para Mac &mdash; Vers&atilde;o 1.8.3 &mdash; Setembro de 2026
+</p>
+
+</body>
+</html>

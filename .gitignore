@@ -1,0 +1,35 @@
+# ---------------------------------------------------------------
+# Este repositório guarda apenas a COLA da consolidação: a versão única,
+# os scripts de release, o contrato entre plataformas e a documentação.
+#
+# Cada motor tem repositório próprio no GitHub e é ignorado aqui:
+#   motor-web        → ruggierow/biblioteca-web
+#   motor-movel/ios  → ruggierow/biblioteca-ios
+#   motor-movel/android → ruggierow/biblioteca-flutter
+# Clone os quatro lado a lado para ter a árvore completa.
+# ---------------------------------------------------------------
+motor-web/
+motor-movel/
+legado/web-tauri/
+
+# Saídas de build e pacotes
+dist/
+build/
+DerivedData/
+*.apk
+*.dmg
+*-setup.exe
+
+# Chaves de assinatura — NUNCA versionar
+*.jks
+*.keystore
+key.properties
+
+# Xcode: estado de janela e preferências pessoais
+xcuserdata/
+**/*.xcuserdatad/
+*.xcuserstate
+
+# macOS
+.DS_Store
+**/.DS_Store

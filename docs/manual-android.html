@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca para Android — Manual do Usuário</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size: 16px; line-height: 1.8; color: #1a1a1a; background: #fff; max-width: 820px; margin: 0 auto; padding: 48px 32px; }
+    h1 { font-size: 2em; text-align: center; margin-bottom: 4px; }
+    .subtitulo { text-align: center; color: #666; margin-bottom: 40px; font-size: 1em; }
+    h2 { font-size: 1.4em; color: #1a3a6e; margin-top: 2.8em; margin-bottom: 0.6em; padding-bottom: 0.3em; border-bottom: 2px solid #d0dcf0; }
+    h3 { font-size: 1.1em; color: #2a4080; margin-top: 1.6em; margin-bottom: 0.4em; }
+    p { margin-bottom: 1em; }
+    ul, ol { margin-bottom: 1em; padding-left: 1.6em; }
+    li { margin-bottom: 0.4em; }
+    code { background: #f0f0f0; border-radius: 3px; padding: 1px 5px; font-family: monospace; font-size: 0.9em; }
+    nav#sumario { background: #f2f6ff; border: 1px solid #c8d8f8; border-radius: 8px; padding: 24px 32px; margin: 32px 0 48px; }
+    nav#sumario h2 { margin-top: 0; border-bottom: none; }
+    nav#sumario ol { margin: 8px 0 0 0; }
+    nav#sumario a { color: #1a56a8; text-decoration: none; }
+    nav#sumario a:hover { text-decoration: underline; }
+    section { margin-bottom: 3em; }
+    .voltar { margin-top: 2em; padding-top: 0.8em; border-top: 1px solid #e8e8e8; text-align: right; font-size: 0.9em; }
+    .voltar a { color: #1a56a8; text-decoration: none; }
+    .nota { background: #fffbe6; border-left: 4px solid #f0c040; padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 16px 0; }
+    .dica { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 16px 0; }
+    figure { margin: 24px 0; text-align: center; }
+    figcaption { font-size: 0.88em; color: #555; margin-top: 8px; font-style: italic; }
+    hr.secao { border: none; border-top: 1px solid #e0e0e0; margin: 3em 0; }
+    /* ── Capa ── */
+    .capa { background: linear-gradient(145deg, #052e16 0%, #15803d 55%, #22c55e 100%); border-radius: 16px; margin: -48px -32px 80px; min-height: 620px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #fff; page-break-after: always; break-after: page; position: relative; overflow: hidden; }
+    .capa-orbe1 { position: absolute; top: -90px; right: -90px; width: 340px; height: 340px; border-radius: 50%; background: rgba(255,255,255,0.07); pointer-events: none; }
+    .capa-orbe2 { position: absolute; bottom: -110px; left: -70px; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,255,255,0.05); pointer-events: none; }
+    .capa-orbe3 { position: absolute; top: 38%; left: 58%; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.04); pointer-events: none; }
+    .capa-conteudo { position: relative; z-index: 1; padding: 80px 60px; display: flex; flex-direction: column; align-items: center; }
+    .capa-icone { margin-bottom: 36px; }
+    .capa-titulo { font-size: 3.6em; font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 10px; }
+    .capa-plataforma { font-size: 0.95em; font-weight: 400; letter-spacing: 6px; text-transform: uppercase; opacity: 0.7; margin-bottom: 44px; }
+    .capa-divisor { width: 60px; height: 2px; background: rgba(255,255,255,0.4); margin-bottom: 44px; }
+    .capa-manual { font-size: 1.3em; font-weight: 600; opacity: 0.95; margin-bottom: 8px; }
+    .capa-versao { font-size: 0.9em; opacity: 0.55; letter-spacing: 1px; }
+    .capa-rodape { position: absolute; bottom: 28px; font-size: 0.82em; opacity: 0.45; letter-spacing: 0.5px; z-index: 1; }
+  </style>
+</head>
+<body>
+
+<div class="capa">
+  <div class="capa-orbe1"></div>
+  <div class="capa-orbe2"></div>
+  <div class="capa-orbe3"></div>
+  <div class="capa-conteudo">
+    <div class="capa-icone">
+      <svg width="160" height="130" viewBox="0 0 160 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M80 22 L12 35 L12 100 L80 89 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M80 22 L148 35 L148 100 L80 89 Z" fill="rgba(255,255,255,0.19)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linejoin="round"/>
+        <line x1="80" y1="22" x2="80" y2="89" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/>
+        <ellipse cx="80" cy="106" rx="55" ry="6" fill="rgba(0,0,0,0.18)"/>
+        <line x1="27" y1="52" x2="68" y2="46" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+        <line x1="27" y1="62" x2="68" y2="56" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+        <line x1="27" y1="72" x2="68" y2="66" stroke="rgba(255,255,255,0.32)" stroke-width="1.2"/>
+        <line x1="92" y1="46" x2="133" y2="52" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+        <line x1="92" y1="56" x2="133" y2="62" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+        <line x1="92" y1="66" x2="133" y2="72" stroke="rgba(255,255,255,0.32)" stroke-width="1.2"/>
+        <ellipse cx="129" cy="34" rx="10" ry="8" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+        <rect x="119" y="33" width="20" height="14" rx="3" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+        <circle cx="124" cy="37" r="1.5" fill="rgba(255,255,255,0.9)"/>
+        <circle cx="134" cy="37" r="1.5" fill="rgba(255,255,255,0.9)"/>
+        <line x1="122" y1="28" x2="120" y2="24" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="136" y1="28" x2="138" y2="24" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="capa-titulo">BIBLIOTECA</div>
+    <div class="capa-plataforma">para Android</div>
+    <div class="capa-divisor"></div>
+    <div class="capa-manual">Manual do Usuário</div>
+    <div class="capa-versao">Versão 1.8.2 &nbsp;&middot;&nbsp; APK</div>
+  </div>
+  <div class="capa-rodape">Setembro de 2026 &nbsp;&middot;&nbsp; ruggierow</div>
+</div>
+
+<h1>Biblioteca para Android</h1>
+<p class="subtitulo">Manual do Usuário &mdash; Vers&atilde;o 1.8.2 &middot; Distribui&ccedil;&atilde;o APK</p>
+
+<nav id="sumario">
+  <h2>Sum&aacute;rio</h2>
+  <ol>
+    <li><a href="#apresentacao">Apresenta&ccedil;&atilde;o</a></li>
+    <li><a href="#instalacao">Instala&ccedil;&atilde;o do APK</a></li>
+    <li><a href="#primeiro-uso">Primeiro uso</a></li>
+    <li><a href="#catalogo">Consultando o cat&aacute;logo</a></li>
+    <li><a href="#livros">Adicionando e editando livros</a></li>
+    <li><a href="#capas">Fotografando capas</a></li>
+    <li><a href="#pesquisa">Pesquisa e filtros</a></li>
+    <li><a href="#sincronizacao">Sincroniza&ccedil;&atilde;o e backup</a></li>
+    <li><a href="#faq">Perguntas frequentes</a></li>
+  </ol>
+</nav>
+
+<hr class="secao">
+
+<!-- ===== SEÇÃO 1 ===== -->
+<section id="apresentacao">
+  <h2>1. Apresenta&ccedil;&atilde;o</h2>
+
+  <p>O <strong>Biblioteca</strong> para Android &eacute; um aplicativo desenvolvido em Flutter para catalogar sua cole&ccedil;&atilde;o de livros diretamente no celular. Com ele voc&ecirc; registra t&iacute;tulos, autores, editoras e assuntos, e ainda fotografa as capas dos livros usando a c&acirc;mera do aparelho.</p>
+
+  <p>O aplicativo foi projetado para funcionar completamente <strong>sem conex&atilde;o com a internet</strong>. Todos os seus dados ficam salvos no armazenamento local do celular, sem nenhuma conta ou cadastro necess&aacute;rio.</p>
+
+  <ul>
+    <li>Cataloga livros com at&eacute; 8 campos por t&iacute;tulo</li>
+    <li>Registra capas fotografadas com a c&acirc;mera ou importadas da galeria</li>
+    <li>Pesquisa e filtra o cat&aacute;logo em tempo real</li>
+    <li>Funciona inteiramente sem acesso &agrave; internet</li>
+    <li>Compat&iacute;vel com Android 8.0 (Oreo) e vers&otilde;es posteriores</li>
+  </ul>
+
+  <figure>
+    <svg width="420" height="560" viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg">
+      <!-- Corpo do telefone -->
+      <rect x="60" y="10" width="300" height="540" rx="32" ry="32" fill="#222" />
+      <!-- Tela -->
+      <rect x="74" y="40" width="272" height="480" rx="8" ry="8" fill="#fafafa" />
+      <!-- Camera frontal -->
+      <circle cx="210" cy="26" r="5" fill="#333" />
+      <!-- AppBar -->
+      <rect x="74" y="40" width="272" height="52" rx="0" ry="0" fill="#1565c0" />
+      <rect x="74" y="40" width="272" height="8" rx="8" ry="8" fill="#1565c0" />
+      <!-- Titulo na AppBar -->
+      <text x="210" y="71" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#fff">Biblioteca</text>
+      <!-- Icone de lupa na AppBar -->
+      <circle cx="314" cy="66" r="7" fill="none" stroke="#fff" stroke-width="2"/>
+      <line x1="319" y1="71" x2="325" y2="77" stroke="#fff" stroke-width="2"/>
+      <!-- Card 1 -->
+      <rect x="84" y="104" width="252" height="76" rx="6" ry="6" fill="#fff" stroke="#e0e0e0" stroke-width="1"/>
+      <rect x="92" y="112" width="48" height="60" rx="3" ry="3" fill="#c8d8f8" />
+      <text x="116" y="136" text-anchor="middle" font-family="Arial" font-size="8" fill="#1565c0">DOM</text>
+      <text x="116" y="148" text-anchor="middle" font-family="Arial" font-size="8" fill="#1565c0">CASMURRO</text>
+      <text x="150" y="128" font-family="Arial" font-size="13" font-weight="bold" fill="#1a1a1a">Dom Casmurro</text>
+      <text x="150" y="146" font-family="Arial" font-size="11" fill="#555">Machado de Assis</text>
+      <text x="150" y="163" font-family="Arial" font-size="10" fill="#888">Editora Atica &middot; Romance</text>
+      <!-- Card 2 -->
+      <rect x="84" y="190" width="252" height="76" rx="6" ry="6" fill="#fff" stroke="#e0e0e0" stroke-width="1"/>
+      <rect x="92" y="198" width="48" height="60" rx="3" ry="3" fill="#dcedc8" />
+      <text x="116" y="220" text-anchor="middle" font-family="Arial" font-size="7" fill="#388e3c">GRANDE</text>
+      <text x="116" y="231" text-anchor="middle" font-family="Arial" font-size="7" fill="#388e3c">SERTAO</text>
+      <text x="150" y="214" font-family="Arial" font-size="13" font-weight="bold" fill="#1a1a1a">Grande Sertao: Veredas</text>
+      <text x="150" y="232" font-family="Arial" font-size="11" fill="#555">Guimaraes Rosa</text>
+      <text x="150" y="249" font-family="Arial" font-size="10" fill="#888">Nova Fronteira &middot; Romance</text>
+      <!-- Card 3 -->
+      <rect x="84" y="276" width="252" height="76" rx="6" ry="6" fill="#fff" stroke="#e0e0e0" stroke-width="1"/>
+      <rect x="92" y="284" width="48" height="60" rx="3" ry="3" fill="#ffe0b2" />
+      <text x="116" y="308" text-anchor="middle" font-family="Arial" font-size="8" fill="#e65100">O CORTIGO</text>
+      <text x="150" y="300" font-family="Arial" font-size="13" font-weight="bold" fill="#1a1a1a">O Cortigo</text>
+      <text x="150" y="318" font-family="Arial" font-size="11" fill="#555">Aluisio Azevedo</text>
+      <text x="150" y="335" font-family="Arial" font-size="10" fill="#888">Martin Claret &middot; Naturalismo</text>
+      <!-- Card 4 -->
+      <rect x="84" y="362" width="252" height="76" rx="6" ry="6" fill="#fff" stroke="#e0e0e0" stroke-width="1"/>
+      <rect x="92" y="370" width="48" height="60" rx="3" ry="3" fill="#f3e5f5" />
+      <text x="116" y="392" text-anchor="middle" font-family="Arial" font-size="7" fill="#7b1fa2">MEMORIAS</text>
+      <text x="116" y="403" text-anchor="middle" font-family="Arial" font-size="7" fill="#7b1fa2">POSTUMAS</text>
+      <text x="150" y="386" font-family="Arial" font-size="13" font-weight="bold" fill="#1a1a1a">Memorias Postumas</text>
+      <text x="150" y="404" font-family="Arial" font-size="11" fill="#555">Machado de Assis</text>
+      <text x="150" y="421" font-family="Arial" font-size="10" fill="#888">Cia. das Letras &middot; Classico</text>
+      <!-- FAB -->
+      <circle cx="310" cy="490" r="22" fill="#1565c0" />
+      <text x="310" y="497" text-anchor="middle" font-family="Arial" font-size="24" font-weight="bold" fill="#fff">+</text>
+      <!-- Barra de navegacao -->
+      <rect x="74" y="508" width="272" height="12" rx="0" ry="0" fill="#eeeeee" />
+      <rect x="195" y="512" width="30" height="4" rx="2" ry="2" fill="#bbb" />
+    </svg>
+    <figcaption>Tela principal do Biblioteca &mdash; lista de livros em cards com miniaturas de capa, t&iacute;tulo e autor</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ===== SEÇÃO 2 ===== -->
+<section id="instalacao">
+  <h2>2. Instala&ccedil;&atilde;o do APK</h2>
+
+  <p>O Biblioteca para Android &eacute; distribu&iacute;do como arquivo APK &mdash; instala&ccedil;&atilde;o direta, sem intermedia&ccedil;&atilde;o da Play Store. O processo &eacute; simples, mas exige liberar uma permiss&atilde;o de seguran&ccedil;a no celular antes de instalar.</p>
+
+  <h3>Passo 1 &mdash; Baixar o arquivo</h3>
+  <p>Baixe o arquivo <code>Biblioteca-1.8.2.apk</code> a partir do link recebido. Anote onde ele ficou salvo &mdash; normalmente a pasta <strong>Downloads</strong> do celular, acess&iacute;vel pela barra de notifica&ccedil;&otilde;es assim que o download terminar.</p>
+
+  <h3>Passo 2 &mdash; Permitir instala&ccedil;&atilde;o de fontes desconhecidas</h3>
+  <p>O Android bloqueia por padr&atilde;o a instala&ccedil;&atilde;o de APKs que n&atilde;o vieram da Play Store. Voc&ecirc; precisa liberar essa permiss&atilde;o uma &uacute;nica vez para o aplicativo que vai instalar o APK (geralmente o navegador ou o gerenciador de arquivos).</p>
+
+  <p><strong>Android 8.0 e vers&otilde;es mais recentes (maioria dos aparelhos):</strong></p>
+  <ol>
+    <li>Toque no arquivo <code>.apk</code> baixado. O Android exibir&aacute; um aviso de bloqueio.</li>
+    <li>Toque em <strong>Configura&ccedil;&otilde;es</strong> dentro do aviso.</li>
+    <li>Ative a op&ccedil;&atilde;o <strong>Permitir desta origem</strong>.</li>
+    <li>Toque em <strong>Voltar</strong> &mdash; a instala&ccedil;&atilde;o continuar&aacute; automaticamente.</li>
+  </ol>
+
+  <p><strong>Caminhos alternativos por fabricante:</strong></p>
+  <ul>
+    <li><strong>Samsung:</strong> Configura&ccedil;&otilde;es &rarr; Biometria e seguran&ccedil;a &rarr; Instalar apps desconhecidos</li>
+    <li><strong>Motorola:</strong> Configura&ccedil;&otilde;es &rarr; Seguran&ccedil;a &rarr; Instalar apps desconhecidos</li>
+    <li><strong>Xiaomi:</strong> Configura&ccedil;&otilde;es &rarr; Senhas e seguran&ccedil;a &rarr; Privacidade &rarr; Fontes desconhecidas</li>
+  </ul>
+
+  <div class="nota">
+    <strong>Aten&ccedil;&atilde;o:</strong> Ap&oacute;s a instala&ccedil;&atilde;o, recomenda-se desativar a permiss&atilde;o de &ldquo;Instalar apps desconhecidos&rdquo; para manter o celular seguro. Ela s&oacute; precisa estar ativa durante o processo de instala&ccedil;&atilde;o.
+  </div>
+
+  <figure>
+    <svg width="420" height="520" viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg">
+      <!-- Corpo do telefone -->
+      <rect x="60" y="10" width="300" height="500" rx="32" ry="32" fill="#222" />
+      <!-- Tela -->
+      <rect x="74" y="40" width="272" height="440" rx="8" ry="8" fill="#fafafa" />
+      <!-- Camera frontal -->
+      <circle cx="210" cy="26" r="5" fill="#333" />
+      <!-- StatusBar -->
+      <rect x="74" y="40" width="272" height="24" rx="0" ry="0" fill="#1a1a2e" />
+      <rect x="74" y="40" width="272" height="8" rx="8" ry="8" fill="#1a1a2e" />
+      <text x="90" y="57" font-family="Arial" font-size="10" fill="#fff">9:41</text>
+      <!-- Overlay escuro -->
+      <rect x="74" y="64" width="272" height="416" rx="0" ry="0" fill="#00000070" />
+      <!-- Caixa de dialogo -->
+      <rect x="94" y="160" width="232" height="220" rx="10" ry="10" fill="#fff" />
+      <!-- Icone de aviso -->
+      <circle cx="210" cy="195" r="18" fill="#ff8f00" />
+      <text x="210" y="202" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="#fff">!</text>
+      <!-- Titulo do dialogo -->
+      <text x="210" y="232" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#1a1a1a">Permitir desta origem?</text>
+      <!-- Texto explicativo -->
+      <text x="210" y="254" text-anchor="middle" font-family="Arial" font-size="10" fill="#444">O aplicativo solicita permissao</text>
+      <text x="210" y="268" text-anchor="middle" font-family="Arial" font-size="10" fill="#444">para instalar outros apps.</text>
+      <!-- Toggle -->
+      <rect x="110" y="284" width="200" height="36" rx="4" ry="4" fill="#f5f5f5" />
+      <text x="125" y="306" font-family="Arial" font-size="11" fill="#1a1a1a">Permitir desta origem</text>
+      <!-- Toggle ativo -->
+      <rect x="271" y="293" width="32" height="18" rx="9" ry="9" fill="#4caf50" />
+      <circle cx="292" cy="302" r="7" fill="#fff" />
+      <!-- Divisor -->
+      <line x1="94" y1="344" x2="326" y2="344" stroke="#e0e0e0" stroke-width="1" />
+      <text x="162" y="366" text-anchor="middle" font-family="Arial" font-size="12" fill="#888">CANCELAR</text>
+      <line x1="210" y1="344" x2="210" y2="378" stroke="#e0e0e0" stroke-width="1" />
+      <text x="268" y="366" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#1565c0">CONFIGURACOES</text>
+    </svg>
+    <figcaption>Di&aacute;logo do Android solicitando permiss&atilde;o para instalar apps de origens desconhecidas</figcaption>
+  </figure>
+
+  <h3>Passo 3 &mdash; Instalar o aplicativo</h3>
+  <ol>
+    <li>Toque no arquivo <code>Biblioteca-1.8.2.apk</code> (em Notifica&ccedil;&otilde;es ou no gerenciador de arquivos).</li>
+    <li>Toque em <strong>Instalar</strong> na tela de confirma&ccedil;&atilde;o.</li>
+    <li>Aguarde a instala&ccedil;&atilde;o concluir &mdash; geralmente leva menos de 30 segundos.</li>
+    <li>Toque em <strong>Conclu&iacute;do</strong> para fechar ou em <strong>Abrir</strong> para iniciar o app imediatamente.</li>
+  </ol>
+
+  <figure>
+    <svg width="420" height="520" viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg">
+      <!-- Corpo do telefone -->
+      <rect x="60" y="10" width="300" height="500" rx="32" ry="32" fill="#222" />
+      <!-- Tela -->
+      <rect x="74" y="40" width="272" height="440" rx="8" ry="8" fill="#fafafa" />
+      <!-- Camera frontal -->
+      <circle cx="210" cy="26" r="5" fill="#333" />
+      <!-- StatusBar -->
+      <rect x="74" y="40" width="272" height="24" rx="0" ry="0" fill="#1a1a2e" />
+      <rect x="74" y="40" width="272" height="8" rx="8" ry="8" fill="#1a1a2e" />
+      <text x="90" y="57" font-family="Arial" font-size="10" fill="#fff">9:41</text>
+      <!-- Fundo branco da tela de instalacao -->
+      <rect x="74" y="64" width="272" height="416" rx="0" ry="0" fill="#fff" />
+      <!-- Icone do app -->
+      <rect x="170" y="96" width="80" height="80" rx="18" ry="18" fill="#1565c0" />
+      <!-- Simbolo de livro simplificado no icone -->
+      <rect x="188" y="112" width="44" height="48" rx="3" ry="3" fill="#fff" />
+      <line x1="210" y1="112" x2="210" y2="160" stroke="#1565c0" stroke-width="2" />
+      <line x1="188" y1="124" x2="208" y2="124" stroke="#90caf9" stroke-width="1.5" />
+      <line x1="188" y1="132" x2="208" y2="132" stroke="#90caf9" stroke-width="1.5" />
+      <line x1="188" y1="140" x2="208" y2="140" stroke="#90caf9" stroke-width="1.5" />
+      <line x1="212" y1="124" x2="230" y2="124" stroke="#90caf9" stroke-width="1.5" />
+      <line x1="212" y1="132" x2="230" y2="132" stroke="#90caf9" stroke-width="1.5" />
+      <line x1="212" y1="140" x2="230" y2="140" stroke="#90caf9" stroke-width="1.5" />
+      <!-- Nome do app -->
+      <text x="210" y="206" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#1a1a1a">Biblioteca</text>
+      <text x="210" y="224" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">Versao 1.8.2</text>
+      <!-- Permissoes -->
+      <text x="210" y="256" text-anchor="middle" font-family="Arial" font-size="12" fill="#444">Este app precisara acessar:</text>
+      <text x="120" y="276" font-family="Arial" font-size="11" fill="#555">&#9679; Camera</text>
+      <text x="120" y="294" font-family="Arial" font-size="11" fill="#555">&#9679; Armazenamento</text>
+      <!-- Barra de progresso preenchida -->
+      <rect x="100" y="330" width="220" height="8" rx="4" ry="4" fill="#e0e0e0" />
+      <rect x="100" y="330" width="220" height="8" rx="4" ry="4" fill="#4caf50" />
+      <text x="210" y="356" text-anchor="middle" font-family="Arial" font-size="11" fill="#555">Instalando&hellip; 100%</text>
+      <!-- Botoes -->
+      <rect x="100" y="390" width="100" height="38" rx="6" ry="6" fill="#f5f5f5" stroke="#ccc" stroke-width="1" />
+      <text x="150" y="414" text-anchor="middle" font-family="Arial" font-size="13" fill="#444">CANCELAR</text>
+      <rect x="214" y="390" width="100" height="38" rx="6" ry="6" fill="#1565c0" />
+      <text x="264" y="414" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">INSTALAR</text>
+    </svg>
+    <figcaption>Tela de instala&ccedil;&atilde;o do APK com barra de progresso e bot&atilde;o Instalar</figcaption>
+  </figure>
+
+  <div class="dica">
+    <strong>Dica:</strong> Guarde o arquivo <code>Biblioteca-1.8.2.apk</code> em local seguro. Se precisar reinstalar o app no futuro, basta usar o mesmo arquivo &mdash; n&atilde;o &eacute; necess&aacute;rio baixar de novo.
+  </div>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ===== SEÇÃO 3 ===== -->
+<section id="primeiro-uso">
+  <h2>3. Primeiro uso</h2>
+
+  <p>Ap&oacute;s a instala&ccedil;&atilde;o, o &iacute;cone do Biblioteca aparecer&aacute; na gaveta de aplicativos do seu Android. Toque nele para abrir o app pela primeira vez.</p>
+
+  <h3>Permiss&otilde;es necess&aacute;rias</h3>
+  <p>Na primeira abertura, o Android solicitar&aacute; permiss&atilde;o para acessar a c&acirc;mera do celular. Essa permiss&atilde;o &eacute; necess&aacute;ria para que voc&ecirc; possa fotografar as capas dos seus livros.</p>
+
+  <ol>
+    <li>Toque no &iacute;cone do <strong>Biblioteca</strong> na gaveta de apps.</li>
+    <li>Uma caixa de di&aacute;logo aparecer&aacute; pedindo permiss&atilde;o para usar a <strong>c&acirc;mera</strong>.</li>
+    <li>Toque em <strong>Permitir</strong>.</li>
+    <li>Em alguns aparelhos, pode aparecer tamb&eacute;m um pedido de permiss&atilde;o de <strong>armazenamento</strong> (para salvar as fotos das capas). Toque em <strong>Permitir</strong> tamb&eacute;m.</li>
+    <li>O app abrir&aacute; na tela principal com o cat&aacute;logo vazio, pronto para receber os primeiros livros.</li>
+  </ol>
+
+  <div class="nota">
+    <strong>Aten&ccedil;&atilde;o:</strong> Se voc&ecirc; tocar em <strong>Negar</strong> na permiss&atilde;o de c&acirc;mera, o app funcionar&aacute; normalmente para gerenciar livros, mas n&atilde;o conseguir&aacute; fotografar capas. Veja na se&ccedil;&atilde;o de <a href="#faq">Perguntas frequentes</a> como conceder a permiss&atilde;o posteriormente.
+  </div>
+
+  <figure>
+    <svg width="420" height="520" viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg">
+      <!-- Corpo do telefone -->
+      <rect x="60" y="10" width="300" height="500" rx="32" ry="32" fill="#222" />
+      <!-- Tela -->
+      <rect x="74" y="40" width="272" height="440" rx="8" ry="8" fill="#fafafa" />
+      <!-- Camera frontal -->
+      <circle cx="210" cy="26" r="5" fill="#333" />
+      <!-- StatusBar -->
+      <rect x="74" y="40" width="272" height="24" rx="0" ry="0" fill="#1565c0" />
+      <rect x="74" y="40" width="272" height="8" rx="8" ry="8" fill="#1565c0" />
+      <text x="90" y="57" font-family="Arial" font-size="10" fill="#fff">9:41</text>
+      <!-- Overlay escuro -->
+      <rect x="74" y="64" width="272" height="416" rx="0" ry="0" fill="#00000060" />
+      <!-- Dialogo de permissao de camera -->
+      <rect x="90" y="150" width="240" height="240" rx="12" ry="12" fill="#fff" />
+      <!-- Icone de camera stylizado -->
+      <rect x="178" y="172" width="64" height="46" rx="8" ry="8" fill="#e8f0fe" />
+      <circle cx="210" cy="195" r="14" fill="#1565c0" />
+      <circle cx="210" cy="195" r="9" fill="#e8f0fe" />
+      <rect x="224" y="177" width="8" height="6" rx="2" ry="2" fill="#1565c0" />
+      <!-- Titulo -->
+      <text x="210" y="238" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#1a1a1a">Permitir acesso a camera?</text>
+      <!-- Texto de descricao -->
+      <text x="210" y="260" text-anchor="middle" font-family="Arial" font-size="10" fill="#444">O Biblioteca usa a camera para</text>
+      <text x="210" y="274" text-anchor="middle" font-family="Arial" font-size="10" fill="#444">fotografar capas de livros.</text>
+      <!-- Opcao selecionada -->
+      <rect x="98" y="292" width="224" height="34" rx="6" ry="6" fill="#e8f0fe" />
+      <text x="210" y="313" text-anchor="middle" font-family="Arial" font-size="11" fill="#1565c0" font-weight="bold">Somente ao usar o app</text>
+      <!-- Opcao negar -->
+      <rect x="98" y="332" width="224" height="34" rx="6" ry="6" fill="#fff" stroke="#e0e0e0" stroke-width="1"/>
+      <text x="210" y="353" text-anchor="middle" font-family="Arial" font-size="11" fill="#555">Negar</text>
+    </svg>
+    <figcaption>Di&aacute;logo de permiss&atilde;o de c&acirc;mera no estilo Material Design do Android</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ===== SEÇÃO 4 ===== -->
+<section id="catalogo">
+  <h2>4. Consultando o cat&aacute;logo</h2>
+
+  <p>A tela principal do Biblioteca exibe todos os seus livros em uma lista de cards. Cada card mostra a miniatura da capa (quando dispon&iacute;vel), o t&iacute;tulo e o nome do autor.</p>
+
+  <h3>Navegando pela lista</h3>
+  <ul>
+    <li>Role a lista deslizando o dedo para cima e para baixo.</li>
+    <li>Toque em qualquer card para abrir os detalhes completos do livro: t&iacute;tulo, autor, editora, assunto, ano e notas.</li>
+    <li>Puxe a lista para baixo (gesto de <em>pull-to-refresh</em>) para for&ccedil;ar uma atualiza&ccedil;&atilde;o e refletir altera&ccedil;&otilde;es recentes.</li>
+  </ul>
+
+  <h3>Tela de detalhes</h3>
+  <p>Na tela de detalhes voc&ecirc; v&ecirc; todas as informa&ccedil;&otilde;es cadastradas para aquele livro, a capa em tamanho maior e os bot&otilde;es para editar ou excluir o registro.</p>
+
+  <div class="dica">
+    <strong>Dica:</strong> Para voltar &agrave; lista principal a partir dos detalhes, pressione a seta de voltar na AppBar ou use o bot&atilde;o Voltar do Android.
+  </div>
+
+  <figure>
+    <svg width="420" height="560" viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg">
+      <!-- Corpo do telefone -->
+      <rect x="60" y="10" width="300" height="540" rx="32" ry="32" fill="#222" />
+      <!-- Tela -->
+      <rect x="74" y="40" width="272" height="480" rx="8" ry="8" fill="#f5f5f5" />
+      <!-- Camera frontal -->
+      <circle cx="210" cy="26" r="5" fill="#333" />
+      <!-- AppBar -->
+      <rect x="74" y="40" width="272" height="52" rx="0" ry="0" fill="#1565c0" />
+      <rect x="74" y="40" width="272" height="8" rx="8" ry="8" fill="#1565c0" />
+      <text x="210" y="71" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="#fff">Minha Biblioteca</text>
+      <circle cx="314" cy="66" r="7" fill="none" stroke="#fff" stroke-width="2"/>
+      <line x1="319" y1="71" x2="325" y2="77" stroke="#fff" stroke-width="2"/>
+      <!-- Indicador de pull-to-refresh -->
+      <text x="210" y="108" text-anchor="middle" font-family="Arial" font-size="9" fill="#888">&#8595; Puxe para atualizar</text>
+      <!-- Card 1 selecionado -->
+      <rect x="82" y="114" width="256" height="80" rx="8" ry="8" fill="#fff" stroke="#1565c0" stroke-width="2"/>
+      <rect x="90" y="122" width="52" height="64" rx="4" ry="4" fill="#c8d8f8" />
+      <text x="116" y="148" text-anchor="middle" font-family="Arial" font-size="8" fill="#1565c0" font-weight="bold">DOM</text>
+      <text x="116" y="160" text-anchor="middle" font-family="Arial" font-size="8" fill="#1565c0">CASMURRO</text>
+      <text x="154" y="136" font-family="Arial" font-size="13" font-weight="bold" fill="#1a1a1a">Dom Casmurro</text>
+      <text x="154" y="154" font-family="Arial" font-size="11" fill="#555">Machado de Assis</text>
+      <text x="154" y="170" font-family="Arial" font-size="10" fill="#888">Editora Atica &middot; Romance</text>
+      <text x="323" y="150" text-anchor="middle" font-family="Arial" font-size="16" fill="#1565c0">&rsaquo;</text>
+      <!-- Card 2 -->
+      <rect x="82" y="202" width="256" height="80" rx="8" ry="8" fill="#fff" />
+      <rect x="90" y="210" width="52" height="64" rx="4" ry="4" fill="#dcedc8" />
+      <text x="116" y="236" text-anchor="middle" font-family="Arial" font-size="7" fill="#388e3c">GRANDE</text>
+      <text x="116" y="247" text-anchor="middle" font-family="Arial" font-size="7" fill="#388e3c">SERTAO</text>
+      <text x="154" y="224" font-family="Arial" font-size="13" font-weight="bold" fill="#1a1a1a">Grande Sertao: Veredas</text>
+      <text x="154" y="242" font-family="Arial" font-size="11" fill="#555">Guimaraes Rosa</text>
+      <text x="154" y="258" font-family="Arial" font-size="10" fill="#888">Nova Fronteira &middot; Romance</text>
+      <text x="323" y="238" text-anchor="middle" font-family="Arial" font-size="16" fill="#ccc">&rsaquo;</text>
+      <!-- Card 3 -->
+      <rect x="82" y="290" width="256" height="80" rx="8" ry="8" fill="#fff" />
+      <rect x="90" y="298" width="52" height="64" rx="4" ry="4" fill="#ffe0b2" />
+      <text x="116" y="324" text-anchor="middle" font-family="Arial" font-size="8" fill="#e65100">O CORTIGO</text>
+      <text x="154" y="312" font-family="Arial" font-size="13" font-weight="bold" fill="#1a1a1a">O Cortigo</text>
+      <text x="154" y="330" font-family="Arial" font-size="11" fill="#555">Aluisio Azevedo</text>
+      <text x="154" y="346" font-family="Arial" font-size="10" fill="#888">Martin Claret &middot; Naturalismo</text>
+      <text x="323" y="326" text-anchor="middle" font-family="Arial" font-size="16" fill="#ccc">&rsaquo;</text>
+      <!-- Card 4 -->
+      <rect x="82" y="378" width="256" height="80" rx="8" ry="8" fill="#fff" />
+      <rect x="90" y="386" width="52" height="64" rx="4" ry="4" fill="#f3e5f5" />
+      <text x="116" y="412" text-anchor="middle" font-family="Arial" font-size="7" fill="#7b1fa2">MEMORIAS</text>
+      <text x="116" y="423" text-anchor="middle" font-family="Arial" font-size="7" fill="#7b1fa2">POSTUMAS</text>
+      <text x="154" y="400" font-family="Arial" font-size="13" font-weight="bold" fill="#1a1a1a">Memorias Postumas</text>
+      <text x="154" y="418" font-family="Arial" font-size="11" fill="#555">Machado de Assis</text>
+      <text x="154" y="434" font-family="Arial" font-size="10" fill="#888">Cia. das Letras &middot; Classico</text>
+      <text x="323" y="414" text-anchor="middle" font-family="Arial" font-size="16" fill="#ccc">&rsaquo;</text>
+      <!-- FAB -->
+      <circle cx="310" cy="492" r="22" fill="#1565c0" />
+      <text x="310" y="499" text-anchor="middle" font-family="Arial" font-size="24" font-weight="bold" fill="#fff">+</text>
+      <!-- Nav bar -->
+      <rect x="74" y="508" width="272" height="12" rx="0" ry="0" fill="#eeeeee" />
+      <rect x="195" y="512" width="30" height="4" rx="2" ry="2" fill="#bbb" />
+    </svg>
+    <figcaption>Tela principal com lista de cards &mdash; toque em qualquer card para ver os detalhes completos</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ===== SEÇÃO 5 ===== -->
+<section id="livros">
+  <h2>5. Adicionando e editando livros</h2>
+
+  <h3>Adicionar um livro novo</h3>
+  <p>Toque no bot&atilde;o flutuante <strong>+</strong> (FAB azul) no canto inferior direito da tela principal. O formul&aacute;rio de cadastro abrir&aacute; com os seguintes campos:</p>
+  <ul>
+    <li><strong>T&iacute;tulo</strong> (obrigat&oacute;rio) &mdash; nome do livro como impresso na capa</li>
+    <li><strong>Autor(es)</strong> &mdash; pode ter mais de um, separados por ponto-e-v&iacute;rgula (ex: &ldquo;Jo&atilde;o Silva; Maria Santos&rdquo;)</li>
+    <li><strong>Assunto/G&ecirc;nero</strong> &mdash; romance, fic&ccedil;&atilde;o cient&iacute;fica, hist&oacute;ria, etc.</li>
+    <li><strong>Editora</strong> &mdash; nome da editora</li>
+    <li><strong>Ano</strong> &mdash; ano de publica&ccedil;&atilde;o</li>
+    <li><strong>ISBN</strong> &mdash; c&oacute;digo de barras do livro (13 d&iacute;gitos), opcional</li>
+    <li><strong>P&aacute;ginas</strong> &mdash; n&uacute;mero de p&aacute;ginas</li>
+    <li><strong>Local</strong> &mdash; prateleira, c&ocirc;modo ou localiza&ccedil;&atilde;o f&iacute;sica do livro</li>
+    <li><strong>Observa&ccedil;&otilde;es</strong> &mdash; notas pessoais sobre o livro</li>
+  </ul>
+  <p>Preencha ao menos o <strong>T&iacute;tulo</strong> e toque em <strong>Salvar</strong> na barra superior (AppBar) para gravar o livro.</p>
+
+  <div class="nota">
+    <strong>Aten&ccedil;&atilde;o:</strong> O campo T&iacute;tulo &eacute; o &uacute;nico obrigat&oacute;rio. Se voc&ecirc; tentar salvar sem preench&ecirc;-lo, o app exibir&aacute; uma mensagem de erro abaixo do campo.
+  </div>
+
+  <h3>Editar um livro existente</h3>
+  <ol>
+    <li>Na lista principal, toque no card do livro que deseja editar.</li>
+    <li>Na tela de detalhes, toque no &iacute;cone de l&aacute;pis no canto superior direito da AppBar.</li>
+    <li>Fa&ccedil;a as altera&ccedil;&otilde;es desejadas.</li>
+    <li>Toque em <strong>Salvar</strong> para confirmar.</li>
+  </ol>
+
+  <div class="nota">
+    <strong>Aten&ccedil;&atilde;o:</strong> Se voc&ecirc; alterar o <strong>T&iacute;tulo</strong> ou o <strong>Autor</strong> de um livro, o identificador interno da foto de capa &eacute; recalculado. A foto associada pode desaparecer da tela de detalhes e precisar ser fotografada novamente.
+  </div>
+
+  <h3>Excluir um livro</h3>
+  <ol>
+    <li>Abra os detalhes do livro tocando no card.</li>
+    <li>Toque no &iacute;cone de lixeira na AppBar.</li>
+    <li>Uma caixa de confirma&ccedil;&atilde;o aparecer&aacute; perguntando se deseja excluir o livro.</li>
+    <li>Toque em <strong>Excluir</strong> para confirmar ou em <strong>Cancelar</strong> para desistir.</li>
+  </ol>
+
+  <div class="nota">
+    <strong>Aten&ccedil;&atilde;o:</strong> A exclus&atilde;o de um livro tamb&eacute;m remove a foto da capa associada a ele. Esta opera&ccedil;&atilde;o n&atilde;o pode ser desfeita.
+  </div>
+
+  <figure>
+    <svg width="420" height="600" viewBox="0 0 420 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- Corpo do telefone -->
+      <rect x="60" y="10" width="300" height="580" rx="32" ry="32" fill="#222" />
+      <!-- Tela -->
+      <rect x="74" y="40" width="272" height="520" rx="8" ry="8" fill="#fff" />
+      <!-- Camera frontal -->
+      <circle cx="210" cy="26" r="5" fill="#333" />
+      <!-- AppBar -->
+      <rect x="74" y="40" width="272" height="52" rx="0" ry="0" fill="#1565c0" />
+      <rect x="74" y="40" width="272" height="8" rx="8" ry="8" fill="#1565c0" />
+      <!-- Seta voltar -->
+      <text x="90" y="72" font-family="Arial" font-size="20" fill="#fff">&#8592;</text>
+      <text x="178" y="72" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="#fff">Novo Livro</text>
+      <!-- Botao Salvar -->
+      <text x="330" y="72" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#fff">Salvar</text>
+      <!-- Titulo -->
+      <text x="90" y="114" font-family="Arial" font-size="11" fill="#1565c0">Titulo *</text>
+      <rect x="84" y="120" width="252" height="36" rx="4" ry="4" fill="#fff" stroke="#1565c0" stroke-width="2" />
+      <text x="96" y="143" font-family="Arial" font-size="12" fill="#1a1a1a">O Alquimista</text>
+      <!-- Autor -->
+      <text x="90" y="174" font-family="Arial" font-size="11" fill="#888">Autor</text>
+      <rect x="84" y="180" width="252" height="36" rx="4" ry="4" fill="#fff" stroke="#ccc" stroke-width="1" />
+      <text x="96" y="203" font-family="Arial" font-size="12" fill="#1a1a1a">Paulo Coelho</text>
+      <!-- Editora -->
+      <text x="90" y="234" font-family="Arial" font-size="11" fill="#888">Editora</text>
+      <rect x="84" y="240" width="252" height="36" rx="4" ry="4" fill="#fff" stroke="#ccc" stroke-width="1" />
+      <text x="96" y="263" font-family="Arial" font-size="12" fill="#1a1a1a">HarperCollins</text>
+      <!-- Assunto -->
+      <text x="90" y="294" font-family="Arial" font-size="11" fill="#888">Assunto</text>
+      <rect x="84" y="300" width="252" height="36" rx="4" ry="4" fill="#fff" stroke="#ccc" stroke-width="1" />
+      <text x="96" y="323" font-family="Arial" font-size="12" fill="#1a1a1a">Fabula</text>
+      <!-- Ano e Paginas lado a lado -->
+      <text x="90" y="354" font-family="Arial" font-size="11" fill="#888">Ano</text>
+      <rect x="84" y="360" width="118" height="36" rx="4" ry="4" fill="#fff" stroke="#ccc" stroke-width="1" />
+      <text x="96" y="383" font-family="Arial" font-size="12" fill="#1a1a1a">1988</text>
+      <text x="218" y="354" font-family="Arial" font-size="11" fill="#888">Paginas</text>
+      <rect x="210" y="360" width="126" height="36" rx="4" ry="4" fill="#fff" stroke="#ccc" stroke-width="1" />
+      <text x="222" y="383" font-family="Arial" font-size="12" fill="#1a1a1a">208</text>
+      <!-- ISBN -->
+      <text x="90" y="414" font-family="Arial" font-size="11" fill="#888">ISBN</text>
+      <rect x="84" y="420" width="252" height="36" rx="4" ry="4" fill="#fff" stroke="#ccc" stroke-width="1" />
+      <text x="96" y="443" font-family="Arial" font-size="12" fill="#1a1a1a">978-85-7542-767-9</text>
+      <!-- Notas -->
+      <text x="90" y="474" font-family="Arial" font-size="11" fill="#888">Notas</text>
+      <rect x="84" y="480" width="252" height="60" rx="4" ry="4" fill="#fff" stroke="#ccc" stroke-width="1" />
+      <text x="96" y="500" font-family="Arial" font-size="11" fill="#aaa">Observacoes pessoais&hellip;</text>
+      <!-- Nav bar -->
+      <rect x="74" y="548" width="272" height="12" rx="0" ry="0" fill="#eeeeee" />
+      <rect x="195" y="552" width="30" height="4" rx="2" ry="2" fill="#bbb" />
+    </svg>
+    <figcaption>Formul&aacute;rio de cadastro com campos preenchidos &mdash; toque em Salvar na AppBar para gravar</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ===== SEÇÃO 6 ===== -->
+<section id="capas">
+  <h2>6. Fotografando capas</h2>
+
+  <p>Registrar a capa de um livro &eacute; uma das fun&ccedil;&otilde;es mais &uacute;teis do Biblioteca. A foto fica vinculada ao livro pelo identificador interno e aparece como miniatura na lista e em tamanho maior na tela de detalhes.</p>
+
+  <h3>Como fotografar ou importar uma capa</h3>
+  <ol>
+    <li>Abra os detalhes de um livro tocando no card na lista principal.</li>
+    <li>Toque na imagem de capa (o placeholder cinza ou a capa j&aacute; existente).</li>
+    <li>Um menu aparecer&aacute; com duas op&ccedil;&otilde;es:
+      <ul>
+        <li><strong>C&acirc;mera</strong> &mdash; abre a c&acirc;mera do celular para fotografar agora</li>
+        <li><strong>Galeria</strong> &mdash; abre a galeria para escolher uma foto j&aacute; existente</li>
+      </ul>
+    </li>
+    <li>Via c&acirc;mera: segure o livro de frente, com luz uniforme, evitando reflexos e sombras sobre a capa. Enquadre dentro do visor e toque no bot&atilde;o redondo de captura.</li>
+    <li>Via galeria: navegue at&eacute; a foto desejada e toque nela para selecion&aacute;-la.</li>
+    <li>O app redimensiona a imagem automaticamente para a propor&ccedil;&atilde;o de capa de livro e a salva localmente. A foto aparece imediatamente na tela de detalhes e como miniatura na lista.</li>
+  </ol>
+
+  <h3>Permiss&atilde;o de c&acirc;mera</h3>
+  <p>Para usar a op&ccedil;&atilde;o C&acirc;mera, o app precisa de permiss&atilde;o de acesso. Se voc&ecirc; recusou a permiss&atilde;o anteriormente, v&aacute; em <strong>Configura&ccedil;&otilde;es &rarr; Apps &rarr; Biblioteca &rarr; Permiss&otilde;es &rarr; C&acirc;mera</strong> e selecione <strong>Permitir somente ao usar o app</strong>. A op&ccedil;&atilde;o Galeria funciona independentemente da permiss&atilde;o de c&acirc;mera.</p>
+
+  <h3>Trocar ou remover uma capa existente</h3>
+  <p>Para substituir uma capa j&aacute; cadastrada, basta tocar na imagem de capa na tela de detalhes e escolher C&acirc;mera ou Galeria novamente. A nova foto substitui a anterior automaticamente &mdash; n&atilde;o &eacute; necess&aacute;rio excluir a foto antiga antes.</p>
+
+  <div class="dica">
+    <strong>Dica:</strong> Para melhores resultados na c&acirc;mera, coloque o livro sobre uma superf&iacute;cie plana com boa ilumina&ccedil;&atilde;o. Evite reflexos e sombras sobre a capa.
+  </div>
+
+  <div class="nota">
+    <strong>Aten&ccedil;&atilde;o:</strong> As fotos das capas s&atilde;o salvas localmente no celular e <strong>n&atilde;o s&atilde;o sincronizadas automaticamente</strong> com outros dispositivos. Ao desinstalar o app, as capas s&atilde;o apagadas junto com os dados. Consulte a se&ccedil;&atilde;o <a href="#sincronizacao">Sincroniza&ccedil;&atilde;o e backup</a> sobre como fazer c&oacute;pias das fotos.
+  </div>
+
+  <figure>
+    <svg width="420" height="580" viewBox="0 0 420 580" xmlns="http://www.w3.org/2000/svg">
+      <!-- Corpo do telefone -->
+      <rect x="60" y="10" width="300" height="560" rx="32" ry="32" fill="#222" />
+      <!-- Tela camera com fundo escuro -->
+      <rect x="74" y="40" width="272" height="500" rx="8" ry="8" fill="#111" />
+      <!-- Camera frontal -->
+      <circle cx="210" cy="26" r="5" fill="#333" />
+      <!-- StatusBar escuro -->
+      <rect x="74" y="40" width="272" height="24" rx="0" ry="0" fill="#000" />
+      <rect x="74" y="40" width="272" height="8" rx="8" ry="8" fill="#000" />
+      <text x="90" y="57" font-family="Arial" font-size="10" fill="#fff">9:41</text>
+      <!-- ViewFinder -->
+      <rect x="74" y="64" width="272" height="370" rx="0" ry="0" fill="#1a2030" />
+      <!-- Capa do livro no viewfinder -->
+      <rect x="134" y="96" width="152" height="224" rx="4" ry="4" fill="#c8a060" />
+      <rect x="140" y="102" width="140" height="212" rx="2" ry="2" fill="#e8c88a" />
+      <rect x="148" y="110" width="124" height="82" rx="0" ry="0" fill="#9a5a18" />
+      <text x="210" y="146" text-anchor="middle" font-family="Arial" font-size="10" fill="#fff" font-weight="bold">O ALQUIMISTA</text>
+      <text x="210" y="162" text-anchor="middle" font-family="Arial" font-size="8" fill="#ffd">PAULO COELHO</text>
+      <rect x="148" y="198" width="124" height="102" rx="0" ry="0" fill="#f5dfa0" />
+      <!-- Grade de foco -->
+      <rect x="134" y="96" width="152" height="224" rx="0" ry="0" fill="none" stroke="#ffcc00" stroke-width="2" stroke-dasharray="8,4" />
+      <!-- Cantos de foco -->
+      <line x1="134" y1="96" x2="156" y2="96" stroke="#ffcc00" stroke-width="3" />
+      <line x1="134" y1="96" x2="134" y2="118" stroke="#ffcc00" stroke-width="3" />
+      <line x1="286" y1="96" x2="264" y2="96" stroke="#ffcc00" stroke-width="3" />
+      <line x1="286" y1="96" x2="286" y2="118" stroke="#ffcc00" stroke-width="3" />
+      <line x1="134" y1="320" x2="156" y2="320" stroke="#ffcc00" stroke-width="3" />
+      <line x1="134" y1="320" x2="134" y2="298" stroke="#ffcc00" stroke-width="3" />
+      <line x1="286" y1="320" x2="264" y2="320" stroke="#ffcc00" stroke-width="3" />
+      <line x1="286" y1="320" x2="286" y2="298" stroke="#ffcc00" stroke-width="3" />
+      <!-- Indicacao de foco -->
+      <text x="210" y="354" text-anchor="middle" font-family="Arial" font-size="10" fill="#ffcc00">EM FOCO</text>
+      <!-- Barra inferior da camera -->
+      <rect x="74" y="434" width="272" height="106" rx="0" ry="0" fill="#000" />
+      <!-- Miniatura da ultima foto -->
+      <rect x="88" y="452" width="50" height="50" rx="6" ry="6" fill="#333" />
+      <!-- Botao de captura -->
+      <circle cx="210" cy="480" r="30" fill="none" stroke="#fff" stroke-width="3" />
+      <circle cx="210" cy="480" r="24" fill="#fff" />
+      <!-- Botao de inverter camera -->
+      <text x="323" y="487" text-anchor="middle" font-family="Arial" font-size="26" fill="#fff">&#8635;</text>
+      <!-- Nav bar -->
+      <rect x="74" y="528" width="272" height="12" rx="0" ry="0" fill="#000" />
+      <rect x="195" y="532" width="30" height="4" rx="2" ry="2" fill="#444" />
+    </svg>
+    <figcaption>C&acirc;mera aberta com livro enquadrado no visor &mdash; toque no bot&atilde;o circular branco para capturar a capa</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ===== SEÇÃO 7 ===== -->
+<section id="pesquisa">
+  <h2>7. Pesquisa e filtros</h2>
+
+  <p>O Biblioteca oferece pesquisa em tempo real e filtros por campo para ajud&aacute;-lo a localizar rapidamente qualquer livro do cat&aacute;logo, mesmo em cole&ccedil;&otilde;es grandes.</p>
+
+  <h3>Pesquisa por texto</h3>
+  <ol>
+    <li>Na tela principal, toque no &iacute;cone de <strong>lupa</strong> na AppBar.</li>
+    <li>A barra de pesquisa se expande na AppBar e o teclado abre automaticamente.</li>
+    <li>Digite qualquer trecho do t&iacute;tulo, autor, editora ou assunto.</li>
+    <li>A lista de livros filtra em <strong>tempo real</strong> enquanto voc&ecirc; digita &mdash; n&atilde;o &eacute; necess&aacute;rio pressionar Enter.</li>
+    <li>Para limpar o texto digitado, toque no <strong>X</strong> dentro da barra de pesquisa.</li>
+    <li>Para fechar a pesquisa completamente e voltar &agrave; lista completa, toque no <strong>X</strong> no in&iacute;cio da AppBar ou pressione o bot&atilde;o <strong>Voltar</strong> do Android.</li>
+  </ol>
+
+  <h3>Filtros por campo</h3>
+  <ol>
+    <li>Com a pesquisa aberta ou fechada, toque no &iacute;cone de <strong>filtro</strong> (funil) &agrave; direita da lupa na AppBar.</li>
+    <li>Um painel deslizante abrir&aacute; com op&ccedil;&otilde;es de filtro:
+      <ul>
+        <li><strong>Assunto</strong> &mdash; selecione uma categoria da lista</li>
+        <li><strong>Editora</strong> &mdash; selecione uma editora</li>
+      </ul>
+    </li>
+    <li>Toque em <strong>Aplicar</strong> para filtrar. Um indicador colorido na AppBar sinaliza que h&aacute; filtros ativos.</li>
+    <li>Para remover todos os filtros, toque em <strong>Limpar filtros</strong> no painel ou toque no indicador colorido na AppBar.</li>
+  </ol>
+
+  <div class="dica">
+    <strong>Dica:</strong> Pesquisa de texto e filtros por campo funcionam juntos. Voc&ecirc; pode, por exemplo, filtrar por assunto &ldquo;Romance&rdquo; e ao mesmo tempo digitar um nome de autor na pesquisa.
+  </div>
+
+  <figure>
+    <svg width="420" height="560" viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg">
+      <!-- Corpo do telefone -->
+      <rect x="60" y="10" width="300" height="540" rx="32" ry="32" fill="#222" />
+      <!-- Tela -->
+      <rect x="74" y="40" width="272" height="480" rx="8" ry="8" fill="#f5f5f5" />
+      <!-- Camera frontal -->
+      <circle cx="210" cy="26" r="5" fill="#333" />
+      <!-- AppBar com pesquisa ativa -->
+      <rect x="74" y="40" width="272" height="52" rx="0" ry="0" fill="#1565c0" />
+      <rect x="74" y="40" width="272" height="8" rx="8" ry="8" fill="#1565c0" />
+      <!-- Seta voltar / fechar pesquisa -->
+      <text x="90" y="71" font-family="Arial" font-size="18" fill="#fff">&#8592;</text>
+      <!-- Barra de pesquisa dentro da AppBar -->
+      <rect x="108" y="50" width="170" height="32" rx="6" ry="6" fill="#ffffff30" />
+      <text x="118" y="71" font-family="Arial" font-size="12" fill="#fff">Machado</text>
+      <!-- Cursor de texto -->
+      <line x1="172" y1="56" x2="172" y2="76" stroke="#fff" stroke-width="1.5" />
+      <!-- Icone X para limpar texto -->
+      <circle cx="265" cy="66" r="8" fill="#ffffff40" />
+      <text x="265" y="71" text-anchor="middle" font-family="Arial" font-size="11" fill="#fff">&#10005;</text>
+      <!-- Icone de filtro funil -->
+      <polygon points="308,56 326,56 320,66 320,76 314,76 314,66" fill="none" stroke="#fff" stroke-width="2"/>
+      <!-- Chip indicando filtro ativo -->
+      <rect x="84" y="100" width="128" height="22" rx="11" ry="11" fill="#0d47a1" />
+      <text x="148" y="115" text-anchor="middle" font-family="Arial" font-size="10" fill="#fff">&#9679; Assunto: Romance</text>
+      <!-- Indicacao de resultados -->
+      <text x="84" y="144" font-family="Arial" font-size="11" fill="#888">2 livros encontrados</text>
+      <!-- Card 1 resultado -->
+      <rect x="82" y="152" width="256" height="80" rx="8" ry="8" fill="#fff" />
+      <rect x="90" y="160" width="52" height="64" rx="4" ry="4" fill="#c8d8f8" />
+      <text x="116" y="186" text-anchor="middle" font-family="Arial" font-size="8" fill="#1565c0">DOM</text>
+      <text x="116" y="197" text-anchor="middle" font-family="Arial" font-size="8" fill="#1565c0">CASMURRO</text>
+      <text x="154" y="174" font-family="Arial" font-size="13" font-weight="bold" fill="#1a1a1a">Dom Casmurro</text>
+      <text x="154" y="192" font-family="Arial" font-size="11" fill="#555">Machado de Assis</text>
+      <text x="154" y="208" font-family="Arial" font-size="10" fill="#888">Editora Atica &middot; Romance</text>
+      <text x="323" y="192" text-anchor="middle" font-family="Arial" font-size="16" fill="#ccc">&rsaquo;</text>
+      <!-- Card 2 resultado -->
+      <rect x="82" y="240" width="256" height="80" rx="8" ry="8" fill="#fff" />
+      <rect x="90" y="248" width="52" height="64" rx="4" ry="4" fill="#f3e5f5" />
+      <text x="116" y="272" text-anchor="middle" font-family="Arial" font-size="7" fill="#7b1fa2">MEMORIAS</text>
+      <text x="116" y="283" text-anchor="middle" font-family="Arial" font-size="7" fill="#7b1fa2">POSTUMAS</text>
+      <text x="154" y="262" font-family="Arial" font-size="13" font-weight="bold" fill="#1a1a1a">Memorias Postumas</text>
+      <text x="154" y="280" font-family="Arial" font-size="11" fill="#555">Machado de Assis</text>
+      <text x="154" y="296" font-family="Arial" font-size="10" fill="#888">Cia. das Letras &middot; Romance</text>
+      <text x="323" y="280" text-anchor="middle" font-family="Arial" font-size="16" fill="#ccc">&rsaquo;</text>
+      <!-- Teclado simulado -->
+      <rect x="74" y="360" width="272" height="160" rx="0" ry="0" fill="#d1d5db" />
+      <!-- Linha 1 do teclado -->
+      <rect x="78" y="366" width="24" height="28" rx="4" ry="4" fill="#fff" /><text x="90" y="385" text-anchor="middle" font-family="Arial" font-size="11" fill="#1a1a1a">q</text>
+      <rect x="105" y="366" width="24" height="28" rx="4" ry="4" fill="#fff" /><text x="117" y="385" text-anchor="middle" font-family="Arial" font-size="11" fill="#1a1a1a">w</text>
+      <rect x="132" y="366" width="24" height="28" rx="4" ry="4" fill="#fff" /><text x="144" y="385" text-anchor="middle" font-family="Arial" font-size="11" fill="#1a1a1a">e</text>
+      <rect x="159" y="366" width="24" height="28" rx="4" ry="4" fill="#fff" /><text x="171" y="385" text-anchor="middle" font-family="Arial" font-size="11" fill="#1a1a1a">r</text>
+      <rect x="186" y="366" width="24" height="28" rx="4" ry="4" fill="#fff" /><text x="198" y="385" text-anchor="middle" font-family="Arial" font-size="11" fill="#1a1a1a">t</text>
+      <rect x="213" y="366" width="24" height="28" rx="4" ry="4" fill="#fff" /><text x="225" y="385" text-anchor="middle" font-family="Arial" font-size="11" fill="#1a1a1a">y</text>
+      <rect x="240" y="366" width="24" height="28" rx="4" ry="4" fill="#fff" /><text x="252" y="385" text-anchor="middle" font-family="Arial" font-size="11" fill="#1a1a1a">u</text>
+      <rect x="267" y="366" width="24" height="28" rx="4" ry="4" fill="#fff" /><text x="279" y="385" text-anchor="middle" font-family="Arial" font-size="11" fill="#1a1a1a">i</text>
+      <rect x="294" y="366" width="24" height="28" rx="4" ry="4" fill="#fff" /><text x="306" y="385" text-anchor="middle" font-family="Arial" font-size="11" fill="#1a1a1a">o</text>
+      <rect x="321" y="366" width="21" height="28" rx="4" ry="4" fill="#fff" /><text x="331" y="385" text-anchor="middle" font-family="Arial" font-size="11" fill="#1a1a1a">p</text>
+      <!-- Barra de espaco -->
+      <rect x="110" y="462" width="160" height="28" rx="4" ry="4" fill="#fff" />
+      <text x="190" y="481" text-anchor="middle" font-family="Arial" font-size="11" fill="#888">espaco</text>
+      <!-- Enter / Pesquisar -->
+      <rect x="280" y="462" width="62" height="28" rx="4" ry="4" fill="#1565c0" />
+      <text x="311" y="481" text-anchor="middle" font-family="Arial" font-size="11" fill="#fff">Pesquisar</text>
+      <!-- Nav bar -->
+      <rect x="74" y="508" width="272" height="12" rx="0" ry="0" fill="#eeeeee" />
+      <rect x="195" y="512" width="30" height="4" rx="2" ry="2" fill="#bbb" />
+    </svg>
+    <figcaption>Barra de pesquisa ativa na AppBar filtrando por &ldquo;Machado&rdquo; com filtro de assunto &ldquo;Romance&rdquo; aplicado</figcaption>
+  </figure>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ===== SEÇÃO 8 ===== -->
+<section id="sincronizacao">
+  <h2>8. Sincroniza&ccedil;&atilde;o e backup</h2>
+
+  <h3>Onde ficam seus dados</h3>
+  <p>O Biblioteca para Android salva seus livros em um arquivo de texto que voc&ecirc; escolhe onde colocar:</p>
+  <table style="width:100%;border-collapse:collapse;margin:16px 0">
+    <thead><tr style="background:#f2f6ff"><th style="text-align:left;padding:8px 12px;border:1px solid #dde">Arquivo</th><th style="text-align:left;padding:8px 12px;border:1px solid #dde">Conte&uacute;do</th></tr></thead>
+    <tbody>
+      <tr><td style="padding:8px 12px;border:1px solid #dde"><code>biblioteca.txt</code></td><td style="padding:8px 12px;border:1px solid #dde">Cat&aacute;logo completo de livros (texto separado por tab)</td></tr>
+      <tr><td style="padding:8px 12px;border:1px solid #dde">Fotos de capa</td><td style="padding:8px 12px;border:1px solid #dde">Armazenadas localmente no celular em <code>Documentos/capas/</code></td></tr>
+    </tbody>
+  </table>
+  <p>O arquivo pode ficar em qualquer lugar: armazenamento interno, cart&atilde;o SD, Google Drive ou OneDrive. A escolha determina se haver&aacute; sincroniza&ccedil;&atilde;o com outros dispositivos.</p>
+
+  <h3>Configura&ccedil;&atilde;o inicial</h3>
+  <p>Antes de come&ccedil;ar, voc&ecirc; precisa escolher onde o arquivo vai ficar. Acesse a tela de sincroniza&ccedil;&atilde;o pelo &iacute;cone de nuvem na barra superior.</p>
+
+  <h4 style="margin-top:1.2em;color:#1a3a6e">Se est&aacute; come&ccedil;ando do zero (sem cat&aacute;logo existente):</h4>
+  <ol>
+    <li>Toque em <strong>Selecionar biblioteca.txt</strong></li>
+    <li>Navegue at&eacute; a pasta desejada (ex: <code>Documentos/Biblioteca/</code>)</li>
+    <li>Se o arquivo ainda n&atilde;o existe, algumas vers&otilde;es do Android permitem criar um novo no seletor &mdash; ou crie um arquivo de texto vazio chamado <code>biblioteca.txt</code> antes de abrir o app</li>
+    <li>O app vincula o arquivo e est&aacute; pronto para uso</li>
+  </ol>
+
+  <h4 style="margin-top:1.2em;color:#1a3a6e">Se j&aacute; tem um cat&aacute;logo (biblioteca.txt existente):</h4>
+  <ol>
+    <li>Copie seu <code>biblioteca.txt</code> para a pasta desejada no celular</li>
+    <li>Abra o app &rarr; &iacute;cone de nuvem &rarr; <strong>Selecionar biblioteca.txt</strong></li>
+    <li>Localize e selecione o arquivo</li>
+    <li>O cat&aacute;logo &eacute; carregado automaticamente</li>
+  </ol>
+
+  <h3>Os bot&otilde;es de sincroniza&ccedil;&atilde;o</h3>
+
+  <h4 style="margin-top:1.2em;color:#1a3a6e">Selecionar biblioteca.txt</h4>
+  <p>Abre o seletor de arquivos do Android para escolher (ou trocar) o arquivo que o app usa. Fa&ccedil;a isso uma vez &mdash; o app memoriza o caminho e carrega automaticamente nas pr&oacute;ximas aberturas.</p>
+
+  <h4 style="margin-top:1.2em;color:#1a3a6e">Recarregar arquivo</h4>
+  <p>Rel&ecirc; o <code>biblioteca.txt</code> do disco, atualizando o que est&aacute; na tela. Use quando:</p>
+  <ul>
+    <li>Voc&ecirc; editou o arquivo em outro dispositivo (PC, Mac) e quer ver as novidades</li>
+    <li>O Google Drive terminou de sincronizar e voc&ecirc; quer carregar a vers&atilde;o atualizada</li>
+    <li>Algo parece desatualizado na lista de livros</li>
+  </ul>
+  <div class="nota"><strong>Importante:</strong> sempre toque em Recarregar antes de come&ccedil;ar a editar se voc&ecirc; usou o Biblioteca em outro dispositivo desde a &uacute;ltima vez. Caso contr&aacute;rio, a vers&atilde;o local pode sobrescrever mudan&ccedil;as feitas em outro lugar.</div>
+
+  <h3>Sincronizando com Google Drive</h3>
+  <p>O Google Drive &eacute; a forma mais pr&aacute;tica de manter o cat&aacute;logo sincronizado entre o celular Android e um PC:</p>
+  <ol>
+    <li>No PC, instale o <strong>Google Drive para Desktop</strong> e coloque o <code>biblioteca.txt</code> em uma pasta dentro do Drive (ex: <code>Meu Drive/Biblioteca/</code>)</li>
+    <li>No celular, abra o app <strong>Google Drive</strong> &rarr; encontre o arquivo <code>biblioteca.txt</code></li>
+    <li>Toque e segure o arquivo &rarr; toque nos tr&ecirc;s pontos &rarr; <strong>Tornar dispon&iacute;vel offline</strong></li>
+    <li>Aguarde o download (&iacute;cone de progresso ao lado do arquivo)</li>
+    <li>No Biblioteca, toque em <strong>Selecionar biblioteca.txt</strong> &rarr; navegue at&eacute; a pasta do Google Drive no seletor de arquivos e selecione o arquivo</li>
+  </ol>
+  <div class="dica">Depois de editar livros no celular, o arquivo &eacute; gravado automaticamente. O Google Drive o sincronizar&aacute; com a nuvem em segundo plano (com conex&atilde;o &agrave; internet).</div>
+
+  <h3>Sincronizando com OneDrive</h3>
+  <p>O processo com o OneDrive &eacute; semelhante:</p>
+  <ol>
+    <li>Instale o app <strong>Microsoft OneDrive</strong> no celular</li>
+    <li>No PC, mova o <code>biblioteca.txt</code> para uma pasta dentro do OneDrive</li>
+    <li>No celular, abra o OneDrive &rarr; localize o arquivo &rarr; toque nos tr&ecirc;s pontos &rarr; <strong>Tornar dispon&iacute;vel offline</strong></li>
+    <li>No Biblioteca, toque em <strong>Selecionar biblioteca.txt</strong> &rarr; localize o arquivo do OneDrive</li>
+  </ol>
+
+  <h3>Sincroniza&ccedil;&atilde;o de fotos</h3>
+  <p>As fotos de capa ficam salvas localmente no celular (<code>Documentos/capas/</code>) e <strong>n&atilde;o s&atilde;o sincronizadas automaticamente</strong> com outros dispositivos pelo Biblioteca.</p>
+  <p>Para levar as fotos para outro dispositivo manualmente:</p>
+  <ol>
+    <li>Abra o gerenciador de arquivos do celular</li>
+    <li>V&aacute; at&eacute; a pasta <code>Android/data/com.ruggierow.biblioteca/files/capas/</code> (o caminho pode variar por fabricante)</li>
+    <li>Copie os arquivos <code>.jpg</code> para uma pasta compartilhada (Google Drive, OneDrive ou pen-drive)</li>
+    <li>No outro dispositivo, coloque os arquivos na pasta equivalente</li>
+  </ol>
+  <div class="nota">Se voc&ecirc; reinstalar o app, as fotos de capa s&atilde;o apagadas junto com os dados do app. Fa&ccedil;a c&oacute;pias peri&oacute;dicas dos arquivos .jpg da pasta capas/ para n&atilde;o perd&ecirc;-las.</div>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<!-- ===== SEÇÃO 9 ===== -->
+<section id="faq">
+  <h2>9. Perguntas frequentes</h2>
+
+  <h3>N&atilde;o consigo instalar o APK &mdash; o Android bloqueia</h3>
+  <p>O bloqueio &eacute; esperado em todos os aparelhos Android por padr&atilde;o. Voc&ecirc; precisa liberar a permiss&atilde;o de &ldquo;Instalar apps de fontes desconhecidas&rdquo; especificamente para o aplicativo que est&aacute; abrindo o APK (o navegador, o gerenciador de arquivos ou o pr&oacute;prio app de downloads). Siga o Passo 2 da <a href="#instalacao">se&ccedil;&atilde;o de instala&ccedil;&atilde;o</a>. Em aparelhos Samsung, o caminho costuma ser Configura&ccedil;&otilde;es &rarr; Biometria e seguran&ccedil;a &rarr; Instalar apps desconhecidos. Em Motorola, Configura&ccedil;&otilde;es &rarr; Seguran&ccedil;a.</p>
+
+  <h3>O app pediu c&acirc;mera, mas eu recusei &mdash; como permitir agora?</h3>
+  <p>Acesse as configura&ccedil;&otilde;es do sistema operacional, n&atilde;o do app. No Android, v&aacute; em <strong>Configura&ccedil;&otilde;es &rarr; Apps &rarr; Biblioteca &rarr; Permiss&otilde;es &rarr; C&acirc;mera</strong> e selecione <strong>Permitir somente ao usar o app</strong>. O caminho pode variar ligeiramente por fabricante (algumas marcas colocam &ldquo;Gerenciador de aplicativos&rdquo; em vez de &ldquo;Apps&rdquo;). Ap&oacute;s liberar, reabra o Biblioteca &mdash; nenhum dado &eacute; perdido nesse processo.</p>
+
+  <h3>Perdi meus livros depois de reinstalar o app</h3>
+  <p>Ao desinstalar o Biblioteca, o Android apaga todos os dados do aplicativo, incluindo o cat&aacute;logo e as fotos de capa. Esse comportamento &eacute; padr&atilde;o do Android por raz&otilde;es de privacidade. N&atilde;o h&aacute; fun&ccedil;&atilde;o de backup autom&aacute;tico nesta vers&atilde;o &mdash; antes de desinstalar ou trocar de celular, exporte seu cat&aacute;logo ou anote os dados importantes. Uma vers&atilde;o futura incluir&aacute; exporta&ccedil;&atilde;o para arquivo.</p>
+
+  <h3>A c&acirc;mera n&atilde;o abre dentro do app</h3>
+  <p>H&aacute; duas causas comuns: (1) a permiss&atilde;o de c&acirc;mera foi negada &mdash; veja a pergunta anterior sobre como liberar; (2) outro aplicativo est&aacute; usando a c&acirc;mera em segundo plano. Feche todos os apps abertos (deslize para cima na tela de multitarefa para encerrar cada um) e tente novamente. Se o problema persistir, reinicie o celular e tente novamente.</p>
+
+  <h3>Posso usar o Biblioteca sem conex&atilde;o com a internet?</h3>
+  <p>Sim. O Biblioteca foi projetado para funcionar 100% offline. Todos os dados do cat&aacute;logo e todas as fotos de capa ficam armazenados no pr&oacute;prio celular. Voc&ecirc; n&atilde;o precisa de conta, login ou conex&atilde;o com internet para nenhuma fun&ccedil;&atilde;o do aplicativo &mdash; nem para instalar, nem para usar no dia a dia.</p>
+
+  <h3>Como recebo atualiza&ccedil;&otilde;es do app?</h3>
+  <p>Como o Biblioteca &eacute; distribu&iacute;do como APK direto (sem Play Store), as atualiza&ccedil;&otilde;es n&atilde;o s&atilde;o autom&aacute;ticas. Quando uma nova vers&atilde;o for disponibilizada, voc&ecirc; receber&aacute; o link para o novo arquivo APK pelo mesmo canal em que recebeu esta vers&atilde;o. O processo de atualiza&ccedil;&atilde;o &eacute; o mesmo da instala&ccedil;&atilde;o inicial: baixe o APK novo e instale sobre o existente. Seus dados e configura&ccedil;&otilde;es s&atilde;o preservados na atualiza&ccedil;&atilde;o &mdash; ao contr&aacute;rio da desinstala&ccedil;&atilde;o, instalar uma vers&atilde;o nova sobre a anterior n&atilde;o apaga nada.</p>
+
+  <p class="voltar"><a href="#sumario">&#8593; Voltar ao Sum&aacute;rio</a></p>
+</section>
+
+<hr class="secao">
+
+<p style="text-align:center; color:#888; font-size:0.85em; margin-top: 2em;">
+  Biblioteca para Android &middot; Vers&atilde;o 1.8.2 &middot; Manual do Usu&aacute;rio<br>
+  Setembro de 2026
+</p>
+
+</body>
+</html>

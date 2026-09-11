@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca — Instalação no Android</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1F2937;
+    background: #fff;
+    padding: 48px 60px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Cabeçalho */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #2B5FB3;
+  }
+  .header-icon {
+    width: 52px; height: 52px;
+    background: #2B5FB3;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2B5FB3;
+  }
+  .header p {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 2px;
+  }
+
+  /* Seções */
+  .secao {
+    margin-bottom: 28px;
+  }
+  .secao-titulo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #2B5FB3;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #E2E6EE;
+  }
+  .passo-numero {
+    width: 26px; height: 26px;
+    background: #2B5FB3;
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* Lista de passos */
+  ol, ul {
+    padding-left: 20px;
+  }
+  ol li, ul li {
+    margin-bottom: 6px;
+    color: #374151;
+  }
+  ul li { list-style: disc; }
+
+  /* Caixa de info */
+  .info-box {
+    background: #EFF6FF;
+    border-left: 4px solid #2B5FB3;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 13px;
+    color: #1e40af;
+  }
+  .warn-box {
+    background: #FFF7ED;
+    border-left: 4px solid #F59E0B;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 13px;
+    color: #92400e;
+  }
+
+  /* Dispositivos */
+  .dispositivos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 10px 0;
+  }
+  .dispositivo {
+    background: #F9FAFB;
+    border: 1px solid #E2E6EE;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  .dispositivo strong {
+    color: #2B5FB3;
+  }
+  .dispositivo .path {
+    color: #6B7280;
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  /* FAQ */
+  .faq-item {
+    background: #F9FAFB;
+    border: 1px solid #E2E6EE;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .faq-pergunta {
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+  .faq-resposta {
+    color: #6B7280;
+    font-size: 13px;
+  }
+
+  /* Rodapé */
+  .rodape {
+    margin-top: 36px;
+    padding-top: 16px;
+    border-top: 1px solid #E2E6EE;
+    text-align: center;
+    font-size: 11px;
+    color: #9CA3AF;
+  }
+
+  code {
+    background: #F3F4F6;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #374151;
+  }
+
+  @media print {
+    body { padding: 32px 48px; }
+    .secao { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-icon">📚</div>
+  <div>
+    <h1>Biblioteca</h1>
+    <p>Manual de instalação para dispositivos Android</p>
+  </div>
+</div>
+
+<!-- Passo 1 -->
+<div class="secao">
+  <div class="secao-titulo">
+    <span class="passo-numero">1</span>
+    Baixar o instalador (APK)
+  </div>
+  <ol>
+    <li>No celular, abra o link que você recebeu (Google Drive)</li>
+    <li>Toque no arquivo <strong>app-release.apk</strong></li>
+    <li>Toque em <strong>Baixar</strong> (ícone ↓)</li>
+    <li>Aguarde o download terminar</li>
+  </ol>
+</div>
+
+<!-- Passo 2 -->
+<div class="secao">
+  <div class="secao-titulo">
+    <span class="passo-numero">2</span>
+    Permitir instalação de apps externos
+  </div>
+  <p style="margin-bottom:10px; color:#374151;">O Android bloqueia por padrão apps instalados fora da Play Store. É necessário liberar uma vez:</p>
+  <div class="dispositivos">
+    <div class="dispositivo">
+      <strong>Samsung</strong>
+      <div class="path">Configurações → Aplicativos → ⋮ (três pontos) → Acesso especial → Instalar apps desconhecidos → ative para <em>Meus Arquivos</em></div>
+    </div>
+    <div class="dispositivo">
+      <strong>Motorola / Nokia / outros</strong>
+      <div class="path">Configurações → Aplicativos → Acesso especial → Instalar apps desconhecidos → ative para o <em>Gerenciador de arquivos</em></div>
+    </div>
+  </div>
+</div>
+
+<!-- Passo 3 -->
+<div class="secao">
+  <div class="secao-titulo">
+    <span class="passo-numero">3</span>
+    Instalar o app
+  </div>
+  <ol>
+    <li>Abra o app <strong>Meus Arquivos</strong> (Samsung) ou <strong>Gerenciador de arquivos</strong></li>
+    <li>Vá em <strong>Downloads</strong></li>
+    <li>Toque no arquivo <strong>app-release.apk</strong></li>
+    <li>Toque em <strong>Instalar</strong></li>
+  </ol>
+  <div class="warn-box">
+    Se aparecer aviso do Play Protect dizendo "desenvolvedor desconhecido", toque em <strong>"Instalar assim mesmo"</strong>. O aviso é padrão para apps fora da Play Store — o app é seguro.
+  </div>
+</div>
+
+<!-- Passo 4 -->
+<div class="secao">
+  <div class="secao-titulo">
+    <span class="passo-numero">4</span>
+    Carregar a biblioteca
+  </div>
+  <ol>
+    <li>Abra o app <strong>Biblioteca</strong></li>
+    <li>Toque em <strong>Sincronização</strong></li>
+    <li>Toque em <strong>"Selecionar biblioteca.txt"</strong></li>
+    <li>Navegue até <strong>Downloads</strong> e selecione o arquivo <code>biblioteca.txt</code></li>
+    <li>Os livros serão carregados automaticamente</li>
+  </ol>
+  <div class="info-box">
+    O arquivo <code>biblioteca.txt</code> contém toda a sua base de livros e deve ser transferido separadamente (via Google Drive ou outro meio).
+  </div>
+</div>
+
+<!-- Passo 5 -->
+<div class="secao">
+  <div class="secao-titulo">
+    <span class="passo-numero">5</span>
+    Sincronizar com outros dispositivos (opcional)
+  </div>
+  <ol>
+    <li>No computador, coloque o <code>biblioteca.txt</code> na pasta do <strong>Google Drive</strong></li>
+    <li>No Android, abra o Google Drive → encontre o arquivo → toque em ⋮ → <strong>"Tornar disponível offline"</strong></li>
+    <li>No app, em Sincronização, selecione esse arquivo via Google Drive</li>
+    <li>Sempre que alterar em outro dispositivo, toque em <strong>"Recarregar"</strong> antes de editar</li>
+  </ol>
+</div>
+
+<!-- FAQ -->
+<div class="secao">
+  <div class="secao-titulo" style="color:#1E8A5F; border-color:#1E8A5F;">
+    <span style="font-size:18px;">?</span>
+    Dúvidas frequentes
+  </div>
+  <div class="faq-item">
+    <div class="faq-pergunta">O app não aparece na Play Store.</div>
+    <div class="faq-resposta">Correto — é um app privado instalado diretamente. Isso é normal e seguro.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-pergunta">O Android diz que nunca viu esse desenvolvedor.</div>
+    <div class="faq-resposta">Toque em "Instalar assim mesmo". O aviso é padrão para apps fora da Play Store.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-pergunta">Posso remover o APK após instalar?</div>
+    <div class="faq-resposta">Sim. O arquivo de instalação pode ser apagado; o app permanece instalado normalmente.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-pergunta">O arquivo biblioteca.txt some após reiniciar o app?</div>
+    <div class="faq-resposta">Não. O app lembra o arquivo selecionado entre sessões automaticamente.</div>
+  </div>
+</div>
+
+<div class="rodape">
+  Biblioteca — Gestão de biblioteca pessoal &nbsp;·&nbsp; iOS e Android
+</div>
+
+</body>
+</html>

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Manual do Usuário — Sistema de Gestão de Biblioteca</title>
+<style>
+  @page { size: A4; margin: 2.2cm 2cm 2.2cm 2cm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11pt; color: #1f2937; line-height: 1.6; background: #fff; }
+
+  /* ── Tipografia ── */
+  h1 { font-size: 22pt; font-weight: 700; color: #1e3a5f; margin-bottom: 10px; }
+  h2 { font-size: 15pt; font-weight: 700; color: #2b5fb3; margin: 28px 0 10px; border-bottom: 2px solid #e2e6ee; padding-bottom: 5px; }
+  h3 { font-size: 12pt; font-weight: 600; color: #1f2937; margin: 18px 0 6px; }
+  p  { margin-bottom: 9px; }
+  ul, ol { margin: 6px 0 10px 20px; }
+  li { margin-bottom: 3px; }
+  strong { color: #111; }
+  code { background: #f3f4f6; border: 1px solid #e2e6ee; border-radius: 4px; padding: 1px 5px; font-size: 9.5pt; font-family: "SF Mono", Menlo, monospace; }
+  .note { background: #eff6ff; border-left: 4px solid #2b5fb3; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 10.5pt; }
+  .tip  { background: #f0fdf4; border-left: 4px solid #1e8a5f; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 10.5pt; }
+
+  /* ── Quebras ── */
+  .page-break { page-break-after: always; }
+
+  /* ── Capa ── */
+  .cover { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 26cm; text-align: center; background: linear-gradient(160deg,#1a3a6b 0%,#2b5fb3 45%,#1e8a5f 100%); margin: -2.2cm -2cm; width: calc(100% + 4cm); padding: 60px 40px; position: relative; overflow: hidden; }
+  .cover::before { content:""; position:absolute; top:-80px; right:-80px; width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,0.05); pointer-events:none; }
+  .cover::after  { content:""; position:absolute; bottom:-60px; left:-60px; width:240px; height:240px; border-radius:50%; background:rgba(255,255,255,0.05); pointer-events:none; }
+  .cover-icon-wrap { background: rgba(255,255,255,0.15); border-radius: 28%; padding: 16px; margin-bottom: 32px; box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  .cover-icon { width: 96px; height: 96px; border-radius: 18%; display: block; }
+  .cover h1 { font-size: 28pt; color: #fff; font-weight: 800; letter-spacing: -0.5px; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  .cover .subtitle { font-size: 14pt; color: rgba(255,255,255,0.9); margin-top: 10px; }
+  .cover .version { margin-top: 10px; font-size: 10pt; color: rgba(255,255,255,0.65); }
+  .cover .divider { width: 60px; height: 3px; background: rgba(255,255,255,0.5); border-radius: 2px; margin: 18px auto; }
+  .cover .platforms { display: flex; gap: 10px; margin-top: 40px; justify-content: center; flex-wrap: wrap; }
+  .cover .plat-badge { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 5px 14px; font-size: 10pt; }
+
+  /* ── Índice ── */
+  .toc { margin: 10px 0; }
+  .toc-item { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 0; border-bottom: 1px dotted #d1d5db; font-size: 11pt; }
+  .toc-item a { color: #2b5fb3; text-decoration: none; }
+  .toc-num { color: #6b7280; font-size: 10pt; }
+
+  /* ── Mockup base ── */
+  .mockup { border: 1px solid #d1d5db; border-radius: 12px; overflow: hidden; margin: 16px 0 20px; box-shadow: 0 4px 18px rgba(20,30,60,0.09); font-size: 10pt; }
+  .mk-header { background: linear-gradient(135deg,#2b5fb3,#1e8a5f); color: #fff; padding: 14px 20px; display: flex; align-items: center; gap: 12px; }
+  .mk-header img { width: 36px; height: 36px; border-radius: 22%; background: rgba(255,255,255,0.15); padding: 3px; }
+  .mk-header h1 { font-size: 13pt; font-weight: 600; color: #fff; border: none; margin: 0; padding: 0; }
+  .mk-header p  { font-size: 9pt; opacity: 0.85; margin: 0; }
+  .mk-body { background: #f4f6fb; padding: 16px; }
+  .mk-card { background: #fff; border-radius: 10px; box-shadow: 0 3px 12px rgba(20,30,60,0.06); padding: 14px 16px; margin-bottom: 14px; }
+  .mk-card h2 { font-size: 11pt; font-weight: 600; color: #1f2937; border: none; padding: 0; margin: 0 0 10px; }
+  .mk-form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 80px; gap: 8px; margin-bottom: 10px; }
+  .mk-label { font-size: 9pt; color: #6b7280; font-weight: 500; margin-bottom: 2px; }
+  .mk-input { border: 1px solid #e2e6ee; border-radius: 7px; padding: 6px 9px; font-size: 10pt; width: 100%; color: #374151; background: #fff; }
+  .mk-input.focus { border-color: #2b5fb3; box-shadow: 0 0 0 3px rgba(43,95,179,0.15); }
+  .mk-input.filled { color: #111; }
+  .btn-primary { background: #2b5fb3; color: #fff; border: none; border-radius: 7px; padding: 7px 14px; font-size: 10pt; font-weight: 500; cursor: pointer; }
+  .btn-ghost { background: transparent; color: #2b5fb3; border: 1px solid #e2e6ee; border-radius: 7px; padding: 7px 14px; font-size: 10pt; font-weight: 500; }
+  .btn-accent { background: #1e8a5f; color: #fff; border: none; border-radius: 7px; padding: 7px 14px; font-size: 10pt; font-weight: 500; }
+  .btn-danger { background: #c0392b; color: #fff; border: none; border-radius: 7px; padding: 7px 14px; font-size: 10pt; font-weight: 500; }
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .btn-small { font-size: 9pt; padding: 4px 10px; border-radius: 6px; }
+
+  /* Toolbar */
+  .mk-toolbar { display: grid; grid-template-columns: 1fr 1fr 1fr 120px 80px 100px; gap: 8px; align-items: end; margin-bottom: 6px; }
+
+  /* Tabela */
+  .mk-table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .mk-table thead th { text-align: left; font-size: 9pt; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; padding: 8px 10px; border-bottom: 1px solid #e2e6ee; background: #fafbfd; }
+  .mk-table tbody td { padding: 10px; border-bottom: 1px solid #e2e6ee; vertical-align: middle; }
+  .mk-table tbody tr:hover { background: #f7f9fd; }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 9pt; font-weight: 500; }
+  .pill-disp { background: #e6f5ee; color: #166b48; }
+  .pill-emp  { background: #fde9e7; color: #9d2d22; }
+  .actions-cell { display: flex; gap: 5px; flex-wrap: wrap; }
+
+  /* Modal */
+  .mk-modal-bg { background: rgba(20,30,60,0.35); padding: 20px; border-radius: 0 0 10px 10px; display: flex; align-items: center; justify-content: center; }
+  .mk-modal { background: #fff; border-radius: 10px; padding: 20px; width: 320px; box-shadow: 0 16px 48px rgba(0,0,0,0.22); }
+  .mk-modal h3 { font-size: 12pt; font-weight: 700; margin-bottom: 12px; }
+  .mk-modal-form { display: flex; flex-direction: column; gap: 8px; }
+  .mk-modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
+
+  /* TSV */
+  .tsv-box { background: #1e2736; color: #a8d8a0; font-family: "SF Mono", Menlo, monospace; font-size: 9pt; padding: 14px 16px; border-radius: 8px; line-height: 1.7; overflow-x: auto; margin: 10px 0; }
+  .tsv-tab { color: #f59e0b; }
+
+  /* Callout de campo */
+  .field-desc { display: flex; gap: 10px; margin: 4px 0; font-size: 10.5pt; }
+  .field-name { font-weight: 600; color: #2b5fb3; min-width: 140px; flex-shrink: 0; }
+  .field-hint { color: #374151; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ CAPA -->
+<div class="cover">
+  <div class="cover-icon-wrap">
+  <img class="cover-icon"
+       src="data:image/png;base64,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"
+       alt="Biblioteca">
+  </div>
+  <div class="divider"></div>
+  <h1>Sistema de Gestão<br>de Biblioteca</h1>
+  <p class="subtitle">Manual do Usuário</p>
+  <p class="version">Versão 1.2 &nbsp;·&nbsp; Julho de 2026</p>
+  <div class="platforms">
+    <span class="plat-badge">🍎 macOS</span>
+    <span class="plat-badge">🪟 Windows</span>
+    <span class="plat-badge">🌐 Interface Web</span>
+  </div>
+</div>
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ ÍNDICE -->
+<h2 style="border:none; font-size:18pt; color:#1e3a5f; margin-bottom:18px;">Índice</h2>
+<div class="toc">
+  <div class="toc-item"><a>1. Instalação</a><span class="toc-num">3</span></div>
+  <div class="toc-item" style="padding-left:16px;font-size:10.5pt;"><a>1.1 macOS</a><span class="toc-num">3</span></div>
+  <div class="toc-item" style="padding-left:16px;font-size:10.5pt;"><a>1.2 Windows</a><span class="toc-num">4</span></div>
+  <div class="toc-item"><a>2. Visão Geral do Sistema</a><span class="toc-num">5</span></div>
+  <div class="toc-item"><a>3. Primeiro Uso</a><span class="toc-num">6</span></div>
+  <div class="toc-item"><a>4. Tela Principal</a><span class="toc-num">7</span></div>
+  <div class="toc-item"><a>5. Cadastrar um Livro</a><span class="toc-num">8</span></div>
+  <div class="toc-item"><a>6. Lista de Livros</a><span class="toc-num">9</span></div>
+  <div class="toc-item"><a>7. Pesquisar e Filtrar</a><span class="toc-num">10</span></div>
+  <div class="toc-item"><a>8. Editar um Livro</a><span class="toc-num">11</span></div>
+  <div class="toc-item"><a>9. Emprestar e Devolver</a><span class="toc-num">12</span></div>
+  <div class="toc-item"><a>10. Importar e Exportar (arquivo TSV)</a><span class="toc-num">13</span></div>
+  <div class="toc-item"><a>11. Remover um Livro</a><span class="toc-num">14</span></div>
+  <div class="toc-item"><a>12. Compatibilidade com Navegadores</a><span class="toc-num">15</span></div>
+  <div class="toc-item"><a>13. Formato do Arquivo de Dados</a><span class="toc-num">16</span></div>
+</div>
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 1 INSTALAÇÃO -->
+<h2>1. Instalação</h2>
+<p>O programa é distribuído como uma <strong>interface web</strong> (arquivo <code>biblioteca.html</code>) que abre diretamente no navegador — sem instalação de software. Há dois pacotes ZIP, um para cada sistema operacional, com o HTML, um lançador e os demais recursos necessários.</p>
+
+<h3>1.1 Instalação no macOS</h3>
+<ol>
+  <li>Baixe o arquivo <code>Biblioteca-Web-Mac.zip</code>.</li>
+  <li>Faça duplo clique no ZIP para extrair — uma pasta com os arquivos do programa aparece.</li>
+  <li>Abra a pasta extraída e faça duplo clique em <strong>Abrir Biblioteca.command</strong>.</li>
+</ol>
+
+<div class="mockup">
+  <div class="mk-header"><div><h1>Pasta Biblioteca-Web-Mac</h1></div></div>
+  <div class="mk-body">
+    <div class="mk-card">
+      <div style="font-family:'SF Mono',Menlo,monospace; font-size:10pt; color:#374151; line-height:2;">
+        <div>📄&nbsp; <strong>Abrir Biblioteca.command</strong></div>
+        <div>📄&nbsp; <strong>Instalar no Desktop.command</strong> &nbsp;<em style="color:#6b7280; font-size:9pt;">(executar uma vez)</em></div>
+        <div>🌐&nbsp; biblioteca.html</div>
+        <div>📖&nbsp; Manual_Biblioteca.pdf</div>
+        <div>📊&nbsp; Obras e Autores 2017-2026.xlsx</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ol start="4">
+  <li>Na <strong>primeira abertura</strong>, o macOS pode exibir um aviso de segurança. Para contorná-lo:</li>
+</ol>
+<ol type="a">
+  <li>Clique com o botão direito em <strong>Abrir Biblioteca.command</strong>.</li>
+  <li>Escolha <strong>Abrir</strong> no menu de contexto.</li>
+  <li>Clique em <strong>Abrir</strong> na caixa de diálogo que aparece.</li>
+</ol>
+<p><em>A partir da segunda abertura, basta dar duplo clique normalmente.</em></p>
+
+<div class="note">ℹ️ Os dados ficam salvos automaticamente no navegador (localStorage). Use <strong>Vincular biblioteca.txt</strong> (seção Arquivo) para que as alterações sejam gravadas também em arquivo.</div>
+<div class="tip">💡 <strong>Ícone no Desktop:</strong> clique com o botão direito em <strong>Instalar no Desktop.command</strong> → Abrir. Um ícone <strong>Biblioteca</strong> 📚 é criado na área de trabalho. Execute este script novamente sempre que instalar uma versão nova — o ícone será atualizado automaticamente.</div>
+<div class="page-break"></div>
+
+<h3>1.2 Instalação no Windows</h3>
+<ol>
+  <li>Baixe o arquivo <code>Biblioteca-Web-Windows.zip</code>.</li>
+  <li>Clique com o botão direito no ZIP → <strong>Extrair Tudo…</strong> → escolha uma pasta definitiva (ex.: <code>C:\Biblioteca\</code>). <em>Não execute diretamente do ZIP.</em></li>
+  <li>Abra a pasta extraída e faça duplo clique em <strong>Criar Atalho no Desktop.bat</strong>.</li>
+</ol>
+
+<div class="mockup">
+  <div class="mk-header"><div><h1>Pasta Biblioteca-Web-Windows</h1></div></div>
+  <div class="mk-body">
+    <div class="mk-card">
+      <div style="font-family:'Cascadia Mono','Consolas',monospace; font-size:10pt; color:#374151; line-height:2;">
+        <div>⚙️&nbsp; <strong>Criar Atalho no Desktop.bat</strong> &nbsp;<em style="color:#6b7280; font-size:9pt;">(executar uma vez)</em></div>
+        <div>⚙️&nbsp; Abrir Biblioteca.bat</div>
+        <div>🌐&nbsp; biblioteca.html</div>
+        <div>📖&nbsp; Manual_Biblioteca.pdf</div>
+        <div>📊&nbsp; Obras e Autores 2017-2026.xlsx</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>Um atalho chamado <strong>Biblioteca</strong> (com ícone de livro) é criado automaticamente no Desktop. A partir daí, use esse atalho para abrir o programa.</p>
+
+<div class="note">ℹ️ Na primeira execução, o Windows pode exibir um aviso do SmartScreen. Clique em <strong>Mais informações → Executar mesmo assim</strong>.</div>
+<div class="tip">💡 Os dados ficam salvos automaticamente no navegador (localStorage). Use <strong>Vincular biblioteca.txt</strong> (seção Arquivo) para que as alterações sejam gravadas também em arquivo.</div>
+<div class="page-break"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 2 VISÃO GERAL -->
+<h2>2. Visão Geral do Sistema</h2>
+<p>O <strong>Sistema de Gestão de Biblioteca</strong> é uma aplicação para catalogar e gerenciar uma coleção particular de livros. Existe em dois formatos complementares:</p>
+<ul>
+  <li><strong>Interface Web</strong> (arquivo <code>biblioteca.html</code>) — abre diretamente no navegador, sem instalação. Disponível para macOS e Windows.</li>
+  <li><strong>Programa em C++</strong> (terminal) — versão de linha de comando para macOS, com persistência automática em arquivo <code>biblioteca.txt</code>.</li>
+</ul>
+<p>Ambas as versões compartilham o mesmo arquivo de dados (<code>biblioteca.txt</code>) no formato TSV, podendo ser usadas alternadamente.</p>
+
+<h3>Campos de cada livro</h3>
+<div class="field-desc"><span class="field-name">Título</span><span class="field-hint">Nome completo do livro.</span></div>
+<div class="field-desc"><span class="field-name">Autor</span><span class="field-hint">Nome do autor. Vários autores separados por ponto-e-vírgula.</span></div>
+<div class="field-desc"><span class="field-name">Tema</span><span class="field-hint">Gênero ou assunto (ex.: Romance, Poesia, Ciência).</span></div>
+<div class="field-desc"><span class="field-name">Ano</span><span class="field-hint">Ano de publicação da edição.</span></div>
+<div class="field-desc"><span class="field-name">Status</span><span class="field-hint">Disponível ou Emprestado.</span></div>
+<div class="field-desc"><span class="field-name">Comentários</span><span class="field-hint">Notas livres sobre o livro (opcional).</span></div>
+<div class="field-desc"><span class="field-name">Local</span><span class="field-hint">Localização física na estante (opcional).</span></div>
+<div class="field-desc"><span class="field-name">Grupo de Literatura</span><span class="field-hint">Indica se o livro foi discutido num grupo de estudos.</span></div>
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 2 -->
+<h2>3. Primeiro Uso</h2>
+<p>Ao abrir o programa pela primeira vez — quando ainda não há livros cadastrados e nenhum arquivo vinculado — uma tela de boas-vindas é exibida automaticamente, guiando o usuário na configuração inicial.</p>
+
+<div class="mockup">
+  <div class="mk-header"><div><h1>📚 Bem-vindo ao Sistema de Biblioteca!</h1><p>Primeira abertura detectada. Como deseja armazenar seus livros?</p></div></div>
+  <div class="mk-body">
+    <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+      <div style="display:flex; align-items:flex-start; gap:14px; background:#f0f5ff; border:2px solid #2b5fb3; border-radius:10px; padding:14px 16px;">
+        <span style="font-size:22px; flex-shrink:0;">📁</span>
+        <div><div style="font-size:11pt; font-weight:700; color:#1e3a5f;">Selecionar ou criar arquivo</div><div style="font-size:10pt; color:#4b5563; margin-top:2px;">Escolhe onde salvar o <code>biblioteca.txt</code> no seu computador. Recomendado.</div></div>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:14px; background:#f0fdf4; border:2px solid #1e8a5f; border-radius:10px; padding:14px 16px;">
+        <span style="font-size:22px; flex-shrink:0;">📥</span>
+        <div><div style="font-size:11pt; font-weight:700; color:#166b48;">Importar arquivo existente</div><div style="font-size:10pt; color:#4b5563; margin-top:2px;">Já tem um <code>biblioteca.txt</code> de outra instalação? Importe-o aqui.</div></div>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:14px; background:#f9fafb; border:2px solid #e2e6ee; border-radius:10px; padding:14px 16px;">
+        <span style="font-size:22px; flex-shrink:0;">⏭</span>
+        <div><div style="font-size:11pt; font-weight:700; color:#374151;">Decidir depois</div><div style="font-size:10pt; color:#4b5563; margin-top:2px;">Os dados ficam salvos apenas no navegador. Você pode vincular um arquivo a qualquer momento.</div></div>
+      </div>
+    </div>
+    <p style="font-size:10pt; color:#9ca3af; text-align:center; margin:0;">💡 O arquivo <code>biblioteca.txt</code> é compatível com o programa em C++ e pode ser usado nos dois.</p>
+  </div>
+</div>
+
+<h3>Opção 1 — Selecionar ou criar arquivo (recomendado)</h3>
+<ol>
+  <li>Clique em <strong>Selecionar ou criar arquivo</strong>.</li>
+  <li>Um diálogo do sistema operacional se abre. Navegue até a pasta desejada (ex.: <code>Documentos</code>).</li>
+  <li>Digite <code>biblioteca.txt</code> no campo de nome e clique em <strong>Salvar</strong> (ou selecione um arquivo já existente).</li>
+  <li>A partir desse momento, todas as alterações são salvas automaticamente nesse arquivo.</li>
+</ol>
+
+<h3>Opção 2 — Importar arquivo existente</h3>
+<p>Use esta opção se já possui um <code>biblioteca.txt</code> de outra instalação do programa (versão web ou C++). O arquivo será carregado e seus livros aparecerão na lista imediatamente.</p>
+
+<h3>Opção 3 — Decidir depois</h3>
+<p>O programa funciona normalmente com os dados salvos apenas no navegador (<code>localStorage</code>). Você pode vincular um arquivo a qualquer momento clicando em <strong>Vincular biblioteca.txt</strong> na seção Importar / Exportar.</p>
+
+<div class="note">ℹ️ Esta tela de boas-vindas aparece somente na primeira abertura. Nas aberturas seguintes, o programa carrega diretamente com os dados já existentes.</div>
+<div class="tip">💡 <strong>Programa C++:</strong> Na versão de terminal para macOS, não há tela de primeiro uso — o arquivo <code>biblioteca.txt</code> é criado automaticamente ao cadastrar o primeiro livro.</div>
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 2 -->
+<h2>4. Tela Principal</h2>
+<p>Ao abrir o programa, é apresentada a seguinte interface:</p>
+
+<div class="mockup">
+  <div class="mk-header">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAOxklEQVR4nO1Zd1RUd77n1d1zXtMXV1Pk/n73d++dBkOboQakBFBiCygJSlUJq4KNWBFRiT3oalzBhl2DEhXbRgRm7hSmwAydoSMMYIstGltM9J3vrOxhfU9if//kd87nTJ/7+fZy7ex+O//7CIXC/yCEUBhjZ4aiZBzGw2iKDgYwCH0Cr8lQ4ug0ZMi/2f1/HZlM9i80RY1jKHyUQaiWUOgKQeg2g9D3QoI6pQJscXdAZj83ShfsYa/9JOADVXjAB+qRfvZ8oJzSu0moKgGNrATheobCuYSiPnpr5Ik9kTMUqgr0sNedXDvY1HN04KW75wbceaQc8PhF0Z0/sGfLnCEaNzFVzSCkRgjhN0YcIfQuQWiHmEFtp9YMLn8Zwv1h85whGhahTowxet3EBzAUXs1i1L1k0nul94sGPnzd5B89Qc7cwRpCocLXQtzfzu6fWYSmMwh1JY4dqrh5esAPb4r4oz5w4HADBPkrkWcQCoTgHOFtr7Qe+W/r2yD+6Ammhr+vYCg65aW1TiicJWFRs3bLOzXPe9Fb3w24Y80feKl61zutik2Dao8sG1z21fR3tSmR7/OfBg9VB3na68I+tNfB8z/NGKJtPvjOM5WSlfyumlB45QuTl/xB8u8Mhf8CF2vc/06HZvMgyzfLBpetSHpXMzXifX6U79BSb2d7s1SILSKG6uRofJGl6Iscpq8IGKbDUSS2uDq7mL08vfRBQUGaiPGRyqRp00sWZ2aqN2Zv1a7duEmXuXpt6djwCJ2IYc+Hetnrrp0aeONpARYnvMcTCme8sAAEoQQG4cdPcMdF6lwRFBikiY2PV8xNS+OXrlqt3bp3r/FUSUm7saHhWq3V+sDS0/P412CwWG6WNzX90Pe9kJBQnYgTtModqMqnBfBzpQw0RY+ye9nDIeTCIHwhLCxM4+worWVo+hqL6esChu20gSbd8JrF9A2OMD0iVtAG2ofvylxczF4eHuW+H36o8/H0KnN1cqnkMH15x8GD5X0FEAuEbYb6+msSoaihNHtQXS95cD8G43oolC8tAEFos5uzS3laxlL+6Nmzllqr9adnaRc0q6qo6Dmn13fAd/PPnLEcPHq0cvu+A+bdhw9XnChRNJlbWm7bLFFff6tQW9pd3dn5QOrgWFdQVNySPGsWP2nU+0ogX7plUD2LUDe0GnZ2dv/0KgLs37Rtu6E/tzBaLLcUJtOFk8WK1gPHjtVl79plyly1unTGnDmqqInR/PDQ4VpPT0+j1MGxlqPJBYLxjxwml4ScoPl4UZElasIEVWxCgvLg8eO1Xk6USbt5UB2D0C1CofssJpcYhK9D0UQI/f5lBJjAInxTQFgrgKPJDXCXJ7C5joAmXWJO0OTkKK30cHc3BAYGasaMGaOMmzRZmTp/gXrl+vVle/Lyas7wfFtZY+PNpxVQWFraBa64Ky+vksPoMotxz5glGZqpJ0+3zzVVPp5davhRHhSiZBDa9sICMAitm5KYWGxsaLgBqO/qsrnAq6Cqvf3hNwUFzXEJk3Qqs7kb3pu7cKGaQfgqQejH6O07q4B4X3xhMP3E0aSLoqj3XlSA8j/n5hpNTU13NNXVN4uMxktn1Grr0e++a887daphx4GDtes3/9m0eNly/fQZM7UTo2M0o0aOKg3wDzD6+Pjo3eXyaghmqYNDEwQri+mrYFG5q0yfPGtOUWVbmy0j7f/2aBNHyMXonG0VT5PvhcTZ2cQi5PpCAtj6eHAhhukQslyzRCCsk4ol1S5SqVHm4lbu5eWlDg4OVkaMH188JTGxaO7ChcUrs9arcnbvKYXgPVRQYMw/fboGgrrYYGg2t7Ze+1vQNzbe3ZCTUwnCChi2bdLBPMuzyANEEodqlqIkLxEHuKe+u/vnF3WVyvb2R5qKiusnFcqOPfn5lhXr1pXFxiVo/Xz9ysRCEVjjuqNMrh+TnqFONZQ/6I888rmSywzGV1mW/cOvEyZkMINQEaGQ6snjT54eHkYPubxG7uZWCS7h7Ci1QL4XMlwXR5gL4BYQ0AzCV/76nNxkaNLFsVyjyMGxEojK/ANUAfHxJZ9krtAmHs63pJaZH/ZHem4fOLq7lzEUPvR8GqfwfI4w5xOPHG1I2HfQEpu7yxT19RZzdPZWU/zufcb4Pfsr4P3Pj59sTj5b1DlDob4xW2u4N6NYdWPqqTOXphzO74rbs79hwuac2sivsqrCM1foxmYsNYyct9AE+Dh1ni5sVqr6o8+n6QMTEnjfyMhSn/AI3j86WjvpYJ4t8/RF6LQUjQuHa104XEMwju+XPIuQF7QPjnJ3syw4WO3qO8zo5Omll7i6VokdnKqFInEDxwnbWcJaGZpcJwjfYhC+DRWWo4lVIhRZpGJJlZuTc7mXh4cO8FFAgLoXoUEfqcaOHs33Ynx4uDI6aiKfPG26OtBvmIZB+Je43N1/i4XP/rTJLCSooysdX186EvEwi/QrgOA9wSAGoVQgtXDBgtLFCxfp16xeY96QlVWVk51t2ZWb27pg/37r8ePHr546depWcXHx49cFuaurMSgoSOvs7W0A8tE526o5jHvMc1D7rS+pBxIGNdM07fRcbsQgVLZ3797zr5Ngfzh79ux9qM7FRmOXQCBujN25q57F+JImhWq8uxI9TvJHJc8dA7Y4QCg/c+mysrclwOG8wxckAlEjtBMsuCPGl88moVogv24sBa5zj7HHn0okkn99PgtQqArc5W0JcOLEiZscIRdCgkNgDn6QPxmb76xAj2YFoxIxxm3BHNYEsljLUKiZfEC4fsnTNC0QcVzz2yIPOHfu3EOOkA6C0MPciZTu2nLqXqgz1vkwuKwrhNy6MYJ5DNjmQWsJwnX9dqgMQpnxMXF83wsUFhb+XFBQcCMvL+8CBHFOdnYDBPXaNWsqIMiXpKfr0xYs0s2aMUMDGQUwOSGBhwwDiJkYzc9ISdEsW5Jh3Ll9Z8uZM2fu9v73+qwsM4tJpxuHquvnUl3fZ6DbzhyuiRLT/PehzM+95HshxbiWoSi3Z5EPAPdxEArrASume6Aw2UZFwlolQnET9O9QzGSubhUwrPj5+RmGDx+uGREWph4f+an6s6goPjxiHB8UFKT38vAyOEudquC3DMI/9JnyHtsKH8ZXhSzb6ebiWgGT35EEVO4hQuVJUqx8mngvQjikgbXks9zHgyB0Esq8VCyuD/AP0I2PjFQmTp2qmJ++RJW5Zo16weJ0dfLMmSWf/3FayWcTohWRUVGKj8M+5qFaQx0AYRlMXxcJhK0yV9cKP19f/YgRI9Sjx4xRx0+ewmeuXqM7q9V21Fqtj00tLXeh7YiOjVXIZfJycKFxIqR6FnmAP4d1LMahz3QhlmX/kyC0UCIQNG/cutWYtmy55vNp01SfRUWpRo4crQENx0+erP7jtGTV3LQ0zaIlGaUwpO/65pvqs9rSzsrz5++/aN+UOHWqgkH4UTCHtddGMI/6E8CBxg0YY2G/gUxR1ECYcV+19wfUWK0PSsrKOvceya/K2bNXD8ICVmVl2aw5JSmpxFEkqXMhqLotmFztjzx8ThDutrOz+4d+BeAw9pS5ulU+D8Gypqarf9Fo2vYcOWJOX75cFR0To/Af5q91lDjUwEjIYnwRAs+PofUBHNaFCbBytAirw0VYkSChFfNcaOVpX6bq1zQPiJEgHpJMv+RtwUxRybCvAdPGxMcrwoaH8RCwcjdZuZODtBpGSJYmF1kK3RQg1C2lUZ0/S+smSrByqRvNH/ImRqM/3XaplLnTe/HzweRWdSDpNgcQq8KPbiwcRup3eNCG+c60KkqE1Z8IsTrZkVaV+jPt/xf5Iz60iaVQCyHkv35VAJsQCI0gFF5FKLwCmqxQAVKHi2l+koRWLHSmVetlRJfjQes2uRPDl65EneaC1YlSxIcLsTqQpQ1uNKoSY9zKIXQFKik0fCKBoKV36SV3k5kCAwO1URNjlPPT01VrNmzQucvkJshQi1ywpi95gz8N/2N9qYEGDkFoX2/6gywDKbMX4eERPAT2hIkxSliNZKxcqdm8Y0fZoRMnagu1uo6+i6zKtrZ7x4uLm9dt/FqfmJSkDAsbqRo5cpSqqqPjHnwuJEx3emamjiPMRWMA6QDyTcHMJQGiO/rNPM9lkaEMC/t6hsLnv/r6az2MjAAgC0EJxGemfsHHJSTwYyMioA5oPWTuZVKRpE5AmC5bPaFJD9SQ0aNHq+bMm6+C3+Xs3m1bdFW0tt6H7QQ8j01IUM10olXdIeQ2ZB2C0LRXIv931qDwCiDk6+2jh7jw9/XTgSXGhofzsN9JmT2bT8/M1GzMyTHs+/bbmmOFhY37jx2r2ZKbWz43LU09YcJEZXBQsEbmJjPBurLXOrWdnb8wmL5W19X1KHPtWl24CKs9GWwiCH1l9zoPS9GRrs4uFZACU+fPVyVNnc4DYmJjlRHjIvnQkFANVGDwddugQ8gFZwfHmgD/gFLw93np6aqN2VuNhwoKanmz+cKXa9dq9TW1tmEfiueJkpLmuYsWqaCpg67Yzs7uH1+vABj7ixi2Hfw+btIkZa8AcFHQ/IbsbIPNvQ4cqNhx4EBFxooVtkD90NvHYHMnmnRD29DrUmAFc0vLjyBAyuzZqpCQUB72qED+lfaizzrQSElEYgtoDnweNA/B6OPlbXCUONTZtI7pK44iUT28B/EwK/ULfvPOnWVnlMo20Hat1fpLn431tdnz5qtg71rR2noXfs9QqJNl2d+9dvJPBJBBNnKROlVCGoQsBBklbflym9+D5jdt31EGK/iU1FQ+Ji5OCZnG28vb4OTgWCNg2PO2Ro7C92xbbUxfhvgBofbm59cwCP8Md4XeCHmbAAgtAgEkInED+PnTgCzj4+2jh+Fk3LhIPmX2bOWyVau14FanlcpWWKX3tQBovqCouAXckUX4MsTYmyNP4SS4GQG9C1Tp3r7GpvknafVpgDXgO0tXrbJZBDIVpFG5TG4SsGwHg/BdhkJwb/hLuKtv9ybPX+/coBpCISssvBiEvyUIHXkWGIRP2x4ptAe2y7AstlmQwrEwe8D098Z8/bfz27F7ofM/xh60onkqPtoAAAAASUVORK5CYII="
+         alt="">
+    <div>
+      <h1>Sistema de Gestão de Biblioteca</h1>
+      <p>Interface web compatível com o arquivo biblioteca.txt (TSV)</p>
+    </div>
+  </div>
+  <div class="mk-body">
+    <div class="mk-card"><h2>Cadastrar livro</h2>
+      <div class="mk-form-grid">
+        <div><div class="mk-label">Título</div><div class="mk-input">Dom Casmurro</div></div>
+        <div><div class="mk-label">Autor</div><div class="mk-input">Machado de Assis</div></div>
+        <div><div class="mk-label">Tema</div><div class="mk-input">Romance Brasileiro</div></div>
+        <div><div class="mk-label">Ano</div><div class="mk-input">1899</div></div>
+      </div>
+      <div class="btn-row"><button class="btn-primary">Cadastrar</button><button class="btn-ghost">Limpar</button></div>
+    </div>
+    <div class="mk-card"><h2>Pesquisar e filtrar</h2>
+      <div class="mk-toolbar">
+        <div><div class="mk-label">Título (parcial)</div><div class="mk-input"></div></div>
+        <div><div class="mk-label">Autor (parcial)</div><div class="mk-input"></div></div>
+        <div><div class="mk-label">Tema (parcial)</div><div class="mk-input"></div></div>
+        <div><div class="mk-label">Status</div><div class="mk-input" style="font-size:9.5pt">Todos ▾</div></div>
+        <div style="padding-top:18px"><button class="btn-primary">Pesquisar</button></div>
+        <div style="padding-top:18px"><button class="btn-ghost">Limpar filtros</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+<p>A tela se divide em quatro seções: <strong>Cadastrar livro</strong>, <strong>Pesquisar e filtrar</strong>, <strong>Importar / Exportar</strong> e <strong>Lista de livros</strong>.</p>
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 3 -->
+<h2>5. Cadastrar um Livro</h2>
+<p>Para adicionar um novo livro ao catálogo, preencha os quatro campos obrigatórios e clique em <strong>Cadastrar</strong>.</p>
+<ol>
+  <li>Escreva o <strong>Título</strong> completo do livro.</li>
+  <li>Escreva o <strong>Autor</strong>. Para vários autores, separe com ponto-e-vírgula: <code>Autor A; Autor B</code>.</li>
+  <li>Indique o <strong>Tema</strong> (gênero literário, área do conhecimento, etc.).</li>
+  <li>Indique o <strong>Ano</strong> de publicação.</li>
+  <li>Clique em <strong>Cadastrar</strong>. O livro aparecerá imediatamente na lista.</li>
+</ol>
+
+<div class="mockup">
+  <div class="mk-header"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQI12NgAAIABQAABjE+ibYAAAAASUVORK5CYII=" alt="" style="opacity:0"><div><h1>Cadastrar livro</h1></div></div>
+  <div class="mk-body">
+    <div class="mk-card">
+      <div class="mk-form-grid">
+        <div><div class="mk-label">Título</div><div class="mk-input filled focus">Grande Sertão: Veredas</div></div>
+        <div><div class="mk-label">Autor</div><div class="mk-input filled">João Guimarães Rosa</div></div>
+        <div><div class="mk-label">Tema</div><div class="mk-input filled">Regionalismo</div></div>
+        <div><div class="mk-label">Ano</div><div class="mk-input filled">1956</div></div>
+      </div>
+      <div class="btn-row"><button class="btn-primary">Cadastrar</button><button class="btn-ghost">Limpar</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="tip">💡 <strong>Dica:</strong> Após clicar em <strong>Cadastrar</strong>, o formulário é limpo automaticamente e o livro aparece no topo da lista abaixo.</div>
+<div class="note">ℹ️ O sistema alerta se detectar um livro com título muito parecido já cadastrado, para evitar duplicatas.</div>
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 4 -->
+<h2>6. Lista de Livros</h2>
+<p>A seção <strong>Lista de livros</strong> mostra todos os livros cadastrados em formato de tabela. Cada linha apresenta as informações principais e botões de ação.</p>
+
+<div class="mockup">
+  <div class="mk-header"><div><h1>Lista de livros &nbsp;<span style="font-size:9pt;opacity:0.75;font-weight:400">6 de 6 livro(s)</span></h1></div></div>
+  <div class="mk-body" style="padding:0">
+    <table class="mk-table">
+      <thead><tr><th>Título</th><th>Autor</th><th>Tema</th><th>Ano</th><th>Status</th><th>Ações</th></tr></thead>
+      <tbody>
+        <tr><td>Dom Casmurro</td><td>Machado de Assis</td><td>Romance Brasileiro</td><td>1899</td><td><span class="pill pill-disp">Disponível</span></td><td><div class="actions-cell"><button class="btn-ghost btn-small">Editar</button><button class="btn-primary btn-small">Emprestar</button><button class="btn-ghost btn-small">Imprimir</button><button class="btn-danger btn-small">Remover</button></div></td></tr>
+        <tr><td>Os Lusíadas</td><td>Luís de Camões</td><td>Poesia Épica</td><td>1572</td><td><span class="pill pill-disp">Disponível</span></td><td><div class="actions-cell"><button class="btn-ghost btn-small">Editar</button><button class="btn-primary btn-small">Emprestar</button><button class="btn-ghost btn-small">Imprimir</button><button class="btn-danger btn-small">Remover</button></div></td></tr>
+        <tr style="background:#f7f9fd"><td>Sagarana</td><td>João Guimarães Rosa</td><td>Regionalismo</td><td>1946</td><td><span class="pill pill-emp">Emprestado</span></td><td><div class="actions-cell"><button class="btn-ghost btn-small">Editar</button><button class="btn-accent btn-small">Devolver</button><button class="btn-ghost btn-small">Imprimir</button><button class="btn-danger btn-small">Remover</button></div></td></tr>
+        <tr><td>Capitães da Areia</td><td>Jorge Amado</td><td>Romance Social</td><td>1937</td><td><span class="pill pill-disp">Disponível</span></td><td><div class="actions-cell"><button class="btn-ghost btn-small">Editar</button><button class="btn-primary btn-small">Emprestar</button><button class="btn-ghost btn-small">Imprimir</button><button class="btn-danger btn-small">Remover</button></div></td></tr>
+        <tr><td>A Hora da Estrela</td><td>Clarice Lispector</td><td>Modernismo</td><td>1977</td><td><span class="pill pill-disp">Disponível</span></td><td><div class="actions-cell"><button class="btn-ghost btn-small">Editar</button><button class="btn-primary btn-small">Emprestar</button><button class="btn-ghost btn-small">Imprimir</button><button class="btn-danger btn-small">Remover</button></div></td></tr>
+        <tr><td>Grande Sertão: Veredas</td><td>João Guimarães Rosa</td><td>Regionalismo</td><td>1956</td><td><span class="pill pill-emp">Emprestado</span></td><td><div class="actions-cell"><button class="btn-ghost btn-small">Editar</button><button class="btn-accent btn-small">Devolver</button><button class="btn-ghost btn-small">Imprimir</button><button class="btn-danger btn-small">Remover</button></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<p>Os livros com status <span class="pill pill-emp">Emprestado</span> mostram o botão <strong>Devolver</strong> em verde. Os livros <span class="pill pill-disp">Disponível</span> mostram o botão <strong>Emprestar</strong> em azul.</p>
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 5 -->
+<h2>7. Pesquisar e Filtrar</h2>
+<p>Use a barra de pesquisa para encontrar livros por qualquer combinação de critérios. A pesquisa é insensível a maiúsculas e aceita trechos parciais.</p>
+<ol>
+  <li>Preencha um ou mais campos de filtro (Título, Autor, Tema, Status).</li>
+  <li>Clique em <strong>Pesquisar</strong> ou pressione <kbd>Enter</kbd> em qualquer campo.</li>
+  <li>A lista se atualiza mostrando apenas os livros que correspondem.</li>
+  <li>Clique em <strong>Limpar filtros</strong> para voltar à lista completa.</li>
+</ol>
+
+<div class="mockup">
+  <div class="mk-header"><div><h1>Pesquisar e filtrar</h1></div></div>
+  <div class="mk-body">
+    <div class="mk-card">
+      <div class="mk-toolbar">
+        <div><div class="mk-label">Título (parcial)</div><div class="mk-input"></div></div>
+        <div><div class="mk-label">Autor (parcial)</div><div class="mk-input filled focus">guimarães</div></div>
+        <div><div class="mk-label">Tema (parcial)</div><div class="mk-input"></div></div>
+        <div><div class="mk-label">Status</div><div class="mk-input" style="font-size:9.5pt">Todos ▾</div></div>
+        <div style="padding-top:18px"><button class="btn-primary">Pesquisar</button></div>
+        <div style="padding-top:18px"><button class="btn-ghost">Limpar filtros</button></div>
+      </div>
+    </div>
+    <div style="background:#fff; border-radius:10px; box-shadow:0 3px 12px rgba(20,30,60,0.06); overflow:hidden;">
+      <table class="mk-table">
+        <thead><tr><th>Título</th><th>Autor</th><th>Tema</th><th>Ano</th><th>Status</th><th>Ações</th></tr></thead>
+        <tbody>
+          <tr><td>Sagarana</td><td>João Guimarães Rosa</td><td>Regionalismo</td><td>1946</td><td><span class="pill pill-emp">Emprestado</span></td><td><div class="actions-cell"><button class="btn-ghost btn-small">Editar</button><button class="btn-accent btn-small">Devolver</button></div></td></tr>
+          <tr><td>Grande Sertão: Veredas</td><td>João Guimarães Rosa</td><td>Regionalismo</td><td>1956</td><td><span class="pill pill-emp">Emprestado</span></td><td><div class="actions-cell"><button class="btn-ghost btn-small">Editar</button><button class="btn-accent btn-small">Devolver</button></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<p><strong>Resultado:</strong> pesquisa por "guimarães" encontrou 2 livros de João Guimarães Rosa.</p>
+<div class="note">ℹ️ Para filtrar apenas livros emprestados, use o seletor de <strong>Status</strong> e escolha <em>Emprestados</em>. O seletor se aplica automaticamente sem necessidade de clicar em Pesquisar.</div>
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 6 -->
+<h2>8. Editar um Livro</h2>
+<p>Para corrigir ou atualizar os dados de um livro, clique no botão <strong>Editar</strong> na linha correspondente. Abre-se uma janela de edição.</p>
+
+<div class="mockup">
+  <div class="mk-header"><div><h1>Lista de livros</h1></div></div>
+  <div class="mk-body">
+    <div class="mk-modal-bg">
+      <div class="mk-modal">
+        <h3>Editar livro</h3>
+        <div class="mk-modal-form">
+          <div><div class="mk-label">Título</div><div class="mk-input filled">Dom Casmurro</div></div>
+          <div><div class="mk-label">Autor</div><div class="mk-input filled focus">Joaquim Maria Machado de Assis</div></div>
+          <div><div class="mk-label">Tema</div><div class="mk-input filled">Romance Brasileiro</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div><div class="mk-label">Ano</div><div class="mk-input filled">1899</div></div>
+            <div><div class="mk-label">Status</div><div class="mk-input" style="font-size:9.5pt">Disponível ▾</div></div>
+          </div>
+        </div>
+        <div class="mk-modal-actions">
+          <button class="btn-ghost">Cancelar</button>
+          <button class="btn-primary">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ol>
+  <li>Altere os campos desejados. Campos não alterados mantêm o valor atual.</li>
+  <li>Clique em <strong>Salvar</strong> para confirmar as alterações.</li>
+  <li>Clique em <strong>Cancelar</strong> ou fora da janela para descartar.</li>
+</ol>
+<div class="tip">💡 <strong>Dica:</strong> Pode alterar o status (Disponível / Emprestado) diretamente aqui, ou usar os botões <strong>Emprestar</strong> / <strong>Devolver</strong> na lista.</div>
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 7 -->
+<h2>9. Emprestar e Devolver</h2>
+<p>O sistema permite registrar empréstimos de livros. O status de cada livro é visível na coluna <strong>Status</strong> da lista.</p>
+
+<h3>Emprestar um livro</h3>
+<ol>
+  <li>Localize o livro na lista (use a pesquisa se necessário).</li>
+  <li>Clique no botão <button class="btn-primary btn-small">Emprestar</button> na linha do livro.</li>
+  <li>O status muda imediatamente para <span class="pill pill-emp">Emprestado</span>.</li>
+</ol>
+
+<h3>Devolver um livro</h3>
+<ol>
+  <li>Localize o livro emprestado na lista.</li>
+  <li>Clique no botão <button class="btn-accent btn-small">Devolver</button>.</li>
+  <li>O status muda para <span class="pill pill-disp">Disponível</span>.</li>
+</ol>
+
+<div class="mockup">
+  <div class="mk-body" style="padding:0">
+    <table class="mk-table">
+      <thead><tr><th>Título</th><th>Autor</th><th>Ano</th><th>Status</th><th>Ações</th></tr></thead>
+      <tbody>
+        <tr><td>Dom Casmurro</td><td>Machado de Assis</td><td>1899</td><td><span class="pill pill-disp">Disponível</span></td><td><div class="actions-cell"><button class="btn-primary btn-small">Emprestar</button></div></td></tr>
+        <tr style="background:#f7f9fd"><td>Sagarana</td><td>João Guimarães Rosa</td><td>1946</td><td><span class="pill pill-emp">Emprestado</span></td><td><div class="actions-cell"><button class="btn-accent btn-small">Devolver</button></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="tip">💡 Para ver apenas os livros emprestados, use o filtro <strong>Status → Emprestados</strong> na barra de pesquisa.</div>
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 8 -->
+<h2>10. Importar e Exportar</h2>
+<p>Os dados podem ser trocados com outras aplicações (incluindo o programa em C++) através do formato TSV.</p>
+
+<div class="mockup">
+  <div class="mk-header"><div><h1>Importar / Exportar</h1></div></div>
+  <div class="mk-body">
+    <div class="mk-card">
+      <p style="font-size:9.5pt; color:#6b7280; margin-bottom:10px">O formato é idêntico ao usado pelo programa em C++: campos separados por TAB e flag 1/0 para emprestado.</p>
+      <div class="btn-row">
+        <button class="btn-primary">Importar biblioteca.txt</button>
+        <button class="btn-accent">Exportar biblioteca.txt</button>
+        <button class="btn-danger">Apagar tudo</button>
+        <button class="btn-ghost">Encerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h3>Backup</h3>
+<p>O botão <strong>Backup</strong> salva uma cópia do arquivo com a data e hora no nome, sem substituir o arquivo principal.</p>
+
+<div class="mockup">
+  <div class="mk-body" style="padding:12px 16px;">
+    <div class="btn-row">
+      <button class="btn-primary">Importar biblioteca.txt</button>
+      <button class="btn-accent">Exportar biblioteca.txt</button>
+      <button class="btn-ghost" style="border-color:#2b5fb3; color:#2b5fb3; font-weight:600;">Backup</button>
+      <button class="btn-danger">Apagar tudo</button>
+      <button class="btn-ghost">Encerrar</button>
+    </div>
+  </div>
+</div>
+
+<p>O nome do arquivo gerado inclui data e hora: <code>biblioteca_2026-06-29_14h30.txt</code>.</p>
+
+<table style="width:100%; border-collapse:collapse; font-size:10pt; margin:10px 0 14px;">
+  <thead><tr style="background:#f4f6fb">
+    <th style="text-align:left;padding:7px 10px;border:1px solid #e2e6ee">Versão</th>
+    <th style="text-align:left;padding:7px 10px;border:1px solid #e2e6ee">O que acontece</th>
+  </tr></thead>
+  <tbody>
+    <tr><td style="padding:7px 10px;border:1px solid #e2e6ee"><strong>Chrome / Edge<br>com arquivo vinculado</strong></td><td style="padding:7px 10px;border:1px solid #e2e6ee">Abre o diálogo "Salvar como" já posicionado na pasta do arquivo vinculado.</td></tr>
+    <tr style="background:#f9fafb"><td style="padding:7px 10px;border:1px solid #e2e6ee"><strong>Chrome / Edge<br>sem arquivo vinculado</strong></td><td style="padding:7px 10px;border:1px solid #e2e6ee">Abre o diálogo "Salvar como" para o usuário escolher a pasta.</td></tr>
+    <tr><td style="padding:7px 10px;border:1px solid #e2e6ee"><strong>Firefox / Safari</strong></td><td style="padding:7px 10px;border:1px solid #e2e6ee">Baixa o arquivo para a pasta Downloads (sem diálogo de destino).</td></tr>
+  </tbody>
+</table>
+
+<div class="tip">💡 Faça backup antes de importar um arquivo novo ou de usar <strong>Apagar tudo</strong>.</div>
+<h3>Exportar</h3>
+<p>Clique em <strong>Exportar biblioteca.txt</strong>. O arquivo <code>biblioteca.txt</code> é baixado para a pasta <strong>Downloads</strong> do navegador. Mova-o depois para a pasta desejada, se necessário.</p>
+
+<h3>Importar</h3>
+<ol>
+  <li>Clique em <strong>Importar biblioteca.txt</strong>.</li>
+  <li>Seleccione o arquivo <code>biblioteca.txt</code> no seu computador.</li>
+  <li>O sistema pergunta se deseja <strong>substituir</strong> a lista atual ou <strong>adicionar</strong> ao final.</li>
+</ol>
+
+<div class="note">ℹ️ <strong>Compatibilidade:</strong> O arquivo TSV é compartilhado com o programa C++ (<code>main.cpp</code>). Pode usar os dois alternadamente: edite pelo navegador e depois continue pelo terminal, ou vice-versa.</div>
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 9 -->
+<h2>11. Remover um Livro</h2>
+<p>Para excluir permanentemente um livro do catálogo:</p>
+<ol>
+  <li>Localize o livro na lista.</li>
+  <li>Clique no botão <button class="btn-danger btn-small">Remover</button>.</li>
+  <li>Confirme a remoção na caixa de diálogo que aparece.</li>
+</ol>
+
+<div class="note">⚠️ <strong>Atenção:</strong> A remoção é permanente e não pode ser desfeita. Se tiver dúvidas, exporte o arquivo antes de remover.</div>
+
+<h3>Apagar toda a biblioteca</h3>
+<p>O botão <strong>Apagar tudo</strong> na seção Importar / Exportar exclui todos os livros de uma vez. Uma confirmação é pedida antes de executar esta ação.</p>
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 10 -->
+<h2>12. Compatibilidade com Navegadores</h2>
+<p>A interface web (<code>biblioteca.html</code>) pode ser aberta diretamente em qualquer navegador moderno. Porém, há diferenças de comportamento importantes dependendo do navegador usado.</p>
+
+<table style="width:100%; border-collapse:collapse; font-size:10pt; margin-top:10px; margin-bottom:14px;">
+  <thead>
+    <tr style="background:#f4f6fb">
+      <th style="text-align:left;padding:8px 12px;border:1px solid #e2e6ee">Função</th>
+      <th style="text-align:center;padding:8px 12px;border:1px solid #e2e6ee">Chrome / Edge</th>
+      <th style="text-align:center;padding:8px 12px;border:1px solid #e2e6ee">Firefox</th>
+      <th style="text-align:center;padding:8px 12px;border:1px solid #e2e6ee">Safari</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="padding:7px 12px;border:1px solid #e2e6ee">Cadastrar, pesquisar, editar</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td></tr>
+    <tr style="background:#f9fafb"><td style="padding:7px 12px;border:1px solid #e2e6ee">Salvar dados no navegador (localStorage)</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td></tr>
+    <tr><td style="padding:7px 12px;border:1px solid #e2e6ee">Importar / Exportar arquivo TSV</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td></tr>
+    <tr style="background:#f9fafb"><td style="padding:7px 12px;border:1px solid #e2e6ee">Vincular arquivo (salvar automaticamente)</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅ (Safari 15.2+)</td></tr>
+    <tr><td style="padding:7px 12px;border:1px solid #e2e6ee">Lembrar arquivo vinculado entre sessões</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">⚠️ Não funciona</td></tr>
+    <tr style="background:#f9fafb"><td style="padding:7px 12px;border:1px solid #e2e6ee">Botão Encerrar (fecha a aba)</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">✅</td><td style="text-align:center;padding:7px 12px;border:1px solid #e2e6ee">⚠️ Não fecha</td></tr>
+  </tbody>
+</table>
+
+<h3>Limitações do Safari — Detalhes</h3>
+
+<div class="note">⚠️ <strong>Botão Encerrar não fecha a aba no Safari:</strong> por regra de segurança, o Safari só permite que um script feche uma aba que ele mesmo abriu. Como o usuário abre o arquivo diretamente, o botão Encerrar exibe a tela "Interface encerrada" mas a aba permanece aberta. Basta fechar manualmente com <kbd>⌘ W</kbd>.</div>
+
+<div class="note">⚠️ <strong>Vínculo de arquivo não é lembrado entre sessões no Safari:</strong> o programa usa o IndexedDB do navegador para memorizar o arquivo <code>biblioteca.txt</code> vinculado. O Safari bloqueia o IndexedDB quando o arquivo é aberto via <code>file://</code> (protocolo de arquivo local), por razões de privacidade. Na prática, a cada vez que abrir o programa no Safari será necessário clicar em <strong>Vincular arquivo</strong> novamente.</div>
+
+<h3>Recomendação</h3>
+<p>Para uso com a interface web, a ordem de preferência de navegadores é:</p>
+<ol>
+  <li><strong>Google Chrome ou Microsoft Edge</strong> — todas as funções disponíveis, incluindo vínculo automático de arquivo.</li>
+  <li><strong>Firefox</strong> — todas as funções básicas funcionam; o vínculo de arquivo também é suportado.</li>
+  <li><strong>Safari</strong> — funciona para uso básico, mas o botão Encerrar não fecha a aba e o vínculo de arquivo precisa ser refeito a cada sessão.</li>
+</ol>
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════ CAP 11 -->
+<h2>13. Formato do Arquivo de Dados</h2>
+<p>Os dados são salvos em <code>biblioteca.txt</code> no formato <strong>TSV</strong> (campos separados por tabulação). Cada linha representa um livro com 8 colunas:</p>
+
+<div class="tsv-box">
+Dom Casmurro<span class="tsv-tab"> → </span>Machado de Assis<span class="tsv-tab"> → </span>Romance Brasileiro<span class="tsv-tab"> → </span>1899<span class="tsv-tab"> → </span>0<span class="tsv-tab"> → </span><span class="tsv-tab"> → </span><span class="tsv-tab"> → </span>0<br>
+Sagarana<span class="tsv-tab"> → </span>João Guimarães Rosa<span class="tsv-tab"> → </span>Regionalismo<span class="tsv-tab"> → </span>1946<span class="tsv-tab"> → </span>1<span class="tsv-tab"> → </span>Exemplar dedicado<span class="tsv-tab"> → </span>Estante 2<span class="tsv-tab"> → </span>1
+</div>
+
+<p><em>(As setas <strong>→</strong> representam caracteres TAB reais no arquivo)</em></p>
+
+<table style="width:100%; border-collapse:collapse; font-size:10pt; margin-top:10px">
+  <thead><tr style="background:#f4f6fb"><th style="text-align:left;padding:7px 10px;border:1px solid #e2e6ee">Coluna</th><th style="text-align:left;padding:7px 10px;border:1px solid #e2e6ee">Conteúdo</th><th style="text-align:left;padding:7px 10px;border:1px solid #e2e6ee">Exemplo</th></tr></thead>
+  <tbody>
+    <tr><td style="padding:6px 10px;border:1px solid #e2e6ee">1</td><td style="padding:6px 10px;border:1px solid #e2e6ee">Título</td><td style="padding:6px 10px;border:1px solid #e2e6ee;font-family:monospace">Dom Casmurro</td></tr>
+    <tr style="background:#f9fafb"><td style="padding:6px 10px;border:1px solid #e2e6ee">2</td><td style="padding:6px 10px;border:1px solid #e2e6ee">Autor</td><td style="padding:6px 10px;border:1px solid #e2e6ee;font-family:monospace">Machado de Assis</td></tr>
+    <tr><td style="padding:6px 10px;border:1px solid #e2e6ee">3</td><td style="padding:6px 10px;border:1px solid #e2e6ee">Tema</td><td style="padding:6px 10px;border:1px solid #e2e6ee;font-family:monospace">Romance Brasileiro</td></tr>
+    <tr style="background:#f9fafb"><td style="padding:6px 10px;border:1px solid #e2e6ee">4</td><td style="padding:6px 10px;border:1px solid #e2e6ee">Ano</td><td style="padding:6px 10px;border:1px solid #e2e6ee;font-family:monospace">1899</td></tr>
+    <tr><td style="padding:6px 10px;border:1px solid #e2e6ee">5</td><td style="padding:6px 10px;border:1px solid #e2e6ee">Emprestado (1=sim, 0=não)</td><td style="padding:6px 10px;border:1px solid #e2e6ee;font-family:monospace">0</td></tr>
+    <tr style="background:#f9fafb"><td style="padding:6px 10px;border:1px solid #e2e6ee">6</td><td style="padding:6px 10px;border:1px solid #e2e6ee">Comentários (opcional)</td><td style="padding:6px 10px;border:1px solid #e2e6ee;font-family:monospace">Exemplar dedicado</td></tr>
+    <tr><td style="padding:6px 10px;border:1px solid #e2e6ee">7</td><td style="padding:6px 10px;border:1px solid #e2e6ee">Local (opcional)</td><td style="padding:6px 10px;border:1px solid #e2e6ee;font-family:monospace">Estante 2</td></tr>
+    <tr style="background:#f9fafb"><td style="padding:6px 10px;border:1px solid #e2e6ee">8</td><td style="padding:6px 10px;border:1px solid #e2e6ee">Grupo de Literatura (1=sim, 0=não)</td><td style="padding:6px 10px;border:1px solid #e2e6ee;font-family:monospace">1</td></tr>
+  </tbody>
+</table>
+
+<p style="margin-top:14px">O arquivo pode ser editado diretamente num editor de texto ou numa folha de cálculo (Excel, Numbers) usando TAB como separador.</p>
+
+<div style="margin-top:40px; padding-top:16px; border-top:1px solid #e2e6ee; text-align:center; color:#9ca3af; font-size:9pt;">
+  Sistema de Gestão de Biblioteca — Manual do Usuário v1.0 — Junho 2026
+</div>
+
+</body>
+</html>

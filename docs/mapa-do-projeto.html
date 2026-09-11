@@ -1,0 +1,665 @@
+<title>Biblioteca em dois motores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+
+<style>
+:root {
+  --ground:      #F5F7FA;
+  --surface:     #FFFFFF;
+  --surface-2:   #EEF2F7;
+  --border:      #D9E0EA;
+  --border-soft: #E7ECF3;
+  --ink:         #141B26;
+  --ink-2:       #3A4657;
+  --muted:       #64738A;
+  --azul:        #2B5FB3;
+  --azul-soft:   #E8EFFA;
+  --verde:       #1B7D57;
+  --verde-soft:  #E3F2EB;
+  --ambar:       #9C6612;
+  --ambar-soft:  #F8EEDA;
+  --vermelho:    #B23A2C;
+  --verm-soft:   #FAE9E6;
+  --parado:      #7A879A;
+  --parado-soft: #EAEDF2;
+
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:      #0E131A;
+    --surface:     #161E28;
+    --surface-2:   #1D2733;
+    --border:      #2A3543;
+    --border-soft: #222C38;
+    --ink:         #E3EAF3;
+    --ink-2:       #C0CBD9;
+    --muted:       #8496AC;
+    --azul:        #6E9EE8;
+    --azul-soft:   #1A2739;
+    --verde:       #4FBF92;
+    --verde-soft:  #12261F;
+    --ambar:       #D6A44E;
+    --ambar-soft:  #2A2214;
+    --vermelho:    #E8796B;
+    --verm-soft:   #2C1917;
+    --parado:      #8D9AAC;
+    --parado-soft: #1E2630;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground:      #0E131A;
+  --surface:     #161E28;
+  --surface-2:   #1D2733;
+  --border:      #2A3543;
+  --border-soft: #222C38;
+  --ink:         #E3EAF3;
+  --ink-2:       #C0CBD9;
+  --muted:       #8496AC;
+  --azul:        #6E9EE8;
+  --azul-soft:   #1A2739;
+  --verde:       #4FBF92;
+  --verde-soft:  #12261F;
+  --ambar:       #D6A44E;
+  --ambar-soft:  #2A2214;
+  --vermelho:    #E8796B;
+  --verm-soft:   #2C1917;
+  --parado:      #8D9AAC;
+  --parado-soft: #1E2630;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 44px 24px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* ---------- cabecalho ---------- */
+
+.cab { display: flex; flex-direction: column; gap: 14px; }
+
+.sobrescrito {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--azul);
+}
+
+h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(30px, 5vw, 46px);
+  line-height: 1.05;
+  letter-spacing: -0.024em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.linha-fina {
+  font-size: 17px;
+  color: var(--ink-2);
+  max-width: 63ch;
+  margin: 0;
+}
+
+.raiz {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 5px;
+  padding: 7px 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+/* ---------- secoes ---------- */
+
+section { display: flex; flex-direction: column; gap: 18px; }
+
+h2 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--border);
+}
+
+h2 em { font-style: normal; color: var(--ink); font-weight: 600; }
+
+.nota { font-size: 14.5px; color: var(--muted); margin: 0; max-width: 68ch; }
+.nota code, .linha-fina code { font-family: var(--mono); font-size: 12.5px; }
+
+/* ---------- arvore ---------- */
+
+.arvore-caixa {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  padding: 22px 24px;
+  overflow-x: auto;
+}
+
+pre.arvore {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--ink-2);
+  white-space: pre;
+}
+
+pre.arvore b { color: var(--ink); font-weight: 700; }
+pre.arvore i { color: var(--muted); font-style: normal; }
+pre.arvore u { color: var(--azul); text-decoration: none; font-weight: 500; }
+pre.arvore s { color: var(--parado); text-decoration: none; }
+
+/* ---------- roteador ---------- */
+
+.tabela-caixa {
+  overflow-x: auto;
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+
+th {
+  font-family: var(--display);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--ink-2);
+  vertical-align: top;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+
+td.m, th.m { font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+td.nowrap { white-space: nowrap; }
+td.forte { color: var(--ink); font-weight: 600; }
+
+.grupo td {
+  background: var(--surface-2);
+  font-family: var(--display);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 8px 16px;
+}
+
+/* ---------- regras ---------- */
+
+.regras { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+
+.regra {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.regra-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--azul);
+}
+
+.regra-tit {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.regra-txt { font-size: 14.5px; color: var(--ink-2); }
+.regra-txt code { font-family: var(--mono); font-size: 12.5px; }
+
+.regra-cmd {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 8px 10px;
+  color: var(--ink-2);
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+/* ---------- antes / depois ---------- */
+
+.antesdepois { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
+
+.coluna {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.coluna-rot {
+  font-family: var(--display);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.num-lista { display: flex; flex-direction: column; gap: 5px; }
+
+.num-linha {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+
+.num-linha span:last-child {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.seta { font-size: 22px; color: var(--muted); }
+
+.unica {
+  font-family: var(--mono);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--verde);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+/* ---------- matriz de permissoes ---------- */
+
+.matriz { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+
+.pill {
+  display: inline-block;
+  font-family: var(--display);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.pill.ok    { background: var(--verde-soft);  color: var(--verde); }
+.pill.velha { background: var(--ambar-soft);  color: var(--ambar); }
+.pill.risco { background: var(--verm-soft);   color: var(--vermelho); }
+.pill.neutra{ background: var(--parado-soft); color: var(--parado); }
+
+/* ---------- pendencias ---------- */
+
+.alertas { display: flex; flex-direction: column; gap: 2px; }
+
+.alerta {
+  display: grid;
+  grid-template-columns: 3px 1fr;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-left: none;
+}
+.alerta + .alerta { border-top: none; }
+
+.faixa { background: var(--parado); }
+.alerta.aten .faixa { background: var(--ambar); }
+.alerta.info .faixa { background: var(--azul); }
+
+.alerta-corpo { padding: 15px 18px; display: flex; flex-direction: column; gap: 3px; }
+
+.alerta-tit {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 15.5px;
+  letter-spacing: -0.008em;
+}
+
+.alerta-txt { font-size: 14.5px; color: var(--ink-2); }
+.alerta-txt code { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+
+/* ---------- rodape ---------- */
+
+.rodape {
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rodape code { font-family: var(--mono); font-size: 12px; }
+
+@media (max-width: 680px) {
+  .antesdepois { grid-template-columns: 1fr; }
+  .seta { transform: rotate(90deg); justify-self: center; }
+}
+</style>
+
+<div class="wrap">
+
+  <header class="cab">
+    <div class="sobrescrito">Mapa do projeto · consolidado em 4 de setembro de 2026</div>
+    <h1>Biblioteca em dois motores</h1>
+    <p class="linha-fina">Cinco projetos soltos viraram um. Um motor web — o <code>biblioteca.html</code>, em cópia única — e um motor móvel com dois apps nativos. O nome de cada pasta diz o motor e a plataforma que ela gera.</p>
+    <div class="raiz">/Users/wilson-16-06-2022/Documents-old/RISK-V-CLAUDE/RISK-Claude/Biblioteca/</div>
+  </header>
+
+  <section>
+    <h2>A árvore</h2>
+    <div class="arvore-caixa">
+<pre class="arvore"><b>Biblioteca/</b>
+├── README.md · CLAUDE.md · <u>VERSION</u>            <i>a única fonte da versão</i>
+│
+├── <b>motor-web/</b>
+│   ├── <u>biblioteca.html</u>                     <i>O MOTOR. Uma cópia, e só.</i>
+│   ├── biblioteca.txt                        <i>exemplo de desenvolvimento</i>
+│   ├── <b>macos/</b>                               <i>Swift + WKWebView</i>
+│   └── <b>windows/</b>                             <i>atalhos .bat · .ps1 · .vbs</i>
+│
+├── <b>motor-movel/</b>
+│   ├── <b>ios/</b>                                 <i>SwiftUI · iPhone</i>
+│   └── <b>android/</b>                             <i>Flutter · Android</i>
+│
+├── <b>comum/</b>                                   <i>o contrato entre todos</i>
+│   ├── formato-tsv.md · foto-id.md · permissoes.md
+│   └── icons/
+│
+├── <b>bin/</b>   versionar.sh · empacotar.sh
+├── <b>docs/</b>  manuais em PDF e HTML
+│
+└── <s>legado/</s>                                  <i>congelado, não apagado</i>
+    ├── <s>terminal-cpp/</s>                        <i>o menu C++ e seus 28 testes</i>
+    └── <s>web-tauri/</s>                           <i>parado desde 1º de julho</i></pre>
+    </div>
+    <p class="nota">As pastas antigas — <code>Biblioteca-IOS</code>, <code>Biblioteca-Flutter</code>, <code>Biblioteca-Mac-Web</code>, <code>Biblioteca-App</code>, <code>Biblioteca-Android</code> — não existem mais. Nem o <code>Biblioteca/Biblioteca/Biblioteca/</code> aninhado três vezes.</p>
+  </section>
+
+  <section>
+    <h2>Onde mexer em <em>cada coisa</em></h2>
+    <div class="tabela-caixa">
+      <table>
+        <thead>
+          <tr><th>Quero mudar…</th><th>Vou em</th><th>Observação</th></tr>
+        </thead>
+        <tbody>
+          <tr class="grupo"><td colspan="3">Interface e comportamento</td></tr>
+          <tr>
+            <td class="forte">o app web</td>
+            <td class="m nowrap">motor-web/biblioteca.html</td>
+            <td>Arquivo único, sem build. Abrir no navegador já testa.</td>
+          </tr>
+          <tr>
+            <td class="forte">o app do Mac</td>
+            <td class="m nowrap">motor-web/macos/</td>
+            <td>Só embrulha o HTML. Não tem lógica própria.</td>
+          </tr>
+          <tr>
+            <td class="forte">os atalhos do Windows</td>
+            <td class="m nowrap">motor-web/windows/</td>
+            <td>Idem. Procuram o motor ao lado, depois um nível acima.</td>
+          </tr>
+          <tr>
+            <td class="forte">o app do iPhone</td>
+            <td class="m nowrap">motor-movel/ios/</td>
+            <td>SwiftUI. Arquivos novos entram na compilação sozinhos.</td>
+          </tr>
+          <tr>
+            <td class="forte">o app do Android</td>
+            <td class="m nowrap">motor-movel/android/</td>
+            <td>Flutter. É daqui que sai o APK.</td>
+          </tr>
+
+          <tr class="grupo"><td colspan="3">Contrato — muda em um, confira nos outros</td></tr>
+          <tr>
+            <td class="forte">o formato do <code>biblioteca.txt</code></td>
+            <td class="m nowrap">comum/formato-tsv.md</td>
+            <td>3 implementações: Swift, Dart, JavaScript.</td>
+          </tr>
+          <tr>
+            <td class="forte">a chave da foto de capa</td>
+            <td class="m nowrap">comum/foto-id.md</td>
+            <td>Hash FNV-1a duplo. Errou o overflow, a capa some sem erro.</td>
+          </tr>
+          <tr>
+            <td class="forte">permissão de câmera</td>
+            <td class="m nowrap">comum/permissoes.md</td>
+            <td>2 implementações espelhadas, iOS e Flutter.</td>
+          </tr>
+
+          <tr class="grupo"><td colspan="3">Publicação</td></tr>
+          <tr>
+            <td class="forte">o número da versão</td>
+            <td class="m nowrap">VERSION</td>
+            <td>Depois rode <code>./bin/versionar.sh</code>. Nunca edite à mão.</td>
+          </tr>
+          <tr>
+            <td class="forte">os zips de distribuição</td>
+            <td class="m nowrap">bin/empacotar.sh</td>
+            <td>Gera <code>dist/</code> com o layout plano que o usuário recebe.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>As três regras que evitam voltar ao caos</h2>
+    <div class="regras">
+
+      <div class="regra">
+        <div class="regra-num">REGRA 1</div>
+        <div class="regra-tit">Uma cópia só do motor web</div>
+        <div class="regra-txt">Edite <code>motor-web/biblioteca.html</code> e mais nada. O app macOS chega nele por link simbólico; os atalhos procuram <code>./biblioteca.html</code> e caem para <code>../biblioteca.html</code>. Achou outra cópia? É lixo — apague, não sincronize.</div>
+      </div>
+
+      <div class="regra">
+        <div class="regra-num">REGRA 2</div>
+        <div class="regra-tit">Uma versão só</div>
+        <div class="regra-txt">O arquivo <code>VERSION</code> na raiz carimba os cinco pontos de uma vez.</div>
+        <div class="regra-cmd">echo "1.8.1" &gt; VERSION &amp;&amp; ./bin/versionar.sh</div>
+      </div>
+
+      <div class="regra">
+        <div class="regra-num">REGRA 3</div>
+        <div class="regra-tit">Mexeu no contrato, confira nos cinco</div>
+        <div class="regra-txt">O que está em <code>comum/</code> tem implementações paralelas em Swift, Dart e JavaScript. Uma alteração ali é uma alteração em todas — os apps trocam dados entre si.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>A versão, antes e depois</h2>
+    <div class="antesdepois">
+      <div class="coluna">
+        <div class="coluna-rot">Cinco numerações independentes</div>
+        <div class="num-lista">
+          <div class="num-linha"><span>App web</span><span>1.7.5</span></div>
+          <div class="num-linha"><span>App macOS</span><span>1.7.5</span></div>
+          <div class="num-linha"><span>App Tauri</span><span>0.5.8</span></div>
+          <div class="num-linha"><span>App iOS</span><span>1.0.0</span></div>
+          <div class="num-linha"><span>App Flutter</span><span>1.0.0+1</span></div>
+          <div class="num-linha"><span>Atalho do Desktop</span><span>0.6.0</span></div>
+        </div>
+      </div>
+      <div class="seta">→</div>
+      <div class="coluna">
+        <div class="coluna-rot">Uma, carimbada por script</div>
+        <div class="unica">1.8.0</div>
+        <div class="num-linha" style="margin-top:4px;"><span>HTML, dois Info.plist, MARKETING_VERSION e pubspec — todos de uma vez.</span></div>
+      </div>
+    </div>
+    <p class="nota">O Tauri saiu de circulação e o atalho do Desktop é um lançador externo de 200 bytes, fora do repositório. Sobraram quatro entregas, com um número só.</p>
+  </section>
+
+  <section>
+    <h2>Permissão de câmera, antes e depois</h2>
+    <div class="matriz">
+      <div class="tabela-caixa">
+        <table>
+          <thead><tr><th>Antes</th><th>Scanner</th><th>Câmera da capa</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="forte">iOS</td>
+              <td><span class="pill ok">tratava</span></td>
+              <td><span class="pill risco">tela preta</span></td>
+            </tr>
+            <tr>
+              <td class="forte">Android</td>
+              <td><span class="pill ok">tratava</span></td>
+              <td><span class="pill risco">silêncio</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tabela-caixa">
+        <table>
+          <thead><tr><th>Depois</th><th>Scanner</th><th>Câmera da capa</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="forte">iOS</td>
+              <td><span class="pill ok">contrato</span></td>
+              <td><span class="pill ok">contrato</span></td>
+            </tr>
+            <tr>
+              <td class="forte">Android</td>
+              <td><span class="pill ok">contrato</span></td>
+              <td><span class="pill ok">contrato</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="nota">Os dois tratavam o scanner, de formas diferentes; nenhum tratava a câmera da capa. Agora os quatro seguem o mesmo comportamento: mesmos quatro estados, mesmo texto, mesmos botões. Dois ganhos que faltavam em ambos — <strong>restrita</strong> deixou de ser confundida com negada (não adianta oferecer Configurações a quem não pode mudar), e <strong>ao voltar das Configurações o app reconsulta e abre a câmera sozinho</strong>. A galeria fica de fora de propósito: no Android 13+ o seletor do sistema dispensa permissão, e pedi-la produziria uma recusa falsa.</p>
+  </section>
+
+  <section>
+    <h2>Verificado, não presumido</h2>
+    <div class="tabela-caixa">
+      <table>
+        <thead><tr><th>O quê</th><th>Como</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="forte">App iOS</td>
+            <td class="m">xcodebuild · simulador, sem assinatura</td>
+            <td><span class="pill ok">build succeeded</span></td>
+          </tr>
+          <tr>
+            <td class="forte">App macOS</td>
+            <td class="m">xcodebuild · BibliotecaWeb</td>
+            <td><span class="pill ok">build succeeded</span></td>
+          </tr>
+          <tr>
+            <td class="forte">App Android</td>
+            <td class="m">flutter analyze</td>
+            <td><span class="pill ok">sem erros nos arquivos tocados</span></td>
+          </tr>
+          <tr>
+            <td class="forte">O link simbólico do motor</td>
+            <td class="m">md5 do HTML dentro do .app construído</td>
+            <td><span class="pill ok">conteúdo real, 184.127 bytes</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="nota">O link simbólico era o único risco real da estrutura: se o Xcode empacotasse o link em vez do arquivo, o app abriria vazio. Empacota o conteúdo.</p>
+  </section>
+
+  <section>
+    <h2>O que ficou em aberto</h2>
+    <div class="alertas">
+
+      <div class="alerta aten">
+        <div class="faixa"></div>
+        <div class="alerta-corpo">
+          <div class="alerta-tit">O release Android assina com a chave de debug</div>
+          <div class="alerta-txt">O <code>android/app/build.gradle.kts</code> ainda tem o TODO padrão do Flutter. Antes de publicar em qualquer lugar, configure uma chave de verdade.</div>
+        </div>
+      </div>
+
+      <div class="alerta aten">
+        <div class="faixa"></div>
+        <div class="alerta-corpo">
+          <div class="alerta-tit">Um erro pré-existente no <code>flutter analyze</code></div>
+          <div class="alerta-txt"><code>test/widget_test.dart</code> referencia uma classe <code>MyApp</code> que nunca existiu — sobra do template. É o único erro do projeto, e conserto de um minuto.</div>
+        </div>
+      </div>
+
+      <div class="alerta info">
+        <div class="faixa"></div>
+        <div class="alerta-corpo">
+          <div class="alerta-tit">A árvore ainda não está toda sob git</div>
+          <div class="alerta-txt"><code>motor-movel/android</code> tem remoto no GitHub; <code>motor-movel/ios</code> tem repositório local com um único commit e muito trabalho não commitado. O resto — inclusive o motor web — não está versionado.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="rodape">
+    <div>Nada foi apagado. O estado anterior está em <code>_biblioteca-antes-da-consolidacao_20260903_2353.tar.gz</code> (10 MB, com os repositórios git), e os artefatos retirados da árvore — dois APKs, builds antigos, o .xcarchive e o export v1.7.5 — em <code>_biblioteca-artefatos-removidos_20260903_2353/</code>, ambos em <code>Documents-old/</code>.</div>
+    <div>Esta máquina tem dois <em>homes</em>. O código vive em <code>/Users/wilson-16-06-2022/</code>; o iCloud, o Xcode e o DerivedData, em <code>/Users/wilson/</code>.</div>
+  </footer>
+
+</div>
