@@ -1,0 +1,12 @@
+Biblioteca 1.9.0
+
+O que mudou:
+- Backup automático: antes da primeira gravação de cada sessão, se algo mudou,
+  o app guarda uma cópia em Backups/ (30 do .txt, 7 do .dat).
+- Capas apagadas não voltam mais na sincronização entre aparelhos.
+- Se você refotografar uma capa que apagou, a foto nova prevalece.
+
+O que ajuda testar:
+1. Cadastrar um livro com capa e conferir que ele aparece nos outros aparelhos.
+2. Apagar uma capa num aparelho e conferir que ela NÃO volta no outro.
+3. Abrir o app, mudar alguma coisa e conferir que nasceu um arquivo em Backups/.
