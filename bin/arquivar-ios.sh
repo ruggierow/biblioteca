@@ -5,6 +5,10 @@
 #
 # Depois, para mandar ao TestFlight:  ./bin/enviar-testflight.sh
 #
+# NAO rode este script ao mesmo tempo que ./bin/empacotar.sh. Dois xcodebuild
+# assinando em paralelo travam: um fica parado a 0% de CPU, por mais de dez
+# minutos, sem imprimir nada. Aconteceu em 11/09/2026. Serialize.
+#
 # Por que "clean archive" e nao so "archive": um xcodebuild interrompido deixa
 # o produto marcado como atualizado, e o Xcode PULA a etapa de assinatura na
 # proxima vez. Ja aconteceu aqui — um app sem assinatura foi parar em

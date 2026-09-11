@@ -1,6 +1,8 @@
 #!/bin/bash
 # Gera os pacotes de distribuicao do motor web em dist/ e copia para o Desktop.
 #
+# NAO rode ao mesmo tempo que ./bin/arquivar-ios.sh — ver o aviso la.
+#
 # Mac  → compila, assina, notariza e empacota num .dmg pronto para distribuicao.
 # Win  → distribui o instalador do app nativo (Tauri), gerado antes por
 #        ./bin/compilar-windows.sh. O HTML vai embutido no executavel.
