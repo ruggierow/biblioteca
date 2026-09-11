@@ -1,0 +1,37 @@
+Assunto: Biblioteca 1.9.0 — nova versão para testar
+
+Oi!
+
+Saiu uma versão nova da Biblioteca, com duas mudanças que valem a pena:
+
+  • o app passa a fazer cópias de segurança sozinho;
+  • apagar a capa de um livro agora vale em todos os seus aparelhos —
+    antes ela voltava sozinha na sincronização seguinte.
+
+Preparei uma página com o passo a passo da instalação em cada aparelho
+(iPhone, Android, Mac e Windows) e com as três coisas que ajudam testar
+depois. Abra e leia só a parte do seu aparelho:
+
+    https://claude.ai/code/artifact/4e47be30-972e-4b4a-8e90-e253fc47c295
+
+Dois avisos que estão lá, mas adianto aqui porque assustam:
+
+  • No ANDROID, na primeira vez que você abrir esta versão, o app vai pedir
+    para escolher o arquivo biblioteca.txt de novo. É proposital, não é
+    defeito. E não desinstale a versão antiga antes de instalar a nova —
+    desinstalar apaga as capas guardadas no aparelho.
+
+  • No WINDOWS, vai aparecer uma tela azul dizendo "O Windows protegeu o seu
+    PC". Não é vírus: é o aviso que o Windows dá para todo programa sem
+    certificado digital pago. Clique em "Mais informações" e depois em
+    "Executar assim mesmo".
+
+Quem usa iPhone vai receber, além deste e-mail, um convite da Apple com
+"TestFlight" no assunto — é por ele que a instalação acontece.
+
+Se algo der errado, me conte o que aconteceu, em que aparelho, e o que você
+estava fazendo na hora. Mesmo "achei estranho isso aqui" ajuda.
+
+Obrigado!
+
+Wilson
