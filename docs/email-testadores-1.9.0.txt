@@ -1,4 +1,4 @@
-Assunto: Biblioteca 1.9.0 — nova versão para testar
+Assunto: Biblioteca 1.9.0 — já pode instalar
 
 Oi!
 
@@ -14,20 +14,29 @@ depois. Abra e leia só a parte do seu aparelho:
 
     https://claude.ai/code/artifact/4e47be30-972e-4b4a-8e90-e253fc47c295
 
-Dois avisos que estão lá, mas adianto aqui porque assustam:
+Três avisos que estão lá, mas adianto aqui porque são os que fazem a
+instalação parecer quebrada:
 
-  • No ANDROID, na primeira vez que você abrir esta versão, o app vai pedir
-    para escolher o arquivo biblioteca.txt de novo. É proposital, não é
-    defeito. E não desinstale a versão antiga antes de instalar a nova —
-    desinstalar apaga as capas guardadas no aparelho.
+  • No iPHONE, a Biblioteca chega pelo TestFlight, e ela só aparece para
+    quem ACEITOU o convite da Apple. Se você recebeu esse convite há
+    semanas e nunca abriu, ele continua valendo — procure o e-mail da
+    Apple com "TestFlight" no assunto. Sem aceitar, procurar na App Store
+    não encontra nada.
 
-  • No WINDOWS, vai aparecer uma tela azul dizendo "O Windows protegeu o seu
-    PC". Não é vírus: é o aviso que o Windows dá para todo programa sem
-    certificado digital pago. Clique em "Mais informações" e depois em
+  • No ANDROID, na primeira vez que você abrir esta versão, o app vai
+    pedir para escolher o arquivo biblioteca.txt de novo. É proposital,
+    não é defeito. E não desinstale a versão antiga antes de instalar a
+    nova — desinstalar apaga as capas guardadas no aparelho.
+
+  • No WINDOWS, vai aparecer uma tela azul dizendo "O Windows protegeu o
+    seu PC". Não é vírus: é o aviso que o Windows dá para todo programa
+    sem certificado digital pago. Clique em "Mais informações" e depois em
     "Executar assim mesmo".
 
-Quem usa iPhone vai receber, além deste e-mail, um convite da Apple com
-"TestFlight" no assunto — é por ele que a instalação acontece.
+Sobre o Android: estou colocando o app num teste fechado da Play Store,
+que ainda está em análise no Google. Quando sair, vou mandar um link de
+convite e as atualizações passam a chegar sozinhas, sem aviso de fonte
+desconhecida. Até lá, instale pelo botão que está na página.
 
 Se algo der errado, me conte o que aconteceu, em que aparelho, e o que você
 estava fazendo na hora. Mesmo "achei estranho isso aqui" ajuda.
