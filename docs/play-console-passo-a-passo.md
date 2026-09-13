@@ -58,16 +58,33 @@ sexo, jogos de azar e afins — tudo "não". O resultado deve ser Livre.
 ## O caminho no Console
 
 1. **Criar app** → nome "Biblioteca", português (Brasil), aplicativo, gratuito.
-2. **Teste fechado** → criar uma faixa → criar uma lista de e-mails com os seus
+
+   **ATENÇÃO ao campo do nome de pacote nessa tela.** O Console passou a pedi-lo
+   já na criação (antes ele só era definido no primeiro envio) e o preenche
+   sozinho com uma sugestão montada a partir do nome do app — em 13/09/2026 ele
+   propôs `com.biblioteca_myapp`, que passou despercebido. O valor tem de ser,
+   exatamente:
+
+       com.wilson.biblioteca.biblioteca
+
+   Se errar: enquanto o app não tiver nenhuma versão publicada dá para
+   **excluí-lo** (Configurações DO APP, no fim do menu da esquerda › Avançado ›
+   Excluir app) e criar de novo. Depois da primeira publicação, não há volta.
+2. **Assinatura de apps**, ANTES de enviar qualquer pacote — ver a seção
+   anterior. Fica em *Testar e lançar › Configuração › Assinatura de apps*
+   (o menu "Integridade do app" virou "Protegido com o Google Play" e NÃO é
+   ali que a assinatura mora).
+
+3. **Teste fechado** → criar uma faixa → criar uma lista de e-mails com os seus
    testadores.
-3. **Enviar o `.aab`** na faixa de teste fechado.
-4. Preencher: política de privacidade (URL acima), segurança de dados,
+4. **Enviar o `.aab`** na faixa de teste fechado.
+5. Preencher: política de privacidade (URL acima), segurança de dados,
    classificação de conteúdo, público-alvo.
-5. **Ficha da loja**: precisa de ícone 512×512, uma imagem de destaque
+6. **Ficha da loja**: precisa de ícone 512×512, uma imagem de destaque
    1024×500 e ao menos duas capturas de tela do app. Texto sugerido abaixo.
-6. Enviar para revisão. O teste fechado costuma sair em algumas horas a poucos
+7. Enviar para revisão. O teste fechado costuma sair em algumas horas a poucos
    dias.
-7. Os testadores recebem um **link de aceite** — precisam abri-lo e aceitar
+8. Os testadores recebem um **link de aceite** — precisam abri-lo e aceitar
    antes de o app aparecer para eles na Play Store.
 
 **Confira as regras vigentes de teste antes de contar prazos.** O Google passou
