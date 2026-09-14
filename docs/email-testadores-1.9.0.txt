@@ -23,20 +23,29 @@ instalação parecer quebrada:
     Apple com "TestFlight" no assunto. Sem aceitar, procurar na App Store
     não encontra nada.
 
-  • No ANDROID, na primeira vez que você abrir esta versão, o app vai
-    pedir para escolher o arquivo biblioteca.txt de novo. É proposital,
-    não é defeito. E não desinstale a versão antiga antes de instalar a
-    nova — desinstalar apaga as capas guardadas no aparelho.
+  • No ANDROID, a Biblioteca agora está na Play Store, num teste fechado.
+    Procurar por "Biblioteca" na loja não encontra nada: é preciso abrir
+    este link e aceitar o convite primeiro.
+
+        https://play.google.com/apps/testing/com.wilson.biblioteca.biblioteca
+
+    Aceite com a MESMA conta Google que a Play Store do seu celular usa.
+    Se você tem mais de uma conta no aparelho, é aí que costuma dar
+    errado — o convite vale para um endereço só. E depois de aceitar, a
+    loja às vezes leva algumas horas para mostrar o app.
 
   • No WINDOWS, vai aparecer uma tela azul dizendo "O Windows protegeu o
     seu PC". Não é vírus: é o aviso que o Windows dá para todo programa
     sem certificado digital pago. Clique em "Mais informações" e depois em
     "Executar assim mesmo".
 
-Sobre o Android: estou colocando o app num teste fechado da Play Store,
-que ainda está em análise no Google. Quando sair, vou mandar um link de
-convite e as atualizações passam a chegar sozinhas, sem aviso de fonte
-desconhecida. Até lá, instale pelo botão que está na página.
+Ainda sobre o Android: se você já tinha instalado a 1.9.0 pelo arquivo
+.apk, a Play Store vai dizer "Instalado" em vez de oferecer a instalação.
+Está certo — ela vê a mesma versão que você já tem. Não precisa fazer
+nada, e daqui para frente as atualizações chegam sozinhas pela loja.
+
+Quem não conseguir usar a Play Store continua podendo instalar pelo
+arquivo, que está na página.
 
 Se algo der errado, me conte o que aconteceu, em que aparelho, e o que você
 estava fazendo na hora. Mesmo "achei estranho isso aqui" ajuda.
