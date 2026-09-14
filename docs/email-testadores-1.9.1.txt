@@ -1,0 +1,60 @@
+Assunto: Biblioteca 1.9.1 — já pode instalar
+
+Oi!
+
+Saiu a 1.9.1, e desta vez o que mudou é mais visível no celular:
+
+  • a pesquisa do iPhone e do Android ficou igual à do computador — um botão
+    de filtros abre Status, Grupo de literatura e "só livros com foto";
+
+  • o filtro de grupo agora é GRUPO A GRUPO, e não mais só sim/não;
+
+  • um livro pode estar em vários grupos, também no celular;
+
+  • os nomes que você dá aos grupos passaram a viajar entre os aparelhos —
+    antes ficavam presos no computador onde foram criados.
+
+Preparei uma página com o passo a passo da instalação em cada aparelho
+(iPhone, Android, Mac e Windows) e com o que ajuda testar depois. Abra e
+leia só a parte do seu aparelho:
+
+    https://claude.ai/code/artifact/4e47be30-972e-4b4a-8e90-e253fc47c295
+
+Quatro avisos que estão lá, mas adianto aqui porque são os que fazem a
+instalação parecer quebrada:
+
+  • No iPHONE, a Biblioteca chega pelo TestFlight, e ela só aparece para
+    quem ACEITOU o convite da Apple. Se você recebeu esse convite há
+    semanas e nunca abriu, ele continua valendo — procure o e-mail da
+    Apple com "TestFlight" no assunto. Sem aceitar, procurar na App Store
+    não encontra nada.
+
+  • No ANDROID, esta versão pede a PASTA onde estão os seus arquivos, e
+    não o biblioteca.txt como antes. É de propósito: de uma escolha só ele
+    acha o biblioteca.txt e o biblioteca.dat das capas. Atenção: o Android
+    NÃO deixa escolher "Meu Drive" direto — é preciso entrar numa pasta
+    dentro dele. Se os seus arquivos estiverem soltos no Meu Drive, crie
+    uma pasta e mova-os para lá.
+
+  • Se você tem um SAMSUNG e for instalar pelo arquivo .apk, existe um
+    recurso chamado "Bloqueio automático" que impede a instalação e não
+    oferece o atalho de Configurações que costuma aparecer. Desligue em
+    Configurações > Segurança e privacidade > Bloqueio automático, instale,
+    e ligue de volta se quiser.
+
+  • No WINDOWS, vai aparecer uma tela azul dizendo "O Windows protegeu o
+    seu PC". Não é vírus: é o aviso que o Windows dá para todo programa
+    sem certificado digital pago. Clique em "Mais informações" e depois em
+    "Executar assim mesmo".
+
+O que mais ajuda testar, se você puder: abrir a pesquisa no celular, filtrar
+por um grupo de literatura e ver se a lista encolhe para os livros certos.
+É a parte mais nova, e a que eu mais quero ver rodando em aparelho de outra
+pessoa.
+
+Se algo der errado, me conte o que aconteceu, em que aparelho, e o que você
+estava fazendo na hora. Mesmo "achei estranho isso aqui" ajuda.
+
+Obrigado!
+
+Wilson
