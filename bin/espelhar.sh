@@ -20,11 +20,21 @@ ARQUIVOS=(biblioteca.txt biblioteca.dat grupos.json biblioteca-removidas.json)
 DESTINOS=(
     "$HOME/Library/CloudStorage/OneDrive-Personal/Biblioteca"
 )
+# No Drive a pasta pode ter qualquer nome e estar em qualquer lugar — o que
+# manda e onde o CELULAR vinculou. Entao procuramos a pasta que JA TEM um
+# biblioteca.txt dentro, ate 4 niveis abaixo da raiz do Drive; so se nao houver
+# nenhuma e que caimos no nome convencional.
 for raiz in "$HOME/Library/CloudStorage/"GoogleDrive-*; do
     [ -d "$raiz" ] || continue
-    for sub in "$raiz/Meu Drive/Biblioteca" "$raiz/My Drive/Biblioteca"; do
-        [ -d "$sub" ] && DESTINOS+=("$sub")
-    done
+    encontrou=0
+    while IFS= read -r achado; do
+        DESTINOS+=("$(dirname "$achado")"); encontrou=1
+    done < <(find "$raiz" -maxdepth 5 -name biblioteca.txt -not -path '*/.*' 2>/dev/null)
+    if [ "$encontrou" -eq 0 ]; then
+        for sub in "$raiz/Meu Drive/Biblioteca" "$raiz/My Drive/Biblioteca"; do
+            [ -d "$sub" ] && DESTINOS+=("$sub")
+        done
+    fi
 done
 
 echo "origem: $ORIGEM"
