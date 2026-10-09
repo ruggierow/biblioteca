@@ -33,3 +33,6 @@ xcuserdata/
 # macOS
 .DS_Store
 **/.DS_Store
+
+# cache do Python dos comandos em bin/
+__pycache__/
