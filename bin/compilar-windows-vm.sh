@@ -3,7 +3,7 @@
 # partir do da tentativa anterior, que nao copiava fonte nenhuma: a VM compilou
 # o codigo de ontem e o instalador saiu com o nome novo e o conteudo velho.
 set -eu
-V=1.9.9
+V=1.9.10
 S='\\Mac\Documents-old\RISK-V-CLAUDE\RISK-Claude\Biblioteca'
 exec_vm() { prlctl exec "Windows 11" cmd.exe /c "$1" 2>&1; }
 
@@ -24,6 +24,7 @@ confere() {   # <padrao> <arquivo> <rotulo>
 confere "copiar_texto"  "C:\build\biblioteca-tauri\src-tauri\src\lib.rs"      "comando copiar_texto (Rust)"
 confere "BIBLIOTECA_URL" "C:\build\biblioteca-tauri\src-tauri\src\lib.rs"      "abertura por Start-Process (Rust)"
 confere "atributoCopiar" "C:\build\biblioteca-tauri\src\index.html"           "marca do titulo no link (HTML)"
+confere "UrlAssociations" "C:\build\biblioteca-tauri\src-tauri\src\lib.rs"     "navegador lido do registro (Rust)"
 # Sem ASPAS nos padroes: elas se perdem atravessando o prlctl exec e a
 # conferencia da falso negativo (aconteceu nesta mesma montagem).
 confere "$V" "C:\build\biblioteca-tauri\src-tauri\Cargo.toml"  "Cargo.toml em $V"

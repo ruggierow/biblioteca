@@ -64,7 +64,12 @@ cp "$TRAB/export/Biblioteca.App.ipa" "$IPA"
 # Conferencia: um .ipa assinado em desenvolvimento e aceito pelo xcodebuild e
 # recusado la na frente pela Apple, com mensagem obscura. Melhor pegar aqui.
 cd "$TRAB" && unzip -q "$IPA" -d conf
-AUT="$(codesign -dvvv conf/Payload/Biblioteca.App.app 2>&1 | grep -m1 "^Authority=" | sed 's/Authority=//')"
+# Sem `grep -m1` num cano: ele fecha o cano, o codesign morre de SIGPIPE e,
+# com `pipefail`, o script inteiro aborta AQUI — antes de conferir coisa
+# alguma. Em 09/10/2026 isso derrubou a conferencia inteira em silencio: o
+# .ipa saia pronto e nenhuma das tres linhas de verificacao era impressa.
+ASSINATURA="$(codesign -dvvv conf/Payload/Biblioteca.App.app 2>&1 || true)"
+AUT="$(printf '%s\n' "$ASSINATURA" | sed -n 's/^Authority=//p' | head -1)"
 security cms -D -i conf/Payload/Biblioteca.App.app/embedded.mobileprovision > conf/perfil.plist 2>/dev/null
 GTA="$(/usr/libexec/PlistBuddy -c "Print :Entitlements:get-task-allow" conf/perfil.plist 2>/dev/null || echo "?")"
 BETA="$(/usr/libexec/PlistBuddy -c "Print :Entitlements:beta-reports-active" conf/perfil.plist 2>/dev/null || echo ausente)"
