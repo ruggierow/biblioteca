@@ -9,8 +9,23 @@
 # por cima do novo — aconteceu em 07/10/2026 e custou 291 capas (recuperadas de
 # Backups/). Este comando copia SEMPRE na mesma direcao: iCloud -> nuvens.
 #
-# Ele NAO le de volta. Se voce cadastrou algo no celular, traga antes, a mao.
+# Ele NAO le de volta — mas AGORA SE RECUSA a copiar por cima do que so existe
+# no destino. O Android ESCREVE na copia do Drive (e a pasta que ele vincula),
+# entao o que voce cadastra no celular vive so la ate alguem trazer. Em
+# 10/10/2026 uma leitura de codigo de barras no Samsung existia so no Drive:
+# espelhar naquele momento a teria apagado, em silencio.
+#
+#   ./bin/espelhar.sh            recusa e diz o que ha de novo no destino
+#   ./bin/espelhar.sh --trazer   traz para a origem e ai espelha
 set -euo pipefail
+
+TRAZER=""
+case "${1:-}" in
+    --trazer) TRAZER="--trazer" ;;
+    "")       ;;
+    *)        echo "uso: $0 [--trazer]"; exit 2 ;;
+esac
+CONFERIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/conferir_destino.py"
 
 ORIGEM="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Biblioteca"
 ARQUIVOS=(biblioteca.txt biblioteca.dat grupos.json biblioteca-removidas.json)
@@ -39,6 +54,7 @@ done
 
 echo "origem: $ORIGEM"
 achou_drive=0
+recusou=0
 for destino in "${DESTINOS[@]}"; do
     case "$destino" in *GoogleDrive-*) achou_drive=1 ;; esac
     echo
@@ -49,6 +65,17 @@ for destino in "${DESTINOS[@]}"; do
             echo "   $arq: ja igual"
             continue
         fi
+        # O portao: o destino tem algo que a origem nao tem? Entao copiar por
+        # cima APAGA. Melhor parar e dizer o que e.
+        if [ -f "$destino/$arq" ]; then
+            echo "   $arq: conferindo o destino…"
+            if ! python3 -I "$CONFERIR" "$ORIGEM/$arq" "$destino/$arq" $TRAZER; then
+                echo "   $arq: RECUSADO — copiar apagaria o que esta acima."
+                echo "      Rode de novo com --trazer para trazer isso para a origem."
+                recusou=1
+                continue
+            fi
+        fi
         cp "$ORIGEM/$arq" "$destino/$arq"
         # conferir DEPOIS de copiar: copia que nao bate e pior que copia nenhuma
         if cmp -s "$ORIGEM/$arq" "$destino/$arq"; then
@@ -58,6 +85,12 @@ for destino in "${DESTINOS[@]}"; do
         fi
     done
 done
+
+if [ "$recusou" -ne 0 ]; then
+    echo
+    echo "NADA foi espelhado para os arquivos recusados: o destino tinha coisa"
+    echo "que a origem nao tem, e a copia teria apagado. Traga com --trazer."
+fi
 
 if [ "$achou_drive" -eq 0 ]; then
     echo
