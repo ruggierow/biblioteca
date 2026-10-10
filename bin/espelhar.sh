@@ -17,13 +17,21 @@
 #
 #   ./bin/espelhar.sh            recusa e diz o que ha de novo no destino
 #   ./bin/espelhar.sh --trazer   traz para a origem e ai espelha
+#   ./bin/espelhar.sh --forcar   copia por cima assim mesmo
+#
+# `--forcar` existe porque o portao NAO distingue "apagado de proposito" de
+# "criado no celular": os dois aparecem como linha que o destino tem e a origem
+# nao. Quando VOCE editou ou removeu algo na base, o certo e forcar. Quando a
+# novidade veio do aparelho, o certo e --trazer. O comando mostra as linhas
+# para voce decidir qual dos dois e o caso.
 set -euo pipefail
 
-TRAZER=""
+TRAZER=""; FORCAR=0
 case "${1:-}" in
     --trazer) TRAZER="--trazer" ;;
+    --forcar) FORCAR=1 ;;
     "")       ;;
-    *)        echo "uso: $0 [--trazer]"; exit 2 ;;
+    *)        echo "uso: $0 [--trazer|--forcar]"; exit 2 ;;
 esac
 CONFERIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/conferir_destino.py"
 
@@ -67,11 +75,12 @@ for destino in "${DESTINOS[@]}"; do
         fi
         # O portao: o destino tem algo que a origem nao tem? Entao copiar por
         # cima APAGA. Melhor parar e dizer o que e.
-        if [ -f "$destino/$arq" ]; then
+        if [ -f "$destino/$arq" ] && [ "$FORCAR" -eq 0 ]; then
             echo "   $arq: conferindo o destino…"
             if ! python3 -I "$CONFERIR" "$ORIGEM/$arq" "$destino/$arq" $TRAZER; then
                 echo "   $arq: RECUSADO — copiar apagaria o que esta acima."
-                echo "      Rode de novo com --trazer para trazer isso para a origem."
+                echo "      Veio do celular?  rode com --trazer"
+                echo "      Voce apagou/editou na base?  rode com --forcar"
                 recusou=1
                 continue
             fi
