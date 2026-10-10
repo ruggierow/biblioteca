@@ -63,9 +63,15 @@ def copia_de_seguranca(arquivo, motivo):
 
 
 def gravar_fotos(novas, motivo):
-    """Grava capas com DOIS portões: cópia antes, e todo id tem de corresponder
-    a um livro que existe agora — se alguém editou título ou autor desde a
-    varredura, a chave mudou e a capa entraria órfã."""
+    """Grava capas com TRÊS portões: cópia antes; todo id tem de corresponder a
+    um livro que existe agora (se alguém editou título ou autor desde a
+    varredura, a chave mudou e a capa entraria órfã); e as capas SUBSTITUÍDAS
+    são contadas e devolvidas.
+
+    A contagem de substituídas existe porque em 10/10/2026 gravei a capa de um
+    livro que JÁ TINHA capa sem perceber: o total de chaves não mudou e nada na
+    saída disse que uma imagem fora trocada. Deu certo por acaso — a capa velha
+    era de outra edição —, mas quem grava precisa saber que apagou algo."""
     vivos = {l.id for l in ler_base()}
     orfas = [i for i in novas if i not in vivos]
     if orfas:
@@ -73,11 +79,12 @@ def gravar_fotos(novas, motivo):
     copia = copia_de_seguranca(FOTOS, motivo)
     fotos = ler_fotos()
     antes = len(fotos)
+    substituidas = [i for i in novas if i in fotos]
     fotos.update(novas)
     tmp = FOTOS.with_suffix(".dat.novo")
     tmp.write_text(json.dumps(fotos, ensure_ascii=False), encoding="utf-8")
     tmp.replace(FOTOS)
-    return copia, antes, len(ler_fotos())
+    return copia, antes, len(ler_fotos()), substituidas
 
 
 def normal(s):

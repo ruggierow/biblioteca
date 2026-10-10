@@ -195,8 +195,11 @@ def main():
         im = Image.open(imagens / f"{x['id']}.jpg").convert("RGB")
         buf = io.BytesIO(); im.save(buf, "JPEG", quality=82, optimize=True)
         novas[x["id"]] = "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
-    copia, antes, depois = bc.gravar_fotos(novas, "capas")
+    copia, antes, depois, substituidas = bc.gravar_fotos(novas, "capas")
     print(f"\ngravadas {len(novas)}   chaves no .dat: {antes} -> {depois}")
+    if substituidas:
+        print(f"ATENCAO: {len(substituidas)} ja tinham capa e foram SUBSTITUIDAS: "
+              f"{', '.join(substituidas[:5])}{' …' if len(substituidas) > 5 else ''}")
     print(f"copia de seguranca: {copia.name}")
     t, c, f = bc.censo()
     print(f"CENSO: {t} livros   com capa {c}   sem capa {f}")
