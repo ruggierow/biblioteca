@@ -9,11 +9,21 @@
 #   LOGICA   — "o botao parou de responder", "o filtro traz o livro errado".
 #              Pega-se exercitando a pagina num navegador (motor-web/testes).
 #
-#   CONTRATO — "o botao responde no navegador e NAO faz nada no app".
-#              NAO se pega assim: no navegador o `confirm()` funciona, o
-#              `window.print()` existe, o `target="_blank"` abre. Essa familia
-#              e do conferir-ponte.py, que compara o que a pagina usa com o que
-#              cada hospedeiro implementa.
+#   CONTRATO — "funciona na mesa e NAO faz nada no aparelho". NAO se pega
+#              exercitando a tela; pega-se comparando o que o codigo USA com o
+#              que o ambiente OFERECE. Sao dois portoes, um por fronteira:
+#
+#                conferir-ponte.py      Mac e Windows: a pagina x o hospedeiro.
+#                                       No navegador o `confirm()` funciona, o
+#                                       `window.print()` existe, o
+#                                       `target="_blank"` abre — no WKWebView,
+#                                       nenhum dos tres.
+#
+#                conferir-celulares.py  iPhone e Android: o codigo x o que o
+#                                       app DECLARA ao sistema. Sem o esquema
+#                                       em <queries>, o Android 11+ nao abre o
+#                                       Kindle e nao avisa; sem a chave de
+#                                       camera, o iPhone DERRUBA o aplicativo.
 #
 # Em 12/10/2026 o Remover nao fazia nada no Mac por falta do WKUIDelegate. Uma
 # suite de navegador teria passado com louvor. Por isso as duas rodam juntas.
@@ -32,6 +42,9 @@ resultado() {   # <codigo> <nome>
 
 secao "Contrato com os hospedeiros (Mac e Windows)"
 python3 -I bin/conferir-ponte.py; resultado $? "conferir-ponte.py"
+
+secao "Declaracoes ao sistema (iPhone e Android)"
+python3 -I bin/conferir-celulares.py; resultado $? "conferir-celulares.py"
 
 secao "motor-web — a pagina que o Mac e o Windows embarcam"
 if [ -d motor-web/testes/node_modules ]; then
