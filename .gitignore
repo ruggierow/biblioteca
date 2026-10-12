@@ -36,3 +36,8 @@ xcuserdata/
 
 # cache do Python dos comandos em bin/
 __pycache__/
+
+# dependencias dos testes do motor-web
+motor-web/testes/node_modules/
+motor-web/testes/test-results/
+motor-web/testes/playwright-report/
