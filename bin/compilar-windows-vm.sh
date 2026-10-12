@@ -3,7 +3,7 @@
 # partir do da tentativa anterior, que nao copiava fonte nenhuma: a VM compilou
 # o codigo de ontem e o instalador saiu com o nome novo e o conteudo velho.
 set -eu
-V=1.9.12
+V=1.9.13
 S='\\Mac\Documents-old\RISK-V-CLAUDE\RISK-Claude\Biblioteca'
 exec_vm() { prlctl exec "Windows 11" cmd.exe /c "$1" 2>&1; }
 
