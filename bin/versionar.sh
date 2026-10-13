@@ -69,10 +69,30 @@ texto("motor-web/tauri/src-tauri/Cargo.toml",
 texto("motor-web/windows/biblioteca.nsi",
       r'(!define APP_VERSION\s+)"\d+\.\d+\.\d+"', f'\\g<1>"{v}"', "instalador NSIS")
 
-# App Android: preserva o build number depois do +
-texto("motor-movel/android/pubspec.yaml",
-      r"(?m)^version:\s*\d+\.\d+\.\d+\+(\d+)\s*$", f"version: {v}+\\1",
-      "app Android (pubspec.yaml)")
+# App Android: o numero depois do + e o codigo de build, e a Play RECUSA um
+# codigo repetido. Ele sobe de um a cada versao NOVA — e so entao: rodar este
+# script duas vezes na mesma versao nao pode gastar dois codigos, senao a
+# numeracao anda sozinha e ninguem sabe qual foi enviado.
+#
+# Ate 13/10/2026 isso era feito a mao (20, 21, ... 25). Esquecer e descobrir
+# so na hora do envio, com o pacote ja montado.
+def android(caminho, rotulo):
+    p = raiz / caminho
+    if not p.exists():
+        print(f"  - {rotulo}: nao encontrado, pulando"); return
+    s = p.read_text(encoding="utf-8")
+    m = re.search(r"(?m)^version:\s*(\d+\.\d+\.\d+)\+(\d+)\s*$", s)
+    if not m:
+        print(f"  ! {rotulo}: nao achei a linha de versao"); return
+    versao_atual, codigo = m.group(1), int(m.group(2))
+    if versao_atual == v:
+        print(f"  = {rotulo}: ja estava em {v}+{codigo}"); return
+    s = s[:m.start()] + f"version: {v}+{codigo + 1}" + s[m.end():]
+    p.write_text(s, encoding="utf-8")
+    mudou.append(f"  * {rotulo}: {versao_atual}+{codigo} -> {v}+{codigo + 1}"
+                 f"   (codigo de build +1)")
+
+android("motor-movel/android/pubspec.yaml", "app Android (pubspec.yaml)")
 
 print()
 if mudou:
