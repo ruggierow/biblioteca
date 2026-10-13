@@ -25,6 +25,12 @@
 #                                       Kindle e nao avisa; sem a chave de
 #                                       camera, o iPhone DERRUBA o aplicativo.
 #
+#                conferir-paises.py     a MESMA tabela escrita a mao em quatro
+#                                       linguagens. Em 13/10/2026, 22 dos 47
+#                                       nomes do motor-web estavam sem acento:
+#                                       "Mocambique" no Mac, "Moçambique" no
+#                                       iPhone. Nada quebrava.
+#
 # Em 12/10/2026 o Remover nao fazia nada no Mac por falta do WKUIDelegate. Uma
 # suite de navegador teria passado com louvor. Por isso as duas rodam juntas.
 set -uo pipefail
@@ -45,6 +51,9 @@ python3 -I bin/conferir-ponte.py; resultado $? "conferir-ponte.py"
 
 secao "Declaracoes ao sistema (iPhone e Android)"
 python3 -I bin/conferir-celulares.py; resultado $? "conferir-celulares.py"
+
+secao "Tabela de paises nas quatro"
+python3 -I bin/conferir-paises.py; resultado $? "conferir-paises.py"
 
 secao "motor-web — a pagina que o Mac e o Windows embarcam"
 if [ -d motor-web/testes/node_modules ]; then
