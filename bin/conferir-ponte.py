@@ -184,6 +184,31 @@ def main():
     for c in orfas_mac:
         faltas.append((f"messageHandlers.{c}", "Mac", 1, "a pagina chama, o Swift nao registra esse handler"))
 
+    # E O SENTIDO INVERSO, que ninguem conferia: o Swift chama funcoes DA
+    # PAGINA por evaluateJavaScript, e todas estao embrulhadas em
+    # `typeof X === 'function'`. Essa guarda evita o erro no console — e com
+    # isso transforma um nome errado em SILENCIO. Renomear a funcao no HTML
+    # desligaria o recurso sem nada quebrar, que e a familia de defeito que
+    # mais custou neste projeto.
+    # Duas formas, e a segunda quase me enganou: alem do nome LITERAL dentro do
+    # `typeof`, ha o nome passado como ARGUMENTO (`entregar(..., para: "X")`),
+    # que chega interpolado no JavaScript. Procurar so o literal fazia o portao
+    # passar verde com a funcao renomeada — conferido em 29/10/2026, quebrando
+    # de proposito.
+    chamadas_swift = set(re.findall(r"typeof\s+([A-Za-z_]\w*)\s*===\s*'function'", mac))
+    chamadas_swift |= set(re.findall(r'para:\s*"([A-Za-z_]\w*)"', mac))
+    chamadas_swift.discard("funcao")        # o proprio parametro, nao uma funcao da pagina
+    definidas = set(re.findall(r"function\s+([A-Za-z_]\w*)\s*\(", pagina))
+    definidas |= set(re.findall(r"(?:const|let|var)\s+([A-Za-z_]\w*)\s*=\s*(?:async\s*)?(?:function|\()", pagina))
+    orfas_swift = sorted(chamadas_swift - definidas)
+    print(f"   volta do Mac:     o Swift chama {len(chamadas_swift)} funcao(oes) da pagina; "
+          f"a pagina define {len(definidas)}")
+    for c in orfas_swift:
+        faltas.append((f"{c}()", "Mac", 1, "o Swift chama, a pagina nao define essa funcao"))
+    if chamadas_swift and not definidas:
+        print("   ABORTADO: nao reconheci funcao nenhuma na pagina — a conferencia nao olhou nada.")
+        return 1
+
     if chamadas_tauri and not comandos_rust:
         print("   ABORTADO: nao reconheci comando nenhum no Rust — a conferencia nao olhou nada.")
         return 1
