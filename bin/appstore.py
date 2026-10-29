@@ -91,7 +91,11 @@ def quando(iso):
 # Limites da Apple: nome 30, subtitulo 30, palavras-chave 100 (contando as
 # virgulas), promocional 170, descricao 4000.
 
-NOME = "Biblioteca"
+# "Biblioteca" sozinho JA ESTA EM USO por outra conta — o nome e unico na App
+# Store inteira, e a Apple recusa com
+# ENTITY_ERROR.ATTRIBUTE.INVALID.DUPLICATE.DIFFERENT_ACCOUNT. "Biblioteca
+# Pessoal" estava livre e foi o gravado em 29/10/2026.
+NOME = "Biblioteca Pessoal"
 
 SUBTITULO = "Catálogo dos seus livros"
 
