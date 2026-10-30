@@ -153,7 +153,24 @@ def comentario(asin):
             f" | Kindle: kindle://book?action=open&asin={asin}")
 
 
-def main():
+def idade_do_banco():
+    """Quantos dias desde a ultima escrita do Kindle. O -wal e quem recebe primeiro."""
+    maior = 0
+    for sufixo in ("", "-wal", "-shm"):
+        a = Path(str(BANCO) + sufixo)
+        if a.exists():
+            maior = max(maior, a.stat().st_mtime)
+    if not maior:
+        return None
+    return (datetime.datetime.now().timestamp() - maior) / 86400
+
+
+def analisar():
+    """Concilia e DEVOLVE o resultado, sem imprimir nada. Quem imprime e o main().
+
+    Separado da impressao para o vigia (bin/vigia-kindle.py) reusar as MESMAS
+    regras de casamento, em vez de haver uma segunda copia delas por ai.
+    """
     itens = ler_kindle()
     base = ler_base()
     na_base = {a: l for l in base for a in l["asins"]}
@@ -183,6 +200,20 @@ def main():
             outra_edicao.append((i, achada))  # a da base e a impressa
 
     amostras_na_base = [i for i in itens if i["tipo"] == AMOSTRA and i["asin"] in na_base]
+
+    return {"itens": itens, "base": base, "na_base": na_base, "livros": livros,
+            "conferidos": conferidos, "novos": novos, "outra_edicao": outra_edicao,
+            "completar": completar, "amostras_na_base": amostras_na_base,
+            "local_de": local_de}
+
+
+def main():
+    r = analisar()
+    itens, base, na_base = r["itens"], r["base"], r["na_base"]
+    livros, conferidos = r["livros"], r["conferidos"]
+    novos, outra_edicao = r["novos"], r["outra_edicao"]
+    completar, amostras_na_base = r["completar"], r["amostras_na_base"]
+    local_de = r["local_de"]
 
     larg = 58
     print(f"KINDLE  livros {len(livros)}   amostras {sum(1 for i in itens if i['tipo']==AMOSTRA)}"

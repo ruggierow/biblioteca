@@ -41,3 +41,4 @@ __pycache__/
 motor-web/testes/node_modules/
 motor-web/testes/test-results/
 motor-web/testes/playwright-report/
+propostas-kindle.tsv

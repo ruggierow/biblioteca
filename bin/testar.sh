@@ -55,6 +55,9 @@ python3 -I bin/conferir-celulares.py; resultado $? "conferir-celulares.py"
 secao "Tabela de paises nas quatro"
 python3 -I bin/conferir-paises.py; resultado $? "conferir-paises.py"
 
+secao "Vigia do Kindle — silencio e conclusao, nao desistencia"
+python3 -I bin/conferir-vigia.py; resultado $? "conferir-vigia.py"
+
 secao "motor-web — a pagina que o Mac e o Windows embarcam"
 if [ -d motor-web/testes/node_modules ]; then
     (cd motor-web/testes && npx playwright test --reporter=line 2>&1 | tail -20)
