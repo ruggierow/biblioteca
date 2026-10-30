@@ -25,6 +25,14 @@
 #                                       Kindle e nao avisa; sem a chave de
 #                                       camera, o iPhone DERRUBA o aplicativo.
 #
+#                conferir-espelho.py    o guarda que roda ANTES de espelhar. A
+#                                       identidade titulo+autores NAO e unica:
+#                                       o mesmo livro pode estar como impresso
+#                                       e como Kindle. Comparar por conjunto
+#                                       engolia um dos dois, e um livro novo
+#                                       do celular era anunciado como "so
+#                                       alterado" e NAO era trazido.
+#
 #                conferir-paises.py     a MESMA tabela escrita a mao em quatro
 #                                       linguagens. Em 13/10/2026, 22 dos 47
 #                                       nomes do motor-web estavam sem acento:
@@ -57,6 +65,9 @@ python3 -I bin/conferir-paises.py; resultado $? "conferir-paises.py"
 
 secao "Vigia do Kindle — silencio e conclusao, nao desistencia"
 python3 -I bin/conferir-vigia.py; resultado $? "conferir-vigia.py"
+
+secao "Guarda do espelho — contar as edicoes, nao so reconhece-las"
+python3 -I bin/conferir-espelho.py; resultado $? "conferir-espelho.py"
 
 secao "motor-web — a pagina que o Mac e o Windows embarcam"
 if [ -d motor-web/testes/node_modules ]; then

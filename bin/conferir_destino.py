@@ -17,7 +17,8 @@ leu um codigo de barras no Samsung e a linha nova existia so no Drive: espelhar
 naquele momento a teria apagado, em silencio.
 
 Duas formas de arquivo, duas comparacoes:
-  .txt  -> por LIVRO, identificado por titulo+autores
+  .txt  -> por LIVRO, identificado por titulo+autores — e por CONTAGEM,
+           porque esse par pode se repetir (impresso e Kindle)
   .json / .dat -> conjunto de CHAVES do objeto no topo
 
 NAO BASTA COMPARAR LINHAS, e por duas razoes que custaram caro em 13/10/2026:
@@ -39,8 +40,15 @@ Entao a comparacao e por LIVRO, e separa dois casos bem diferentes:
 
 Os dois recusam a copia — nao da para saber daqui quem editou por ultimo —, mas
 dizem coisas diferentes, e so o AUSENTE e trazido pelo --trazer.
+
+E A IDENTIDADE NAO E UNICA. O projeto permite de proposito o mesmo titulo e
+autor duas vezes: a edicao impressa e a do Kindle, que diferem no local. Por
+isso a comparacao conta QUANTAS vezes cada identidade aparece de cada lado, em
+vez de perguntar se aparece. Comparar por conjunto engolia um dos dois, e um
+livro novo de verdade era anunciado como "so alterado" e nao era trazido.
 """
 import json, shutil, sys, datetime, unicodedata
+from collections import Counter
 from pathlib import Path
 
 
@@ -79,10 +87,37 @@ def main():
 
     if origem.suffix == ".txt":
         o, d = linhas(origem), linhas(destino)
-        na_origem = {identidade(l) for l in o}
-        iguais = set(o)
-        ausentes  = [l for l in d if l not in iguais and identidade(l) not in na_origem]
-        alterados = [l for l in d if l not in iguais and identidade(l) in na_origem]
+        # Por CONTAGEM, nao por conjunto. O projeto permite o mesmo
+        # titulo+autores DUAS vezes — o impresso e a edicao Kindle —, e um
+        # conjunto engole uma das duas: a partir dai nao da para distinguir
+        # "existe" de "existe quantas vezes".
+        #
+        # Em 30/10/2026 o Judas comprado no Kindle caiu exatamente ai. O
+        # guarda disse "1 livro esta DIFERENTE dos dois lados (nenhum
+        # sumiria)" — as duas afirmacoes falsas — e o --trazer se RECUSOU a
+        # traze-lo alegando que criaria o livro duas vezes. Duas vezes era o
+        # CERTO, e a mensagem empurrava para o --forcar, que o apagaria.
+        sobra_origem = Counter(o)
+        sobra_destino = []
+        for l in d:
+            if sobra_origem[l] > 0:
+                sobra_origem[l] -= 1          # par exato: nada a dizer
+            else:
+                sobra_destino.append(l)
+
+        por_identidade = Counter()
+        for l, n in sobra_origem.items():
+            if n > 0:
+                por_identidade[identidade(l)] += n
+
+        ausentes, alterados = [], []
+        for l in sobra_destino:
+            i = identidade(l)
+            if por_identidade[i] > 0:         # sobrou par na origem: e edicao
+                por_identidade[i] -= 1
+                alterados.append(l)
+            else:                             # nao sobrou: o livro sumiria
+                ausentes.append(l)
         if not ausentes and not alterados:
             return 0
 
