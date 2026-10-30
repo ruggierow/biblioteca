@@ -51,6 +51,57 @@ HORA = 12
 
 IDENTIDADE = "Developer ID Application: WILSON VICENTE RUGGIERO (Q87ANATBD3)"
 
+# O executavel do pacote tem de ser um Mach-O DE VERDADE, e nao pode dar `exec`.
+#
+# POR QUE (medido em 30/10/2026, e custou duas autorizacoes do usuario)
+#
+# O TCC nao autoriza o PACOTE, autoriza o binario que faz a leitura. A primeira
+# versao deste executavel era um script de duas linhas que dava
+# `exec /usr/bin/python3`; depois do exec o processo PASSAVA A SER o python3, da
+# Apple, e o Acesso Total ao Disco concedido ao `larc.biblioteca.tarefas` nao
+# tinha a quem se aplicar. Negado em silencio, tanto pelo launchd quanto pelo
+# LaunchServices. O contraste estava a vista: o `Biblioteca Web.app`, que le
+# esse mesmo banco sem reclamar, tem um Mach-O em Contents/MacOS.
+#
+# Com `posix_spawn` o pai continua vivo sendo o aplicativo autorizado, e o
+# python3 filho herda a permissao pelo processo responsavel — e exatamente
+# assim que o Terminal empresta o Acesso Total ao Disco ao python3 que roda
+# dentro dele.
+LANCADOR_C = r"""
+/* Lancador do "Tarefas da Biblioteca.app".  GERADO por bin/tarefas-diarias.py
+   — nao edite aqui: edite o LANCADOR_C naquele arquivo. */
+#include <spawn.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+extern char **environ;
+
+int main(int argc, char *argv[])
+{{
+    /* o roteiro e fixo; o resto da linha de comando passa adiante */
+    char *fixos[] = {{"/usr/bin/python3", "-I", "{roteiro}"}};
+    const int n = 3;
+    char **args = malloc(sizeof(char *) * (n + argc));
+    if (!args) return 70;
+    for (int i = 0; i < n; i++) args[i] = fixos[i];
+    for (int i = 1; i < argc; i++) args[n + i - 1] = argv[i];
+    args[n + argc - 1] = NULL;
+
+    /* posix_spawn, e NAO execv: o pai tem de continuar vivo, porque e ELE que
+       esta autorizado no Acesso Total ao Disco. Ver o comentario no .py. */
+    pid_t filho;
+    if (posix_spawn(&filho, "/usr/bin/python3", NULL, NULL, args, environ) != 0)
+        return 70;
+
+    int estado = 0;
+    if (waitpid(filho, &estado, 0) < 0) return 70;
+    /* devolve o mesmo codigo do vigia: 0 sem novidade, 10 com, 20 nao olhei */
+    if (WIFEXITED(estado)) return WEXITSTATUS(estado);
+    return 70;
+}}
+"""
+
 
 def anota(texto):
     agora = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
@@ -128,10 +179,20 @@ def monta_app():
         shutil.rmtree(APP)
     (APP / "Contents/MacOS").mkdir(parents=True)
     executavel = APP / "Contents/MacOS/tarefas"
-    executavel.write_text(
-        "#!/bin/bash\n"
-        f'exec /usr/bin/python3 -I "{AQUI / "tarefas-diarias.py"}" "$@"\n',
-        encoding="utf-8")
+    # O .c fica FORA do pacote: arquivo solto em Contents/MacOS quebra o selo.
+    fonte_c = SUPORTE / "tarefas.c"
+    fonte_c.write_text(LANCADOR_C.format(roteiro=AQUI / "tarefas-diarias.py"),
+                       encoding="utf-8")
+    r = subprocess.run(["cc", "-O2", "-Wall", "-o", str(executavel), str(fonte_c)],
+                       capture_output=True, text=True)
+    fonte_c.unlink(missing_ok=True)
+    if r.returncode or not executavel.exists():
+        # Cair para o script de shell aqui seria refazer o defeito de 30/10 em
+        # silencio: o pacote montaria, autorizaria e NUNCA leria o banco.
+        sys.exit("nao consegui compilar o lancador do pacote "
+                 f"(`cc` respondeu {r.returncode}):\n{r.stderr.strip()[:400]}\n"
+                 "sem ele o aplicativo NAO consegue ler a biblioteca do Kindle, "
+                 "por mais que voce o autorize.")
     executavel.chmod(0o755)
     with (APP / "Contents/Info.plist").open("wb") as f:
         plistlib.dump({
