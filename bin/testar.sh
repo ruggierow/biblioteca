@@ -25,6 +25,11 @@
 #                                       Kindle e nao avisa; sem a chave de
 #                                       camera, o iPhone DERRUBA o aplicativo.
 #
+#                conferir-audible.py    o caminho do Audible: o vigia (banco
+#                                       velho nunca vira "nada novo") e as
+#                                       regras de quem entra na base — com
+#                                       biblioteca de mentira, sem rede.
+#
 #                conferir-espelho.py    o guarda que roda ANTES de espelhar. A
 #                                       identidade titulo+autores NAO e unica:
 #                                       o mesmo livro pode estar como impresso
@@ -68,6 +73,8 @@ python3 -I bin/conferir-vigia.py; resultado $? "conferir-vigia.py"
 
 secao "Guarda do espelho — contar as edicoes, nao so reconhece-las"
 python3 -I bin/conferir-espelho.py; resultado $? "conferir-espelho.py"
+
+python3 -I bin/conferir-audible.py; resultado $? "conferir-audible.py"
 
 secao "motor-web — a pagina que o Mac e o Windows embarcam"
 if [ -d motor-web/testes/node_modules ]; then

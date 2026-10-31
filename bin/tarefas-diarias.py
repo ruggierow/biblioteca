@@ -6,12 +6,14 @@
     ./bin/tarefas-diarias.py --estado     mostra o agendamento, a permissao e o log
     ./bin/tarefas-diarias.py --desinstalar
 
-Faz duas coisas, nesta ordem:
+Faz tres coisas, nesta ordem:
 
   1. VIGIA DO KINDLE  — sincroniza o Kindle e avisa se ha livro novo para
      cadastrar. Nunca escreve na base: a insercao e pelo botao do aplicativo,
      com a sua conferencia.
-  2. ESPELHO PARA AS NUVENS — roda `espelhar.sh`, que e o que leva a base ate
+  2. VIGIA DO AUDIBLE — o mesmo, para os audiolivros. Tambem precisa abrir o
+     aplicativo: o banco do Audible so sincroniza quando ele roda.
+  3. ESPELHO PARA AS NUVENS — roda `espelhar.sh`, que e o que leva a base ate
      o Android. Ele tem guarda propria e RECUSA quando o destino tem coisa que
      a origem nao tem; aqui a recusa vira aviso, nao erro.
 
@@ -118,9 +120,10 @@ def avisa(subtitulo, texto):
                    capture_output=True, timeout=20)
 
 
-def vigia():
-    """Importa bin/vigia-kindle.py (o hifen impede o `import` normal)."""
-    spec = importlib.util.spec_from_file_location("vigia_kindle", AQUI / "vigia-kindle.py")
+def vigia(nome):
+    """Importa bin/vigia-<nome>.py (o hifen impede o `import` normal)."""
+    spec = importlib.util.spec_from_file_location(
+        f"vigia_{nome}", AQUI / f"vigia-{nome}.py")
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
@@ -128,9 +131,14 @@ def vigia():
 
 def tenho_permissao():
     """Leitura de VERDADE, nao suposicao: o metadado e legivel mesmo sem ela."""
+    audible = Path.home() / ("Library/Containers/com.audible.iphone/Data/Library"
+                             "/Application Support")
     alvos = [
         Path.home() / "Library/Containers/com.amazon.Lassen/Data/Library/Protected/BookData.sqlite",
         Path.home() / "Library/Mobile Documents/com~apple~CloudDocs/Biblioteca/biblioteca.txt",
+        # O nome traz o identificador da conta, entao e por padrao. Ausente, o
+        # laco abaixo pula: aplicativo nao instalado nao e permissao faltando.
+        next(iter(sorted(audible.glob("amzn1.account.*-BR-library.sqlite"))), audible),
     ]
     for a in alvos:
         if not a.exists():
@@ -167,8 +175,13 @@ def uma_passada():
               "Autorize 'Tarefas da Biblioteca' em Acesso Total ao Disco.")
         return 20
 
-    v = vigia()
-    codigo = v.uma_passada(abrir=True)     # o vigia tem o portao da idade dele
+    # Cada vigia tem o portao de idade dele. O codigo que sai e o MAIOR dos
+    # dois, porque a escala vai de "conferi e nada" (0) a "nao consegui olhar"
+    # (20): um Audible que nao sincronizou nao pode ser apagado por um Kindle
+    # que sincronizou e nao achou nada.
+    codigo = 0
+    for nome in ("kindle", "audible"):
+        codigo = max(codigo, vigia(nome).uma_passada(abrir=True))
     espelhar()
     return codigo
 

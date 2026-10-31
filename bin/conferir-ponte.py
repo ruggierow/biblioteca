@@ -176,6 +176,12 @@ def main():
         faltas.append((f'invoke("{c}")', "Windows", 1, "a pagina chama, o Rust nao expoe esse comando"))
 
     chamadas_mac = achados(r'messageHandlers\.([A-Za-z]+)', pagina)
+    # Nem todo canal e chamado por ponto. O botao das lojas percorre uma tabela
+    # e chama `messageHandlers[l.canal]`, entao `kindleListar` e `audibleListar`
+    # sumiram daqui em 31/10/2026 — o portao continuou verde conferindo DOZE
+    # canais onde antes conferia quatorze, que e exatamente a familia de defeito
+    # que ele existe para pegar. O nome ainda esta no codigo, so que como valor.
+    chamadas_mac |= achados(r'canal:\s*"([A-Za-z]+)"', pagina)
     handlers_mac = set(re.findall(r'add\(self,\s*name:\s*"([A-Za-z]+)"', mac))
     handlers_mac |= set(re.findall(r'case\s+"([A-Za-z]+)"', mac))
     orfas_mac = sorted(chamadas_mac - handlers_mac)
