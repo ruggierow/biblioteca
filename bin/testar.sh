@@ -25,6 +25,11 @@
 #                                       Kindle e nao avisa; sem a chave de
 #                                       camera, o iPhone DERRUBA o aplicativo.
 #
+#                conferir-espera-ios.py a espera pela build do iPhone: ausencia
+#                                       na API e processamento, nao falha de
+#                                       envio — com consulta, relogio e sono
+#                                       de mentira, sem rede.
+#
 #                conferir-audible.py    o caminho do Audible: o vigia (banco
 #                                       velho nunca vira "nada novo") e as
 #                                       regras de quem entra na base — com
@@ -75,6 +80,8 @@ secao "Guarda do espelho — contar as edicoes, nao so reconhece-las"
 python3 -I bin/conferir-espelho.py; resultado $? "conferir-espelho.py"
 
 python3 -I bin/conferir-audible.py; resultado $? "conferir-audible.py"
+
+python3 -I bin/conferir-espera-ios.py; resultado $? "conferir-espera-ios.py"
 
 secao "motor-web — a pagina que o Mac e o Windows embarcam"
 if [ -d motor-web/testes/node_modules ]; then

@@ -64,8 +64,27 @@ echo
 echo "Enviando (alguns minutos)..."
 xcrun altool --upload-app -f "$IPA" -t ios "${CRED[@]}"
 echo
-echo "Enviado. O build leva 5 a 15 minutos processando antes de aparecer em"
-echo "App Store Connect > TestFlight. Depois disso:"
+# O altool sabe dizer que o ENVIO deu certo; ele nao sabe dizer que a build
+# CHEGOU. Entre as duas coisas ha de 5 a 15 min de processamento na Apple, e
+# nessa janela a build nao aparece na API. Em 03/11/2026 eu li essa ausencia
+# como falha de envio e mandei um segundo pacote a toa, recusado com 409.
+# Entao aqui quem afirma "chegou" MEDIU — ver bin/esperar-build-ios.py.
+codigo=0
+"$RAIZ/bin/esperar-build-ios.py" "$V" --teto-min 20 || codigo=$?
+
+if [ "$codigo" -eq 2 ]; then
+    echo
+    echo "O ENVIO deu certo, mas nao deu para confirmar a chegada. NAO envie de"
+    echo "novo sem olhar: a Apple recusa pacote repetido com erro 409."
+    exit 2
+fi
+if [ "$codigo" -eq 3 ]; then
+    echo
+    echo "(envio concluido; a conferencia exige a chave de API em ~/.appstoreconnect)"
+fi
+
+echo
+echo "Em App Store Connect > TestFlight:"
 echo "  - testadores internos (ate 100, precisam estar na equipe): liberam na hora;"
 echo "  - testadores externos (ate 10.000, basta o e-mail): o PRIMEIRO build passa"
 echo "    por Beta App Review, cerca de um dia. Os seguintes sao diretos."
