@@ -6,10 +6,23 @@
     ./bin/appstore.py --ficha      mostra o texto proposto para a loja
     ./bin/appstore.py --ficha --gravar    grava o texto na ficha (RASCUNHO)
 
-NUNCA SUBMETE. `--gravar` preenche os campos de texto do RASCUNHO da versao,
-que e privado e reversivel ate alguem apertar "Enviar para analise" no site.
-O envio para analise e a publicacao sao do usuario, com a mao dele — nem a
-captura de tela nem o botao de enviar passam por aqui.
+A LINHA DE COMANDO NAO SUBMETE, e isso nao mudou: nenhuma das opcoes acima
+envia nada para analise. `--gravar` preenche os campos de texto do RASCUNHO da
+versao, que e privado e reversivel ate alguem apertar "Enviar para analise".
+
+O MODULO, POREM, TEM MAO PESADA — e a prosa daqui dizia o contrario ate
+03/11/2026. `enviar()` faz POST e PATCH em qualquer caminho da API, e foi por
+ele que passaram, a pedido explicito do usuario:
+
+  - a ficha inteira da 1.0, inclusive as capturas e a classificacao etaria
+    (30/10, quando eu havia anotado que isso "so pelo site" — estava errado);
+  - o registro de versao 1.9.18, a build anexada e o texto de novidades;
+  - **o envio para analise** das duas, via `reviewSubmissions`.
+
+Entao a regra de verdade nao e "a ferramenta nao consegue", e sim: **submeter e
+publicar sao decisao do usuario**. Quem chama `enviar()` para submeter tem de
+ter uma ordem dele para aquilo, naquela vez. Sem ordem, prepara-se o rascunho e
+pergunta-se — e dizer "nao da" quando da seria mentir para ele.
 
 A credencial e a MESMA do TestFlight e da notarizacao:
 `~/.appstoreconnect/private_keys/AuthKey_<KEYID>.p8` mais o issuer em
