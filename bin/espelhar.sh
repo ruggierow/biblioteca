@@ -40,8 +40,25 @@ ARQUIVOS=(biblioteca.txt biblioteca.dat grupos.json biblioteca-removidas.json)
 
 # Destinos possiveis. O do Drive so existe com o "Google Drive para computador"
 # instalado; sem ele a pasta nao aparece e o destino e pulado com aviso.
+# A pasta que a VM do Windows le pela rede. Ela e um destino COMUM do espelho,
+# e nao uma copia empurrada para dentro da maquina virtual: a VM enxerga o disco
+# do Mac em \\Mac\Home, e o aplicativo do Windows tem uma pasta configuravel
+# (%APPDATA%\Biblioteca\pasta.txt) que ele consulta ANTES do iCloud.
+#
+# POR QUE (medido em 03/11/2026): o Windows lia a pasta do iCloud para Windows,
+# que tinha PARADO em 07/10 — 749 linhas contra 757, sem nenhum audiolivro. O
+# usuario viu os links do Kindle e nenhum "Ouvir", e o aplicativo estava certo:
+# os seis livros nao existiam no arquivo que ele lia. Era a segunda vez que o
+# iCloud para Windows parava em silencio.
+#
+# Assim o Windows deixa de depender dele, e passa a ter o mesmo guarda e o mesmo
+# --trazer do Android: o que for editado la volta pela porta de sempre.
+ESPELHO_WINDOWS="$HOME/Biblioteca-Windows"
+mkdir -p "$ESPELHO_WINDOWS"
+
 DESTINOS=(
     "$HOME/Library/CloudStorage/OneDrive-Personal/Biblioteca"
+    "$ESPELHO_WINDOWS"
 )
 # No Drive a pasta pode ter qualquer nome e estar em qualquer lugar — o que
 # manda e onde o CELULAR vinculou. Entao procuramos a pasta que JA TEM um
