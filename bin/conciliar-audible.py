@@ -149,8 +149,19 @@ def ler_base():
 
 
 def comentario(item):
-    """A mensagem, os creditos que nao couberam no campo de autor, e o link."""
-    partes = []
+    """O link PRIMEIRO, depois a mensagem e os creditos.
+
+    A ordem nao e estetica. A celula de comentario da tabela corta em tres
+    linhas, e em 03/11/2026 o link ficava FORA do corte em toda largura de
+    janela: a caixa tem 59 px e o link comecava em y=60. No Mac ele ainda
+    aparecia — o WebKit desenha o ultimo elemento depois das reticencias — e no
+    Windows nao, porque o WebView2 e Chromium e corta. Mesmo HTML, motores
+    diferentes, e o usuario via o recurso faltando so numa das maquinas.
+
+    Com o endereco na frente, o rotulo cabe na primeira linha em qualquer
+    motor. E a mesma ordem que o Kindle ja usava, com o `Ler:` na frente.
+    """
+    partes = [f"Ouvir: https://www.audible.com.br/pd/{item['asin']}"]
     if not item["para_sempre"]:
         partes.append(A_ADQUIRIR)
     extras = item["autores"][1:]
@@ -164,7 +175,6 @@ def comentario(item):
         if len(item["narradores"]) > MAX_CREDITOS:
             texto += " e outros"
         partes.append("Narrado por " + texto)
-    partes.append(f"Ouvir: https://www.audible.com.br/pd/{item['asin']}")
     return " | ".join(partes)
 
 

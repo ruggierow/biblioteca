@@ -195,6 +195,15 @@ do_plano = ca.comentario(PRODUTOS[1])
 exige("o que NAO e seu leva a mensagem", ca.A_ADQUIRIR in do_plano, do_plano)
 exige("o que ja e seu NAO leva a mensagem", ca.A_ADQUIRIR not in comprado, comprado)
 
+# A ORDEM e regra, nao gosto. A celula da tabela corta em tres linhas e o link
+# no fim ficava fora do corte no Chromium (o motor do Windows), enquanto o
+# WebKit do Mac ainda o desenhava. O usuario via o recurso faltar numa maquina
+# so. Com o endereco na frente, o rotulo cabe na primeira linha em qualquer
+# motor — e e a mesma ordem do `Ler:` do Kindle.
+for rotulo, texto in (("comprado", comprado), ("do plano", do_plano)):
+    exige(f"o link vem PRIMEIRO no comentario ({rotulo})",
+          texto.startswith("Ouvir: https://"), texto[:60])
+
 # O link do Audible e o da web porque `audible://` nao tem rota para o titulo
 # (medido em 31/10/2026). E vai SEM a forma de consulta de proposito: o
 # conciliador do Kindle reconhece ASIN por `/dp/` ou pela chave de consulta, e
