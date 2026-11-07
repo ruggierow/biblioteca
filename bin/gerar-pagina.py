@@ -133,15 +133,22 @@ def legivel(n):
 
 
 def manuais():
-    """Os manuais que EXISTEM — a pagina nao oferece link para o que falta."""
+    """Os manuais que EXISTEM — a pagina nao oferece link para o que falta.
+
+    Cada plataforma pode ter o manual em portugues (`manual-<p>.html`) e em
+    ingles (`manual-<p>-en.html`); a pagina so cita a lingua que ja existe.
+    """
     achados = []
     for arq, rotulo in (("manual-mac", "Mac"), ("manual-windows", "Windows"),
                         ("manual-ios", "iPhone"), ("manual-android", "Android")):
-        html = RAIZ / "docs" / f"{arq}.html"
-        pdf = RAIZ / "docs" / f"{arq}.pdf"
-        if html.exists() or pdf.exists():
-            achados.append((rotulo, f"{arq}.html" if html.exists() else None,
-                            f"{arq}.pdf" if pdf.exists() else None))
+        linguas = []
+        for sufixo, lingua in (("", "Português"), ("-en", "English")):
+            formatos = [(f"{arq}{sufixo}.{e}", e.upper()) for e in ("html", "pdf")
+                        if (RAIZ / "docs" / f"{arq}{sufixo}.{e}").exists()]
+            if formatos:
+                linguas.append((lingua, formatos))
+        if linguas:
+            achados.append((rotulo, linguas))
     return achados
 
 
@@ -184,12 +191,11 @@ def monta(v, chamada, destaques, tam, hoje):
     novidades = "\n".join(blocos)
 
     links_manuais = []
-    for rotulo, html, pdf in manuais():
+    for rotulo, linguas in manuais():
         partes = []
-        if html:
-            partes.append(f'<a href="{html}">HTML</a>')
-        if pdf:
-            partes.append(f'<a href="{pdf}">PDF</a>')
+        for lingua, formatos in linguas:
+            ligacoes = " ".join(f'<a href="{arq}">{fmt}</a>' for arq, fmt in formatos)
+            partes.append(f"{lingua}: {ligacoes}")
         links_manuais.append(f'      <li><strong>{rotulo}</strong> — '
                              + " · ".join(partes) + "</li>")
     manuais_html = "\n".join(links_manuais)
