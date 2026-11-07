@@ -1,0 +1,399 @@
+/* Aparencia da pagina do app (docs/index.html).
+   As cores, as fontes e o espacamento vem da pagina que ele ja tinha; o que
+   mudou aqui foi so o conteudo. Arquivo separado de proposito: assim o
+   gerador cuida do TEXTO e o desenho fica estavel entre as versoes. */
+
+:root {
+  --ground:      #F3F5F0;
+  --surface:     #FFFFFF;
+  --surface-alt: #EAEEE6;
+  --ink:         #16241F;
+  --ink-2:       #4B5B53;
+  --ink-3:       #76837B;
+  --rule:        #D7DCD2;
+  --rule-soft:   #E5E9E0;
+  --accent:      #6E5620;
+  --accent-soft: #F0E8D6;
+  --warn:        #8A4512;
+  --warn-soft:   #F8EADE;
+  --warn-rule:   #D9A97E;
+  --ok:          #2F6B4F;
+  --ok-soft:     #E4F0E7;
+  --ok-rule:     #8FBDA1;
+
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body:    "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:      #0F1512;
+    --surface:     #161D19;
+    --surface-alt: #1C241F;
+    --ink:         #E6EBE3;
+    --ink-2:       #A3B0A7;
+    --ink-3:       #7B8880;
+    --rule:        #29332C;
+    --rule-soft:   #202822;
+    --accent:      #D5B76F;
+    --accent-soft: #241F13;
+    --warn:        #E2A16A;
+    --warn-soft:   #241A12;
+    --warn-rule:   #6B4A2B;
+    --ok:          #8FCBA6;
+    --ok-soft:     #14211A;
+    --ok-rule:     #39604A;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ground:      #0F1512;
+  --surface:     #161D19;
+  --surface-alt: #1C241F;
+  --ink:         #E6EBE3;
+  --ink-2:       #A3B0A7;
+  --ink-3:       #7B8880;
+  --rule:        #29332C;
+  --rule-soft:   #202822;
+  --accent:      #D5B76F;
+  --accent-soft: #241F13;
+  --warn:        #E2A16A;
+  --warn-soft:   #241A12;
+  --warn-rule:   #6B4A2B;
+  --ok:          #8FCBA6;
+  --ok-soft:     #14211A;
+  --ok-rule:     #39604A;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; }
+
+.folha {
+  max-width: 43rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+/* ---------- abertura ---------- */
+
+.capa { display: flex; flex-direction: column; gap: 1rem; }
+
+.selo {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h1 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(2.1rem, 6vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -.015em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.subtitulo {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  line-height: 1.45;
+  color: var(--ink-2);
+  margin: 0;
+  max-width: 34rem;
+}
+
+/* ---------- o que mudou ---------- */
+
+.novidades {
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+  margin: 2.5rem 0 0;
+  padding: 1.5rem 1.6rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+
+.novidades h2 {
+  font-family: var(--body);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.novidades .chamada {
+  margin: -.3rem 0 .2rem;
+  color: var(--ink-2);
+}
+
+.novidade { display: flex; gap: .9rem; align-items: baseline; }
+
+.novidade b {
+  font-family: var(--mono);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  color: var(--accent);
+  flex: 0 0 1.4rem;
+}
+
+.novidade span { color: var(--ink-2); }
+
+/* ---------- seletor de plataforma ---------- */
+
+.escolha {
+  margin: 3rem 0 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.escolha p {
+  margin: 0 0 1rem;
+  font-size: .95rem;
+  color: var(--ink-3);
+}
+
+.atalhos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: .6rem;
+}
+
+.atalho {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  padding: .7rem .9rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color .15s, background .15s;
+}
+
+.atalho:hover, .atalho:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.atalho strong { font-weight: 600; font-size: 1rem; }
+
+.atalho small {
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--ink-3);
+}
+
+/* ---------- secoes ---------- */
+
+section.plataforma, section.manuais, section.fecho-secao {
+  margin-top: 3.5rem;
+  scroll-margin-top: 1.5rem;
+}
+
+h2 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  letter-spacing: -.01em;
+  margin: 0 0 .2rem;
+  text-wrap: balance;
+}
+
+h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 2.5rem 0 .3rem;
+}
+
+.ficha {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--ink-3);
+  padding-bottom: 1.2rem;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.ficha span + span::before {
+  content: "·";
+  margin: 0 .55em;
+  color: var(--rule);
+}
+
+.nota { margin: 0 0 1.2rem; color: var(--ink-2); }
+p.nota:last-child { margin-bottom: 0; }
+
+/* ---------- passos ---------- */
+
+ol.passos {
+  list-style: none;
+  counter-reset: passo;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+ol.passos > li {
+  counter-increment: passo;
+  display: grid;
+  grid-template-columns: 1.9rem 1fr;
+  gap: .9rem;
+  align-items: baseline;
+}
+
+ol.passos > li::before {
+  content: counter(passo);
+  font-family: var(--mono);
+  font-size: .8rem;
+  color: var(--accent);
+  text-align: right;
+}
+
+ol.passos > li > div > p { margin: 0; }
+ol.passos > li > div > p + p { margin-top: .5rem; color: var(--ink-2); }
+
+/* ---------- avisos ---------- */
+
+.aviso {
+  margin: 1.6rem 0 0 2.8rem;
+  padding: 1.1rem 1.3rem;
+  background: var(--warn-soft);
+  border-left: 3px solid var(--warn-rule);
+  border-radius: 0 3px 3px 0;
+}
+
+.aviso.solto { margin-left: 0; }
+
+.aviso.bom {
+  background: var(--ok-soft);
+  border-left-color: var(--ok-rule);
+}
+
+.aviso.bom .rotulo { color: var(--ok); }
+
+.aviso .rotulo {
+  display: block;
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--warn);
+  margin-bottom: .45rem;
+}
+
+.aviso p { margin: 0; }
+.aviso p + p { margin-top: .6rem; }
+
+/* ---------- download ---------- */
+
+.baixar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem 1rem;
+  margin-bottom: 1.6rem;
+  padding: .95rem 1.2rem;
+  background: var(--surface-alt);
+  border-radius: 3px;
+}
+
+.baixar .arquivo {
+  font-family: var(--mono);
+  font-size: .8rem;
+  color: var(--ink-2);
+  word-break: break-all;
+}
+
+.baixar a {
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--ground);
+  background: var(--accent);
+  padding: .45rem 1.1rem;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.baixar a:hover, .baixar a:focus-visible { filter: brightness(1.12); }
+
+/* ---------- manuais ---------- */
+
+.lista-manuais {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+
+.lista-manuais li {
+  padding: .7rem .9rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+
+.lista-manuais strong { font-weight: 600; }
+
+/* ---------- fecho ---------- */
+
+.fecho-secao { padding-top: 2.5rem; border-top: 2px solid var(--ink); }
+
+.fecho {
+  margin: .6rem 0 1.4rem;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.fecho strong { color: var(--ink); font-weight: 600; }
+
+code {
+  font-family: var(--mono);
+  font-size: .85em;
+  background: var(--surface-alt);
+  padding: .12em .38em;
+  border-radius: 2px;
+  word-break: break-word;
+}
+
+a { color: var(--accent); }
+a:focus-visible, .atalho:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+@media (max-width: 34rem) {
+  body { font-size: 16px; }
+  .folha { padding: 2.2rem 1.15rem 3.5rem; }
+  .aviso { margin-left: 0; }
+  ol.passos > li { grid-template-columns: 1.4rem 1fr; gap: .7rem; }
+}

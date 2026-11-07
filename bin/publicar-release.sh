@@ -13,8 +13,10 @@
 # O nome fixo existe porque o GitHub serve a release mais recente em
 #   https://github.com/<dono>/<repo>/releases/latest/download/<nome>
 # e esse endereco so funciona se o nome NAO mudar entre releases. E por ele que
-# a pagina dos testadores aponta — assim ela nunca precisa ser reeditada: basta
-# publicar a release nova e os botoes passam a servir a versao nova sozinhos.
+# a pagina do app aponta (docs/index.html, servida pelo GitHub Pages em
+# https://ruggierow.github.io/biblioteca/) — os botoes passam a servir a versao
+# nova sozinhos. O TEXTO da pagina, esse muda, e por isso este script chama o
+# ./bin/gerar-pagina.py no fim.
 #
 # O custo e duplicar os bytes no GitHub. Para 68 MB por release, e barato perto
 # de reeditar a pagina (e reavisar os testadores) toda vez.
@@ -70,7 +72,7 @@ else
 fi
 
 echo
-echo "Conferindo os enderecos que a pagina dos testadores usa..."
+echo "Conferindo os enderecos de nome fixo que a pagina usa..."
 ok=1
 for f in Biblioteca-Mac.dmg Biblioteca-Windows-setup.exe Biblioteca-Android.apk; do
     u="https://github.com/$REPO/releases/latest/download/$f"
@@ -78,4 +80,12 @@ for f in Biblioteca-Mac.dmg Biblioteca-Windows-setup.exe Biblioteca-Android.apk;
     echo "  $c  $f"
     [ "$c" = "200" ] || ok=0
 done
-[ "$ok" -eq 1 ] && echo && echo "Pronto. A pagina dos testadores ja serve a $V, sem precisar ser editada."
+[ "$ok" -eq 1 ] && echo && echo "Pronto. Os enderecos de nome fixo ja servem a $V."
+
+# A pagina DEPOIS do upload, de proposito: assim os tamanhos que ela anuncia
+# saem da release recem-criada, e nao da dist/ local.
+echo
+echo "Atualizando a pagina do app..."
+"$RAIZ/bin/gerar-pagina.py"
+"$RAIZ/bin/conferir-pagina.py" || exit 1
+echo "  Falta commitar docs/index.html — o Pages serve do main."

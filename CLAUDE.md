@@ -97,6 +97,14 @@ caducando a cada reinício. Desde a v1.8.3 o Windows roda o **app Tauri**, que
 acha sozinho `C:\Users\<voce>\iCloudDrive\Biblioteca\`, como o Mac faz.
 
 - O HTML vai **embutido no executável** — não é mais instalado à parte.
+- `docs/notas-<v>.md` é **texto público em dois lugares**: é o corpo da release
+  no GitHub e, desde 07/11/2026, a fonte das novidades de `docs/index.html`. Por
+  isso elas passam a ser escritas **com acento**, decisão dele em 07/11 — ao
+  contrário dos comentários de código, que seguem sem.
+- A página do app é **gerada**, nunca editada à mão: `./bin/gerar-pagina.py`
+  escreve `docs/index.html` a partir do `VERSION`, das notas e dos tamanhos reais
+  dos anexos da release. `./bin/conferir-pagina.py` é o portão, e roda no
+  `./bin/testar.sh`.
 - `./bin/compilar-windows.sh` compila na VM e gera o instalador NSIS. Se o
   disco C: não estiver montado em `/Volumes` (a extensão de sistema do
   Parallels pode não estar carregada), ele delega sozinho ao
