@@ -97,7 +97,10 @@ caducando a cada reinício. Desde a v1.8.3 o Windows roda o **app Tauri**, que
 acha sozinho `C:\Users\<voce>\iCloudDrive\Biblioteca\`, como o Mac faz.
 
 - O HTML vai **embutido no executável** — não é mais instalado à parte.
-- `./bin/compilar-windows.sh` compila na VM e gera o instalador NSIS.
+- `./bin/compilar-windows.sh` compila na VM e gera o instalador NSIS. Se o
+  disco C: não estiver montado em `/Volumes` (a extensão de sistema do
+  Parallels pode não estar carregada), ele delega sozinho ao
+  `./bin/compilar-windows-vm.sh`, que vai pela ponte inversa (`\\Mac\...`).
 - `motor-web/tauri/src/index.html` é link simbólico para o motor; links
   simbólicos não atravessam para o Windows, então o script materializa o
   arquivo na cópia (`cp -L`).

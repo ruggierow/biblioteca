@@ -18,14 +18,22 @@ V="$(tr -d '[:space:]' < "$RAIZ/VERSION")"
 MONTADO="/Volumes/[C] Windows 11.hidden"
 STAGE="$MONTADO/build"
 
-if [ ! -d "$MONTADO" ]; then
-    echo "O disco C: da VM nao esta montado em $MONTADO."
-    echo "Ligue a VM '$VM' no Parallels e tente de novo."
-    exit 1
-fi
+# A VM primeiro: sem ela nenhum dos dois caminhos funciona.
 if ! prlctl list -a 2>/dev/null | grep -q "running.*$VM"; then
     echo "A VM '$VM' nao esta rodando."
     exit 1
+fi
+
+# Este roteiro escreve no C: pelo /Volumes, e essa montagem depende de uma
+# extensao de sistema do Parallels que pode nao estar carregada (04/11/2026,
+# depois de uma atualizacao do Parallels). A ponte INVERSA -- o Windows lendo
+# \\Mac\... -- nao depende dela. Sem a montagem, delegamos em vez de parar.
+if [ ! -d "$MONTADO" ]; then
+    echo "O disco C: nao esta montado em $MONTADO."
+    echo "A VM esta rodando, entao nao e ela: quem monta e a extensao de"
+    echo "sistema do Parallels. Seguindo pela ponte inversa."
+    echo
+    exec "$(dirname "$0")/compilar-windows-vm.sh" "$@"
 fi
 
 echo "Versao: $V"
