@@ -79,9 +79,16 @@ echo "Gerando DMG..."
 TMPDIR_DMG="$(mktemp -d)"
 cp -R "$APP" "$TMPDIR_DMG/"
 ln -s /Applications "$TMPDIR_DMG/Applications"
-# Inclui o manual (HTML + PDF) no DMG
-cp "$DOCS/manual-mac.html" "$TMPDIR_DMG/Manual.html"
-cp "$DOCS/manual-mac.pdf"  "$TMPDIR_DMG/Manual.pdf"
+# Inclui os manuais no DMG: so o PDF, nos DOIS idiomas.
+#
+# O HTML saiu: desde 08/11/2026 ele traz as capturas embutidas em base64 e
+# pesa 3,7 MB — mais que o proprio app, e para mostrar o mesmo conteudo do
+# PDF. Quem quiser a versao de ler no navegador acha as duas na pagina.
+#
+# O nome diz a lingua nos DOIS arquivos, e nao so no ingles: quem abre o DMG
+# com o Mac em ingles nao tem de adivinhar o que "Manual.pdf" quer dizer.
+cp "$DOCS/manual-mac.pdf"    "$TMPDIR_DMG/Manual (Português).pdf"
+cp "$DOCS/manual-mac-en.pdf" "$TMPDIR_DMG/Manual (English).pdf"
 hdiutil create \
     -volname "Biblioteca" \
     -srcfolder "$TMPDIR_DMG" \
