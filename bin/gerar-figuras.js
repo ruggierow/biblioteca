@@ -99,23 +99,39 @@ const PECAS = {
   // numa figura de manual.
   tabela: { sel: "#tabela-container", linhas: 5, capas: true },
   paginacao: { sel: "#tabela-container .paginacao" },
+  // O mapa vive num bloco retratil: sem abrir, a figura sairia so do titulo.
+  mapa: { sel: "#secao-mapa", abrir: "#secao-mapa > summary", altura: 1700 },
 };
 
 // Que figura de que manual e qual peca. O numero e a ORDEM da imagem dentro do
 // HTML (a 1 e sempre o icone da capa), nao o numero da legenda.
 const FIGURAS = [
   { manual: "manual-mac", n: 2, peca: "cabecalho", hospedeiro: "Mac" },
+  { manual: "manual-mac", n: 4, peca: "cadastro", hospedeiro: "Mac" },
+  { manual: "manual-mac", n: 5, peca: "pesquisa", hospedeiro: "Mac" },
+  { manual: "manual-mac", n: 8, peca: "mapa", hospedeiro: "Mac" },
   { manual: "manual-mac", n: 9, peca: "arquivo", hospedeiro: "Mac" },
+  { manual: "manual-mac", n: 10, peca: "tabela", hospedeiro: "Mac" },
+  { manual: "manual-mac", n: 11, peca: "paginacao", hospedeiro: "Mac" },
+  { manual: "manual-mac", n: 12, peca: "cadastro", hospedeiro: "Mac" },
+  // A 6 do Mac (a janela de edicao aberta POR CIMA da pagina) continua sendo
+  // captura de setembro: e uma caixa modal sobre a pagina escurecida, e o
+  // gerador so sabe fotografar peca inteira. Esta anotada no relatorio.
   { manual: "manual-windows", n: 2, peca: "cabecalho", hospedeiro: "Windows" },
   { manual: "manual-windows", n: 4, peca: "cadastro", hospedeiro: "Windows" },
   { manual: "manual-windows", n: 5, peca: "pesquisa", hospedeiro: "Windows" },
-  // A 8 nao mostrava so texto velho: pegou o app no meio da partida, com o
+  // A 8 e o capitulo do mapa, que o manual do Windows nao tinha ate 12/11 —
+  // o mapa sempre funcionou la, porque e a mesma pagina. Entrar com ele
+  // empurrou TODAS as figuras seguintes um numero adiante, e e por isso que
+  // os numeros abaixo nao batem com os da versao anterior deste arquivo.
+  { manual: "manual-windows", n: 8, peca: "mapa", hospedeiro: "Windows" },
+  // A 9 nao mostrava so texto velho: pegou o app no meio da partida, com o
   // aviso "Inicializando..." na tela. Figura de manual nao mostra estado de
   // passagem.
-  { manual: "manual-windows", n: 8, peca: "arquivo", hospedeiro: "Windows" },
-  { manual: "manual-windows", n: 9, peca: "tabela", hospedeiro: "Windows" },
-  { manual: "manual-windows", n: 10, peca: "paginacao", hospedeiro: "Windows" },
-  { manual: "manual-windows", n: 12, peca: "cadastro", hospedeiro: "Windows" },
+  { manual: "manual-windows", n: 9, peca: "arquivo", hospedeiro: "Windows" },
+  { manual: "manual-windows", n: 10, peca: "tabela", hospedeiro: "Windows" },
+  { manual: "manual-windows", n: 11, peca: "paginacao", hospedeiro: "Windows" },
+  { manual: "manual-windows", n: 13, peca: "cadastro", hospedeiro: "Windows" },
 ];
 
 const TIPOS = { ".html": "text/html; charset=utf-8", ".js": "text/javascript",
@@ -313,6 +329,10 @@ function trocarNoManual(manual, n, png) {
           `livros tem foto no .dat; ${nasLinhas} apareceram na tabela`);
       }
 
+      if (peca.abrir) {
+        await pagina.click(peca.abrir);
+        await pagina.waitForTimeout(400);     // o mapa desenha as bolhas
+      }
       const alvo = pagina.locator(peca.sel).first();
       const png = path.join(saidas, `${manual}--${String(f.n).padStart(2, "0")}.png`);
 
@@ -322,7 +342,7 @@ function trocarNoManual(manual, n, png) {
       await pagina.evaluate(() => window.scrollTo(0, 0));
       await pagina.waitForTimeout(120);
       const caixa = await alvo.boundingBox();
-      let altura = caixa.height;
+      let altura = peca.altura ? Math.min(caixa.height, peca.altura) : caixa.height;
       if (peca.linhas) {
         const fim = await pagina.evaluate(([sel, n]) => {
           const linhas = document.querySelectorAll(sel + " table tbody tr");
