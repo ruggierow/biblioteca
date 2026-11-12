@@ -344,6 +344,24 @@ def monta(v, chamada, destaques, tam, hoje):
     </div>
   </section>
 
+  <section class="plataforma" id="primeira-vez">
+    <h2>Na primeira vez que abrir</h2>
+    <p class="nota">O app precisa saber onde fica o seu <code>biblioteca.txt</code> — o arquivo onde os seus livros ficam guardados. É a única coisa que ele pergunta, e a resposta é a mesma nos quatro aparelhos.</p>
+
+    <ol class="passos">
+      <li><div><p>Clique em <strong>Selecionar pasta</strong>. No <strong>Mac</strong> e no <strong>Windows</strong> ele fica na faixa de cima da tela; no <strong>iPhone</strong> e no <strong>Android</strong>, no menu da tela inicial.</p></div></li>
+      <li><div><p>Escolha a pasta onde o seu <code>biblioteca.txt</code> está — ou onde você quer que ele passe a ficar.</p></div></li>
+      <li><div><p>Se já houver uma biblioteca na pasta, o app diz <strong>quantos livros achou</strong> lá dentro e pede confirmação antes de usar. Se a pasta estiver vazia, ele <strong>cria o arquivo</strong> e avisa onde.</p></div></li>
+    </ol>
+
+    <div class="aviso bom">
+      <span class="rotulo">Ele nunca escreve por cima</span>
+      <p>Se a pasta tiver um arquivo que o app <strong>não conseguiu ler</strong> — porque ainda está baixando da nuvem, por exemplo — ele não grava nada e oferece escolher outra pasta.</p>
+    </div>
+
+    <p class="nota">Se você <strong>já usa</strong> a Biblioteca, nada disso aparece: o app segue na pasta de sempre. O botão fica ali para quando você quiser trocar.</p>
+  </section>
+
   <section class="manuais">
     <h2>Os manuais</h2>
     <p class="nota">Um para cada aparelho.</p>

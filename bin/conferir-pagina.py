@@ -79,6 +79,34 @@ def confere_versao(html):
                 f"e o VERSION diz {v}")
 
 
+def confere_versao_dos_manuais():
+    """Nenhum manual pode CITAR uma versao que nao e a do VERSION.
+
+    Em 12/11/2026 as oito capas diziam tres coisas diferentes — 1.9.19 no
+    iPhone, 1.9.20 nas outras, com o VERSION em 1.9.21 — e o manual do Windows
+    afirmava que a janela se chama "Biblioteca v1.9.19" quando o
+    versionar.sh ja a tinha renomeado. Texto escrito a mao envelhece sozinho,
+    exatamente como a pagina envelhecia antes de ser gerada.
+
+    As FIGURAS ficam de fora de proposito: sao PNG em base64, e o cabecalho do
+    app dentro delas so muda recapturando a tela. Este portao olha o texto.
+    """
+    v = (RAIZ / "VERSION").read_text().strip()
+    manuais = sorted((RAIZ / "docs").glob("manual-*.html"))
+    if not manuais:
+        reprova("nao achei nenhum docs/manual-*.html")
+        return
+    for arq in manuais:
+        texto = re.sub(r"data:image/[^\"')]+", "FIGURA", arq.read_text())
+        erradas = sorted({x for x in re.findall(r"\d+\.\d+\.\d+", texto)
+                          if x != v})
+        if erradas:
+            reprova(f"{arq.name} cita {', '.join(erradas)}, "
+                    f"e o VERSION diz {v}")
+        else:
+            passa(f"{arq.name} fala da {v}")
+
+
 def confere_rede(html):
     for url in sorted(set(re.findall(
             r'href="(https://github\.com/[^"]+/releases/latest/download/[^"]+)"', html))):
@@ -104,6 +132,7 @@ def main():
     if html:
         confere_versao(html)
         confere_arquivos(html)
+        confere_versao_dos_manuais()
         if "--rede" in sys.argv[1:]:
             confere_rede(html)
 

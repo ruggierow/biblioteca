@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Biblioteca</title>
-<meta name="description" content="Biblioteca 1.9.20 — catálogo dos seus livros no Mac, no Windows, no iPhone e no Android.">
+<meta name="description" content="Biblioteca 1.9.21 — catálogo dos seus livros no Mac, no Windows, no iPhone e no Android.">
 <!-- PAGINA GERADA por bin/gerar-pagina.py. Nao edite a mao: a proxima release
      sobrescreve. Para mudar o texto das novidades, edite docs/notas-<v>.md. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,17 +17,17 @@
 <div class="folha">
 
   <header class="capa">
-    <div class="selo">Versão 1.9.20 · 8 de novembro de 2026</div>
+    <div class="selo">Versão 1.9.21 · 12 de novembro de 2026</div>
     <h1>Biblioteca</h1>
     <p class="subtitulo">O catálogo dos seus livros, no computador e no celular. Abaixo está como instalá-lo em cada aparelho.</p>
   </header>
 
   <div class="novidades">
-    <h2>O que mudou na 1.9.20</h2>
-    <p class="chamada"><strong>Seis rótulos teimavam em português</strong> com o app em inglês, e o Android não sabia criar o seu arquivo. Esta versão conserta as duas coisas — e os manuais passam a ensinar o que faltava.</p>
-      <div class="novidade"><b>01</b><span>Os rótulos que ficavam em português</span></div>
-      <div class="novidade"><b>02</b><span>O Android agora cria o seu biblioteca.txt</span></div>
-      <div class="novidade"><b>03</b><span>Os manuais, nas quatro plataformas e em dois idiomas</span></div>
+    <h2>O que mudou na 1.9.21</h2>
+    <p class="chamada"><strong>A primeira vez agora é igual nos quatro aparelhos.</strong> Em todos existe um botão <strong>Selecionar pasta</strong>, e em todos ele responde do mesmo jeito: se a pasta já tem uma biblioteca, o app diz quantos livros achou e pergunta antes de usar; se está vazia, cria o arquivo; se há um arquivo que ele não conseguiu ler, não escreve nada e oferece outra pasta. No Mac, de quebra, a pasta deixa de ser cravada no iCloud.</p>
+      <div class="novidade"><b>01</b><span>O mesmo Selecionar pasta nos quatro aparelhos</span></div>
+      <div class="novidade"><b>02</b><span>No Mac, a pasta deixa de ser cravada no iCloud</span></div>
+      <div class="novidade"><b>03</b><span>Dois textos em inglês que estavam errados</span></div>
   </div>
 
   <nav class="escolha">
@@ -94,7 +94,7 @@
 
     <div class="baixar">
       <a href="https://github.com/ruggierow/biblioteca/releases/latest/download/Biblioteca-Android.apk">Baixar</a>
-      <span class="arquivo">Biblioteca-Android.apk · 67 MB</span>
+      <span class="arquivo">Biblioteca-Android.apk</span>
     </div>
 
     <ol class="passos">
@@ -119,11 +119,11 @@
 
   <section class="plataforma" id="mac">
     <h2>No Mac</h2>
-    <div class="ficha"><span>macOS 13 Ventura ou mais novo</span><span>5,9 MB</span><span>reconhecido pela Apple</span></div>
+    <div class="ficha"><span>macOS 13 Ventura ou mais novo</span><span>—</span><span>reconhecido pela Apple</span></div>
 
     <div class="baixar">
       <a href="https://github.com/ruggierow/biblioteca/releases/latest/download/Biblioteca-Mac.dmg">Baixar</a>
-      <span class="arquivo">Biblioteca-Mac.dmg · 5,9 MB</span>
+      <span class="arquivo">Biblioteca-Mac.dmg</span>
     </div>
 
     <ol class="passos">
@@ -137,11 +137,11 @@
 
   <section class="plataforma" id="windows">
     <h2>No Windows</h2>
-    <div class="ficha"><span>Windows 10 ou 11</span><span>1,8 MB</span></div>
+    <div class="ficha"><span>Windows 10 ou 11</span><span>—</span></div>
 
     <div class="baixar">
       <a href="https://github.com/ruggierow/biblioteca/releases/latest/download/Biblioteca-Windows-setup.exe">Baixar</a>
-      <span class="arquivo">Biblioteca-Windows-setup.exe · 1,8 MB</span>
+      <span class="arquivo">Biblioteca-Windows-setup.exe</span>
     </div>
 
     <ol class="passos">
@@ -154,6 +154,24 @@
       <span class="rotulo">Sobre aquela tela azul</span>
       <p><strong>Não é vírus.</strong> O aviso aparece porque o instalador não tem um certificado digital pago, e o Windows desconfia de todo programa que não tenha um. É o mesmo aviso que apareceria em qualquer programa feito em casa.</p>
     </div>
+  </section>
+
+  <section class="plataforma" id="primeira-vez">
+    <h2>Na primeira vez que abrir</h2>
+    <p class="nota">O app precisa saber onde fica o seu <code>biblioteca.txt</code> — o arquivo onde os seus livros ficam guardados. É a única coisa que ele pergunta, e a resposta é a mesma nos quatro aparelhos.</p>
+
+    <ol class="passos">
+      <li><div><p>Clique em <strong>Selecionar pasta</strong>. No <strong>Mac</strong> e no <strong>Windows</strong> ele fica na faixa de cima da tela; no <strong>iPhone</strong> e no <strong>Android</strong>, no menu da tela inicial.</p></div></li>
+      <li><div><p>Escolha a pasta onde o seu <code>biblioteca.txt</code> está — ou onde você quer que ele passe a ficar.</p></div></li>
+      <li><div><p>Se já houver uma biblioteca na pasta, o app diz <strong>quantos livros achou</strong> lá dentro e pede confirmação antes de usar. Se a pasta estiver vazia, ele <strong>cria o arquivo</strong> e avisa onde.</p></div></li>
+    </ol>
+
+    <div class="aviso bom">
+      <span class="rotulo">Ele nunca escreve por cima</span>
+      <p>Se a pasta tiver um arquivo que o app <strong>não conseguiu ler</strong> — porque ainda está baixando da nuvem, por exemplo — ele não grava nada e oferece escolher outra pasta.</p>
+    </div>
+
+    <p class="nota">Se você <strong>já usa</strong> a Biblioteca, nada disso aparece: o app segue na pasta de sempre. O botão fica ali para quando você quiser trocar.</p>
   </section>
 
   <section class="manuais">
