@@ -94,6 +94,18 @@ else
     echo "   (pulado: rode  cd motor-web/testes && npm install && npx playwright install chromium)"
 fi
 
+secao "Mac — as duas funcoes do Selecionar pasta que mexem em arquivo"
+# A pagina ja e medida acima, nos dois hospedeiros. O que falta e o lado SWIFT:
+# `olharAPasta` e `criarArquivoNaPasta`, que sao as unicas partes do fluxo
+# capazes de perder a biblioteca de alguem. O par delas no Windows roda na VM
+# com `cargo test`.
+if command -v swift >/dev/null; then
+    (cd motor-web/macos && swift test 2>&1 | grep -E "Executed [0-9]+ tests, with" | tail -1)
+    resultado "${PIPESTATUS[0]:-$?}" "swift test"
+else
+    echo "   (pulado: swift nao encontrado)"
+fi
+
 secao "Android"
 if command -v flutter >/dev/null || [ -x "$HOME/development/flutter/bin/flutter" ]; then
     PATH="$PATH:$HOME/development/flutter/bin"

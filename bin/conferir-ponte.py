@@ -183,6 +183,14 @@ def main():
     # que ele existe para pegar. O nome ainda esta no codigo, so que como valor.
     chamadas_mac |= achados(r'canal:\s*"([A-Za-z]+)"', pagina)
     handlers_mac = set(re.findall(r'add\(self,\s*name:\s*"([A-Za-z]+)"', mac))
+    # Ha DUAS formas de registrar um canal, e quem so conhece uma fica cego.
+    # `addScriptMessageHandler` e a que RESPONDE (devolve Promessa ao
+    # JavaScript); o "Selecionar pasta" precisa dela porque cada passo depende
+    # da resposta do anterior. Em 12/11/2026 este portao reprovou o
+    # `messageHandlers.pasta` justamente por nao conhecer esta linha -- estava
+    # certo em reprovar, e so entao a linha entrou aqui.
+    handlers_mac |= set(re.findall(
+        r'addScriptMessageHandler\((?:[^()]|\([^()]*\))*?name:\s*"([A-Za-z]+)"', mac))
     handlers_mac |= set(re.findall(r'case\s+"([A-Za-z]+)"', mac))
     orfas_mac = sorted(chamadas_mac - handlers_mac)
     print(f"   ponte do Mac:     a pagina chama {len(chamadas_mac)} handler(es); "
