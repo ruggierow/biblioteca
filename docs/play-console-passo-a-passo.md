@@ -3,6 +3,19 @@
 Objetivo: os testadores instalarem pela própria Play Store, sem o aviso de
 "fontes desconhecidas" e sem o Play Protect. É o equivalente ao TestFlight.
 
+## Subir uma versão nova: hoje é um comando
+
+Este documento é de setembro de 2026, de quando a conta não existia. Para
+**publicar uma versão nas duas faixas fechadas** hoje:
+
+```bash
+./bin/publicar-play.py              # o plano: confere tudo e não envia nada
+./bin/publicar-play.py --publicar   # envia e confere depois
+```
+
+O que continua sendo só pelo Console está mais abaixo: o acesso à produção, a
+lista de testadores e o contador dos 14 dias — nada disso é legível pela API.
+
 ## O que já está pronto
 
 | | |

@@ -77,17 +77,26 @@ sempre a mesma, e a ordem importa — o número vem antes do build:
 
 ```bash
 echo "1.8.1" > VERSION && ./bin/versionar.sh      # carimba nos 5 pontos
-cd motor-movel/android && flutter build apk --release
-# sai em build/app/outputs/flutter-apk/app-release.apk
+cd motor-movel/android && flutter build apk --release && flutter build appbundle --release
+# o .apk vai para a release do GitHub (é o que a página oferece)
+# o .aab vai para a Play — são DOIS comandos, e faltou um na 1.9.20
 ```
 
 Para o iPhone, o mesmo `versionar.sh` e depois Archive no Xcode. Para o motor
 web, `./bin/empacotar.sh`, que recusa rodar se o HTML e o VERSION divergirem.
 
-**Antes de chamar de release de verdade:** o Android ainda assina com a chave de
-debug. Serve para instalar no aparelho do usuário e no emulador, não para
-distribuir. E trocar de chave depois força desinstalar/reinstalar — o que apaga
-as fotos de capa em `Documents/capas/`.
+**O Android assina com a chave de verdade** (`motor-movel/android/key.properties`,
+fora do git) — é a mesma que os testadores já têm, e por isso a atualização
+acontece por cima. Num clone sem esse arquivo o build cai na chave de **debug**
+sem avisar: a Play recusa o pacote, e instalar por fora forçaria desinstalar, o
+que apaga as fotos de capa em `Documents/capas/`. O
+`./bin/publicar-play.py` confere a impressão digital antes de enviar.
+
+**Publicar na Play** é `./bin/publicar-play.py` (sem `--publicar` ele só mostra o
+plano e confere). Ele existe porque a 1.9.20 foi carimbada, empacotada,
+publicada no GitHub — e **nunca chegou à Play**, por quatro dias, sem ninguém
+notar. `./bin/publicar-play.py --conferir` responde "a versão do VERSION está no
+ar nas faixas fechadas?" e é o portão que faltava naquele dia.
 
 ## O Windows virou app nativo (10/09/2026)
 
@@ -130,8 +139,6 @@ acha sozinho `C:\Users\<voce>\iCloudDrive\Biblioteca\`, como o Mac faz.
 
 - `motor-movel/android/test/widget_test.dart` referencia uma classe `MyApp` que
   não existe — sobra do template do Flutter. É o único erro do `flutter analyze`.
-- O release Android ainda assina com a chave de debug (`android/app/build.gradle.kts`
-  tem o TODO padrão). Antes de publicar, configure uma chave de verdade.
 - `motor-movel/ios` tem repositório git local com um único commit e muito
   trabalho não commitado; `motor-movel/android` tem remoto em
   `ruggierow/biblioteca-flutter`. O restante da árvore não está sob git.
