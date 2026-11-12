@@ -81,6 +81,9 @@ python3 -I bin/conferir-ponte.py; resultado $? "conferir-ponte.py"
 secao "Declaracoes ao sistema (iPhone e Android)"
 python3 -I bin/conferir-celulares.py; resultado $? "conferir-celulares.py"
 
+secao "O portugues da tela — acento que falta e acento que varia"
+python3 -I bin/conferir-acentos.py; resultado $? "conferir-acentos.py"
+
 secao "Tabela de paises nas quatro"
 python3 -I bin/conferir-paises.py; resultado $? "conferir-paises.py"
 
