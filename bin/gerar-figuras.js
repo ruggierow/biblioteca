@@ -20,6 +20,14 @@
 //   node bin/gerar-figuras.js                 todas, nos dois idiomas
 //   node bin/gerar-figuras.js --listar        so diz o que faria
 //   node bin/gerar-figuras.js --nao-trocar    gera os PNG e NAO mexe no manual
+//   node bin/gerar-figuras.js --trocar manual-ios 2 foto.png
+//                                             poe uma captura no lugar da
+//                                             figura 2 daquele manual
+//
+// O `--trocar` existe para o iPhone e o Android, que nao saem daqui: a tela
+// deles e do aparelho, nao da pagina. A CAPTURA continua sendo a mao, mas a
+// troca no manual nao — era ali que se errava o numero da figura e se
+// descobria depois, no PDF.
 //   node bin/gerar-figuras.js manual-windows  so as de um manual
 //
 // O QUE ELE NAO FAZ, e e deliberado: **moldura de janela**. As figuras antigas
@@ -205,7 +213,28 @@ function trocarNoManual(manual, n, png) {
 }
 
 (async () => {
-  const pedidos = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+  const argv = process.argv.slice(2);
+
+  // --trocar <manual> <numero> <arquivo.png>: uma captura feita fora daqui.
+  const ondeTrocar = argv.indexOf("--trocar");
+  if (ondeTrocar >= 0) {
+    const [manual, numero, arquivo] = argv.slice(ondeTrocar + 1);
+    if (!manual || !numero || !arquivo) {
+      console.log("uso: --trocar <manual> <numero da figura> <arquivo.png>");
+      process.exit(1);
+    }
+    if (!fs.existsSync(arquivo)) {
+      console.log(`nao achei ${arquivo}`);
+      process.exit(1);
+    }
+    trocarNoManual(manual, Number(numero), arquivo);
+    const kb = Math.round(fs.statSync(arquivo).size / 1024);
+    console.log(`   ok  ${manual} figura ${numero} <- ${path.basename(arquivo)} (${kb} KB)`);
+    console.log("   Refaca o PDF: node bin/gerar-manuais-pdf.js " + manual);
+    return;
+  }
+
+  const pedidos = argv.filter((a) => !a.startsWith("--"));
   const soListar = process.argv.includes("--listar");
   const naoTrocar = process.argv.includes("--nao-trocar");
   const alvos = FIGURAS.filter((f) => !pedidos.length || pedidos.includes(f.manual));
