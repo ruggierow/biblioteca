@@ -4,6 +4,25 @@ Proposta aprovada por ele em **12/11/2026**. Este documento é a referência da
 implementação — a ordem dos passos, os textos nos dois idiomas e as decisões
 já tomadas ficam aqui, para não viverem só num diálogo.
 
+## Estado: os cinco passos, FEITOS em 12/11/2026
+
+| | |
+|---|---|
+| 1. Android | `3aab130` (motor-movel/android) |
+| 2. iPhone | `cf63096` (motor-movel/ios) |
+| 3. Windows | `8ee4d35` (motor-web) |
+| 4. Mac | `4056ef1` (motor-web) + `a96ed7f` (raiz, o portão da ponte) |
+| 5. Manuais | `01f7001` (raiz) |
+
+Dois achados de fora do roteiro, os dois vistos **na tela**, não por teste: em
+inglês o botão do Android dizia *Select folder* enquanto as outras três diziam
+*Choose folder*, e a frase de ajuda da faixa falava de "vincular" e de
+"navegadores sem suporte" **dentro do aplicativo instalado**, onde nenhuma das
+duas coisas existe.
+
+Falta um clique humano: percorrer o seletor de pastas do Mac até outra pasta e
+confirmar. O painel do sistema roda em outro processo e não é para contornar.
+
 ## O problema que isto resolve
 
 Hoje as quatro plataformas fazem **quatro coisas diferentes** quando alguém
