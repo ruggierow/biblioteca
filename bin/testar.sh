@@ -2,7 +2,8 @@
 # Roda a regressao da Biblioteca.
 #
 #   ./bin/testar.sh          rapido (~30 s): ponte, motor-web e Android
-#   ./bin/testar.sh --tudo   acrescenta o iPhone, que precisa do simulador
+#   ./bin/testar.sh --tudo   acrescenta o iPhone (precisa do simulador) e as
+#                            figuras do manual (redesenha as 34, ~1 min)
 #
 # SAO DUAS FAMILIAS DE DEFEITO, E CADA UMA PRECISA DO SEU TESTE:
 #
@@ -133,6 +134,9 @@ else
 fi
 
 if [ "$TUDO" -eq 1 ]; then
+    secao "Figuras do manual — a do papel ainda e a tela de hoje?"
+    python3 -I bin/conferir-figuras.py; resultado $? "conferir-figuras.py"
+
     secao "iPhone (precisa do simulador; demora alguns minutos)"
     SIM=$(xcrun simctl list devices available 2>/dev/null | grep -m1 -oE '[0-9A-F-]{36}')
     if [ -n "$SIM" ]; then
@@ -143,7 +147,7 @@ if [ "$TUDO" -eq 1 ]; then
         echo "   (pulado: nenhum simulador disponivel)"
     fi
 else
-    printf '\n(o iPhone so roda com --tudo)\n'
+    printf '\n(o iPhone e as figuras do manual so rodam com --tudo)\n'
 fi
 
 printf '\n'

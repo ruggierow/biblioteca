@@ -292,6 +292,14 @@ function trocarNoManual(manual, n, png) {
   const tsv = fs.readFileSync(TSV, "utf8");
   const saidas = path.join(RAIZ, "dist", "figuras");
   fs.mkdirSync(saidas, { recursive: true });
+  // Numa passada COMPLETA a pasta e esvaziada antes: o `conferir-figuras.py`
+  // confere o que esta ali contra o manual, e sobra de uma passada anterior
+  // viraria conferencia de figura que ninguem gerou hoje.
+  if (!pedidos.length) {
+    for (const velho of fs.readdirSync(saidas)) {
+      if (/^manual-.*--\d+\.png$/.test(velho)) fs.unlinkSync(path.join(saidas, velho));
+    }
+  }
 
   const servico = await servidor();
   const navegador = await chromium.launch();

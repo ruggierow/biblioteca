@@ -85,6 +85,14 @@ done
 # A pagina DEPOIS do upload, de proposito: assim os tamanhos que ela anuncia
 # saem da release recem-criada, e nao da dist/ local.
 echo
+echo "Conferindo se as figuras do manual ainda sao a tela de hoje..."
+"$RAIZ/bin/conferir-figuras.py" || {
+    echo "As figuras do manual envelheceram. Rode:"
+    echo "   node bin/gerar-figuras.js && node bin/gerar-manuais-pdf.js"
+    exit 1
+}
+
+echo
 echo "Atualizando a pagina do app..."
 "$RAIZ/bin/gerar-pagina.py"
 "$RAIZ/bin/conferir-pagina.py" || exit 1
