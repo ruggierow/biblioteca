@@ -101,6 +101,24 @@ const PECAS = {
   paginacao: { sel: "#tabela-container .paginacao" },
   // O mapa vive num bloco retratil: sem abrir, a figura sairia so do titulo.
   mapa: { sel: "#secao-mapa", abrir: "#secao-mapa > summary", altura: 1700 },
+  // A janela de edicao e a unica figura que NAO e uma peca da pagina: e a
+  // pagina inteira com a caixa por cima, e o escurecido atras faz parte do
+  // que ela conta. Por isso fotografa a JANELA, nao um elemento.
+  edicao: {
+    tela: true,
+    janela: { width: 1280, height: 820 },
+    preparar: async (pagina) => {
+      await pagina.evaluate(() => {
+        // a SECAO, nao o botao: enquadra como a figura de setembro, com o
+        // titulo "Pesquisar e filtrar" no alto e o resto da pagina atras.
+        document.querySelector("#btn-pesquisar").closest("section")
+          .scrollIntoView({ block: "start" });
+        window.scrollBy(0, -24);
+      });
+      await pagina.waitForTimeout(150);
+      await pagina.evaluate(() => abrirEdicao(0));   // o primeiro da lista
+    },
+  },
 };
 
 // Que figura de que manual e qual peca. O numero e a ORDEM da imagem dentro do
@@ -109,14 +127,12 @@ const FIGURAS = [
   { manual: "manual-mac", n: 2, peca: "cabecalho", hospedeiro: "Mac" },
   { manual: "manual-mac", n: 4, peca: "cadastro", hospedeiro: "Mac" },
   { manual: "manual-mac", n: 5, peca: "pesquisa", hospedeiro: "Mac" },
+  { manual: "manual-mac", n: 6, peca: "edicao", hospedeiro: "Mac" },
   { manual: "manual-mac", n: 8, peca: "mapa", hospedeiro: "Mac" },
   { manual: "manual-mac", n: 9, peca: "arquivo", hospedeiro: "Mac" },
   { manual: "manual-mac", n: 10, peca: "tabela", hospedeiro: "Mac" },
   { manual: "manual-mac", n: 11, peca: "paginacao", hospedeiro: "Mac" },
   { manual: "manual-mac", n: 12, peca: "cadastro", hospedeiro: "Mac" },
-  // A 6 do Mac (a janela de edicao aberta POR CIMA da pagina) continua sendo
-  // captura de setembro: e uma caixa modal sobre a pagina escurecida, e o
-  // gerador so sabe fotografar peca inteira. Esta anotada no relatorio.
   { manual: "manual-windows", n: 2, peca: "cabecalho", hospedeiro: "Windows" },
   { manual: "manual-windows", n: 4, peca: "cadastro", hospedeiro: "Windows" },
   { manual: "manual-windows", n: 5, peca: "pesquisa", hospedeiro: "Windows" },
@@ -285,8 +301,9 @@ function trocarNoManual(manual, n, png) {
     const sufixo = idioma === "en" ? "-en" : "";
     for (const f of alvos) {
       const manual = f.manual + sufixo;
+      const peca = PECAS[f.peca];
       const contexto = await navegador.newContext({
-        viewport: { width: 1280, height: 1000 },
+        viewport: peca.janela || { width: 1280, height: 1000 },
         deviceScaleFactor: 2,
         locale: idioma === "en" ? "en-US" : "pt-BR",
       });
@@ -299,7 +316,6 @@ function trocarNoManual(manual, n, png) {
         { waitUntil: "load" });
       await pagina.waitForSelector("#carregando", { state: "hidden", timeout: 20000 });
 
-      const peca = PECAS[f.peca];
       if (peca.capas) {
         // As capas das linhas VISIVEIS. Perguntar a lista em memoria nao
         // serve: a tabela ordena por autor e pagina, entao os 12 primeiros da
@@ -329,12 +345,25 @@ function trocarNoManual(manual, n, png) {
           `livros tem foto no .dat; ${nasLinhas} apareceram na tabela`);
       }
 
+      if (peca.preparar) {
+        await peca.preparar(pagina);
+        await pagina.waitForTimeout(350);
+      }
       if (peca.abrir) {
         await pagina.click(peca.abrir);
         await pagina.waitForTimeout(400);     // o mapa desenha as bolhas
       }
-      const alvo = pagina.locator(peca.sel).first();
       const png = path.join(saidas, `${manual}--${String(f.n).padStart(2, "0")}.png`);
+      if (peca.tela) {
+        await pagina.screenshot({ path: png });
+        if (!naoTrocar) trocarNoManual(manual, f.n, png);
+        console.log(`   ok  ${manual} figura ${f.n} (${f.peca}) — ` +
+          `${Math.round(fs.statSync(png).size / 1024)} KB`);
+        feitas += 1;
+        await contexto.close();
+        continue;
+      }
+      const alvo = pagina.locator(peca.sel).first();
 
       // Rolar ao topo antes de medir: com a pagina rolada, a caixa que o
       // Playwright devolve e relativa a JANELA, e o recorte de pagina inteira
