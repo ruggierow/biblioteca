@@ -38,7 +38,19 @@ O QUE ELE VIGIA
   1. o estado de cada versao iOS na loja (WAITING_FOR_REVIEW, IN_REVIEW,
      READY_FOR_SALE, os rejeitados, e qualquer outro que a Apple invente);
   2. Portugal, que e o unico territorio da UE entre os 6 escolhidos;
-  3. as duas faixas FECHADAS da Play, desde 12/11/2026.
+  3. as duas faixas FECHADAS da Play, desde 12/11/2026;
+  4. se a ficha da App Store ainda OFERECE o app iOS para Mac, desde
+     13/11/2026 — ele desligou isso no App Store Connect e a vitrine demora
+     horas para refletir.
+
+A FICHA DO MAC VEM COM UM CONTROLE JUNTO
+
+A linha "View in Mac App Store" e escrita por JavaScript, entao quem olha e o
+`olhar-ficha-da-loja.js`, com o Chromium. E ele olha DOIS apps: o nosso e um
+alheio que esta oferecido no Mac. Se a Apple trocar o texto da ficha, a linha
+some para os dois — e isso e defeito do MEDIDOR, nao propagacao. Sem o
+controle eu anunciaria a boa noticia errada; em 13/11 quase anunciei, lendo
+HTML sem renderizar.
 
 E A PLAY NAO SE VIGIA POR MUDANCA
 
@@ -70,6 +82,7 @@ import base64
 import importlib.util
 import json
 import sys
+import subprocess
 import urllib.request
 from datetime import date
 from pathlib import Path
@@ -103,6 +116,27 @@ def api():
     projeto.
     """
     return modulo("appstore")
+
+
+APP_IOS, CONTROLE = "6799312712", "6821807835"
+
+
+def olhar_a_ficha():
+    """A ficha da App Store ainda oferece o app iOS para Mac? E o controle?
+
+    Levanta excecao se o olheiro falhar: "nao consegui olhar" NAO pode virar
+    "sumiu do Mac".
+    """
+    bruto = subprocess.run(
+        ["node", str(AQUI / "olhar-ficha-da-loja.js"), APP_IOS, CONTROLE],
+        capture_output=True, text=True, timeout=180)
+    if bruto.returncode != 0 or not bruto.stdout.strip():
+        raise RuntimeError("olhar-ficha-da-loja.js: "
+                           + (bruto.stderr.strip()[:150] or "sem saida"))
+    fichas = json.loads(bruto.stdout)
+    return {"noMac": fichas[APP_IOS]["noMac"],
+            "controleNoMac": fichas[CONTROLE]["noMac"],
+            "versaoNaLoja": fichas[APP_IOS]["versao"]}
 
 
 def olhar_a_play():
@@ -186,7 +220,8 @@ def olhar():
 
     return {"versoes": versoes,
             "portugal": {"contentStatus": status, "lookup": lookup("pt")},
-            "play": olhar_a_play()}
+            "play": olhar_a_play(),
+            "mac": olhar_a_ficha()}
 
 
 def ler_referencia():
@@ -234,6 +269,19 @@ def diferencas(antes, agora):
                          f"{velho if velho is not None else 'nada'} -> "
                          f"{codigo if codigo is not None else 'nada'}")
 
+    ma, mb = (antes.get("mac") or {}), agora.get("mac", {})
+    if ma.get("noMac") != mb.get("noMac"):
+        if mb.get("noMac") is False and mb.get("controleNoMac") is False:
+            # Os dois sumiram no mesmo dia: o medidor e que esta suspeito.
+            mudou.append("App Store: a linha do Mac sumiu da NOSSA ficha E da "
+                         "do controle — isso parece mudanca no texto da ficha, "
+                         "nao propagacao. Confira antes de comemorar")
+        elif mb.get("noMac") is False:
+            mudou.append("App Store: o app iOS NAO e mais oferecido para Mac "
+                         "(e o controle continua sendo — entao propagou)")
+        else:
+            mudou.append("App Store: o app iOS voltou a ser oferecido para Mac")
+
     return mudou
 
 
@@ -260,6 +308,11 @@ def imprimir(agora):
         print(f"     {versao:8s} {estado}")
     p = agora["portugal"]
     print(f"  Portugal: contentStatus={p['contentStatus']}  lookup={p['lookup']}")
+    mac = agora.get("mac")
+    if mac:
+        print(f"  App Store, oferecido para Mac: "
+              f"{'SIM' if mac['noMac'] else 'nao'}"
+              f"   (controle: {'SIM' if mac['controleNoMac'] else 'nao'})")
     play = agora.get("play")
     if play:
         print(f"  Play (o repositorio esta na {play['versao']}, "
@@ -334,8 +387,9 @@ def main():
     # de agora evita anunciar "a faixa passou de nada para 32", que nao
     # aconteceu — e nao abre ponto cego, porque o atraso nao se mede por
     # comparacao.
-    if "play" not in antes:
-        antes["play"] = agora["play"]
+    for chave in ("play", "mac"):
+        if chave not in antes:
+            antes[chave] = agora[chave]
 
     mudou = diferencas(antes, agora)
     novo_atraso = bool(atrasadas) and (atrasadas != antes.get("atraso")

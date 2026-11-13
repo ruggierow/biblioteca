@@ -11,6 +11,7 @@ Por isso o vigia ganhou uma pergunta que NAO olha para ontem: o codigo que o
 portao exercita exatamente essa pergunta, nos casos em que ela e facil de
 estragar:
 
+    a linha do Mac some da ficha   -> 10, e DIZ se o controle tambem sumiu
     atraso aparece                 -> 10 (fala)
     o MESMO atraso, no mesmo dia   ->  0 (cala: a tarefa roda a cada 2 horas)
     o MESMO atraso, no dia seguinte-> 10 (volta a falar)
@@ -55,10 +56,13 @@ class RelogioFalso:
         return self.dia
 
 
-def estado(faixas, esperado=32, versao="1.9.21", ios="READY_FOR_SALE"):
+def estado(faixas, esperado=32, versao="1.9.21", ios="READY_FOR_SALE",
+           noMac=False, controle=True):
     return {"versoes": {"1.9.21": ios},
             "portugal": {"contentStatus": "OK", "lookup": 1},
-            "play": {"faixas": faixas, "esperado": esperado, "versao": versao}}
+            "play": {"faixas": faixas, "esperado": esperado, "versao": versao},
+            "mac": {"noMac": noMac, "controleNoMac": controle,
+                    "versaoNaLoja": "1.9.20"}}
 
 
 EM_DIA = {"alpha": 32, "Teste inical do Biblioteca": 32}
@@ -150,21 +154,42 @@ def main():
     # completa — senao a proxima mudanca de verdade passa por "chave que
     # faltava" e nao e relatada.
     velha = {"versoes": {"1.9.21": "READY_FOR_SALE"},
-             "portugal": {"contentStatus": "OK", "lookup": 1}}
-    guardado = caso("referencia velha, sem a Play: nao inventa mudanca",
-                    0, calando=("Play", "ATRASO"),
+             "portugal": {"contentStatus": "OK", "lookup": 1}}   # sem `play` nem `mac`
+    guardado = caso("referencia velha, sem a Play nem a ficha: nao inventa mudanca",
+                    0, calando=("Play", "ATRASO", "App Store"),
                     olhado=estado(EM_DIA), referencia=velha)
-    if guardado is None or "play" not in (guardado or {}):
+    if guardado is None or "play" not in (guardado or {}) or "mac" not in guardado:
         falhas.append("a referencia nao foi completada")
-        print("   FALHOU: a referencia velha nao ganhou a chave `play` — "
+        print("   FALHOU: a referencia velha nao ganhou as chaves `play`/`mac` — "
               "a proxima mudanca de verdade passaria em silencio")
     else:
-        print("   ok: a referencia velha ganhou a chave `play`")
+        print("   ok: a referencia velha ganhou as chaves `play` e `mac`")
         caso("e a mudanca SEGUINTE ja e relatada (ponto cego fechado)",
              10, dizendo=("Play, faixa",),
              olhado=estado({"alpha": 33, "Teste inical do Biblioteca": 33},
                            esperado=33),
              referencia=guardado)
+
+    # --- a ficha do Mac, com o controle do lado -------------------------
+    caso("a linha do Mac sumiu da nossa ficha e o controle continua: propagou",
+         10, dizendo=("NAO e mais oferecido para Mac", "propagou"),
+         olhado=estado(EM_DIA, noMac=False, controle=True),
+         referencia=estado(EM_DIA, noMac=True, controle=True))
+
+    caso("sumiu das DUAS fichas: desconfia do medidor, nao comemora",
+         10, dizendo=("parece mudanca no texto", "Confira"),
+         calando=("propagou",),
+         olhado=estado(EM_DIA, noMac=False, controle=False),
+         referencia=estado(EM_DIA, noMac=True, controle=True))
+
+    caso("voltou a ser oferecido para Mac: fala",
+         10, dizendo=("voltou a ser oferecido",),
+         olhado=estado(EM_DIA, noMac=True, controle=True),
+         referencia=estado(EM_DIA, noMac=False, controle=True))
+
+    caso("continua oferecido, como ontem: cala",
+         0, olhado=estado(EM_DIA, noMac=True, controle=True),
+         referencia=estado(EM_DIA, noMac=True, controle=True))
 
     caso("nao consegui olhar: 20, nunca 0",
          20, dizendo=("NAO CONSEGUI OLHAR",),
