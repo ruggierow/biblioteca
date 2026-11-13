@@ -34,7 +34,10 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 REPO = "ruggierow/biblioteca"
-APP_STORE = "https://apps.apple.com/br/app/biblioteca-pessoal/id6799312712"
+APP_STORE = "https://apps.apple.com/app/biblioteca-pessoal/id6799312712"
+# SEM o pais no caminho, de proposito: a Apple manda o visitante para a
+# loja DELE. Com `/br/` quem abrisse de fora do Brasil podia cair num "item
+# indisponivel" — e o manual em ingles apontava para a loja brasileira.
 PLAY_TESTE = "https://play.google.com/apps/testing/com.wilson.biblioteca.biblioteca"
 BAIXAR = f"https://github.com/{REPO}/releases/latest/download"
 
