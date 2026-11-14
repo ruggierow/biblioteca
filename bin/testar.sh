@@ -55,6 +55,14 @@
 #                                       portao exercita essa pergunta com
 #                                       relogio e loja de mentira.
 #
+#                conferir-olheiro.js    o olheiro das fichas da App Store. O
+#                                       `noMac` media tambem `a[href*="/mac/"]`,
+#                                       que casa com o link `/us/mac/discover`
+#                                       da NAVEGACAO — presente em toda ficha.
+#                                       O termo nunca podia dar `false`: o
+#                                       vigia jamais anunciaria a propagacao.
+#                                       Fichas de mentira, sem rede.
+#
 #                conferir-paises.py     a MESMA tabela escrita a mao em quatro
 #                                       linguagens. Em 13/10/2026, 22 dos 47
 #                                       nomes do motor-web estavam sem acento:
@@ -93,6 +101,13 @@ python3 -I bin/conferir-vigia.py; resultado $? "conferir-vigia.py"
 
 secao "Vigia das lojas — na Play, parado nao e igual a certo"
 python3 -I bin/conferir-vigia-loja.py; resultado $? "conferir-vigia-loja.py"
+
+secao "Olheiro das fichas — termo que nunca da 'nao' nao e medida"
+if [ -d motor-web/testes/node_modules ]; then
+    node bin/conferir-olheiro.js; resultado $? "conferir-olheiro.js"
+else
+    echo "   (pulado: rode  cd motor-web/testes && npm install)"
+fi
 
 secao "Guarda do espelho — contar as edicoes, nao so reconhece-las"
 python3 -I bin/conferir-espelho.py; resultado $? "conferir-espelho.py"
