@@ -38,6 +38,13 @@ APP_STORE = "https://apps.apple.com/app/biblioteca-pessoal/id6799312712"
 # SEM o pais no caminho, de proposito: a Apple manda o visitante para a
 # loja DELE. Com `/br/` quem abrisse de fora do Brasil podia cair num "item
 # indisponivel" — e o manual em ingles apontava para a loja brasileira.
+# Os territorios onde o app iOS esta a venda, em ordem de interesse para quem
+# le a pagina. A VERDADE fica no App Store Connect (`appAvailabilityV2`, um
+# item por territorio com `contentStatuses`), e quem a vigia e o
+# `bin/vigia-loja.py` — mas o gerador nao pode consultar a API, senao o portao
+# precisaria de rede e de credencial para regerar a pagina. Se ele acrescentar
+# ou tirar um pais la, esta lista tem de mudar aqui a mao.
+PAISES_IOS = ("Portugal", "Brasil", "Estados Unidos", "Canadá", "Angola", "Macau")
 PLAY_TESTE = "https://play.google.com/apps/testing/com.wilson.biblioteca.biblioteca"
 BAIXAR = f"https://github.com/{REPO}/releases/latest/download"
 
@@ -257,6 +264,8 @@ def monta(v, chamada, destaques, tam, hoje):
       <li><div><p>Se você já tem o app, toque em <strong>Atualizar</strong>. Seus livros e capas continuam onde estão.</p></div></li>
     </ol>
 
+    <p class="nota">O app está nas lojas de <strong>{PAISES_IOS[0]}</strong>, {", ".join(PAISES_IOS[1:-1])} e {PAISES_IOS[-1]}. Em outros países ele ainda não aparece.</p>
+
     <div class="aviso">
       <span class="rotulo">A versão nova do iPhone chega alguns dias depois</span>
       <p>Cada versão do iPhone passa pela análise da Apple antes de entrar na loja. Então a App Store pode ainda estar oferecendo a versão anterior por alguns dias — é normal, e não há nada a fazer além de esperar.</p>
@@ -328,6 +337,8 @@ def monta(v, chamada, destaques, tam, hoje):
     </ol>
 
     <p class="nota">O app é reconhecido pela Apple, então abre direto, sem aviso de segurança. Seu <code>biblioteca.txt</code> e seu <code>biblioteca.dat</code> não são tocados.</p>
+
+    <p class="nota">Esta é a versão <strong>feita para o Mac</strong>, e é por aqui que ela se instala — não pela App Store. O app do <strong>iPhone</strong> já pôde ser instalado em Macs com Apple Silicon; não pode mais. No Mac, a Biblioteca é esta.</p>
   </section>
 
   <section class="plataforma" id="windows">
