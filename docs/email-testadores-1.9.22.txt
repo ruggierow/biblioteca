@@ -1,0 +1,54 @@
+Assunto: Biblioteca 1.9.22 — só o manual mudou
+
+Oi!
+
+Saiu a 1.9.22, e por honestidade já começo pelo principal: o aplicativo é
+exatamente o mesmo da 1.9.21. Nenhuma linha dos programas mudou. Esta versão
+existe para corrigir uma coisa que ia junto deles — o manual.
+
+O guia do usuário é distribuído em dois lugares: pela página, que sempre
+serviu o mais recente, e DENTRO do instalador, que é o que abre pelo atalho
+"Manual" depois de instalado. Esse segundo estava velho.
+
+No WINDOWS estava velho de verdade: o manual embutido no instalador era de 4
+de novembro, e três versões seguidas reempacotaram o mesmo arquivo sem que
+ninguém percebesse. Quem instalou no Windows e leu o manual pelo atalho viu
+um guia sem o capítulo do mapa por país, com figuras de uma versão anterior e
+com palavras sem acento.
+
+No MAC o atraso era de um dia — o pacote da 1.9.21 foi fechado de manhã e as
+correções do manual entraram à tarde.
+
+Então:
+
+  • se você usa WINDOWS, vale instalar: é a maior diferença;
+
+  • se você usa MAC e costuma abrir o manual pelo aplicativo, também vale;
+
+  • se você usa ANDROID, a 1.9.22 já está na faixa de teste, mas é só o
+    número que muda — pode atualizar quando quiser;
+
+  • se você usa IPHONE, não há nada a fazer: o app continua na 1.9.21 de
+    propósito, porque o programa dele não mudou e não há manual dentro dele
+    para corrigir. Não vou mandar você esperar por uma análise da Apple que
+    não mudaria nada na sua tela.
+
+Os downloads estão na página de sempre, que já aponta para a versão nova:
+
+    https://ruggierow.github.io/biblioteca/
+
+O que eu gostaria de saber de vocês
+
+Se você instalar no Windows ou no Mac, abra o manual pelo atalho (no Windows,
+menu Iniciar > Biblioteca > Manual; no Mac, ele vem dentro do .dmg, ao lado
+do aplicativo) e me diga duas coisas:
+
+  1. a capa diz "Versão do programa: 1.9.22"?
+
+  2. o manual do Windows tem o capítulo do mapa por país?
+
+São as duas perguntas que mostram se a correção chegou até a sua máquina.
+
+Seus livros e suas capas não são tocados pela atualização, como sempre.
+
+Obrigado!
