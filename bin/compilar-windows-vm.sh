@@ -14,6 +14,12 @@ echo "--- copiando fontes ---"
 exec_vm "xcopy /E /I /Y /Q \"$S\motor-web\tauri\src-tauri\" C:\build\biblioteca-tauri\src-tauri" | tail -1
 exec_vm "copy /Y \"$S\motor-web\biblioteca.html\" C:\build\biblioteca-tauri\src\index.html" | tail -1
 exec_vm "copy /Y \"$S\motor-web\windows\biblioteca.nsi\" C:\build\windows" | tail -1
+# O MANUAL, que faltava aqui ate 16/11/2026. O outro caminho (o disco C: montado
+# em /Volumes) copiava os dois; este, nao — e quando a extensao do Parallels nao
+# carrega, e este que roda. Resultado medido na 1.9.22: o `C:\build\windows`
+# ainda tinha o manual de 04/11, e o instalador da 1.9.21 saiu com ele dentro.
+exec_vm "copy /Y \"$S\docs\manual-windows.html\" C:\build\windows\Manual.html" | tail -1
+exec_vm "copy /Y \"$S\docs\manual-windows.pdf\" C:\build\windows\Manual.pdf" | tail -1
 
 echo "--- portao: o que chegou tem de ser o NOVO ---"
 falhou=0
@@ -36,6 +42,24 @@ confere "info_do_arquivo" "C:\build\biblioteca-tauri\src-tauri\src\lib.rs"  "dat
 # conferencia da falso negativo (aconteceu nesta mesma montagem).
 confere "$V" "C:\build\biblioteca-tauri\src-tauri\Cargo.toml"  "Cargo.toml em $V"
 confere "$V" "C:\build\windows\biblioteca.nsi"                 "instalador NSIS em $V"
+
+# O manual nao se confere por findstr: o PDF e binario e o HTML tem as figuras
+# embutidas em base64. Confere-se pelo TAMANHO, contra o arquivo do Mac — e a
+# pergunta "chegou o de hoje?", que e a que faltava.
+tamanho_no_mac() { wc -c < "$(dirname "$0")/../$1" | tr -d ' '; }
+tamanho_na_vm()  { exec_vm "for %I in ($1) do @echo %~zI" | tr -d '\r' \
+                       | grep -E "^[0-9]+$" | tail -1; }
+confere_tamanho() {   # <arquivo no Mac> <arquivo na VM> <rotulo>
+    local aqui la
+    aqui="$(tamanho_no_mac "$1")"; la="$(tamanho_na_vm "$2")"
+    if [ -n "$la" ] && [ "$aqui" = "$la" ]; then
+        echo "   ok: $3 ($aqui bytes)"
+    else
+        echo "   FALTOU: $3 — o Mac tem $aqui bytes e a VM ${la:-nada}"; falhou=1
+    fi
+}
+confere_tamanho "docs/manual-windows.pdf"  "C:\build\windows\Manual.pdf"  "Manual.pdf e o de hoje"
+confere_tamanho "docs/manual-windows.html" "C:\build\windows\Manual.html" "Manual.html e o de hoje"
 [ "$falhou" -eq 0 ] || { echo "ABORTADO: a VM nao esta com os fontes da $V."; exit 1; }
 
 echo "--- compilando ---"
